@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="BoardEntity" representedClassName="BoardEntity" syncable="YES">
+        <attribute name="height" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="snapshot" optional="YES" attributeType="Binary"/>
+        <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="width" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="boardPegEntities" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PegEntity" inverseName="boardEntity" inverseEntity="PegEntity"/>
+    </entity>
+    <entity name="PegEntity" representedClassName="PegEntity" syncable="YES">
+        <attribute name="color" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="xCoord" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="yCoord" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="boardEntity" maxCount="1" deletionRule="Nullify" destinationEntity="BoardEntity" inverseName="boardPegEntities" inverseEntity="BoardEntity"/>
+    </entity>
+    <elements>
+        <element name="BoardEntity" positionX="-63" positionY="-18" width="128" height="119"/>
+        <element name="PegEntity" positionX="-54" positionY="0" width="128" height="104"/>
+    </elements>
+</model>
