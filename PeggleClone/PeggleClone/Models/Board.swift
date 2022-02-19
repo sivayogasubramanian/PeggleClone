@@ -76,11 +76,22 @@ final class Board: Identifiable {
         }
 
         let currentPeg = pegs[index]
-        guard validateMovePeg(peg: currentPeg, newCenter: newCenter, bounds: bounds) else {
+        movePegToClosestValidLocation(currentPeg: currentPeg, to: newCenter, bounds: bounds)
+    }
+
+    private func movePegToClosestValidLocation(currentPeg: Peg, to newCenter: CGPoint, bounds: CGSize) {
+        let direction = (currentPeg.center.toCGVector() - newCenter.toCGVector()).normalize()
+        var currentPoint = newCenter.toCGVector()
+
+        while isAnyPegPresent(at: currentPoint.toCGPoint(), excludingPeg: currentPeg) {
+            currentPoint += direction
+        }
+
+        guard validateMovePeg(peg: currentPeg, newCenter: currentPoint.toCGPoint(), bounds: bounds) else {
             return
         }
 
-        currentPeg.changeCenter(to: newCenter)
+        currentPeg.changeCenter(to: currentPoint.toCGPoint())
     }
 }
 
