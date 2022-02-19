@@ -8,24 +8,13 @@
 import Foundation
 
 class DesignerActionsViewModel: ObservableObject {
-    enum Actions {
-        case addBluePeg, addOrangePeg, deletePeg
-    }
+    @Published private(set) var currentAction: PegAction = AddBluePegAction()
 
-    @Published private(set) var currentAction = Actions.addBluePeg
-
-    func setAction(to action: Actions) {
+    func setAction(to action: PegAction) {
         currentAction = action
     }
 
     func getPegColor() -> PegColor? {
-        switch currentAction {
-        case .addBluePeg:
-            return .blue
-        case .addOrangePeg:
-            return .orange
-        case .deletePeg:
-            return nil
-        }
+        currentAction.getPegColor()
     }
 }

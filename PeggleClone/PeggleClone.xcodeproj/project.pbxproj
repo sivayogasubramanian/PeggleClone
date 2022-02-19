@@ -63,6 +63,10 @@
 		47A930C927B43EA000009C30 /* PegGameObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A930C827B43EA000009C30 /* PegGameObjectTests.swift */; };
 		47CA667227B67E4100ADC2C5 /* GameObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CA667127B67E4100ADC2C5 /* GameObjects.swift */; };
 		47CA667527B68BC900ADC2C5 /* GameObjectsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CA667427B68BC900ADC2C5 /* GameObjectsTests.swift */; };
+		47CBF83E27C1315100B80002 /* PegAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBF83D27C1315100B80002 /* PegAction.swift */; };
+		47CBF84027C132AD00B80002 /* AddBluePegAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBF83F27C132AD00B80002 /* AddBluePegAction.swift */; };
+		47CBF84227C132D200B80002 /* AddOrangePegAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBF84127C132D200B80002 /* AddOrangePegAction.swift */; };
+		47CBF84427C132EF00B80002 /* DeletePegAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBF84327C132EF00B80002 /* DeletePegAction.swift */; };
 		47F94AD327A329E20016EDC7 /* PegEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F94ACF27A329E20016EDC7 /* PegEntity+CoreDataClass.swift */; };
 		47F94AD427A329E20016EDC7 /* PegEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F94AD027A329E20016EDC7 /* PegEntity+CoreDataProperties.swift */; };
 		47F94AD527A329E20016EDC7 /* BoardEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F94AD127A329E20016EDC7 /* BoardEntity+CoreDataClass.swift */; };
@@ -139,6 +143,10 @@
 		47A930C827B43EA000009C30 /* PegGameObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegGameObjectTests.swift; sourceTree = "<group>"; };
 		47CA667127B67E4100ADC2C5 /* GameObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObjects.swift; sourceTree = "<group>"; };
 		47CA667427B68BC900ADC2C5 /* GameObjectsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObjectsTests.swift; sourceTree = "<group>"; };
+		47CBF83D27C1315100B80002 /* PegAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegAction.swift; sourceTree = "<group>"; };
+		47CBF83F27C132AD00B80002 /* AddBluePegAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBluePegAction.swift; sourceTree = "<group>"; };
+		47CBF84127C132D200B80002 /* AddOrangePegAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrangePegAction.swift; sourceTree = "<group>"; };
+		47CBF84327C132EF00B80002 /* DeletePegAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePegAction.swift; sourceTree = "<group>"; };
 		47F94ACF27A329E20016EDC7 /* PegEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PegEntity+CoreDataClass.swift"; path = "PeggleClone/Persistence/CoreDataEntities/PegEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		47F94AD027A329E20016EDC7 /* PegEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PegEntity+CoreDataProperties.swift"; path = "PeggleClone/Persistence/CoreDataEntities/PegEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		47F94AD127A329E20016EDC7 /* BoardEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BoardEntity+CoreDataClass.swift"; path = "PeggleClone/Persistence/CoreDataEntities/BoardEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
@@ -258,6 +266,7 @@
 		473A9E1B279C2DC000476A3A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				47CBF83C27C1313F00B80002 /* Actions */,
 				473A9E1C279C2DDB00476A3A /* Constants.swift */,
 				47A9309727B3FA3200009C30 /* PhysicsConstants.swift */,
 				473A9E1F279C2F7D00476A3A /* Utils.swift */,
@@ -477,6 +486,17 @@
 			path = GameObjectsTests;
 			sourceTree = "<group>";
 		};
+		47CBF83C27C1313F00B80002 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				47CBF83D27C1315100B80002 /* PegAction.swift */,
+				47CBF83F27C132AD00B80002 /* AddBluePegAction.swift */,
+				47CBF84127C132D200B80002 /* AddOrangePegAction.swift */,
+				47CBF84327C132EF00B80002 /* DeletePegAction.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
 		47F94AC627A326580016EDC7 /* CoreDataEntities */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,6 +670,7 @@
 				47A9309E27B3FAE300009C30 /* CircularPhysicsBody.swift in Sources */,
 				47F94AD327A329E20016EDC7 /* PegEntity+CoreDataClass.swift in Sources */,
 				47F94AD427A329E20016EDC7 /* PegEntity+CoreDataProperties.swift in Sources */,
+				47CBF84427C132EF00B80002 /* DeletePegAction.swift in Sources */,
 				474470FD27AEC8360048C4BF /* CGVector.swift in Sources */,
 				473A9E1A279C212500476A3A /* DesignerBoardView.swift in Sources */,
 				47A930AF27B3FCBD00009C30 /* PeggleGameEngine.swift in Sources */,
@@ -666,6 +687,7 @@
 				473A9E18279C1F8300476A3A /* ActionButtonView.swift in Sources */,
 				4717DC6227A0075600DF7272 /* PeggleCloneData.xcdatamodeld in Sources */,
 				4717DC6827A0132700DF7272 /* Persistable.swift in Sources */,
+				47CBF83E27C1315100B80002 /* PegAction.swift in Sources */,
 				47A930A427B3FBCF00009C30 /* PhysicsWorld.swift in Sources */,
 				47A9309C27B3FACA00009C30 /* PhysicsBody.swift in Sources */,
 				473A9E0E279BEBF500476A3A /* Board.swift in Sources */,
@@ -674,9 +696,11 @@
 				4717DC6627A010F000DF7272 /* CoreDataManager.swift in Sources */,
 				47A9309827B3FA3200009C30 /* PhysicsConstants.swift in Sources */,
 				47A930B527B3FD4600009C30 /* GameViewModel.swift in Sources */,
+				47CBF84027C132AD00B80002 /* AddBluePegAction.swift in Sources */,
 				47A930B327B3FD0C00009C30 /* GameView.swift in Sources */,
 				473A9E20279C2F7D00476A3A /* Utils.swift in Sources */,
 				47A930AB27B3FC7300009C30 /* BallGameObject.swift in Sources */,
+				47CBF84227C132D200B80002 /* AddOrangePegAction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

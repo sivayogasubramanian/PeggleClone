@@ -22,19 +22,19 @@ class DesignerActionsViewModelTests: XCTestCase {
     }
 
     func testDefaultAction() {
-        XCTAssertEqual(viewModel.currentAction, .addBluePeg)
+        XCTAssertTrue(type(of: viewModel.currentAction) == AddBluePegAction.self)
     }
 
     func testSetAction() {
-        viewModel.setAction(to: .deletePeg)
-        XCTAssertEqual(viewModel.currentAction, .deletePeg)
+        viewModel.setAction(to: DeletePegAction())
+        XCTAssertTrue(type(of: viewModel.currentAction) == DeletePegAction.self)
     }
 
     func testGetPegColor() {
         XCTAssertEqual(viewModel.getPegColor(), .blue)
-        viewModel.setAction(to: .addOrangePeg)
+        viewModel.setAction(to: AddOrangePegAction())
         XCTAssertEqual(viewModel.getPegColor(), .orange)
-        viewModel.setAction(to: .deletePeg)
+        viewModel.setAction(to: DeletePegAction())
         XCTAssertNil(viewModel.getPegColor())
     }
 }

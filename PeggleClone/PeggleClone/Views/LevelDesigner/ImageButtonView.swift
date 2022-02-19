@@ -33,11 +33,11 @@ struct ImageButtonView: View {
             .frame(width: 100, height: 100, alignment: .center)
             .onTapGesture {
                 withAnimation(.easeInOut(duration: 0.2)) {
-                    actionsViewModel.setAction(to: .addBluePeg)
+                    actionsViewModel.setAction(to: AddBluePegAction())
                 }
             }
             .opacity(
-                actionsViewModel.currentAction == .addBluePeg
+                type(of: actionsViewModel.currentAction) == AddBluePegAction.self
                 ? ImageButtonView.selectedOpacity
                 : ImageButtonView.notSelectedOpacity
             )
@@ -50,11 +50,11 @@ struct ImageButtonView: View {
             .frame(width: 100, height: 100, alignment: .center)
             .onTapGesture {
                 withAnimation(.easeInOut(duration: 0.2)) {
-                    actionsViewModel.setAction(to: .addOrangePeg)
+                    actionsViewModel.setAction(to: AddOrangePegAction())
                 }
             }
             .opacity(
-                actionsViewModel.currentAction == .addOrangePeg
+                type(of: actionsViewModel.currentAction) == AddOrangePegAction.self
                 ? ImageButtonView.selectedOpacity
                 : ImageButtonView.notSelectedOpacity
             )
@@ -67,11 +67,11 @@ struct ImageButtonView: View {
             .frame(width: 100, height: 100, alignment: .center)
             .onTapGesture {
                 withAnimation(.easeInOut(duration: 0.2)) {
-                    actionsViewModel.setAction(to: .deletePeg)
+                    actionsViewModel.setAction(to: DeletePegAction())
                 }
             }
             .opacity(
-                actionsViewModel.currentAction == .deletePeg
+                type(of: actionsViewModel.currentAction) == DeletePegAction.self
                 ? ImageButtonView.selectedOpacity
                 : ImageButtonView.notSelectedOpacity
             )

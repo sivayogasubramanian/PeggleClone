@@ -48,7 +48,7 @@ struct DesignerBoardView: View {
             .frame(width: Peg.diameter, height: Peg.diameter, alignment: .center)
             .position(x: peg.center.x, y: peg.center.y)
             .onTapGesture {
-                if actionsViewModel.currentAction == .deletePeg {
+                if type(of: actionsViewModel.currentAction) == DeletePegAction.self {
                     withAnimation(.easeOut(duration: 0.1)) {
                         designerViewModel.deletePeg(peg: peg)
                     }
