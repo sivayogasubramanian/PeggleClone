@@ -1,11 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "ball.png",
+      "filename" : "peg-purple-triangle@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "peg-purple-triangle@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
