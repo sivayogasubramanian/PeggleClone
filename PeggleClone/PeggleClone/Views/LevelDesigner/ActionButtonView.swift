@@ -24,7 +24,6 @@ struct ActionButtonView: View {
     @State private var showingLoadAlert = false
     @State private var showingSavedLevels = false
     @State private var isSaveSuccess = false
-    @State private var isSaveFailure = false
 
     // Game state
     @State private var isGameActive = false
@@ -83,7 +82,6 @@ struct ActionButtonView: View {
                 Button("Yes", action: { saveButtonHandler() })
             })
             .alert("Successfully saved level!", isPresented: $isSaveSuccess, actions: {})
-            .alert("Unable to save level! Please try again", isPresented: $isSaveFailure, actions: {})
     }
 
     private var resetButtonView: some View {
@@ -120,14 +118,10 @@ struct ActionButtonView: View {
 
 extension ActionButtonView {
     private func saveButtonHandler() {
-        designerViewModel.setBoardName(to: levelName)
+        designerViewModel.setBoardName(to: levelName.trimmingCharacters(in: .whitespacesAndNewlines))
         designerViewModel.setImageData(from: boardView)
-        do {
-            try designerViewModel.saveBoard()
-            isSaveSuccess = true
-        } catch {
-            isSaveFailure = true
-        }
+        designerViewModel.saveBoard()
+        isSaveSuccess = true
     }
 
     private func resetButtonHandler() {

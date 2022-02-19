@@ -13,7 +13,6 @@ struct SavedLevelsView: View {
     @Binding var levelName: String
     @ObservedObject var designerViewModel: DesignerViewModel
 
-    @State private var isLoadFailure = false
     @State private var savedBoards: [Board] = []
 
     var body: some View {
@@ -37,9 +36,6 @@ struct SavedLevelsView: View {
         }
         .onAppear(perform: {
             onAppearHandler()
-        })
-        .alert("Unable to load levels. Please try again.", isPresented: $isLoadFailure, actions: {
-            Button("Ok", action: { presentationMode.wrappedValue.dismiss() })
         })
     }
 
@@ -82,10 +78,6 @@ extension SavedLevelsView {
     }
 
     private func onAppearHandler() {
-        do {
-            savedBoards = try designerViewModel.loadSavedLevels()
-        } catch {
-            isLoadFailure = true
-        }
+        savedBoards = designerViewModel.loadSavedLevels()
     }
 }

@@ -120,48 +120,39 @@ class DesignerViewModelTests: XCTestCase {
     }
 
     func testLoadSavedLevels_whenThereAreNoSavedLevels_shouldReturnEmptyArray() {
-        guard let boards = try? viewModel.loadSavedLevels(using: viewContext) else {
-            return
-        }
-
+        let boards = viewModel.loadSavedLevels(using: viewContext)
         XCTAssertTrue(boards.isEmpty)
     }
 
     func testLoadSavedLevels_whenThereIsASavedLevel_shouldReturnBoardsArray() {
         viewModel.setBoardName(to: "This is a test")
-        try? viewModel.saveBoard(using: viewContext)
+        viewModel.saveBoard(using: viewContext)
 
-        guard let boards = try? viewModel.loadSavedLevels(using: viewContext) else {
-            return
-        }
+        let boards = viewModel.loadSavedLevels(using: viewContext)
 
         XCTAssertTrue(boards.count == 1)
     }
 
     func testLoadSavedLevels_whenThereAreMultipleSavedLevelsWithSameName_shouldReturnBoardsArray() {
         viewModel.setBoardName(to: "Same name")
-        try? viewModel.saveBoard(using: viewContext)
+        viewModel.saveBoard(using: viewContext)
         viewModel.setBoard(to: Board())
         viewModel.setBoardName(to: "Same name")
-        try? viewModel.saveBoard(using: viewContext)
+        viewModel.saveBoard(using: viewContext)
 
-        guard let boards = try? viewModel.loadSavedLevels(using: viewContext) else {
-            return
-        }
+        let boards = viewModel.loadSavedLevels(using: viewContext)
 
         XCTAssertTrue(boards.count == 2)
     }
 
     func testLoadSavedLevels_whenThereAreMultipleSavedLevelsWithDifferentName_shouldReturnBoardsArray() {
         viewModel.setBoardName(to: "Different name")
-        try? viewModel.saveBoard(using: viewContext)
+        viewModel.saveBoard(using: viewContext)
         viewModel.setBoard(to: Board())
         viewModel.setBoardName(to: "Different name here")
-        try? viewModel.saveBoard(using: viewContext)
+        viewModel.saveBoard(using: viewContext)
 
-        guard let boards = try? viewModel.loadSavedLevels(using: viewContext) else {
-            return
-        }
+        let boards = viewModel.loadSavedLevels(using: viewContext)
 
         XCTAssertTrue(boards.count == 2)
     }
@@ -169,11 +160,9 @@ class DesignerViewModelTests: XCTestCase {
     func testSaveBoard_whenBoardIsNewWithEmptyName_shouldNotAddNewBoard() {
         viewModel.addPeg(at: CGPoint(x: 50, y: 50), color: .orange)
         viewModel.addPeg(at: CGPoint(x: 100, y: 100), color: .blue)
-        try? viewModel.saveBoard(using: viewContext)
+        viewModel.saveBoard(using: viewContext)
 
-        guard let boards = try? viewModel.loadSavedLevels(using: viewContext) else {
-            return
-        }
+        let boards = viewModel.loadSavedLevels(using: viewContext)
 
         XCTAssertTrue(boards.isEmpty)
     }
@@ -182,11 +171,9 @@ class DesignerViewModelTests: XCTestCase {
         viewModel.setBoardName(to: "This is a test")
         viewModel.addPeg(at: CGPoint(x: 50, y: 50), color: .orange)
         viewModel.addPeg(at: CGPoint(x: 100, y: 100), color: .blue)
-        try? viewModel.saveBoard(using: viewContext)
+        viewModel.saveBoard(using: viewContext)
 
-        guard let boards = try? viewModel.loadSavedLevels(using: viewContext) else {
-            return
-        }
+        let boards = viewModel.loadSavedLevels(using: viewContext)
 
         XCTAssertTrue(boards.count == 1)
     }
@@ -197,23 +184,19 @@ class DesignerViewModelTests: XCTestCase {
         viewModel.setBoardName(to: "test")
         viewModel.addPeg(at: CGPoint(x: 50, y: 50), color: .orange)
         viewModel.addPeg(at: CGPoint(x: 100, y: 100), color: .blue)
-        try? viewModel.saveBoard(using: viewContext)
+        viewModel.saveBoard(using: viewContext)
 
-        guard let boards = try? viewModel.loadSavedLevels(using: viewContext) else {
-            return
-        }
+        var boards = viewModel.loadSavedLevels(using: viewContext)
         XCTAssertTrue(boards.count == 1)
 
         viewModel.addPeg(at: CGPoint(x: 150, y: 150), color: .blue)
         viewModel.setBoardName(to: "new name")
-        try? viewModel.saveBoard(using: viewContext)
+        viewModel.saveBoard(using: viewContext)
 
-        guard let boards = try? viewModel.loadSavedLevels(using: viewContext), let name = boards.first?.name else {
-            return
-        }
+        boards = viewModel.loadSavedLevels(using: viewContext)
 
         XCTAssertTrue(boards.count == 1)
-        XCTAssertTrue(name == "new name")
+        XCTAssertTrue(boards.first?.name == "new name")
     }
 
     func testSaveBoard_whenBoardIsNotNewWithEmptyName_shouldNotUpdateOldBoardName() {
@@ -222,22 +205,18 @@ class DesignerViewModelTests: XCTestCase {
         viewModel.setBoardName(to: "test")
         viewModel.addPeg(at: CGPoint(x: 50, y: 50), color: .orange)
         viewModel.addPeg(at: CGPoint(x: 100, y: 100), color: .blue)
-        try? viewModel.saveBoard(using: viewContext)
+        viewModel.saveBoard(using: viewContext)
 
-        guard let boards = try? viewModel.loadSavedLevels(using: viewContext) else {
-            return
-        }
+        var boards = viewModel.loadSavedLevels(using: viewContext)
         XCTAssertTrue(boards.count == 1)
 
         viewModel.addPeg(at: CGPoint(x: 150, y: 150), color: .blue)
         viewModel.setBoardName(to: "")
-        try? viewModel.saveBoard(using: viewContext)
+        viewModel.saveBoard(using: viewContext)
 
-        guard let boards = try? viewModel.loadSavedLevels(using: viewContext), let name = boards.first?.name else {
-            return
-        }
+        boards = viewModel.loadSavedLevels(using: viewContext)
 
         XCTAssertTrue(boards.count == 1)
-        XCTAssertTrue(name == "test")
+        XCTAssertTrue(boards.first?.name == "test")
     }
 }

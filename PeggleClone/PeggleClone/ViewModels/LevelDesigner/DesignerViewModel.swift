@@ -57,47 +57,62 @@ class DesignerViewModel: ObservableObject {
         updateViews()
     }
 
-    func saveBoard(using context: NSManagedObjectContext = CoreDataManager.viewContext) throws {
+    func saveBoard(using context: NSManagedObjectContext = CoreDataManager.viewContext) {
         guard board.canSave else {
             return
         }
 
         if isNewBoard {
-            try createNewBoard(using: context)
+            createNewBoard(using: context)
         } else {
-            try updateCurrentBoard(using: context)
+            updateCurrentBoard(using: context)
         }
     }
 
-    func loadSavedLevels(using context: NSManagedObjectContext = CoreDataManager.viewContext) throws -> [Board] {
+    func loadSavedLevels(using context: NSManagedObjectContext = CoreDataManager.viewContext) -> [Board] {
         let request = BoardEntity.fetchRequest()
         let sort = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [sort]
 
-        let boardObjects = try context.fetch(request)
+        let boardObjects = (try? context.fetch(request)) ?? []
 
         return boardObjects.map({ Board.fromCoreDataEntity($0) })
     }
 
-    private func createNewBoard(using context: NSManagedObjectContext) throws {
+    private func createNewBoard(using context: NSManagedObjectContext) {
+        makeBoardNameUnique()
         _ = board.toCoreDataEntity(using: context)
-        try context.save()
+        try? context.save()
     }
 
-    private func updateCurrentBoard(using context: NSManagedObjectContext) throws {
-        try deleteCurrentBoard(using: context)
-        try createNewBoard(using: context)
+    private func updateCurrentBoard(using context: NSManagedObjectContext) {
+        deleteCurrentBoard(using: context)
+        createNewBoard(using: context)
     }
 
-    private func deleteCurrentBoard(using context: NSManagedObjectContext) throws {
+    private func deleteCurrentBoard(using context: NSManagedObjectContext) {
         let uuid = board.uuid.uuidString
         let request = BoardEntity.fetchRequest()
         request.predicate = NSPredicate(format: "uuid == %@", uuid)
 
-        let objects = try context.fetch(request)
+        guard let objects = try? context.fetch(request) else {
+            return
+        }
+
         if let object = objects.first {
             context.delete(object)
         }
+    }
+
+    private func makeBoardNameUnique() {
+        let boards = loadSavedLevels()
+        var name = board.name
+
+        while boards.contains(where: { $0.name == name }) {
+            name += " copy"
+        }
+
+        board.setName(to: name)
     }
 
     private func updateViews() {
