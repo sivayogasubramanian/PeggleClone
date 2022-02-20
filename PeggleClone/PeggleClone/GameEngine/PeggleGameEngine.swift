@@ -20,15 +20,27 @@ class PeggleGameEngine {
 
     init(board: Board) {
         boardSize = board.boardSize
-        world = PhysicsWorld(
-            withDimensions:
-                TwoDimensionBoundaries(
-                    xMin: 0,
-                    xMax: boardSize.width,
-                    yMin: 0,
-                    yMax: boardSize.height
-                )
+        world = PhysicsWorld()
+
+        // Left boundary
+        world.addPhysicsBody(
+            LinePhysicsBody(start: CGVector(dx: 0, dy: 0), end: CGVector(dx: 0, dy: boardSize.height))
         )
+        // Right boundary
+        world.addPhysicsBody(
+            LinePhysicsBody(
+                start: CGVector(dx: boardSize.width, dy: 0),
+                end: CGVector(dx: boardSize.width, dy: boardSize.height)
+            )
+        )
+        // Top boundary
+        world.addPhysicsBody(
+            LinePhysicsBody(
+                start: CGVector(dx: 0, dy: 0),
+                end: CGVector(dx: boardSize.width, dy: 0)
+            )
+        )
+
         board.pegs.forEach({ addPegToPhysicsEngine(PegGameObject(fromPeg: $0)) })
     }
 
@@ -44,7 +56,7 @@ class PeggleGameEngine {
     func simulateFor(dt deltaTime: TimeInterval) {
         // Physics Engine Operations
         world.updatePhysicsBodiesPositions(dt: deltaTime)
-        world.resolveCollisions(withBoundaries: [.top, .left, .right])
+        world.resolveCollisions()
 
         // Peggle Specific Operations
         removeBallIfBallExited()

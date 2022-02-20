@@ -13,8 +13,7 @@ class PhysicsWorldTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let dim = TwoDimensionBoundaries(xMin: 1, xMax: 2, yMin: 3, yMax: 4)
-        world = PhysicsWorld(withDimensions: dim)
+        world = PhysicsWorld()
     }
 
     override func tearDown() {
@@ -51,18 +50,18 @@ class PhysicsWorldTests: XCTestCase {
         let circle2 = CircularPhysicsBody(gameObjectType: .ball, position: circle2Position, radius: 20, mass: 2)
         world.addPhysicsBody(circle1)
         world.addPhysicsBody(circle2)
-        world.resolveCollisions(withBoundaries: [])
+        world.resolveCollisions()
         XCTAssertNotEqual(circle1.position, circle1Position)
         XCTAssertNotEqual(circle2.position, circle2Position)
     }
 
     func testResolveCollisions_forCollisionBetweenBoundaries() {
-        let dim = TwoDimensionBoundaries(xMin: 0, xMax: 10, yMin: 0, yMax: 40)
-        world = PhysicsWorld(withDimensions: dim)
+        world = PhysicsWorld()
+        world.addPhysicsBody(LinePhysicsBody(start: CGVector(dx: 10, dy: 0), end: CGVector(dx: 10, dy: 40)))
         let circle1Position = CGVector(dx: 10, dy: 41)
         let circle1 = CircularPhysicsBody(gameObjectType: .ball, position: circle1Position, radius: 10, mass: 1)
         world.addPhysicsBody(circle1)
-        world.resolveCollisions(withBoundaries: [.top, .bottom, .left, .right])
+        world.resolveCollisions()
         XCTAssertNotEqual(circle1.position, circle1Position)
     }
 }

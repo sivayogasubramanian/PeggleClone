@@ -32,8 +32,8 @@
 		473A9E20279C2F7D00476A3A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A9E1F279C2F7D00476A3A /* Utils.swift */; };
 		474470FD27AEC8360048C4BF /* CGVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474470FC27AEC8360048C4BF /* CGVector.swift */; };
 		4744710027AEC8E30048C4BF /* CGVectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474470FF27AEC8E30048C4BF /* CGVectorTests.swift */; };
-		4754996627C23836005FFC68 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754996527C23836005FFC68 /* Line.swift */; };
-		4754996827C23CE8005FFC68 /* LineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754996727C23CE8005FFC68 /* LineTests.swift */; };
+		4754996627C23836005FFC68 /* LinePhysicsBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754996527C23836005FFC68 /* LinePhysicsBody.swift */; };
+		4754996827C23CE8005FFC68 /* LinePhysicsBodyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754996727C23CE8005FFC68 /* LinePhysicsBodyTests.swift */; };
 		475C70AF27A043C500F8C2CB /* SavedLevelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C70AE27A043C500F8C2CB /* SavedLevelsView.swift */; };
 		47603E4427B6BEE10089E394 /* IntersectionDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47603E4327B6BEE10089E394 /* IntersectionDetectorTests.swift */; };
 		47603E4627B6C0BE0089E394 /* CollisionResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47603E4527B6C0BE0089E394 /* CollisionResolverTests.swift */; };
@@ -112,8 +112,8 @@
 		473A9E1F279C2F7D00476A3A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		474470FC27AEC8360048C4BF /* CGVector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGVector.swift; sourceTree = "<group>"; };
 		474470FF27AEC8E30048C4BF /* CGVectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGVectorTests.swift; sourceTree = "<group>"; };
-		4754996527C23836005FFC68 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
-		4754996727C23CE8005FFC68 /* LineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineTests.swift; sourceTree = "<group>"; };
+		4754996527C23836005FFC68 /* LinePhysicsBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePhysicsBody.swift; sourceTree = "<group>"; };
+		4754996727C23CE8005FFC68 /* LinePhysicsBodyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePhysicsBodyTests.swift; sourceTree = "<group>"; };
 		475C70AE27A043C500F8C2CB /* SavedLevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLevelsView.swift; sourceTree = "<group>"; };
 		47603E4327B6BEE10089E394 /* IntersectionDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectionDetectorTests.swift; sourceTree = "<group>"; };
 		47603E4527B6C0BE0089E394 /* CollisionResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionResolverTests.swift; sourceTree = "<group>"; };
@@ -274,7 +274,6 @@
 				473A9E1C279C2DDB00476A3A /* Constants.swift */,
 				47A9309727B3FA3200009C30 /* PhysicsConstants.swift */,
 				473A9E1F279C2F7D00476A3A /* Utils.swift */,
-				4754996527C23836005FFC68 /* Line.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -388,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				47A9309D27B3FAE300009C30 /* CircularPhysicsBody.swift */,
+				4754996527C23836005FFC68 /* LinePhysicsBody.swift */,
 				47A9309B27B3FACA00009C30 /* PhysicsBody.swift */,
 			);
 			path = Bodies;
@@ -449,7 +449,6 @@
 			isa = PBXGroup;
 			children = (
 				47A930BB27B4366C00009C30 /* UtilsTests.swift */,
-				4754996727C23CE8005FFC68 /* LineTests.swift */,
 			);
 			path = UtilsTests;
 			sourceTree = "<group>";
@@ -468,6 +467,7 @@
 			isa = PBXGroup;
 			children = (
 				47A930C027B4393300009C30 /* CircularPhysicsBodyTests.swift */,
+				4754996727C23CE8005FFC68 /* LinePhysicsBodyTests.swift */,
 				47A930C227B4393D00009C30 /* PhysicsBodyTests.swift */,
 			);
 			path = BodiesTests;
@@ -702,7 +702,7 @@
 				4717DC6627A010F000DF7272 /* CoreDataManager.swift in Sources */,
 				47A9309827B3FA3200009C30 /* PhysicsConstants.swift in Sources */,
 				47A930B527B3FD4600009C30 /* GameViewModel.swift in Sources */,
-				4754996627C23836005FFC68 /* Line.swift in Sources */,
+				4754996627C23836005FFC68 /* LinePhysicsBody.swift in Sources */,
 				47CBF84027C132AD00B80002 /* AddBluePegAction.swift in Sources */,
 				47A930B327B3FD0C00009C30 /* GameView.swift in Sources */,
 				473A9E20279C2F7D00476A3A /* Utils.swift in Sources */,
@@ -732,7 +732,7 @@
 				470BC5EA27A567A100E88AE9 /* PegPersistableTests.swift in Sources */,
 				470BC5D927A42A3F00E88AE9 /* DesignerViewModelTests.swift in Sources */,
 				470BC5E627A4624F00E88AE9 /* CGFloatTests.swift in Sources */,
-				4754996827C23CE8005FFC68 /* LineTests.swift in Sources */,
+				4754996827C23CE8005FFC68 /* LinePhysicsBodyTests.swift in Sources */,
 				47A930BC27B4366C00009C30 /* UtilsTests.swift in Sources */,
 				47A930C127B4393300009C30 /* CircularPhysicsBodyTests.swift in Sources */,
 				47A930C727B43E9100009C30 /* BallGameObjectTests.swift in Sources */,

@@ -9,24 +9,8 @@ import Foundation
 import CoreGraphics
 import SwiftUI
 
-struct TwoDimensionBoundaries: Equatable {
-    let xMin: Double
-    let xMax: Double
-    let yMin: Double
-    let yMax: Double
-}
-
-enum Boundary {
-    case top, right, bottom, left
-}
-
 class PhysicsWorld {
     private(set) var physicsBodies: [PhysicsBody] = []
-    private(set) var worldDimension: TwoDimensionBoundaries
-
-    init(withDimensions dimensions: TwoDimensionBoundaries) {
-        worldDimension = dimensions
-    }
 
     func addPhysicsBody(_ physicsBody: PhysicsBody) {
         physicsBodies.append(physicsBody)
@@ -40,7 +24,7 @@ class PhysicsWorld {
         physicsBodies.forEach({ $0.updatePhysicsBody(dt: deltaTime) })
     }
 
-    func resolveCollisions(withBoundaries: Set<Boundary>) {
+    func resolveCollisions() {
         guard !physicsBodies.isEmpty else {
             return
         }
@@ -50,14 +34,6 @@ class PhysicsWorld {
                 let body1 = physicsBodies[iIndex], body2 = physicsBodies[jIndex]
                 resolveCollisionsOfPhysicsBodies(body1, body2)
             }
-        }
-
-        resolveCollisionsOfPhysicsBodiesBetweenBoundaries(forBoundaries: withBoundaries)
-    }
-
-    private func resolveCollisionsOfPhysicsBodiesBetweenBoundaries(forBoundaries: Set<Boundary>) {
-        physicsBodies.forEach { body in
-            CollisionResolver.resolveCollisions(body1: body, dimensions: worldDimension, edges: forBoundaries)
         }
     }
 
