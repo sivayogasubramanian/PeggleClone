@@ -21,6 +21,8 @@ struct GameView: View {
                         .frame(width: gameViewModel.boardWidth, height: gameViewModel.boardHeight)
                         .overlay {
                             overlayPegViews()
+                        }
+                        .overlay {
                             overlayBlockViews()
                         }
                         .overlay {
