@@ -9,28 +9,32 @@ import CoreGraphics
 import Foundation
 
 final class Peg: Identifiable {
-    static let radius = CGFloat(25)
-    static let diameter = radius * 2
-
     let uuid: UUID
-    let color: PegColor
-    private(set) var center: CGPoint
+    let color: PeggleColor
+    private(set) var center: CGVector
+    private(set) var radius = Constants.pegRadius
+    var diameter: Double {
+        radius * 2
+    }
 
-    convenience init(color: PegColor, center: CGPoint) {
+    convenience init(color: PeggleColor, center: CGVector) {
         self.init(uuid: UUID(), color: color, center: center)
     }
 
-    init(uuid: UUID, color: PegColor, center: CGPoint) {
+    init(uuid: UUID, color: PeggleColor, center: CGVector) {
         self.uuid = uuid
         self.color = color
         self.center = center
     }
 
-    func changeCenter(to center: CGPoint) {
+    func changeCenter(to center: CGVector) {
         self.center = center
+    }
+
+    func changeRadius(to radius: Double) {
+        self.radius = radius
     }
 }
 
-@objc public enum PegColor: Int16 {
-    case blue = 0, orange = 1
+extension Peg: CircularIntersector {
 }

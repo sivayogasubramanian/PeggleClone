@@ -27,7 +27,7 @@ class PegTests: XCTestCase {
     }
 
     func testChangeCenter() {
-        let newCenter = CGPoint(x: 10, y: 10)
+        let newCenter = CGVector(dx: 10, dy: 10)
         let peg = Peg(color: .blue, center: .zero)
 
         XCTAssertEqual(peg.center, .zero)

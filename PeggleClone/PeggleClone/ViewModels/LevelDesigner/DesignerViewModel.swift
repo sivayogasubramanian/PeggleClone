@@ -14,8 +14,13 @@ class DesignerViewModel: ObservableObject {
     private(set) var isNewBoard = true
     private(set) var boardSize: CGSize = .zero
 
-    func addPeg(at point: CGPoint, color: PegColor?) {
+    func addPeg(at point: CGPoint, color: PeggleColor?) {
         board.addPeg(at: point, color: color, bounds: boardSize)
+        updateViews()
+    }
+
+    func addBlock(at point: CGPoint, color: PeggleColor?) {
+        board.addBlock(at: point, color: color, bounds: boardSize)
         updateViews()
     }
 
@@ -24,8 +29,18 @@ class DesignerViewModel: ObservableObject {
         updateViews()
     }
 
+    func moveBlock(block: TriangularBlock, to newCenter: CGPoint) {
+        board.moveBlock(block: block, to: newCenter, bounds: boardSize)
+        updateViews()
+    }
+
     func deletePeg(peg: Peg) {
         board.deletePeg(peg: peg)
+        updateViews()
+    }
+
+    func deleteBlock(block: TriangularBlock) {
+        board.deleteBlock(block: block)
         updateViews()
     }
 

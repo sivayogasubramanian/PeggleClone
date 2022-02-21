@@ -16,9 +16,10 @@ extension PegEntity {
     }
 
     @NSManaged public private(set) var uuid: UUID
-    @NSManaged private(set) var color: PegColor
+    @NSManaged private(set) var color: PeggleColor
     @NSManaged private(set) var xCoord: Double
     @NSManaged private(set) var yCoord: Double
+    @NSManaged private(set) var radius: Double
     @NSManaged private(set) var boardEntity: BoardEntity
 }
 
@@ -27,7 +28,7 @@ extension PegEntity: Identifiable {
         self.uuid = uuid
     }
 
-    func setColor(to color: PegColor) {
+    func setColor(to color: PeggleColor) {
         self.color = color
     }
 
@@ -37,5 +38,9 @@ extension PegEntity: Identifiable {
 
     func setYCoord(to yCoord: Double) {
         self.yCoord = yCoord
+    }
+
+    func setRadius(to radius: Double) {
+        self.radius = radius
     }
 }

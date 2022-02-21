@@ -34,6 +34,16 @@
 		4744710027AEC8E30048C4BF /* CGVectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474470FF27AEC8E30048C4BF /* CGVectorTests.swift */; };
 		4754996627C23836005FFC68 /* LinePhysicsBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754996527C23836005FFC68 /* LinePhysicsBody.swift */; };
 		4754996827C23CE8005FFC68 /* LinePhysicsBodyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754996727C23CE8005FFC68 /* LinePhysicsBodyTests.swift */; };
+		4754996A27C2684D005FFC68 /* TriangularBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754996927C2684D005FFC68 /* TriangularBlock.swift */; };
+		4754996C27C26C67005FFC68 /* PeggleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754996B27C26C67005FFC68 /* PeggleColor.swift */; };
+		4754996E27C26CE0005FFC68 /* AddBlueTriangularBlockAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754996D27C26CE0005FFC68 /* AddBlueTriangularBlockAction.swift */; };
+		4754997027C282D8005FFC68 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754996F27C282D8005FFC68 /* Line.swift */; };
+		4754997327C35D0A005FFC68 /* CircularIntersector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754997227C35D0A005FFC68 /* CircularIntersector.swift */; };
+		4754997627C35D36005FFC68 /* LineIntersector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754997527C35D36005FFC68 /* LineIntersector.swift */; };
+		4754997827C35D73005FFC68 /* PolygonIntersector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754997727C35D73005FFC68 /* PolygonIntersector.swift */; };
+		4754997A27C35DCC005FFC68 /* Intersector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754997927C35DCC005FFC68 /* Intersector.swift */; };
+		4754999427C391D3005FFC68 /* TriangularBlockEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754998E27C391D3005FFC68 /* TriangularBlockEntity+CoreDataClass.swift */; };
+		4754999F27C39287005FFC68 /* TriangularBlockEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754999927C39287005FFC68 /* TriangularBlockEntity+CoreDataProperties.swift */; };
 		475C70AF27A043C500F8C2CB /* SavedLevelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C70AE27A043C500F8C2CB /* SavedLevelsView.swift */; };
 		47603E4427B6BEE10089E394 /* IntersectionDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47603E4327B6BEE10089E394 /* IntersectionDetectorTests.swift */; };
 		47603E4627B6C0BE0089E394 /* CollisionResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47603E4527B6C0BE0089E394 /* CollisionResolverTests.swift */; };
@@ -65,10 +75,12 @@
 		47A930C927B43EA000009C30 /* PegGameObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A930C827B43EA000009C30 /* PegGameObjectTests.swift */; };
 		47CA667227B67E4100ADC2C5 /* GameObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CA667127B67E4100ADC2C5 /* GameObjects.swift */; };
 		47CA667527B68BC900ADC2C5 /* GameObjectsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CA667427B68BC900ADC2C5 /* GameObjectsTests.swift */; };
-		47CBF83E27C1315100B80002 /* PegAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBF83D27C1315100B80002 /* PegAction.swift */; };
+		47CBF83E27C1315100B80002 /* PeggleAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBF83D27C1315100B80002 /* PeggleAction.swift */; };
 		47CBF84027C132AD00B80002 /* AddBluePegAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBF83F27C132AD00B80002 /* AddBluePegAction.swift */; };
 		47CBF84227C132D200B80002 /* AddOrangePegAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBF84127C132D200B80002 /* AddOrangePegAction.swift */; };
-		47CBF84427C132EF00B80002 /* DeletePegAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBF84327C132EF00B80002 /* DeletePegAction.swift */; };
+		47CBF84427C132EF00B80002 /* DeleteAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBF84327C132EF00B80002 /* DeleteAction.swift */; };
+		47DA512D27C3955700491B3A /* TriangularBlock+Persistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA512C27C3955700491B3A /* TriangularBlock+Persistable.swift */; };
+		47DA512F27C3A54A00491B3A /* AddOrangeTriangularBlockAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA512E27C3A54A00491B3A /* AddOrangeTriangularBlockAction.swift */; };
 		47F94AD327A329E20016EDC7 /* PegEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F94ACF27A329E20016EDC7 /* PegEntity+CoreDataClass.swift */; };
 		47F94AD427A329E20016EDC7 /* PegEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F94AD027A329E20016EDC7 /* PegEntity+CoreDataProperties.swift */; };
 		47F94AD527A329E20016EDC7 /* BoardEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F94AD127A329E20016EDC7 /* BoardEntity+CoreDataClass.swift */; };
@@ -114,6 +126,16 @@
 		474470FF27AEC8E30048C4BF /* CGVectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGVectorTests.swift; sourceTree = "<group>"; };
 		4754996527C23836005FFC68 /* LinePhysicsBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePhysicsBody.swift; sourceTree = "<group>"; };
 		4754996727C23CE8005FFC68 /* LinePhysicsBodyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinePhysicsBodyTests.swift; sourceTree = "<group>"; };
+		4754996927C2684D005FFC68 /* TriangularBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangularBlock.swift; sourceTree = "<group>"; };
+		4754996B27C26C67005FFC68 /* PeggleColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleColor.swift; sourceTree = "<group>"; };
+		4754996D27C26CE0005FFC68 /* AddBlueTriangularBlockAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBlueTriangularBlockAction.swift; sourceTree = "<group>"; };
+		4754996F27C282D8005FFC68 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		4754997227C35D0A005FFC68 /* CircularIntersector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularIntersector.swift; sourceTree = "<group>"; };
+		4754997527C35D36005FFC68 /* LineIntersector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineIntersector.swift; sourceTree = "<group>"; };
+		4754997727C35D73005FFC68 /* PolygonIntersector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonIntersector.swift; sourceTree = "<group>"; };
+		4754997927C35DCC005FFC68 /* Intersector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intersector.swift; sourceTree = "<group>"; };
+		4754998E27C391D3005FFC68 /* TriangularBlockEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TriangularBlockEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4754999927C39287005FFC68 /* TriangularBlockEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TriangularBlockEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		475C70AE27A043C500F8C2CB /* SavedLevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLevelsView.swift; sourceTree = "<group>"; };
 		47603E4327B6BEE10089E394 /* IntersectionDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectionDetectorTests.swift; sourceTree = "<group>"; };
 		47603E4527B6C0BE0089E394 /* CollisionResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionResolverTests.swift; sourceTree = "<group>"; };
@@ -147,10 +169,12 @@
 		47A930C827B43EA000009C30 /* PegGameObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegGameObjectTests.swift; sourceTree = "<group>"; };
 		47CA667127B67E4100ADC2C5 /* GameObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObjects.swift; sourceTree = "<group>"; };
 		47CA667427B68BC900ADC2C5 /* GameObjectsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObjectsTests.swift; sourceTree = "<group>"; };
-		47CBF83D27C1315100B80002 /* PegAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegAction.swift; sourceTree = "<group>"; };
+		47CBF83D27C1315100B80002 /* PeggleAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleAction.swift; sourceTree = "<group>"; };
 		47CBF83F27C132AD00B80002 /* AddBluePegAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBluePegAction.swift; sourceTree = "<group>"; };
 		47CBF84127C132D200B80002 /* AddOrangePegAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrangePegAction.swift; sourceTree = "<group>"; };
-		47CBF84327C132EF00B80002 /* DeletePegAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePegAction.swift; sourceTree = "<group>"; };
+		47CBF84327C132EF00B80002 /* DeleteAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAction.swift; sourceTree = "<group>"; };
+		47DA512C27C3955700491B3A /* TriangularBlock+Persistable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TriangularBlock+Persistable.swift"; sourceTree = "<group>"; };
+		47DA512E27C3A54A00491B3A /* AddOrangeTriangularBlockAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrangeTriangularBlockAction.swift; sourceTree = "<group>"; };
 		47F94ACF27A329E20016EDC7 /* PegEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PegEntity+CoreDataClass.swift"; path = "PeggleClone/Persistence/CoreDataEntities/PegEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		47F94AD027A329E20016EDC7 /* PegEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PegEntity+CoreDataProperties.swift"; path = "PeggleClone/Persistence/CoreDataEntities/PegEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		47F94AD127A329E20016EDC7 /* BoardEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BoardEntity+CoreDataClass.swift"; path = "PeggleClone/Persistence/CoreDataEntities/BoardEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
@@ -219,6 +243,7 @@
 				4717DC6527A010F000DF7272 /* CoreDataManager.swift */,
 				4717DC6727A0132700DF7272 /* Persistable.swift */,
 				4717DC6927A014C300DF7272 /* Peg+Persistable.swift */,
+				47DA512C27C3955700491B3A /* TriangularBlock+Persistable.swift */,
 				4717DC6B27A015D300DF7272 /* Board+Persistable.swift */,
 				4717DC6027A0075600DF7272 /* PeggleCloneData.xcdatamodeld */,
 			);
@@ -271,9 +296,11 @@
 			isa = PBXGroup;
 			children = (
 				47CBF83C27C1313F00B80002 /* Actions */,
+				4754996B27C26C67005FFC68 /* PeggleColor.swift */,
 				473A9E1C279C2DDB00476A3A /* Constants.swift */,
 				47A9309727B3FA3200009C30 /* PhysicsConstants.swift */,
 				473A9E1F279C2F7D00476A3A /* Utils.swift */,
+				4754996F27C282D8005FFC68 /* Line.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -295,6 +322,17 @@
 				47A930A327B3FBCF00009C30 /* PhysicsWorld.swift */,
 			);
 			path = PhysicsEngine;
+			sourceTree = "<group>";
+		};
+		4754997127C35CD6005FFC68 /* IntersectionHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				4754997227C35D0A005FFC68 /* CircularIntersector.swift */,
+				4754997527C35D36005FFC68 /* LineIntersector.swift */,
+				4754997727C35D73005FFC68 /* PolygonIntersector.swift */,
+				4754997927C35DCC005FFC68 /* Intersector.swift */,
+			);
+			path = IntersectionHelpers;
 			sourceTree = "<group>";
 		};
 		47603E3E27B6BE990089E394 /* HelpersTests */ = {
@@ -335,6 +373,7 @@
 				4717DC6427A010D200DF7272 /* Persistence */,
 				474470FB27AEC81D0048C4BF /* PhysicsEngine */,
 				47A930A627B3FC3800009C30 /* GameEngine */,
+				4754997127C35CD6005FFC68 /* IntersectionHelpers */,
 				47762936279844B700A1A8C0 /* PeggleCloneApp.swift */,
 				4776293A279844B800A1A8C0 /* Assets.xcassets */,
 				4776293C279844B800A1A8C0 /* Preview Content */,
@@ -369,6 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				472D3FBF279882CC001B2E42 /* Peg.swift */,
+				4754996927C2684D005FFC68 /* TriangularBlock.swift */,
 				473A9E0D279BEBF500476A3A /* Board.swift */,
 			);
 			path = Models;
@@ -495,10 +535,12 @@
 		47CBF83C27C1313F00B80002 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
-				47CBF83D27C1315100B80002 /* PegAction.swift */,
+				47CBF83D27C1315100B80002 /* PeggleAction.swift */,
 				47CBF83F27C132AD00B80002 /* AddBluePegAction.swift */,
 				47CBF84127C132D200B80002 /* AddOrangePegAction.swift */,
-				47CBF84327C132EF00B80002 /* DeletePegAction.swift */,
+				4754996D27C26CE0005FFC68 /* AddBlueTriangularBlockAction.swift */,
+				47DA512E27C3A54A00491B3A /* AddOrangeTriangularBlockAction.swift */,
+				47CBF84327C132EF00B80002 /* DeleteAction.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -508,6 +550,8 @@
 			children = (
 				47F94ACF27A329E20016EDC7 /* PegEntity+CoreDataClass.swift */,
 				47F94AD027A329E20016EDC7 /* PegEntity+CoreDataProperties.swift */,
+				4754998E27C391D3005FFC68 /* TriangularBlockEntity+CoreDataClass.swift */,
+				4754999927C39287005FFC68 /* TriangularBlockEntity+CoreDataProperties.swift */,
 				47F94AD127A329E20016EDC7 /* BoardEntity+CoreDataClass.swift */,
 				47F94AD227A329E20016EDC7 /* BoardEntity+CoreDataProperties.swift */,
 			);
@@ -669,35 +713,46 @@
 				473A9E1D279C2DDB00476A3A /* Constants.swift in Sources */,
 				476119C927A2BA90001E2344 /* UIView.swift in Sources */,
 				473A9E10279BF38800476A3A /* DesignerActionsViewModel.swift in Sources */,
+				4754996E27C26CE0005FFC68 /* AddBlueTriangularBlockAction.swift in Sources */,
+				4754996A27C2684D005FFC68 /* TriangularBlock.swift in Sources */,
 				47A930A027B3FB8D00009C30 /* IntersectionDetector.swift in Sources */,
 				472D3FC0279882CC001B2E42 /* Peg.swift in Sources */,
 				473A9E15279C13A600476A3A /* CGFloat.swift in Sources */,
+				4754999F27C39287005FFC68 /* TriangularBlockEntity+CoreDataProperties.swift in Sources */,
 				47CA667227B67E4100ADC2C5 /* GameObjects.swift in Sources */,
 				47A9309E27B3FAE300009C30 /* CircularPhysicsBody.swift in Sources */,
 				47F94AD327A329E20016EDC7 /* PegEntity+CoreDataClass.swift in Sources */,
 				47F94AD427A329E20016EDC7 /* PegEntity+CoreDataProperties.swift in Sources */,
-				47CBF84427C132EF00B80002 /* DeletePegAction.swift in Sources */,
+				47CBF84427C132EF00B80002 /* DeleteAction.swift in Sources */,
 				474470FD27AEC8360048C4BF /* CGVector.swift in Sources */,
+				4754997627C35D36005FFC68 /* LineIntersector.swift in Sources */,
 				473A9E1A279C212500476A3A /* DesignerBoardView.swift in Sources */,
 				47A930AF27B3FCBD00009C30 /* PeggleGameEngine.swift in Sources */,
 				475C70AF27A043C500F8C2CB /* SavedLevelsView.swift in Sources */,
 				4717DC6A27A014C300DF7272 /* Peg+Persistable.swift in Sources */,
+				4754997A27C35DCC005FFC68 /* Intersector.swift in Sources */,
 				47A930A227B3FBA400009C30 /* CollisionResolver.swift in Sources */,
 				479AB7FA27A1C2AF00F3208E /* View.swift in Sources */,
 				47F94AD527A329E20016EDC7 /* BoardEntity+CoreDataClass.swift in Sources */,
 				472D3FBE279882C4001B2E42 /* DesignerViewModel.swift in Sources */,
 				4717DC6C27A015D300DF7272 /* Board+Persistable.swift in Sources */,
+				4754997027C282D8005FFC68 /* Line.swift in Sources */,
 				476119C727A2619F001E2344 /* ImageButtonView.swift in Sources */,
 				473A9E13279C134500476A3A /* CGPoint.swift in Sources */,
+				4754997327C35D0A005FFC68 /* CircularIntersector.swift in Sources */,
 				47A930AD27B3FC8700009C30 /* PegGameObject.swift in Sources */,
 				473A9E18279C1F8300476A3A /* ActionButtonView.swift in Sources */,
 				4717DC6227A0075600DF7272 /* PeggleCloneData.xcdatamodeld in Sources */,
 				4717DC6827A0132700DF7272 /* Persistable.swift in Sources */,
-				47CBF83E27C1315100B80002 /* PegAction.swift in Sources */,
+				4754999427C391D3005FFC68 /* TriangularBlockEntity+CoreDataClass.swift in Sources */,
+				47CBF83E27C1315100B80002 /* PeggleAction.swift in Sources */,
 				47A930A427B3FBCF00009C30 /* PhysicsWorld.swift in Sources */,
 				47A9309C27B3FACA00009C30 /* PhysicsBody.swift in Sources */,
+				47DA512D27C3955700491B3A /* TriangularBlock+Persistable.swift in Sources */,
 				473A9E0E279BEBF500476A3A /* Board.swift in Sources */,
 				47762939279844B700A1A8C0 /* DesignerView.swift in Sources */,
+				4754996C27C26C67005FFC68 /* PeggleColor.swift in Sources */,
+				47DA512F27C3A54A00491B3A /* AddOrangeTriangularBlockAction.swift in Sources */,
 				47762937279844B700A1A8C0 /* PeggleCloneApp.swift in Sources */,
 				4717DC6627A010F000DF7272 /* CoreDataManager.swift in Sources */,
 				47A9309827B3FA3200009C30 /* PhysicsConstants.swift in Sources */,
@@ -706,6 +761,7 @@
 				47CBF84027C132AD00B80002 /* AddBluePegAction.swift in Sources */,
 				47A930B327B3FD0C00009C30 /* GameView.swift in Sources */,
 				473A9E20279C2F7D00476A3A /* Utils.swift in Sources */,
+				4754997827C35D73005FFC68 /* PolygonIntersector.swift in Sources */,
 				47A930AB27B3FC7300009C30 /* BallGameObject.swift in Sources */,
 				47CBF84227C132D200B80002 /* AddOrangePegAction.swift in Sources */,
 			);

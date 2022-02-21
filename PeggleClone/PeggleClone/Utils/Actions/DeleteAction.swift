@@ -7,8 +7,12 @@
 
 import Foundation
 
-class DeletePegAction: PegAction {
-    func getPegColor() -> PegColor? {
+class DeleteAction: PeggleAction {
+    func getPeggleType() -> PeggleType? {
+        nil
+    }
+
+    func getColor() -> PeggleColor? {
         nil
     }
 }

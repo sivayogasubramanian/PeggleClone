@@ -1,15 +1,15 @@
 //
-//  AddBluePegAction.swift
+//  AddBlueTriangularBlockAction.swift
 //  PeggleClone
 //
-//  Created by Sivayogasubramanian on 19/2/22.
+//  Created by Sivayogasubramanian on 20/2/22.
 //
 
 import Foundation
 
-class AddBluePegAction: PeggleAction {
+class AddBlueTriangularBlockAction: PeggleAction {
     func getPeggleType() -> PeggleType? {
-        .peg
+        .block
     }
 
     func getColor() -> PeggleColor? {

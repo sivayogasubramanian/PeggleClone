@@ -16,7 +16,7 @@ struct GameView: View {
         NavigationView {
             ZStack(alignment: .top) {
                 GeometryReader { _ in
-                    Image(Constants.backgroundImageFileName)
+                    Image(Constants.backgroundImage)
                         .resizable()
                         .frame(width: gameViewModel.boardWidth, height: gameViewModel.boardHeight)
                         .overlay {
@@ -67,9 +67,9 @@ struct GameView: View {
     }
 
     private func makePegView(_ peg: PegGameObject) -> some View {
-        Image(Utils.pegColorToImageFileName(color: peg.color, isHit: peg.isHit))
+        Image(Utils.pegColorToImagePegFileName(color: peg.color, isHit: peg.isHit))
             .resizable()
-            .frame(width: Peg.diameter, height: Peg.diameter, alignment: .center)
+            .frame(width: peg.diameter, height: peg.diameter, alignment: .center)
             .position(x: peg.position.dx, y: peg.position.dy)
     }
 

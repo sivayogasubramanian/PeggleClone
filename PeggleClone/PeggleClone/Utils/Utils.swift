@@ -5,30 +5,32 @@
 //  Created by Sivayogasubramanian on 22/1/22.
 //
 
+import CoreGraphics
+
 struct Utils {
     static func deg2rad(_ number: Double) -> Double {
        number * .pi / 180
     }
 
-    static func pegColorToImageFileName(color: PegColor) -> String {
+    static func pegColorToImagePegFileName(color: PeggleColor, isHit: Bool = false) -> String {
         switch color {
         case .blue:
-            return Constants.bluePegImageFileName
+            return isHit ? Constants.glowingBluePegImage : Constants.bluePegImage
         case .orange:
-            return Constants.orangePegImageFileName
+            return isHit ? Constants.glowingOrangePegImage : Constants.orangePegImage
         }
     }
 
-    static func pegColorToImageFileName(color: PegColor, isHit: Bool) -> String {
+    static func pegColorToImageBlockFileName(color: PeggleColor, isHit: Bool = false) -> String {
         switch color {
         case .blue:
-            return isHit ? Constants.glowingBluePegImageFileName : Constants.bluePegImageFileName
+            return isHit ? Constants.glowingBlueTriangularBlockImage : Constants.blueTriangularBlockImage
         case .orange:
-            return isHit ? Constants.glowingOrangePegImageFileName : Constants.orangePegImageFileName
+            return isHit ? Constants.glowingOrangeTriangularBlockImage : Constants.orangeTriangularBlockImage
         }
     }
 
     static func cannonImageFileName(isCannonLoaded loadStatus: Bool) -> String {
-        loadStatus ? Constants.cannontLoadedImageFileName : Constants.cannontUnloadedImageFileName
+        loadStatus ? Constants.cannontLoadedImage : Constants.cannontUnloadedImage
     }
 }

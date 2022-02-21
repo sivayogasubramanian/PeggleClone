@@ -15,20 +15,30 @@ struct DesignerBoardView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            Image(Constants.backgroundImageFileName)
+            Image(Constants.backgroundImage)
                 .resizable()
                 .scaledToFill()
                 .gesture(
                     DragGesture(minimumDistance: 0).onEnded({ value in
                         withAnimation(.easeIn(duration: 0.1)) {
-                            designerViewModel.addPeg(
-                                at: value.location,
-                                color: actionsViewModel.getPegColor()
-                            )
+                            if actionsViewModel.getPeggleType() == .peg {
+                                designerViewModel.addPeg(
+                                    at: value.location,
+                                    color: actionsViewModel.getColor()
+                                )
+                            }
+
+                            if actionsViewModel.getPeggleType() == .block {
+                                designerViewModel.addBlock(
+                                    at: value.location,
+                                    color: actionsViewModel.getColor()
+                                )
+                            }
                         }
                     })
                 ).overlay {
                     overlayPegViews()
+                    overlayBlockViews()
                 }
                 .onAppear(perform: {
                     designerViewModel.setBoardSize(to: geometry.size)
@@ -42,13 +52,19 @@ struct DesignerBoardView: View {
         }
     }
 
+    private func overlayBlockViews() -> some View {
+        ForEach(designerViewModel.board.blocks) { block in
+            makeBlockView(block)
+        }
+    }
+
     private func makePegView(_ peg: Peg) -> some View {
-        Image(Utils.pegColorToImageFileName(color: peg.color))
+        Image(Utils.pegColorToImagePegFileName(color: peg.color))
             .resizable()
-            .frame(width: Peg.diameter, height: Peg.diameter, alignment: .center)
-            .position(x: peg.center.x, y: peg.center.y)
+            .frame(width: peg.diameter, height: peg.diameter, alignment: .center)
+            .position(x: peg.center.dx, y: peg.center.dy)
             .onTapGesture {
-                if type(of: actionsViewModel.currentAction) == DeletePegAction.self {
+                if type(of: actionsViewModel.currentAction) == DeleteAction.self {
                     withAnimation(.easeOut(duration: 0.1)) {
                         designerViewModel.deletePeg(peg: peg)
                     }
@@ -62,6 +78,30 @@ struct DesignerBoardView: View {
             .gesture(DragGesture().onChanged({ value in
                 withAnimation(.interactiveSpring(response: 0.4)) {
                     designerViewModel.movePeg(peg: peg, to: value.location)
+                }
+            }))
+    }
+
+    private func makeBlockView(_ block: TriangularBlock) -> some View {
+        Image(Utils.pegColorToImageBlockFileName(color: block.color))
+            .resizable()
+            .frame(width: block.width, height: block.height, alignment: .center)
+            .position(x: block.center.dx, y: block.center.dy)
+            .onTapGesture {
+                if type(of: actionsViewModel.currentAction) == DeleteAction.self {
+                    withAnimation(.easeOut(duration: 0.1)) {
+                        designerViewModel.deleteBlock(block: block)
+                    }
+                }
+            }
+            .onLongPressGesture(minimumDuration: 0.3, maximumDistance: 0, perform: {
+                withAnimation(.easeOut(duration: 0.05)) {
+                    designerViewModel.deleteBlock(block: block)
+                }
+            })
+            .gesture(DragGesture().onChanged({ value in
+                withAnimation(.interactiveSpring(response: 0.4)) {
+                    designerViewModel.moveBlock(block: block, to: value.location)
                 }
             }))
     }

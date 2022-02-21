@@ -10,25 +10,14 @@ import Foundation
 class IntersectionDetector {
     static func detectCollisions(body1: PhysicsBody, body2: PhysicsBody) -> Bool {
         switch (body1, body2) {
-        case let (circle1, circle2) as (CircularPhysicsBody, CircularPhysicsBody):
-            return circleAndCircle(circle1: circle1, circle2: circle2)
-        case let (circle, line) as (CircularPhysicsBody, LinePhysicsBody),
-            let (line, circle) as (LinePhysicsBody, CircularPhysicsBody):
-            return circleAndLine(circle: circle, line: line)
+        case let (circle1, circle2) as (CircularIntersector, CircularIntersector):
+            return Intersector.detectBetween(circle1: circle1, circle2: circle2)
+        case let (circle, line) as (CircularIntersector, LineIntersector),
+            let (line, circle) as (LineIntersector, CircularIntersector):
+            return Intersector.detectBetween(circle: circle, line: line)
         default:
             assertionFailure("Unknown physics bodies in IntersectionDetector")
             return false
         }
-    }
-
-    private static func circleAndCircle(circle1: CircularPhysicsBody, circle2: CircularPhysicsBody) -> Bool {
-        let vectorBetweenCenters = circle1.center - circle2.center
-        let radiiSum = circle1.radius + circle2.radius
-        return vectorBetweenCenters.lengthSquared() < radiiSum * radiiSum
-    }
-
-    private static func circleAndLine(circle: CircularPhysicsBody, line: LinePhysicsBody) -> Bool {
-        let distanceFromCenterToLine = line.shortestDistance(from: circle.center)
-        return distanceFromCenterToLine < circle.radius
     }
 }

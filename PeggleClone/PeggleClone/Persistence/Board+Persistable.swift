@@ -13,8 +13,9 @@ extension Board: Persistable {
     static func fromCoreDataEntity(_ entity: BoardEntity) -> Self {
         let uuid = entity.uuid, name = entity.name, image = entity.snapshot
         let pegs = Array(entity.boardPegEntities).map({ Peg.fromCoreDataEntity($0) })
+        let blocks = Array(entity.boardTriangularBlockEntities).map({ TriangularBlock.fromCoreDataEntity($0) })
 
-        let board = self.init(uuid: uuid, name: name, pegs: pegs)
+        let board = self.init(uuid: uuid, name: name, pegs: pegs, blocks: blocks)
         board.setImage(to: image)
         board.setSize(boardSize: CGSize(width: entity.width, height: entity.height))
 
@@ -35,6 +36,9 @@ extension Board: Persistable {
         entity.setHeight(to: Double(boardSize.height))
         pegs.forEach { peg in
             entity.addToBoardPegEntities(peg.toCoreDataEntity(using: context))
+        }
+        blocks.forEach { block in
+            entity.addToBoardTriangularBlockEntities(block.toCoreDataEntity(using: context))
         }
     }
 }

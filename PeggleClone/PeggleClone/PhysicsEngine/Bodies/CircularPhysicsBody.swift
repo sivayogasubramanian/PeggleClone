@@ -8,10 +8,13 @@
 import Foundation
 import CoreGraphics
 
-class CircularPhysicsBody: PhysicsBody {
+class CircularPhysicsBody: PhysicsBody, CircularIntersector {
     private(set) var radius: Double
     var center: CGVector {
         super.position
+    }
+    var diameter: Double {
+        radius * 2
     }
 
     init(gameObjectType: GameObjectType, position: CGVector, radius: Double) {

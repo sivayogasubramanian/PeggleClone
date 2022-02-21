@@ -26,15 +26,15 @@ class DesignerActionsViewModelTests: XCTestCase {
     }
 
     func testSetAction() {
-        viewModel.setAction(to: DeletePegAction())
-        XCTAssertTrue(type(of: viewModel.currentAction) == DeletePegAction.self)
+        viewModel.setAction(to: DeleteAction())
+        XCTAssertTrue(type(of: viewModel.currentAction) == DeleteAction.self)
     }
 
     func testGetPegColor() {
-        XCTAssertEqual(viewModel.getPegColor(), .blue)
+        XCTAssertEqual(viewModel.getColor(), .blue)
         viewModel.setAction(to: AddOrangePegAction())
-        XCTAssertEqual(viewModel.getPegColor(), .orange)
-        viewModel.setAction(to: DeletePegAction())
-        XCTAssertNil(viewModel.getPegColor())
+        XCTAssertEqual(viewModel.getColor(), .orange)
+        viewModel.setAction(to: DeleteAction())
+        XCTAssertNil(viewModel.getColor())
     }
 }

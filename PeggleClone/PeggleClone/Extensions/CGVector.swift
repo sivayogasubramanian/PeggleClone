@@ -87,6 +87,10 @@ extension CGVector {
 
         return CGVector(dx: xPrime + origin.dx, dy: yPrime + origin.dy)
     }
+
+    func isWithinBounds(minX: CGFloat, maxX: CGFloat, minY: CGFloat, maxY: CGFloat) -> Bool {
+        dx.isWithin(min: minX, max: maxX) && dy.isWithin(min: minY, max: maxY)
+    }
 }
 
 // MARK: Converters

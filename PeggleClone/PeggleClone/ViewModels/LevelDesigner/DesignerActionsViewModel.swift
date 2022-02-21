@@ -8,13 +8,17 @@
 import Foundation
 
 class DesignerActionsViewModel: ObservableObject {
-    @Published private(set) var currentAction: PegAction = AddBluePegAction()
+    @Published private(set) var currentAction: PeggleAction = AddBluePegAction()
 
-    func setAction(to action: PegAction) {
+    func setAction(to action: PeggleAction) {
         currentAction = action
     }
 
-    func getPegColor() -> PegColor? {
-        currentAction.getPegColor()
+    func getPeggleType() -> PeggleType? {
+        currentAction.getPeggleType()
+    }
+
+    func getColor() -> PeggleColor? {
+        currentAction.getColor()
     }
 }

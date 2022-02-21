@@ -21,6 +21,7 @@ extension BoardEntity {
     @NSManaged private(set) var height: Double
     @NSManaged private(set) var snapshot: Data
     @NSManaged private(set) var boardPegEntities: Set<PegEntity>
+    @NSManaged private(set) var boardTriangularBlockEntities: Set<TriangularBlockEntity>
 }
 
 // MARK: Generated accessors for boardPegEntities
@@ -37,6 +38,23 @@ extension BoardEntity {
 
     @objc(removeBoardPegEntities:)
     @NSManaged public func removeFromBoardPegEntities(_ values: Set<PegEntity>)
+
+}
+
+// MARK: Generated accessors for boardTriangularBlockEntities
+extension BoardEntity {
+
+    @objc(addBoardTriangularBlockEntitiesObject:)
+    @NSManaged public func addToBoardTriangularBlockEntities(_ value: TriangularBlockEntity)
+
+    @objc(removeBoardTriangularBlockEntitiesObject:)
+    @NSManaged public func removeFromBoardTriangularBlockEntities(_ value: TriangularBlockEntity)
+
+    @objc(addBoardTriangularBlockEntities:)
+    @NSManaged public func addToBoardTriangularBlockEntities(_ values: Set<TriangularBlockEntity>)
+
+    @objc(removeBoardTriangularBlockEntities:)
+    @NSManaged public func removeFromBoardTriangularBlockEntities(_ values: Set<TriangularBlockEntity>)
 
 }
 

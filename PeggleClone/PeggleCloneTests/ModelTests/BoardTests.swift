@@ -20,11 +20,12 @@ class BoardTests: XCTestCase {
 
     func testConstructor_withId() {
         let uuid = UUID()
-        let board = Board(uuid: uuid, name: "example", pegs: [Peg(color: .blue, center: .zero)])
+        let board = Board(uuid: uuid, name: "example", pegs: [Peg(color: .blue, center: .zero)], blocks: [])
 
         XCTAssertEqual(board.uuid, uuid)
         XCTAssertEqual(board.name, "example")
         XCTAssertTrue(board.pegs.count == 1)
+        XCTAssertTrue(board.blocks.isEmpty)
         XCTAssertEqual(board.snapshot, .init())
     }
 
@@ -94,7 +95,7 @@ class BoardTests: XCTestCase {
 
     func testAddPeg_withPointJustOutOfBounds_shouldNotAddPeg() {
         let board = Board()
-        let point = CGPoint(x: 100 - Peg.radius + 1, y: 100 - Peg.radius)
+        let point = CGPoint(x: 100 - Constants.pegRadius + 1, y: 100 - Constants.pegRadius)
         let bounds = CGSize(width: 100, height: 100)
 
         XCTAssertTrue(board.pegs.isEmpty)
@@ -157,33 +158,33 @@ class BoardTests: XCTestCase {
     }
 
     func testMovePeg_withValidNewCenter_shouldMovePeg() {
-        let peg = Peg(color: .blue, center: CGPoint(x: 40, y: 40))
-        let board = Board(uuid: UUID(), name: "board", pegs: [peg])
+        let peg = Peg(color: .blue, center: CGVector(dx: 40, dy: 40))
+        let board = Board(uuid: UUID(), name: "board", pegs: [peg], blocks: [])
 
         board.movePeg(peg: peg, to: CGPoint(x: 50, y: 50), bounds: CGSize(width: 100, height: 100))
 
-        XCTAssertTrue(peg.center.x == 50)
-        XCTAssertTrue(peg.center.y == 50)
+        XCTAssertTrue(peg.center.dx == 50)
+        XCTAssertTrue(peg.center.dy == 50)
     }
 
     func testMovePeg_withNewCenterOutOfBounds_shouldNotMovePeg() {
-        let peg = Peg(color: .blue, center: CGPoint(x: 40, y: 40))
-        let board = Board(uuid: UUID(), name: "board", pegs: [peg])
+        let peg = Peg(color: .blue, center: CGVector(dx: 40, dy: 40))
+        let board = Board(uuid: UUID(), name: "board", pegs: [peg], blocks: [])
 
         board.movePeg(peg: peg, to: CGPoint(x: 100, y: 100), bounds: CGSize(width: 100, height: 100))
 
-        XCTAssertTrue(peg.center.x == 40)
-        XCTAssertTrue(peg.center.y == 40)
+        XCTAssertTrue(peg.center.dx == 40)
+        XCTAssertTrue(peg.center.dy == 40)
     }
 
     func testMovePeg_withNewCenterOverlappingAnotherPeg_shouldNotMovePeg() {
-        let peg1 = Peg(color: .blue, center: CGPoint(x: 40, y: 40))
-        let peg2 = Peg(color: .blue, center: CGPoint(x: 100, y: 100))
-        let board = Board(uuid: UUID(), name: "board", pegs: [peg1, peg2])
+        let peg1 = Peg(color: .blue, center: CGVector(dx: 40, dy: 40))
+        let peg2 = Peg(color: .blue, center: CGVector(dx: 100, dy: 100))
+        let board = Board(uuid: UUID(), name: "board", pegs: [peg1, peg2], blocks: [])
 
         board.movePeg(peg: peg1, to: CGPoint(x: 200, y: 200), bounds: CGSize(width: 100, height: 100))
 
-        XCTAssertTrue(peg1.center.x == 40)
-        XCTAssertTrue(peg1.center.y == 40)
+        XCTAssertTrue(peg1.center.dx == 40)
+        XCTAssertTrue(peg1.center.dy == 40)
     }
 }

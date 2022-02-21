@@ -53,11 +53,11 @@ class DesignerViewModelTests: XCTestCase {
             return
         }
 
-        XCTAssertEqual(peg.center.x, 50)
-        XCTAssertEqual(peg.center.y, 50)
+        XCTAssertEqual(peg.center.dx, 50)
+        XCTAssertEqual(peg.center.dy, 50)
         viewModel.movePeg(peg: peg, to: CGPoint(x: 100, y: 100))
-        XCTAssertEqual(peg.center.x, 100)
-        XCTAssertEqual(peg.center.y, 100)
+        XCTAssertEqual(peg.center.dx, 100)
+        XCTAssertEqual(peg.center.dy, 100)
     }
 
     func testDeletePeg() {

@@ -10,16 +10,16 @@ import XCTest
 
 class PegGameObjectTests: XCTestCase {
     func testInit() {
-        let peg = Peg(color: .blue, center: CGPoint(x: 10, y: 20))
+        let peg = Peg(color: .blue, center: CGVector(dx: 10, dy: 20))
         let pegGameObject = PegGameObject(fromPeg: peg)
 
         XCTAssertNotNil(pegGameObject)
-        XCTAssertEqual(pegGameObject.position, peg.center.toCGVector())
+        XCTAssertEqual(pegGameObject.position, peg.center)
         XCTAssertEqual(pegGameObject.color, peg.color)
     }
 
     func testEquatable() {
-        let peg = Peg(color: .blue, center: CGPoint(x: 10, y: 20))
+        let peg = Peg(color: .blue, center: CGVector(dx: 10, dy: 20))
         let pegGameObject1 = PegGameObject(fromPeg: peg)
         let pegGameObject2 = PegGameObject(fromPeg: peg)
 

@@ -19,6 +19,10 @@ struct ImageButtonView: View {
 
             orangePegImageButtonView
 
+            blueTriangularBlockButtonView
+
+            orangeTriangularBlockButtonView
+
             Spacer()
 
             deletePegImageButtonView
@@ -27,7 +31,7 @@ struct ImageButtonView: View {
     }
 
     private var bluePegImageButtonView: some View {
-        Image(Constants.bluePegImageFileName)
+        Image(Constants.bluePegImage)
             .resizable()
             .scaledToFit()
             .frame(width: 100, height: 100, alignment: .center)
@@ -44,7 +48,7 @@ struct ImageButtonView: View {
     }
 
     private var orangePegImageButtonView: some View {
-        Image(Constants.orangePegImageFileName)
+        Image(Constants.orangePegImage)
             .resizable()
             .scaledToFit()
             .frame(width: 100, height: 100, alignment: .center)
@@ -60,18 +64,52 @@ struct ImageButtonView: View {
             )
     }
 
-    private var deletePegImageButtonView: some View {
-        Image(Constants.deleteButtonImageFileName)
+    private var blueTriangularBlockButtonView: some View {
+        Image(Constants.blueTriangularBlockImage)
             .resizable()
             .scaledToFit()
             .frame(width: 100, height: 100, alignment: .center)
             .onTapGesture {
                 withAnimation(.easeInOut(duration: 0.2)) {
-                    actionsViewModel.setAction(to: DeletePegAction())
+                    actionsViewModel.setAction(to: AddBlueTriangularBlockAction())
                 }
             }
             .opacity(
-                type(of: actionsViewModel.currentAction) == DeletePegAction.self
+                type(of: actionsViewModel.currentAction) == AddBlueTriangularBlockAction.self
+                ? ImageButtonView.selectedOpacity
+                : ImageButtonView.notSelectedOpacity
+            )
+    }
+
+    private var orangeTriangularBlockButtonView: some View {
+        Image(Constants.orangeTriangularBlockImage)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 100, height: 100, alignment: .center)
+            .onTapGesture {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    actionsViewModel.setAction(to: AddOrangeTriangularBlockAction())
+                }
+            }
+            .opacity(
+                type(of: actionsViewModel.currentAction) == AddOrangeTriangularBlockAction.self
+                ? ImageButtonView.selectedOpacity
+                : ImageButtonView.notSelectedOpacity
+            )
+    }
+
+    private var deletePegImageButtonView: some View {
+        Image(Constants.deleteButtonImage)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 100, height: 100, alignment: .center)
+            .onTapGesture {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    actionsViewModel.setAction(to: DeleteAction())
+                }
+            }
+            .opacity(
+                type(of: actionsViewModel.currentAction) == DeleteAction.self
                 ? ImageButtonView.selectedOpacity
                 : ImageButtonView.notSelectedOpacity
             )

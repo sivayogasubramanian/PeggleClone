@@ -11,7 +11,7 @@ import CoreGraphics
 class PegGameObject: CircularPhysicsBody {
     private static let pegGameObjectType = GameObjectType.peg
 
-    private(set) var color: PegColor
+    private(set) var color: PeggleColor
     var isHit: Bool {
         super.hitCount != 0
     }
@@ -23,8 +23,8 @@ class PegGameObject: CircularPhysicsBody {
         color = fromPeg.color
         super.init(
             gameObjectType: PegGameObject.pegGameObjectType,
-            position: fromPeg.center.toCGVector(),
-            radius: Peg.radius
+            position: fromPeg.center,
+            radius: fromPeg.radius
         )
     }
 }

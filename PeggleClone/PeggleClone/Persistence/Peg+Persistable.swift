@@ -11,10 +11,12 @@ import Foundation
 
 extension Peg: Persistable {
     static func fromCoreDataEntity(_ entity: PegEntity) -> Self {
-        let uuid = entity.uuid, color = entity.color
-        let center = CGPoint(x: entity.xCoord, y: entity.yCoord)
+        let uuid = entity.uuid, color = entity.color, radius = entity.radius
+        let center = CGVector(dx: entity.xCoord, dy: entity.yCoord)
 
-        return self.init(uuid: uuid, color: color, center: center)
+        let peg = self.init(uuid: uuid, color: color, center: center)
+        peg.changeRadius(to: radius)
+        return peg
     }
 
     func toCoreDataEntity(using context: NSManagedObjectContext) -> PegEntity {
@@ -26,7 +28,8 @@ extension Peg: Persistable {
     private func assignAttributesToEntity(_ entity: PegEntity) {
         entity.setId(to: uuid)
         entity.setColor(to: color)
-        entity.setXCoord(to: Double(center.x))
-        entity.setYCoord(to: Double(center.y))
+        entity.setXCoord(to: Double(center.dx))
+        entity.setYCoord(to: Double(center.dy))
+        entity.setRadius(to: radius)
     }
 }
