@@ -186,11 +186,11 @@ extension Board {
     }
 
     private func validateMovePeg(movedPeg: Peg, bounds: CGSize) -> Bool {
-        return isWithinBounds(peg: movedPeg, bounds: bounds)
+        isWithinBounds(peg: movedPeg, bounds: bounds)
     }
 
     private func validateMoveBlock(movedBlock: TriangularBlock, bounds: CGSize) -> Bool {
-        return isWithinBounds(block: movedBlock, bounds: bounds)
+        isWithinBounds(block: movedBlock, bounds: bounds)
     }
 
     private func isOverlappingWithExisitingPegs(newPeg: Peg) -> Bool {

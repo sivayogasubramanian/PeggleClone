@@ -28,9 +28,9 @@ class PeggleGameEngineTests: XCTestCase {
         let point = CGPoint(x: 100, y: 100)
         gameEngine.addBall(shootingTowards: point)
         if let ball = gameEngine.ball {
-            let direction = (point.toCGVector() - ball.position).normalize()
-            XCTAssertEqual(ball.force, PhysicsConstants.gravity)
-            XCTAssertEqual(ball.velocity, direction * PhysicsConstants.initialBallLaunchVelocityMultiplier)
+            let direction = (point.toCGVector() - ball.physicsBody.position).normalize()
+            XCTAssertEqual(ball.physicsBody.force, PhysicsConstants.gravity)
+            XCTAssertEqual(ball.physicsBody.velocity, direction * PhysicsConstants.initialBallLaunchVelocityMultiplier)
         }
         XCTAssertNotNil(gameEngine.ball)
     }
@@ -38,9 +38,9 @@ class PeggleGameEngineTests: XCTestCase {
     func testSimulateFor_movesBall() {
         let point = CGPoint(x: 100, y: 100)
         gameEngine.addBall(shootingTowards: point)
-        let initialPosition = gameEngine.ball?.position
+        let initialPosition = gameEngine.ball?.physicsBody.position
         gameEngine.simulateFor(dt: 2)
-        XCTAssertNotEqual(gameEngine.ball?.position, initialPosition)
+        XCTAssertNotEqual(gameEngine.ball?.physicsBody.position, initialPosition)
     }
 
     func testSimulateFor_doesNotMovePeg() {
@@ -49,10 +49,10 @@ class PeggleGameEngineTests: XCTestCase {
         board.addPeg(at: CGPoint(x: 75, y: 86), color: .orange, bounds: boardSize)
 
         gameEngine = PeggleGameEngine(board: board)
-        let initialPosition = gameEngine.pegs.first?.position
+        let initialPosition = gameEngine.pegs.first?.physicsBody.position
         gameEngine.simulateFor(dt: 2)
 
-        XCTAssertEqual(gameEngine.pegs.first?.position, initialPosition)
+        XCTAssertEqual(gameEngine.pegs.first?.physicsBody.position, initialPosition)
     }
 
     func testSimulateFor_removesBallWhenBallExitsBounds() {

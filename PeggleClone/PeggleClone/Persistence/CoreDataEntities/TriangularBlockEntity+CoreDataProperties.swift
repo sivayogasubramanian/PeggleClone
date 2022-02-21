@@ -12,7 +12,7 @@ import CoreData
 extension TriangularBlockEntity {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<TriangularBlockEntity> {
-        return NSFetchRequest<TriangularBlockEntity>(entityName: "TriangularBlockEntity")
+        NSFetchRequest<TriangularBlockEntity>(entityName: "TriangularBlockEntity")
     }
 
     @NSManaged public private(set) var uuid: UUID

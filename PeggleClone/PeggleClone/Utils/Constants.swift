@@ -21,6 +21,7 @@ struct Constants {
     static let orangePegImage = "peg-orange"
     static let orangeTriangularBlockImage = "peg-orange-triangle"
 
+    static let ballRadius = 20.0
     static let pegRadius = 25.0
     static let blockWidth = 50.0
     static let blockHeight = 50.0

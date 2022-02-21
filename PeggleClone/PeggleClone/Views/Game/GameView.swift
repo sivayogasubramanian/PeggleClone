@@ -70,14 +70,14 @@ struct GameView: View {
         Image(Utils.pegColorToImagePegFileName(color: peg.color, isHit: peg.isHit))
             .resizable()
             .frame(width: peg.diameter, height: peg.diameter, alignment: .center)
-            .position(x: peg.position.dx, y: peg.position.dy)
+            .position(x: peg.physicsBody.position.dx, y: peg.physicsBody.position.dy)
     }
 
     private func overlayBallView(_ ball: BallGameObject) -> some View {
         Image("ball")
             .resizable()
-            .frame(width: BallGameObject.diameter, height: BallGameObject.diameter)
-            .position(x: ball.position.dx, y: ball.position.dy)
+            .frame(width: ball.diameter, height: ball.diameter)
+            .position(x: ball.physicsBody.position.dx, y: ball.physicsBody.position.dy)
     }
 
     private var dragGestureForShoot: some Gesture {

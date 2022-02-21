@@ -36,7 +36,7 @@ class Intersector {
 
     static func detectBetween(circle: CircularIntersector, line: LineIntersector) -> Bool {
         let distanceFromCenterToLine = line.line.shortestDistance(from: circle.center)
-        return distanceFromCenterToLine < BallGameObject.radius
+        return distanceFromCenterToLine < circle.radius
     }
 
     static func detectBetween(circle: CircularIntersector, polygon: PolygonIntersector) -> Bool {
@@ -63,11 +63,11 @@ class Intersector {
 // MARK: Overloaded Methods
 extension Intersector {
     static func detectBetween(line: LineIntersector, circle: CircularIntersector) -> Bool {
-        return Intersector.detectBetween(circle: circle, line: line)
+        Intersector.detectBetween(circle: circle, line: line)
     }
 
     static func detectBetween(polygon: PolygonIntersector, circle: CircularIntersector) -> Bool {
-        return Intersector.detectBetween(circle: circle, polygon: polygon)
+        Intersector.detectBetween(circle: circle, polygon: polygon)
     }
 }
 

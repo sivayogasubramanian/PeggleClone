@@ -49,7 +49,7 @@ class PeggleGameEngine {
             return
         }
         self.ball = ball
-        world.addPhysicsBody(ball)
+        world.addPhysicsBody(ball.physicsBody)
         isReadyToShoot.toggle()
     }
 
@@ -65,12 +65,12 @@ class PeggleGameEngine {
 
     private func addPegToPhysicsEngine(_ peg: PegGameObject) {
         pegObjects[ObjectIdentifier(peg)] = peg
-        world.addPhysicsBody(peg)
+        world.addPhysicsBody(peg.physicsBody)
     }
 
     private func removeNearbyGameObjectsIfBallStationary() {
         for peg in pegs where peg.shouldBeRemoved {
-            world.removePhysicsBody(peg)
+            world.removePhysicsBody(peg.physicsBody)
             pegObjects.removeValue(forKey: ObjectIdentifier(peg))
         }
     }
@@ -80,7 +80,7 @@ class PeggleGameEngine {
             return
         }
 
-        let shouldRemoveBall = ball.position.dy > boardSize.height - ball.radius
+        let shouldRemoveBall = ball.physicsBody.position.dy > boardSize.height - ball.radius
 
         if shouldRemoveBall {
             removeBall(ball: ball)
@@ -89,30 +89,30 @@ class PeggleGameEngine {
 
     private func removeLitPegsIfBallExited() {
         for peg in pegs where peg.isHit {
-            world.removePhysicsBody(peg)
+            world.removePhysicsBody(peg.physicsBody)
             pegObjects.removeValue(forKey: ObjectIdentifier(peg))
         }
     }
 
     private func resetHitCountOfGameObjects() {
-        ball?.resetHitCount()
-        pegs.forEach({ $0.resetHitCount() })
+        ball?.physicsBody.resetHitCount()
+        pegs.forEach({ $0.physicsBody.resetHitCount() })
     }
 
     private func prepareNewBall(initialDirection point: CGPoint) -> BallGameObject? {
         let ball = BallGameObject(
             position: CGVector(dx: boardSize.width / 2, dy: PhysicsConstants.initialBallLaunchYCoordinate)
         )
-        let direction = (point.toCGVector() - ball.position).normalize()
-        ball.setForce(to: PhysicsConstants.gravity)
-        ball.setVelocity(to: direction * PhysicsConstants.initialBallLaunchVelocityMultiplier)
+        let direction = (point.toCGVector() - ball.physicsBody.position).normalize()
+        ball.physicsBody.setForce(to: PhysicsConstants.gravity)
+        ball.physicsBody.setVelocity(to: direction * PhysicsConstants.initialBallLaunchVelocityMultiplier)
 
         return ball
     }
 
     private func removeBall(ball: BallGameObject) {
         self.ball = nil
-        world.removePhysicsBody(ball)
+        world.removePhysicsBody(ball.physicsBody)
         removeLitPegsIfBallExited()
         resetHitCountOfGameObjects()
         isReadyToShoot.toggle()

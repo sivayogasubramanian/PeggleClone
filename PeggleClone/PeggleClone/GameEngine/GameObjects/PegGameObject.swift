@@ -8,20 +8,26 @@
 import Foundation
 import CoreGraphics
 
-class PegGameObject: CircularPhysicsBody {
+class PegGameObject {
     private static let pegGameObjectType = GameObjectType.peg
 
+    private(set) var physicsBody: PhysicsBody
+    private(set) var radius: Double
     private(set) var color: PeggleColor
+    var diameter: Double {
+        radius * 2
+    }
     var isHit: Bool {
-        super.hitCount != 0
+        physicsBody.hitCount != 0
     }
     var shouldBeRemoved: Bool {
-        super.hitCount > PhysicsConstants.physicsBodyMaxHitCount
+        physicsBody.hitCount > PhysicsConstants.physicsBodyMaxHitCount
     }
 
     init(fromPeg: Peg) {
+        radius = fromPeg.radius
         color = fromPeg.color
-        super.init(
+        physicsBody = CircularPhysicsBody(
             gameObjectType: PegGameObject.pegGameObjectType,
             position: fromPeg.center,
             radius: fromPeg.radius

@@ -8,16 +8,20 @@
 import Foundation
 import CoreGraphics
 
-class BallGameObject: CircularPhysicsBody {
-    static let radius = CGFloat(20)
-    static let diameter = radius * 2
+class BallGameObject {
     private static let ballGameObjectType = GameObjectType.ball
 
+    private(set) var physicsBody: PhysicsBody
+    private(set) var radius = Constants.ballRadius
+    var diameter: Double {
+        radius * 2
+    }
+
     init(position: CGVector) {
-        super.init(
+        physicsBody = CircularPhysicsBody(
             gameObjectType: BallGameObject.ballGameObjectType,
             position: position,
-            radius: BallGameObject.radius,
+            radius: radius,
             mass: PhysicsConstants.ballMass
         )
     }

@@ -14,7 +14,7 @@ class PegGameObjectTests: XCTestCase {
         let pegGameObject = PegGameObject(fromPeg: peg)
 
         XCTAssertNotNil(pegGameObject)
-        XCTAssertEqual(pegGameObject.position, peg.center)
+        XCTAssertEqual(pegGameObject.physicsBody.position, peg.center)
         XCTAssertEqual(pegGameObject.color, peg.color)
     }
 
