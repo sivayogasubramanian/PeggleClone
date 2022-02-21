@@ -68,17 +68,17 @@ class PeggleGameEngineTests: XCTestCase {
     func testSimulateFor_removesPegsWhenBallCollidesWithPeg() {
         let board = Board()
         board.setSize(boardSize: boardSize)
-        board.addPeg(at: CGPoint(x: 200, y: 200), color: .orange, bounds: boardSize)
+        board.addPeg(at: CGPoint(x: 500, y: 500), color: .orange, bounds: boardSize)
         gameEngine = PeggleGameEngine(board: board)
 
-        let point = CGPoint(x: 100, y: 100)
+        let point = CGPoint(x: 500, y: 500)
         gameEngine.addBall(shootingTowards: point)
 
         // Simulate collision
         var totalTime = 10.0
         while totalTime > 0 {
-            gameEngine.simulateFor(dt: 0.1)
-            totalTime -= 0.1
+            gameEngine.simulateFor(dt: PhysicsConstants.physicsUpdateTickTime)
+            totalTime -= PhysicsConstants.physicsUpdateTickTime
         }
 
         XCTAssertTrue(gameEngine.pegs.isEmpty)
