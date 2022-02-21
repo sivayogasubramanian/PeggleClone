@@ -81,6 +81,8 @@
 		47CBF84427C132EF00B80002 /* DeleteAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBF84327C132EF00B80002 /* DeleteAction.swift */; };
 		47DA512D27C3955700491B3A /* TriangularBlock+Persistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA512C27C3955700491B3A /* TriangularBlock+Persistable.swift */; };
 		47DA512F27C3A54A00491B3A /* AddOrangeTriangularBlockAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA512E27C3A54A00491B3A /* AddOrangeTriangularBlockAction.swift */; };
+		47DA513127C3AA9200491B3A /* PolygonalPhysicsBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA513027C3AA9200491B3A /* PolygonalPhysicsBody.swift */; };
+		47DA513327C3ABA000491B3A /* BlockGameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA513227C3ABA000491B3A /* BlockGameObject.swift */; };
 		47F94AD327A329E20016EDC7 /* PegEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F94ACF27A329E20016EDC7 /* PegEntity+CoreDataClass.swift */; };
 		47F94AD427A329E20016EDC7 /* PegEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F94AD027A329E20016EDC7 /* PegEntity+CoreDataProperties.swift */; };
 		47F94AD527A329E20016EDC7 /* BoardEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F94AD127A329E20016EDC7 /* BoardEntity+CoreDataClass.swift */; };
@@ -175,6 +177,8 @@
 		47CBF84327C132EF00B80002 /* DeleteAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAction.swift; sourceTree = "<group>"; };
 		47DA512C27C3955700491B3A /* TriangularBlock+Persistable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TriangularBlock+Persistable.swift"; sourceTree = "<group>"; };
 		47DA512E27C3A54A00491B3A /* AddOrangeTriangularBlockAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrangeTriangularBlockAction.swift; sourceTree = "<group>"; };
+		47DA513027C3AA9200491B3A /* PolygonalPhysicsBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonalPhysicsBody.swift; sourceTree = "<group>"; };
+		47DA513227C3ABA000491B3A /* BlockGameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockGameObject.swift; sourceTree = "<group>"; };
 		47F94ACF27A329E20016EDC7 /* PegEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PegEntity+CoreDataClass.swift"; path = "PeggleClone/Persistence/CoreDataEntities/PegEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		47F94AD027A329E20016EDC7 /* PegEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PegEntity+CoreDataProperties.swift"; path = "PeggleClone/Persistence/CoreDataEntities/PegEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		47F94AD127A329E20016EDC7 /* BoardEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BoardEntity+CoreDataClass.swift"; path = "PeggleClone/Persistence/CoreDataEntities/BoardEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
@@ -428,6 +432,7 @@
 			children = (
 				47A9309D27B3FAE300009C30 /* CircularPhysicsBody.swift */,
 				4754996527C23836005FFC68 /* LinePhysicsBody.swift */,
+				47DA513027C3AA9200491B3A /* PolygonalPhysicsBody.swift */,
 				47A9309B27B3FACA00009C30 /* PhysicsBody.swift */,
 			);
 			path = Bodies;
@@ -448,6 +453,7 @@
 				47CA667127B67E4100ADC2C5 /* GameObjects.swift */,
 				47A930AA27B3FC7300009C30 /* BallGameObject.swift */,
 				47A930AC27B3FC8700009C30 /* PegGameObject.swift */,
+				47DA513227C3ABA000491B3A /* BlockGameObject.swift */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -744,6 +750,7 @@
 				473A9E18279C1F8300476A3A /* ActionButtonView.swift in Sources */,
 				4717DC6227A0075600DF7272 /* PeggleCloneData.xcdatamodeld in Sources */,
 				4717DC6827A0132700DF7272 /* Persistable.swift in Sources */,
+				47DA513327C3ABA000491B3A /* BlockGameObject.swift in Sources */,
 				4754999427C391D3005FFC68 /* TriangularBlockEntity+CoreDataClass.swift in Sources */,
 				47CBF83E27C1315100B80002 /* PeggleAction.swift in Sources */,
 				47A930A427B3FBCF00009C30 /* PhysicsWorld.swift in Sources */,
@@ -752,6 +759,7 @@
 				473A9E0E279BEBF500476A3A /* Board.swift in Sources */,
 				47762939279844B700A1A8C0 /* DesignerView.swift in Sources */,
 				4754996C27C26C67005FFC68 /* PeggleColor.swift in Sources */,
+				47DA513127C3AA9200491B3A /* PolygonalPhysicsBody.swift in Sources */,
 				47DA512F27C3A54A00491B3A /* AddOrangeTriangularBlockAction.swift in Sources */,
 				47762937279844B700A1A8C0 /* PeggleCloneApp.swift in Sources */,
 				4717DC6627A010F000DF7272 /* CoreDataManager.swift in Sources */,

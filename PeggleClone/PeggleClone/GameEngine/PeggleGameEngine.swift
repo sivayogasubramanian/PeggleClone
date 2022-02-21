@@ -12,10 +12,14 @@ class PeggleGameEngine {
     private let world: PhysicsWorld
     private(set) var ball: BallGameObject?
     private var pegObjects = [ObjectIdentifier: PegGameObject]()
+    private var blockObjects = [ObjectIdentifier: BlockGameObject]()
     private var boardSize: CGSize
     private(set) var isReadyToShoot = true
     var pegs: [PegGameObject] {
         Array(pegObjects.values)
+    }
+    var blocks: [BlockGameObject] {
+        Array(blockObjects.values)
     }
 
     init(board: Board) {
@@ -42,6 +46,7 @@ class PeggleGameEngine {
         )
 
         board.pegs.forEach({ addPegToPhysicsEngine(PegGameObject(fromPeg: $0)) })
+        board.blocks.forEach({ addBlockToPhysicsEngine(BlockGameObject(fromBlock: $0)) })
     }
 
     func addBall(shootingTowards point: CGPoint) {
@@ -68,10 +73,20 @@ class PeggleGameEngine {
         world.addPhysicsBody(peg.physicsBody)
     }
 
+    private func addBlockToPhysicsEngine(_ block: BlockGameObject) {
+        blockObjects[ObjectIdentifier(block)] = block
+        world.addPhysicsBody(block.physicsBody)
+    }
+
     private func removeNearbyGameObjectsIfBallStationary() {
         for peg in pegs where peg.shouldBeRemoved {
             world.removePhysicsBody(peg.physicsBody)
             pegObjects.removeValue(forKey: ObjectIdentifier(peg))
+        }
+
+        for block in blocks where block.shouldBeRemoved {
+            world.removePhysicsBody(block.physicsBody)
+            blockObjects.removeValue(forKey: ObjectIdentifier(block))
         }
     }
 
@@ -87,16 +102,22 @@ class PeggleGameEngine {
         }
     }
 
-    private func removeLitPegsIfBallExited() {
+    private func removeLitGameObjectsIfBallExited() {
         for peg in pegs where peg.isHit {
             world.removePhysicsBody(peg.physicsBody)
             pegObjects.removeValue(forKey: ObjectIdentifier(peg))
+        }
+
+        for block in blocks where block.isHit {
+            world.removePhysicsBody(block.physicsBody)
+            blockObjects.removeValue(forKey: ObjectIdentifier(block))
         }
     }
 
     private func resetHitCountOfGameObjects() {
         ball?.physicsBody.resetHitCount()
         pegs.forEach({ $0.physicsBody.resetHitCount() })
+        blocks.forEach({ $0.physicsBody.resetHitCount() })
     }
 
     private func prepareNewBall(initialDirection point: CGPoint) -> BallGameObject? {
@@ -113,7 +134,7 @@ class PeggleGameEngine {
     private func removeBall(ball: BallGameObject) {
         self.ball = nil
         world.removePhysicsBody(ball.physicsBody)
-        removeLitPegsIfBallExited()
+        removeLitGameObjectsIfBallExited()
         resetHitCountOfGameObjects()
         isReadyToShoot.toggle()
     }

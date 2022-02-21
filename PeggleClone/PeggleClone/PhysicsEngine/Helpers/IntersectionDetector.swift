@@ -15,6 +15,9 @@ class IntersectionDetector {
         case let (circle, line) as (CircularIntersector, LineIntersector),
             let (line, circle) as (LineIntersector, CircularIntersector):
             return Intersector.detectBetween(circle: circle, line: line)
+        case let (circle, polygon) as (CircularIntersector, PolygonIntersector),
+            let (polygon, circle) as (PolygonIntersector, CircularIntersector):
+            return Intersector.detectBetween(circle: circle, polygon: polygon)
         default:
             assertionFailure("Unknown physics bodies in IntersectionDetector")
             return false

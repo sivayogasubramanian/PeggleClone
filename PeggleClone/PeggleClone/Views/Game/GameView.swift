@@ -21,6 +21,7 @@ struct GameView: View {
                         .frame(width: gameViewModel.boardWidth, height: gameViewModel.boardHeight)
                         .overlay {
                             overlayPegViews()
+                            overlayBlockViews()
                         }
                         .overlay {
                             if let ball = gameViewModel.ball {
@@ -71,6 +72,19 @@ struct GameView: View {
             .resizable()
             .frame(width: peg.diameter, height: peg.diameter, alignment: .center)
             .position(x: peg.physicsBody.position.dx, y: peg.physicsBody.position.dy)
+    }
+
+    private func overlayBlockViews() -> some View {
+        ForEach(gameViewModel.blocks) { block in
+            makeBlockView(block)
+        }.animation(.easeOut(duration: 0.5), value: gameViewModel.blocks)
+    }
+
+    private func makeBlockView(_ block: BlockGameObject) -> some View {
+        Image(Utils.pegColorToImageBlockFileName(color: block.color, isHit: block.isHit))
+            .resizable()
+            .frame(width: block.width, height: block.height, alignment: .center)
+            .position(x: block.physicsBody.position.dx, y: block.physicsBody.position.dy)
     }
 
     private func overlayBallView(_ ball: BallGameObject) -> some View {

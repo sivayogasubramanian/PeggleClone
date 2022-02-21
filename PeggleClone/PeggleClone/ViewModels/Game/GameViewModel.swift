@@ -18,6 +18,9 @@ class GameViewModel: ObservableObject {
     var pegs: [PegGameObject] {
         gameEngine.pegs
     }
+    var blocks: [BlockGameObject] {
+        gameEngine.blocks
+    }
     var ball: BallGameObject? {
         gameEngine.ball
     }
@@ -30,6 +33,10 @@ class GameViewModel: ObservableObject {
     var boardHeight: CGFloat {
         board.boardSize.height
     }
+
+    // Game loop variables
+    private(set) var previousTime = Date().timeIntervalSince1970
+    private(set) var lag = 0.0
 
     init(board: Board) {
         self.board = board
@@ -60,10 +67,21 @@ class GameViewModel: ObservableObject {
         let displaylink = CADisplayLink(target: self, selector: #selector(step))
         displaylink.add(to: .current, forMode: .common)
         self.displaylink = displaylink
+        previousTime = Date().timeIntervalSince1970
+
     }
 
     @objc private func step(displaylink: CADisplayLink) {
-        gameEngine.simulateFor(dt: displaylink.targetTimestamp - displaylink.timestamp)
+        let current = Date().timeIntervalSince1970
+        let elasped = current - previousTime
+        previousTime = current
+        lag += elasped
+
+        while lag >= PhysicsConstants.physicsUpdateTickTime {
+            gameEngine.simulateFor(dt: PhysicsConstants.physicsUpdateTickTime)
+            lag -= PhysicsConstants.physicsUpdateTickTime
+        }
+
         updateViews()
     }
 

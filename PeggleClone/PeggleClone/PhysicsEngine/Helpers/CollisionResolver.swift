@@ -15,15 +15,38 @@ class CollisionResolver {
             circleAndCircle(circle1: circle1, circle2: circle2)
         case let (circle, line) as (CircularPhysicsBody, LinePhysicsBody),
             let (line, circle) as (LinePhysicsBody, CircularPhysicsBody):
-            circleAndLine(circle: circle, line: line)
+            circleAndLine(circle: circle, line: line, withCof: 1)
+        case let (circle, polygon) as (CircularPhysicsBody, PolygonalPhysicsBody),
+            let (polygon, circle) as (PolygonalPhysicsBody, CircularPhysicsBody):
+            circleAndPolygon(circle: circle, polygon: polygon)
         default:
             assertionFailure("Unknown physics bodies in CollisionResolver")
         }
     }
 
-    private static func circleAndLine(circle: CircularPhysicsBody, line: LinePhysicsBody) {
+    private static func circleAndPolygon(circle: CircularPhysicsBody, polygon: PolygonalPhysicsBody) {
+        for vertex in polygon.vertices {
+            let circularPhysicsBody = CircularPhysicsBody(gameObjectType: .block, position: vertex, radius: 1)
+
+            if Intersector.detectBetween(circle1: circle, circle2: circularPhysicsBody) {
+                circleAndCircle(circle1: circle, circle2: circularPhysicsBody)
+                return
+            }
+        }
+
+        for line in polygon.edges {
+            let linePhysicsBody = LinePhysicsBody(start: line.start, end: line.end)
+
+            if Intersector.detectBetween(circle: circle, line: linePhysicsBody) {
+                circleAndLine(circle: circle, line: linePhysicsBody, withCof: PhysicsConstants.coefficientOfRestitution)
+                return
+            }
+        }
+    }
+
+    private static func circleAndLine(circle: CircularPhysicsBody, line: LinePhysicsBody, withCof cof: Double) {
         let collisionNormal = (circle.center - line.closestPointOnLine(to: circle.center)).normalize()
-        let impulseVector = getImpulseVector(collisionNormal: collisionNormal, body1: circle, body2: line, cof: 1)
+        let impulseVector = getImpulseVector(collisionNormal: collisionNormal, body1: circle, body2: line, cof: cof)
         circle.setVelocity(to: circle.velocity + impulseVector)
         line.setVelocity(to: line.velocity - impulseVector)
         fixOverlapForCircleAndLineCollisions(circle, line, collisionNormal)
