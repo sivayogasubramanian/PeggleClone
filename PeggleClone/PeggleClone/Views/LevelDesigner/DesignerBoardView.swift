@@ -21,8 +21,6 @@ struct DesignerBoardView: View {
                 .gesture(
                     DragGesture(minimumDistance: 0).onEnded({ value in
                         withAnimation(.easeIn(duration: 0.1)) {
-                            designerViewModel.resetSelectedObjects()
-
                             if actionsViewModel.getPeggleType() == .peg {
                                 designerViewModel.addPeg(
                                     at: value.location,
@@ -66,6 +64,7 @@ struct DesignerBoardView: View {
             .frame(width: peg.diameter, height: peg.diameter, alignment: .center)
             .rotationEffect(Angle(degrees: peg.rotation))
             .animation(.default, value: peg.rotation)
+            .animation(.default, value: peg.radius)
             .position(x: peg.center.dx, y: peg.center.dy)
             .onTapGesture {
                 if type(of: actionsViewModel.currentAction) == DeleteAction.self {
@@ -96,6 +95,8 @@ struct DesignerBoardView: View {
             .rotationEffect(Angle(degrees: block.rotation))
             .position(x: block.center.dx, y: block.center.dy)
             .animation(.default, value: block.rotation)
+            .animation(.default, value: block.width)
+            .animation(.default, value: block.height)
             .onTapGesture {
                 if type(of: actionsViewModel.currentAction) == DeleteAction.self {
                     withAnimation(.easeOut(duration: 0.1)) {

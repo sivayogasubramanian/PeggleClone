@@ -13,7 +13,11 @@ class DesignerViewModel: ObservableObject {
     private(set) var board = Board()
     private(set) var isNewBoard = true
     private(set) var boardSize: CGSize = .zero
+
     private(set) var rotation: Double = .zero
+    private(set) var radius = Constants.pegRadius
+    private(set) var width = Constants.blockWidth
+    private(set) var height = Constants.blockHeight
     private(set) var selectedPeg: Peg?
     private(set) var selectedBlock: TriangularBlock?
 
@@ -41,13 +45,13 @@ class DesignerViewModel: ObservableObject {
 
     func deletePeg(peg: Peg) {
         board.deletePeg(peg: peg)
-        rotation = .zero
+        resetStatesOfSliders()
         updateViews()
     }
 
     func deleteBlock(block: TriangularBlock) {
         board.deleteBlock(block: block)
-        rotation = .zero
+        resetStatesOfSliders()
         updateViews()
     }
 
@@ -55,7 +59,7 @@ class DesignerViewModel: ObservableObject {
     func setBoard(to board: Board) {
         self.board = board
         isNewBoard = false
-        rotation = 0.0
+        resetStatesOfSliders()
         updateViews()
     }
 
@@ -77,13 +81,8 @@ class DesignerViewModel: ObservableObject {
         board = Board()
         setBoardSize(to: boardSize)
         isNewBoard = true
-        rotation = .zero
+        resetStatesOfSliders()
         updateViews()
-    }
-
-    func resetSelectedObjects() {
-        selectedPeg = nil
-        selectedBlock = nil
     }
 
     func setSelectedPeg(_ peg: Peg?) {
@@ -91,6 +90,7 @@ class DesignerViewModel: ObservableObject {
 
         if let peg = peg {
             rotation = peg.rotation
+            radius = peg.radius
             selectedPeg = peg
         }
 
@@ -102,6 +102,8 @@ class DesignerViewModel: ObservableObject {
 
         if let block = block {
             rotation = block.rotation
+            width = block.width
+            height = block.height
             selectedBlock = block
         }
 
@@ -118,6 +120,36 @@ class DesignerViewModel: ObservableObject {
         if let block = selectedBlock {
             if board.setRotation(block: block, to: rotation) {
                 self.rotation = rotation
+            }
+        }
+
+        updateViews()
+    }
+
+    func setPegRadius(to radius: Double) {
+        if let peg = selectedPeg {
+            if board.setPegRadius(peg: peg, to: radius) {
+                self.radius = radius
+            }
+        }
+
+        updateViews()
+    }
+
+    func setBlockWidth(to width: Double) {
+        if let block = selectedBlock {
+            if board.setBlockWidth(block: block, to: width) {
+                self.width = width
+            }
+        }
+
+        updateViews()
+    }
+
+    func setBlockHeight(to height: Double) {
+        if let block = selectedBlock {
+            if board.setBlockHeight(block: block, to: height) {
+                self.height = height
             }
         }
 
@@ -180,6 +212,13 @@ class DesignerViewModel: ObservableObject {
         }
 
         board.setName(to: name)
+    }
+
+    private func resetStatesOfSliders() {
+        rotation = .zero
+        radius = Constants.pegRadius
+        width = Constants.blockWidth
+        height = Constants.blockHeight
     }
 
     private func updateViews() {

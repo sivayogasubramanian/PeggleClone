@@ -12,8 +12,8 @@ final class TriangularBlock: Identifiable {
     let uuid: UUID
     let color: PeggleColor
 
-    private(set) var width = Constants.blockWidth * 3
-    private(set) var height = Constants.blockHeight * 3
+    private(set) var width = Constants.blockWidth
+    private(set) var height = Constants.blockHeight
     private(set) var center: CGVector
     private(set) var topVertex: CGVector
     private(set) var leftVertex: CGVector
@@ -58,12 +58,11 @@ final class TriangularBlock: Identifiable {
 
     private func resetVertices() {
         topVertex = CGVector(dx: center.dx, dy: center.dy - height / 2)
+            .rotate(by: rotation, origin: center)
         leftVertex = CGVector(dx: center.dx - width / 2, dy: center.dy + height / 2)
+            .rotate(by: rotation, origin: center)
         rightVertex = CGVector(dx: center.dx + width / 2, dy: center.dy + height / 2)
-
-        topVertex = topVertex.rotate(by: rotation, origin: center)
-        leftVertex = leftVertex.rotate(by: rotation, origin: center)
-        rightVertex = rightVertex.rotate(by: rotation, origin: center)
+            .rotate(by: rotation, origin: center)
     }
 }
 

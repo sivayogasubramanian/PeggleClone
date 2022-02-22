@@ -16,7 +16,7 @@ struct ImageButtonView: View {
     @ObservedObject var actionsViewModel: DesignerActionsViewModel
 
     var body: some View {
-        HStack(spacing: 10) {
+        HStack(spacing: 5) {
             bluePegImageButtonView
 
             orangePegImageButtonView
@@ -27,13 +27,24 @@ struct ImageButtonView: View {
 
             Spacer()
 
-            rotationSelectorImageView
+            VStack {
+                if designerViewModel.selectedPeg != nil || designerViewModel.selectedBlock != nil {
+                    rotationSelectorView
+                }
+
+                if designerViewModel.selectedPeg != nil {
+                    resizePegView
+                } else if designerViewModel.selectedBlock != nil {
+                    resizeBlockView
+                }
+            }
 
             Spacer()
 
             deletePegImageButtonView
         }
         .padding(.horizontal, 20)
+        .frame(height: 100)
     }
 
     private var bluePegImageButtonView: some View {
@@ -121,7 +132,7 @@ struct ImageButtonView: View {
             )
     }
 
-    private var rotationSelectorImageView: some View {
+    private var rotationSelectorView: some View {
         HStack {
             Text("Rotation:")
             Slider(
@@ -132,6 +143,48 @@ struct ImageButtonView: View {
                     }),
                 in: 0...360, step: 1.0
             )
+        }
+    }
+
+    private var resizePegView: some View {
+        HStack {
+            Text("Radius:   ")
+            Slider(
+                value: Binding(
+                    get: { designerViewModel.radius },
+                    set: { newRadius, _ in
+                        designerViewModel.setPegRadius(to: newRadius)
+                    }),
+                in: Constants.pegRadius...Constants.pegRadius * 2, step: 1.0
+            )
+        }
+    }
+
+    private var resizeBlockView: some View {
+        HStack {
+            HStack {
+                Text("Width:    ")
+                Slider(
+                    value: Binding(
+                        get: { designerViewModel.width },
+                        set: { newWidth, _ in
+                            designerViewModel.setBlockWidth(to: newWidth)
+                        }),
+                    in: Constants.blockWidth...Constants.blockWidth * 2, step: 1.0
+                )
+            }
+
+            HStack {
+                Text("Height:   ")
+                Slider(
+                    value: Binding(
+                        get: { designerViewModel.height },
+                        set: { newHeight, _ in
+                            designerViewModel.setBlockHeight(to: newHeight)
+                        }),
+                    in: Constants.blockHeight...Constants.blockHeight * 2, step: 1.0
+                )
+            }
         }
     }
 }

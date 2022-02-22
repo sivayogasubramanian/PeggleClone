@@ -39,6 +39,10 @@ final class Peg: Identifiable {
     func setRotation(to rotation: Double) {
         self.rotation = rotation
     }
+
+    func setRadius(to radius: Double) {
+        self.radius = radius
+    }
 }
 
 extension Peg: CircularIntersector {
