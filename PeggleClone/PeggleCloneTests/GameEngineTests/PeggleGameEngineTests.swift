@@ -46,7 +46,7 @@ class PeggleGameEngineTests: XCTestCase {
     func testSimulateFor_doesNotMovePeg() {
         let board = Board()
         board.setSize(boardSize: boardSize)
-        board.addPeg(at: CGPoint(x: 75, y: 86), color: .orange, bounds: boardSize)
+        _ = board.addPeg(at: CGPoint(x: 75, y: 86), color: .orange, bounds: boardSize)
 
         gameEngine = PeggleGameEngine(board: board)
         let initialPosition = gameEngine.pegs.first?.physicsBody.position
@@ -68,7 +68,7 @@ class PeggleGameEngineTests: XCTestCase {
     func testSimulateFor_removesPegsWhenBallCollidesWithPeg() {
         let board = Board()
         board.setSize(boardSize: boardSize)
-        board.addPeg(at: CGPoint(x: 500, y: 500), color: .orange, bounds: boardSize)
+        _ = board.addPeg(at: CGPoint(x: 500, y: 500), color: .orange, bounds: boardSize)
         gameEngine = PeggleGameEngine(board: board)
 
         let point = CGPoint(x: 500, y: 500)
