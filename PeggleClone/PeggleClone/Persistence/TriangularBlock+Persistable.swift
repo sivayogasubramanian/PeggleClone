@@ -14,11 +14,7 @@ extension TriangularBlock: Persistable {
         let uuid = entity.uuid, color = entity.color, width = entity.width, height = entity.height
         let center = CGVector(dx: entity.xCoord, dy: entity.yCoord), rotation = entity.rotation
 
-        let block = self.init(uuid: uuid, color: color, center: center)
-        block.setWidth(to: width)
-        block.setHeight(to: height)
-        block.setRotation(to: rotation)
-        return block
+        return self.init(uuid: uuid, color: color, center: center, width: width, height: height, rotation: rotation)
     }
 
     func toCoreDataEntity(using context: NSManagedObjectContext) -> TriangularBlockEntity {

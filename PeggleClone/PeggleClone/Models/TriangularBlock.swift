@@ -12,22 +12,26 @@ final class TriangularBlock: Identifiable {
     let uuid: UUID
     let color: PeggleColor
 
-    private(set) var width = Constants.blockWidth
-    private(set) var height = Constants.blockHeight
+    private(set) var width: Double
+    private(set) var height: Double
     private(set) var center: CGVector
     private(set) var topVertex: CGVector
     private(set) var leftVertex: CGVector
     private(set) var rightVertex: CGVector
-    private(set) var rotation = 0.0
+    private(set) var rotation: Double
 
-    convenience init(color: PeggleColor, center: CGVector) {
-        self.init(uuid: UUID(), color: color, center: center)
+    convenience init(color: PeggleColor, center: CGVector, width: Double, height: Double, rotation: Double) {
+        self.init(uuid: UUID(), color: color, center: center, width: width, height: height, rotation: rotation)
     }
 
-    init(uuid: UUID, color: PeggleColor, center: CGVector) {
+    init(uuid: UUID, color: PeggleColor, center: CGVector, width: Double, height: Double, rotation: Double) {
         self.uuid = uuid
         self.color = color
         self.center = center
+        self.width = width
+        self.height = height
+        self.rotation = rotation
+
         topVertex = CGVector(dx: center.dx, dy: center.dy - height / 2)
             .rotate(by: rotation, origin: center)
         leftVertex = CGVector(dx: center.dx - width / 2, dy: center.dy + height / 2)

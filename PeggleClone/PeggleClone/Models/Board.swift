@@ -70,7 +70,8 @@ final class Board: Identifiable {
             return nil
         }
 
-        let newBlock = TriangularBlock(color: color, center: point.toCGVector())
+        let newBlock = TriangularBlock(color: color, center: point.toCGVector(), width: Constants.blockWidth,
+                                       height: Constants.blockHeight, rotation: .zero)
         guard validateAddBlock(newBlock: newBlock, bounds: bounds) else {
             return nil
         }
@@ -98,7 +99,7 @@ final class Board: Identifiable {
         }
 
         let currentPeg = pegs[index]
-        movePegToClosestValidLocation(currentPeg: currentPeg, to: newCenter, bounds: bounds)
+        movePegToClosestValidLocation(peg: currentPeg, to: newCenter, bounds: bounds)
     }
 
     func moveBlock(block: TriangularBlock, to newCenter: CGPoint, bounds: CGSize) {
@@ -107,7 +108,7 @@ final class Board: Identifiable {
         }
 
         let currentBlock = blocks[index]
-        moveBlockToClosestValidLocation(currentBlock: currentBlock, to: newCenter, bounds: bounds)
+        moveBlockToClosestValidLocation(block: currentBlock, to: newCenter, bounds: bounds)
     }
 
     func setRotation(peg: Peg, to rotation: Double) -> Bool {
@@ -123,10 +124,8 @@ final class Board: Identifiable {
     }
 
     func setRotation(block: TriangularBlock, to rotation: Double) -> Bool {
-        let rotatedBlock = TriangularBlock(color: block.color, center: block.center)
-        rotatedBlock.setRotation(to: rotation)
-        rotatedBlock.setWidth(to: block.width)
-        rotatedBlock.setHeight(to: block.height)
+        let rotatedBlock = TriangularBlock(color: block.color, center: block.center, width: block.width,
+                                           height: block.height, rotation: rotation)
 
         guard !isAnyPegPresentThatOverlaps(currentBlock: rotatedBlock)
                 && !isAnyBlockPresentThatOverlaps(currentBlock: rotatedBlock, excludeBlock: block) else {
@@ -150,10 +149,8 @@ final class Board: Identifiable {
     }
 
     func setBlockWidth(block: TriangularBlock, to width: Double) -> Bool {
-        let resizedBlock = TriangularBlock(color: block.color, center: block.center)
-        resizedBlock.setWidth(to: width)
-        resizedBlock.setHeight(to: block.height)
-        resizedBlock.setRotation(to: block.rotation)
+        let resizedBlock = TriangularBlock(color: block.color, center: block.center, width: width,
+                                           height: block.height, rotation: block.rotation)
 
         guard !isAnyPegPresentThatOverlaps(currentBlock: resizedBlock)
                 && !isAnyBlockPresentThatOverlaps(currentBlock: resizedBlock, excludeBlock: block) else {
@@ -165,10 +162,8 @@ final class Board: Identifiable {
     }
 
     func setBlockHeight(block: TriangularBlock, to height: Double) -> Bool {
-        let resizedBlock = TriangularBlock(color: block.color, center: block.center)
-        resizedBlock.setHeight(to: height)
-        resizedBlock.setWidth(to: block.width)
-        resizedBlock.setRotation(to: block.rotation)
+        let resizedBlock = TriangularBlock(color: block.color, center: block.center, width: block.width,
+                                           height: height, rotation: block.rotation)
 
         guard !isAnyPegPresentThatOverlaps(currentBlock: resizedBlock)
                 && !isAnyBlockPresentThatOverlaps(currentBlock: resizedBlock, excludeBlock: block) else {
@@ -179,48 +174,44 @@ final class Board: Identifiable {
         return true
     }
 
-    private func movePegToClosestValidLocation(currentPeg: Peg, to newCenter: CGPoint, bounds: CGSize) {
-        let direction = (currentPeg.center - newCenter.toCGVector()).normalize()
+    private func movePegToClosestValidLocation(peg: Peg, to newCenter: CGPoint, bounds: CGSize) {
+        let direction = (peg.center - newCenter.toCGVector()).normalize()
         var currentPoint = newCenter.toCGVector()
-        var movedPeg = Peg(color: currentPeg.color, center: currentPoint, radius: currentPeg.radius,
-                           rotation: currentPeg.rotation)
+        var movedPeg = Peg(color: peg.color, center: currentPoint, radius: peg.radius,
+                           rotation: peg.rotation)
 
-        while isAnyPegPresentThatOverlaps(currentPeg: movedPeg, excludePeg: currentPeg)
+        while isAnyPegPresentThatOverlaps(currentPeg: movedPeg, excludePeg: peg)
                 || isAnyBlockPresentThatOverlaps(currentPeg: movedPeg) {
             currentPoint += direction
-            movedPeg = Peg(color: currentPeg.color, center: currentPoint, radius: currentPeg.radius,
-                           rotation: currentPeg.rotation)
+            movedPeg = Peg(color: peg.color, center: currentPoint, radius: peg.radius,
+                           rotation: peg.rotation)
         }
 
         guard validateMovePeg(movedPeg: movedPeg, bounds: bounds) else {
             return
         }
 
-        currentPeg.setCenter(to: currentPoint)
+        peg.setCenter(to: currentPoint)
     }
 
-    private func moveBlockToClosestValidLocation(currentBlock: TriangularBlock, to newCenter: CGPoint, bounds: CGSize) {
-        let direction = (currentBlock.center - newCenter.toCGVector()).normalize()
+    private func moveBlockToClosestValidLocation(block: TriangularBlock, to newCenter: CGPoint, bounds: CGSize) {
+        let direction = (block.center - newCenter.toCGVector()).normalize()
         var currentPoint = newCenter.toCGVector()
-        var movedBlock = TriangularBlock(color: currentBlock.color, center: currentPoint)
-        movedBlock.setRotation(to: currentBlock.rotation)
-        movedBlock.setWidth(to: currentBlock.width)
-        movedBlock.setHeight(to: currentBlock.height)
+        var movedBlock = TriangularBlock(color: block.color, center: currentPoint, width: block.width,
+                                         height: block.height, rotation: block.rotation)
 
         while isAnyPegPresentThatOverlaps(currentBlock: movedBlock)
-                || isAnyBlockPresentThatOverlaps(currentBlock: movedBlock, excludeBlock: currentBlock) {
+                || isAnyBlockPresentThatOverlaps(currentBlock: movedBlock, excludeBlock: block) {
             currentPoint += direction
-            movedBlock = TriangularBlock(color: currentBlock.color, center: currentPoint)
-            movedBlock.setRotation(to: currentBlock.rotation)
-            movedBlock.setWidth(to: currentBlock.width)
-            movedBlock.setHeight(to: currentBlock.height)
+            movedBlock = TriangularBlock(color: block.color, center: currentPoint, width: block.width,
+                                         height: block.height, rotation: block.rotation)
         }
 
         guard validateMoveBlock(movedBlock: movedBlock, bounds: bounds) else {
             return
         }
 
-        currentBlock.setCenter(to: currentPoint)
+        block.setCenter(to: currentPoint)
     }
 }
 
