@@ -33,7 +33,8 @@ class PegPersistableTests: XCTestCase {
         pegEntity.setYCoord(to: yCoord)
 
         let peg = Peg.fromCoreDataEntity(pegEntity)
-        let expectedPeg = Peg(uuid: uuid, color: color, center: CGVector(dx: xCoord, dy: yCoord))
+        let expectedPeg = Peg(uuid: uuid, color: color, center: CGVector(dx: xCoord, dy: yCoord),
+                              radius: Constants.pegRadius, rotation: .zero)
 
         XCTAssertEqual(peg.uuid, expectedPeg.uuid)
         XCTAssertEqual(peg.color, expectedPeg.color)
@@ -44,7 +45,8 @@ class PegPersistableTests: XCTestCase {
         let uuid = UUID(), color = PeggleColor.blue
         let xCoord = 56.1, yCoord = 121.23
 
-        let peg = Peg(uuid: uuid, color: color, center: CGVector(dx: xCoord, dy: yCoord))
+        let peg = Peg(uuid: uuid, color: color, center: CGVector(dx: xCoord, dy: yCoord),
+                      radius: Constants.pegRadius, rotation: .zero)
         let pegEntity = peg.toCoreDataEntity(using: viewContext)
 
         XCTAssertEqual(pegEntity.uuid, uuid)

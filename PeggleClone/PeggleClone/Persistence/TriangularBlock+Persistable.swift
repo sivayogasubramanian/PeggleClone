@@ -15,8 +15,8 @@ extension TriangularBlock: Persistable {
         let center = CGVector(dx: entity.xCoord, dy: entity.yCoord), rotation = entity.rotation
 
         let block = self.init(uuid: uuid, color: color, center: center)
-        block.changeWidth(to: width)
-        block.changeHeight(to: height)
+        block.setWidth(to: width)
+        block.setHeight(to: height)
         block.setRotation(to: rotation)
         return block
     }

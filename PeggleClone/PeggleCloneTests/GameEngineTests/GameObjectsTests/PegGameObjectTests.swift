@@ -10,7 +10,7 @@ import XCTest
 
 class PegGameObjectTests: XCTestCase {
     func testInit() {
-        let peg = Peg(color: .blue, center: CGVector(dx: 10, dy: 20))
+        let peg = Peg(color: .blue, center: CGVector(dx: 10, dy: 20), radius: Constants.pegRadius, rotation: .zero)
         let pegGameObject = PegGameObject(fromPeg: peg)
 
         XCTAssertNotNil(pegGameObject)
@@ -19,7 +19,7 @@ class PegGameObjectTests: XCTestCase {
     }
 
     func testEquatable() {
-        let peg = Peg(color: .blue, center: CGVector(dx: 10, dy: 20))
+        let peg = Peg(color: .blue, center: CGVector(dx: 10, dy: 20), radius: Constants.pegRadius, rotation: .zero)
         let pegGameObject1 = PegGameObject(fromPeg: peg)
         let pegGameObject2 = PegGameObject(fromPeg: peg)
 

@@ -12,28 +12,26 @@ final class Peg: Identifiable {
     let uuid: UUID
     let color: PeggleColor
     private(set) var center: CGVector
-    private(set) var radius = Constants.pegRadius
-    private(set) var rotation = 0.0
+    private(set) var radius: Double
+    private(set) var rotation: Double
     var diameter: Double {
         radius * 2
     }
 
-    convenience init(color: PeggleColor, center: CGVector) {
-        self.init(uuid: UUID(), color: color, center: center)
+    convenience init(color: PeggleColor, center: CGVector, radius: Double, rotation: Double) {
+        self.init(uuid: UUID(), color: color, center: center, radius: radius, rotation: rotation)
     }
 
-    init(uuid: UUID, color: PeggleColor, center: CGVector) {
+    init(uuid: UUID, color: PeggleColor, center: CGVector, radius: Double, rotation: Double) {
         self.uuid = uuid
         self.color = color
         self.center = center
-    }
-
-    func changeCenter(to center: CGVector) {
-        self.center = center
-    }
-
-    func changeRadius(to radius: Double) {
         self.radius = radius
+        self.rotation = rotation
+    }
+
+    func setCenter(to center: CGVector) {
+        self.center = center
     }
 
     func setRotation(to rotation: Double) {

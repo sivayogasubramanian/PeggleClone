@@ -20,7 +20,9 @@ class BoardTests: XCTestCase {
 
     func testConstructor_withId() {
         let uuid = UUID()
-        let board = Board(uuid: uuid, name: "example", pegs: [Peg(color: .blue, center: .zero)], blocks: [])
+        let board = Board(uuid: uuid, name: "example",
+                          pegs: [Peg(color: .blue, center: .zero, radius: Constants.pegRadius, rotation: .zero)],
+                          blocks: [])
 
         XCTAssertEqual(board.uuid, uuid)
         XCTAssertEqual(board.name, "example")
@@ -158,7 +160,8 @@ class BoardTests: XCTestCase {
     }
 
     func testMovePeg_withValidNewCenter_shouldMovePeg() {
-        let peg = Peg(color: .blue, center: CGVector(dx: 40, dy: 40))
+        let peg = Peg(color: .blue, center: CGVector(dx: 40, dy: 40),
+                      radius: Constants.pegRadius, rotation: .zero)
         let board = Board(uuid: UUID(), name: "board", pegs: [peg], blocks: [])
 
         board.movePeg(peg: peg, to: CGPoint(x: 50, y: 50), bounds: CGSize(width: 100, height: 100))
@@ -168,7 +171,8 @@ class BoardTests: XCTestCase {
     }
 
     func testMovePeg_withNewCenterOutOfBounds_shouldNotMovePeg() {
-        let peg = Peg(color: .blue, center: CGVector(dx: 40, dy: 40))
+        let peg = Peg(color: .blue, center: CGVector(dx: 40, dy: 40),
+                      radius: Constants.pegRadius, rotation: .zero)
         let board = Board(uuid: UUID(), name: "board", pegs: [peg], blocks: [])
 
         board.movePeg(peg: peg, to: CGPoint(x: 100, y: 100), bounds: CGSize(width: 100, height: 100))
@@ -178,8 +182,10 @@ class BoardTests: XCTestCase {
     }
 
     func testMovePeg_withNewCenterOverlappingAnotherPeg_shouldNotMovePeg() {
-        let peg1 = Peg(color: .blue, center: CGVector(dx: 40, dy: 40))
-        let peg2 = Peg(color: .blue, center: CGVector(dx: 100, dy: 100))
+        let peg1 = Peg(color: .blue, center: CGVector(dx: 40, dy: 40),
+                       radius: Constants.pegRadius, rotation: .zero)
+        let peg2 = Peg(color: .blue, center: CGVector(dx: 100, dy: 100),
+                       radius: Constants.pegRadius, rotation: .zero)
         let board = Board(uuid: UUID(), name: "board", pegs: [peg1, peg2], blocks: [])
 
         board.movePeg(peg: peg1, to: CGPoint(x: 200, y: 200), bounds: CGSize(width: 100, height: 100))

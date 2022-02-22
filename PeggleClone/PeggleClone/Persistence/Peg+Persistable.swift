@@ -14,10 +14,7 @@ extension Peg: Persistable {
         let uuid = entity.uuid, color = entity.color, radius = entity.radius
         let center = CGVector(dx: entity.xCoord, dy: entity.yCoord), rotation = entity.rotation
 
-        let peg = self.init(uuid: uuid, color: color, center: center)
-        peg.changeRadius(to: radius)
-        peg.changeRadius(to: rotation)
-        return peg
+        return self.init(uuid: uuid, color: color, center: center, radius: radius, rotation: rotation)
     }
 
     func toCoreDataEntity(using context: NSManagedObjectContext) -> PegEntity {

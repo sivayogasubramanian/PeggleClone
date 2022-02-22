@@ -36,17 +36,17 @@ final class TriangularBlock: Identifiable {
             .rotate(by: rotation, origin: center)
     }
 
-    func changeCenter(to center: CGVector) {
+    func setCenter(to center: CGVector) {
         self.center = center
         resetVertices()
     }
 
-    func changeWidth(to width: Double) {
+    func setWidth(to width: Double) {
         self.width = width
         resetVertices()
     }
 
-    func changeHeight(to height: Double) {
+    func setHeight(to height: Double) {
         self.height = height
         resetVertices()
     }

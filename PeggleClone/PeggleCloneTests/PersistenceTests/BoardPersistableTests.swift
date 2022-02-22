@@ -23,8 +23,8 @@ class BoardPersistableTests: XCTestCase {
     }
 
     func testFromCoreDataEntity() {
-        let peg1 = Peg(color: .blue, center: .zero)
-        let peg2 = Peg(color: .orange, center: CGVector(dx: 10, dy: 10))
+        let peg1 = Peg(color: .blue, center: .zero, radius: Constants.pegRadius, rotation: .zero)
+        let peg2 = Peg(color: .orange, center: CGVector(dx: 10, dy: 10), radius: Constants.pegRadius, rotation: .zero)
         let pegEntities = [peg1, peg2].map({ $0.toCoreDataEntity(using: viewContext) })
 
         let block1 = TriangularBlock(color: .blue, center: .zero)
@@ -55,8 +55,8 @@ class BoardPersistableTests: XCTestCase {
     }
 
     func testToCoreDataEntity() {
-        let peg1 = Peg(color: .blue, center: .zero)
-        let peg2 = Peg(color: .orange, center: CGVector(dx: 10, dy: 10))
+        let peg1 = Peg(color: .blue, center: .zero, radius: Constants.pegRadius, rotation: .zero)
+        let peg2 = Peg(color: .orange, center: CGVector(dx: 10, dy: 10), radius: Constants.pegRadius, rotation: .zero)
         let block1 = TriangularBlock(color: .blue, center: .zero)
         let block2 = TriangularBlock(color: .orange, center: CGVector(dx: 10, dy: 10))
 
