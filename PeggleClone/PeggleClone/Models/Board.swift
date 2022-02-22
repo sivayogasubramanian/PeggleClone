@@ -57,7 +57,7 @@ final class Board: Identifiable {
         }
 
         let newPeg = Peg(color: color, center: point.toCGVector(), radius: Constants.pegRadius, rotation: .zero)
-        guard validateAddPeg(newPeg: newPeg, bounds: bounds) else {
+        guard validateAddPeg(peg: newPeg, bounds: bounds) else {
             return nil
         }
 
@@ -72,7 +72,7 @@ final class Board: Identifiable {
 
         let newBlock = TriangularBlock(color: color, center: point.toCGVector(), width: Constants.blockWidth,
                                        height: Constants.blockHeight, rotation: .zero)
-        guard validateAddBlock(newBlock: newBlock, bounds: bounds) else {
+        guard validateAddBlock(block: newBlock, bounds: bounds) else {
             return nil
         }
 
@@ -114,8 +114,8 @@ final class Board: Identifiable {
     func setRotation(peg: Peg, to rotation: Double) -> Bool {
         let rotatedPeg = Peg(color: peg.color, center: peg.center, radius: peg.radius, rotation: rotation)
 
-        guard !isAnyPegPresentThatOverlaps(currentPeg: rotatedPeg, excludePeg: peg)
-                && !isAnyBlockPresentThatOverlaps(currentPeg: rotatedPeg) else {
+        guard !isAnyPegPresentThatOverlaps(peg: rotatedPeg, excludePeg: peg)
+                && !isAnyBlockPresentThatOverlaps(peg: rotatedPeg) else {
             return false
         }
 
@@ -127,8 +127,8 @@ final class Board: Identifiable {
         let rotatedBlock = TriangularBlock(color: block.color, center: block.center, width: block.width,
                                            height: block.height, rotation: rotation)
 
-        guard !isAnyPegPresentThatOverlaps(currentBlock: rotatedBlock)
-                && !isAnyBlockPresentThatOverlaps(currentBlock: rotatedBlock, excludeBlock: block) else {
+        guard !isAnyPegPresentThatOverlaps(block: rotatedBlock)
+                && !isAnyBlockPresentThatOverlaps(block: rotatedBlock, excludeBlock: block) else {
             return false
         }
 
@@ -139,8 +139,8 @@ final class Board: Identifiable {
     func setPegRadius(peg: Peg, to radius: Double) -> Bool {
         let resizedPeg = Peg(color: peg.color, center: peg.center, radius: radius, rotation: peg.rotation)
 
-        guard  !isAnyPegPresentThatOverlaps(currentPeg: resizedPeg, excludePeg: peg)
-                && !isAnyBlockPresentThatOverlaps(currentPeg: resizedPeg) else {
+        guard  !isAnyPegPresentThatOverlaps(peg: resizedPeg, excludePeg: peg)
+                && !isAnyBlockPresentThatOverlaps(peg: resizedPeg) else {
             return false
         }
 
@@ -152,8 +152,8 @@ final class Board: Identifiable {
         let resizedBlock = TriangularBlock(color: block.color, center: block.center, width: width,
                                            height: block.height, rotation: block.rotation)
 
-        guard !isAnyPegPresentThatOverlaps(currentBlock: resizedBlock)
-                && !isAnyBlockPresentThatOverlaps(currentBlock: resizedBlock, excludeBlock: block) else {
+        guard !isAnyPegPresentThatOverlaps(block: resizedBlock)
+                && !isAnyBlockPresentThatOverlaps(block: resizedBlock, excludeBlock: block) else {
             return false
         }
 
@@ -165,8 +165,8 @@ final class Board: Identifiable {
         let resizedBlock = TriangularBlock(color: block.color, center: block.center, width: block.width,
                                            height: height, rotation: block.rotation)
 
-        guard !isAnyPegPresentThatOverlaps(currentBlock: resizedBlock)
-                && !isAnyBlockPresentThatOverlaps(currentBlock: resizedBlock, excludeBlock: block) else {
+        guard !isAnyPegPresentThatOverlaps(block: resizedBlock)
+                && !isAnyBlockPresentThatOverlaps(block: resizedBlock, excludeBlock: block) else {
             return false
         }
 
@@ -180,14 +180,14 @@ final class Board: Identifiable {
         var movedPeg = Peg(color: peg.color, center: currentPoint, radius: peg.radius,
                            rotation: peg.rotation)
 
-        while isAnyPegPresentThatOverlaps(currentPeg: movedPeg, excludePeg: peg)
-                || isAnyBlockPresentThatOverlaps(currentPeg: movedPeg) {
+        while isAnyPegPresentThatOverlaps(peg: movedPeg, excludePeg: peg)
+                || isAnyBlockPresentThatOverlaps(peg: movedPeg) {
             currentPoint += direction
             movedPeg = Peg(color: peg.color, center: currentPoint, radius: peg.radius,
                            rotation: peg.rotation)
         }
 
-        guard validateMovePeg(movedPeg: movedPeg, bounds: bounds) else {
+        guard validateMovePeg(peg: movedPeg, bounds: bounds) else {
             return
         }
 
@@ -200,14 +200,14 @@ final class Board: Identifiable {
         var movedBlock = TriangularBlock(color: block.color, center: currentPoint, width: block.width,
                                          height: block.height, rotation: block.rotation)
 
-        while isAnyPegPresentThatOverlaps(currentBlock: movedBlock)
-                || isAnyBlockPresentThatOverlaps(currentBlock: movedBlock, excludeBlock: block) {
+        while isAnyPegPresentThatOverlaps(block: movedBlock)
+                || isAnyBlockPresentThatOverlaps(block: movedBlock, excludeBlock: block) {
             currentPoint += direction
             movedBlock = TriangularBlock(color: block.color, center: currentPoint, width: block.width,
                                          height: block.height, rotation: block.rotation)
         }
 
-        guard validateMoveBlock(movedBlock: movedBlock, bounds: bounds) else {
+        guard validateMoveBlock(block: movedBlock, bounds: bounds) else {
             return
         }
 
@@ -224,96 +224,98 @@ extension Board {
         return true
     }
 
-    private func validateAddPeg(newPeg: Peg, bounds: CGSize) -> Bool {
-        guard isWithinBounds(peg: newPeg, bounds: bounds) else {
+    private func validateAddPeg(peg: Peg, bounds: CGSize) -> Bool {
+        guard isWithinBounds(peg: peg, bounds: bounds) else {
             return false
         }
 
-        guard !isOverlappingWithExisitingPegs(newPeg: newPeg) else {
+        guard !isOverlappingWithExisitingPegs(peg: peg) else {
             return false
         }
 
-        guard !isOverlappingWithExisitingBlocks(newPeg: newPeg) else {
-            return false
-        }
-
-        return true
-    }
-
-    private func validateAddBlock(newBlock: TriangularBlock, bounds: CGSize) -> Bool {
-        guard isWithinBounds(block: newBlock, bounds: bounds) else {
-            return false
-        }
-
-        guard !isOverlappingWithExisitingPegs(newBlock: newBlock) else {
-            return false
-        }
-
-        guard !isOverlappingWithExisitingBlocks(newBlock: newBlock) else {
+        guard !isOverlappingWithExisitingBlocks(peg: peg) else {
             return false
         }
 
         return true
     }
 
-    private func validateMovePeg(movedPeg: Peg, bounds: CGSize) -> Bool {
-        isWithinBounds(peg: movedPeg, bounds: bounds)
+    private func validateAddBlock(block: TriangularBlock, bounds: CGSize) -> Bool {
+        guard isWithinBounds(block: block, bounds: bounds) else {
+            return false
+        }
+
+        guard !isOverlappingWithExisitingPegs(block: block) else {
+            return false
+        }
+
+        guard !isOverlappingWithExisitingBlocks(block: block) else {
+            return false
+        }
+
+        return true
     }
 
-    private func validateMoveBlock(movedBlock: TriangularBlock, bounds: CGSize) -> Bool {
-        isWithinBounds(block: movedBlock, bounds: bounds)
+    private func validateMovePeg(peg: Peg, bounds: CGSize) -> Bool {
+        isWithinBounds(peg: peg, bounds: bounds)
     }
 
-    private func isOverlappingWithExisitingPegs(newPeg: Peg) -> Bool {
+    private func validateMoveBlock(block: TriangularBlock, bounds: CGSize) -> Bool {
+        isWithinBounds(block: block, bounds: bounds)
+    }
+
+    private func isOverlappingWithExisitingPegs(peg newPeg: Peg) -> Bool {
         for peg in pegs where areOverlapping(peg1: peg, peg2: newPeg) {
             return true
         }
         return false
     }
 
-    private func isOverlappingWithExisitingBlocks(newPeg: Peg) -> Bool {
+    private func isOverlappingWithExisitingBlocks(peg newPeg: Peg) -> Bool {
         for block in blocks where isOverlapping(block: block, peg: newPeg) {
             return true
         }
         return false
     }
 
-    private func isOverlappingWithExisitingPegs(newBlock: TriangularBlock) -> Bool {
+    private func isOverlappingWithExisitingPegs(block newBlock: TriangularBlock) -> Bool {
         for peg in pegs where isOverlapping(block: newBlock, peg: peg) {
             return true
         }
         return false
     }
 
-    private func isOverlappingWithExisitingBlocks(newBlock: TriangularBlock) -> Bool {
+    private func isOverlappingWithExisitingBlocks(block newBlock: TriangularBlock) -> Bool {
         for block in blocks where areOverlapping(block1: newBlock, block2: block) {
             return true
         }
         return false
     }
 
-    private func isAnyPegPresentThatOverlaps(currentPeg: Peg, excludePeg: Peg) -> Bool {
+    private func isAnyPegPresentThatOverlaps(peg currentPeg: Peg, excludePeg: Peg) -> Bool {
         for peg in pegs where peg !== excludePeg && areOverlapping(peg1: currentPeg, peg2: peg) {
             return true
         }
         return false
     }
 
-    private func isAnyBlockPresentThatOverlaps(currentPeg: Peg) -> Bool {
-        for block in blocks where isOverlapping(block: block, peg: currentPeg) {
+    private func isAnyBlockPresentThatOverlaps(peg: Peg) -> Bool {
+        for block in blocks where isOverlapping(block: block, peg: peg) {
             return true
         }
         return false
     }
 
-    private func isAnyPegPresentThatOverlaps(currentBlock: TriangularBlock) -> Bool {
-        for peg in pegs where isOverlapping(block: currentBlock, peg: peg) {
+    private func isAnyPegPresentThatOverlaps(block: TriangularBlock) -> Bool {
+        for peg in pegs where isOverlapping(block: block, peg: peg) {
             return true
         }
         return false
     }
 
-    private func isAnyBlockPresentThatOverlaps(currentBlock: TriangularBlock, excludeBlock: TriangularBlock) -> Bool {
+    private func isAnyBlockPresentThatOverlaps(
+        block currentBlock: TriangularBlock, excludeBlock: TriangularBlock
+    ) -> Bool {
         for block in blocks where block !== excludeBlock && areOverlapping(block1: currentBlock, block2: block) {
             return true
         }
