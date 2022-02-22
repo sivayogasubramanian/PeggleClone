@@ -14,6 +14,7 @@ class PegGameObject {
     private(set) var physicsBody: PhysicsBody
     private(set) var radius: Double
     private(set) var color: PeggleColor
+    private(set) var rotation: Double
     var diameter: Double {
         radius * 2
     }
@@ -24,13 +25,14 @@ class PegGameObject {
         physicsBody.hitCount > PhysicsConstants.physicsBodyMaxHitCount
     }
 
-    init(fromPeg: Peg) {
-        radius = fromPeg.radius
-        color = fromPeg.color
+    init(fromPeg peg: Peg) {
+        radius = peg.radius
+        color = peg.color
+        rotation = peg.rotation
         physicsBody = CircularPhysicsBody(
             gameObjectType: PegGameObject.pegGameObjectType,
-            position: fromPeg.center,
-            radius: fromPeg.radius
+            position: peg.center,
+            radius: peg.radius
         )
     }
 }

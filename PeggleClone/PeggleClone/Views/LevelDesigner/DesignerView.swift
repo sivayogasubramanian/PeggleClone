@@ -13,16 +13,18 @@ struct DesignerView: View {
 
     var body: some View {
         VStack {
+            ImageButtonView(
+                designerViewModel: designerViewModel,
+                actionsViewModel: actionsViewModel
+            )
+
             ActionButtonView(
                 boardView: boardView,
                 designerViewModel: designerViewModel,
                 actionsViewModel: actionsViewModel
-            ).padding(.top, 15)
+            )
 
             boardView
-
-            ImageButtonView(actionsViewModel: actionsViewModel)
-                .padding(.vertical, 15)
         }.ignoresSafeArea(.keyboard)
     }
 

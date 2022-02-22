@@ -73,6 +73,7 @@ struct GameView: View {
         Image(Utils.pegColorToImagePegFileName(color: peg.color, isHit: peg.isHit))
             .resizable()
             .frame(width: peg.diameter, height: peg.diameter, alignment: .center)
+            .rotationEffect(Angle(degrees: peg.rotation))
             .position(x: peg.physicsBody.position.dx, y: peg.physicsBody.position.dy)
     }
 
@@ -86,6 +87,7 @@ struct GameView: View {
         Image(Utils.pegColorToImageBlockFileName(color: block.color, isHit: block.isHit))
             .resizable()
             .frame(width: block.width, height: block.height, alignment: .center)
+            .rotationEffect(Angle(degrees: block.rotation))
             .position(x: block.physicsBody.position.dx, y: block.physicsBody.position.dy)
     }
 

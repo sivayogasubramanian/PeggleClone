@@ -20,6 +20,7 @@ extension PegEntity {
     @NSManaged private(set) var xCoord: Double
     @NSManaged private(set) var yCoord: Double
     @NSManaged private(set) var radius: Double
+    @NSManaged private(set) var rotation: Double
     @NSManaged private(set) var boardEntity: BoardEntity
 }
 
@@ -42,5 +43,9 @@ extension PegEntity: Identifiable {
 
     func setRadius(to radius: Double) {
         self.radius = radius
+    }
+
+    func setRotation(to rotation: Double) {
+        self.rotation = rotation
     }
 }

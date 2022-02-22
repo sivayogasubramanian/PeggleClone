@@ -15,6 +15,7 @@ class BlockGameObject {
     private(set) var color: PeggleColor
     private(set) var width: Double
     private(set) var height: Double
+    private(set) var rotation: Double
     var isHit: Bool {
         physicsBody.hitCount != 0
     }
@@ -22,15 +23,16 @@ class BlockGameObject {
         physicsBody.hitCount > PhysicsConstants.physicsBodyMaxHitCount
     }
 
-    init(fromBlock: TriangularBlock) {
-        width = fromBlock.width
-        height = fromBlock.height
-        color = fromBlock.color
+    init(fromBlock block: TriangularBlock) {
+        width = block.width
+        height = block.height
+        color = block.color
+        rotation = block.rotation
         physicsBody = PolygonalPhysicsBody(
             gameObjectType: BlockGameObject.pegGameObjectType,
-            position: fromBlock.center,
-            vertices: fromBlock.vertices,
-            edges: fromBlock.edges
+            position: block.center,
+            vertices: block.vertices,
+            edges: block.edges
         )
     }
 }

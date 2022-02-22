@@ -13,6 +13,7 @@ final class Peg: Identifiable {
     let color: PeggleColor
     private(set) var center: CGVector
     private(set) var radius = Constants.pegRadius
+    private(set) var rotation = 0.0
     var diameter: Double {
         radius * 2
     }
@@ -33,6 +34,10 @@ final class Peg: Identifiable {
 
     func changeRadius(to radius: Double) {
         self.radius = radius
+    }
+
+    func setRotation(to rotation: Double) {
+        self.rotation = rotation
     }
 }
 

@@ -12,11 +12,12 @@ import Foundation
 extension TriangularBlock: Persistable {
     static func fromCoreDataEntity(_ entity: TriangularBlockEntity) -> Self {
         let uuid = entity.uuid, color = entity.color, width = entity.width, height = entity.height
-        let center = CGVector(dx: entity.xCoord, dy: entity.yCoord)
+        let center = CGVector(dx: entity.xCoord, dy: entity.yCoord), rotation = entity.rotation
 
         let block = self.init(uuid: uuid, color: color, center: center)
         block.changeWidth(to: width)
         block.changeHeight(to: height)
+        block.setRotation(to: rotation)
         return block
     }
 
@@ -33,5 +34,6 @@ extension TriangularBlock: Persistable {
         entity.setYCoord(to: Double(center.dy))
         entity.setWidth(to: width)
         entity.setHeight(to: height)
+        entity.setRotation(to: rotation)
     }
 }

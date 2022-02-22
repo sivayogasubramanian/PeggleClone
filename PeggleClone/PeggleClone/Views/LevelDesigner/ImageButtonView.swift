@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct ImageButtonView: View {
+    private static let imageButtonSize = 70.0
     private static let selectedOpacity = 1.0
     private static let notSelectedOpacity = 0.3
 
+    @ObservedObject var designerViewModel: DesignerViewModel
     @ObservedObject var actionsViewModel: DesignerActionsViewModel
 
     var body: some View {
-        HStack(spacing: 40) {
+        HStack(spacing: 10) {
             bluePegImageButtonView
 
             orangePegImageButtonView
@@ -22,6 +24,10 @@ struct ImageButtonView: View {
             blueTriangularBlockButtonView
 
             orangeTriangularBlockButtonView
+
+            Spacer()
+
+            rotationSelectorImageView
 
             Spacer()
 
@@ -34,7 +40,7 @@ struct ImageButtonView: View {
         Image(Constants.bluePegImage)
             .resizable()
             .scaledToFit()
-            .frame(width: 100, height: 100, alignment: .center)
+            .frame(width: ImageButtonView.imageButtonSize, height: ImageButtonView.imageButtonSize)
             .onTapGesture {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     actionsViewModel.setAction(to: AddBluePegAction())
@@ -51,7 +57,7 @@ struct ImageButtonView: View {
         Image(Constants.orangePegImage)
             .resizable()
             .scaledToFit()
-            .frame(width: 100, height: 100, alignment: .center)
+            .frame(width: ImageButtonView.imageButtonSize, height: ImageButtonView.imageButtonSize)
             .onTapGesture {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     actionsViewModel.setAction(to: AddOrangePegAction())
@@ -68,7 +74,7 @@ struct ImageButtonView: View {
         Image(Constants.blueTriangularBlockImage)
             .resizable()
             .scaledToFit()
-            .frame(width: 100, height: 100, alignment: .center)
+            .frame(width: ImageButtonView.imageButtonSize, height: ImageButtonView.imageButtonSize)
             .onTapGesture {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     actionsViewModel.setAction(to: AddBlueTriangularBlockAction())
@@ -85,7 +91,7 @@ struct ImageButtonView: View {
         Image(Constants.orangeTriangularBlockImage)
             .resizable()
             .scaledToFit()
-            .frame(width: 100, height: 100, alignment: .center)
+            .frame(width: ImageButtonView.imageButtonSize, height: ImageButtonView.imageButtonSize)
             .onTapGesture {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     actionsViewModel.setAction(to: AddOrangeTriangularBlockAction())
@@ -102,7 +108,7 @@ struct ImageButtonView: View {
         Image(Constants.deleteButtonImage)
             .resizable()
             .scaledToFit()
-            .frame(width: 100, height: 100, alignment: .center)
+            .frame(width: ImageButtonView.imageButtonSize, height: ImageButtonView.imageButtonSize)
             .onTapGesture {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     actionsViewModel.setAction(to: DeleteAction())
@@ -113,5 +119,19 @@ struct ImageButtonView: View {
                 ? ImageButtonView.selectedOpacity
                 : ImageButtonView.notSelectedOpacity
             )
+    }
+
+    private var rotationSelectorImageView: some View {
+        HStack {
+            Text("Rotation:")
+            Slider(
+                value: Binding(
+                    get: { designerViewModel.rotation },
+                    set: { newRotation, _ in
+                        designerViewModel.setRotation(to: newRotation)
+                    }),
+                in: 0...360, step: 1.0
+            )
+        }
     }
 }

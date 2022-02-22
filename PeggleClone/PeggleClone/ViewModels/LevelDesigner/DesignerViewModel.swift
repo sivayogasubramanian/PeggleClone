@@ -13,14 +13,19 @@ class DesignerViewModel: ObservableObject {
     private(set) var board = Board()
     private(set) var isNewBoard = true
     private(set) var boardSize: CGSize = .zero
+    private(set) var rotation: Double = .zero
+    private(set) var selectedPeg: Peg?
+    private(set) var selectedBlock: TriangularBlock?
 
     func addPeg(at point: CGPoint, color: PeggleColor?) {
-        board.addPeg(at: point, color: color, bounds: boardSize)
+        let peg = board.addPeg(at: point, color: color, bounds: boardSize)
+        setSelectedPeg(peg)
         updateViews()
     }
 
     func addBlock(at point: CGPoint, color: PeggleColor?) {
-        board.addBlock(at: point, color: color, bounds: boardSize)
+        let block = board.addBlock(at: point, color: color, bounds: boardSize)
+        setSelectedBlock(block)
         updateViews()
     }
 
@@ -36,11 +41,13 @@ class DesignerViewModel: ObservableObject {
 
     func deletePeg(peg: Peg) {
         board.deletePeg(peg: peg)
+        rotation = .zero
         updateViews()
     }
 
     func deleteBlock(block: TriangularBlock) {
         board.deleteBlock(block: block)
+        rotation = .zero
         updateViews()
     }
 
@@ -48,6 +55,7 @@ class DesignerViewModel: ObservableObject {
     func setBoard(to board: Board) {
         self.board = board
         isNewBoard = false
+        rotation = 0.0
         updateViews()
     }
 
@@ -69,6 +77,50 @@ class DesignerViewModel: ObservableObject {
         board = Board()
         setBoardSize(to: boardSize)
         isNewBoard = true
+        rotation = .zero
+        updateViews()
+    }
+
+    func resetSelectedObjects() {
+        selectedPeg = nil
+        selectedBlock = nil
+    }
+
+    func setSelectedPeg(_ peg: Peg?) {
+        selectedBlock = nil
+
+        if let peg = peg {
+            rotation = peg.rotation
+            selectedPeg = peg
+        }
+
+        updateViews()
+    }
+
+    func setSelectedBlock(_ block: TriangularBlock?) {
+        selectedPeg = nil
+
+        if let block = block {
+            rotation = block.rotation
+            selectedBlock = block
+        }
+
+        updateViews()
+    }
+
+    func setRotation(to rotation: Double) {
+        if let peg = selectedPeg {
+            if board.setRotation(peg: peg, to: rotation) {
+                self.rotation = rotation
+            }
+        }
+
+        if let block = selectedBlock {
+            if board.setRotation(block: block, to: rotation) {
+                self.rotation = rotation
+            }
+        }
+
         updateViews()
     }
 

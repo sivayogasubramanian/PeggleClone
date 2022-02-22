@@ -21,6 +21,8 @@ struct DesignerBoardView: View {
                 .gesture(
                     DragGesture(minimumDistance: 0).onEnded({ value in
                         withAnimation(.easeIn(duration: 0.1)) {
+                            designerViewModel.resetSelectedObjects()
+
                             if actionsViewModel.getPeggleType() == .peg {
                                 designerViewModel.addPeg(
                                     at: value.location,
@@ -62,13 +64,18 @@ struct DesignerBoardView: View {
         Image(Utils.pegColorToImagePegFileName(color: peg.color))
             .resizable()
             .frame(width: peg.diameter, height: peg.diameter, alignment: .center)
+            .rotationEffect(Angle(degrees: peg.rotation))
+            .animation(.default, value: peg.rotation)
             .position(x: peg.center.dx, y: peg.center.dy)
             .onTapGesture {
                 if type(of: actionsViewModel.currentAction) == DeleteAction.self {
                     withAnimation(.easeOut(duration: 0.1)) {
                         designerViewModel.deletePeg(peg: peg)
                     }
+                } else {
+                    designerViewModel.setSelectedPeg(peg)
                 }
+
             }
             .onLongPressGesture(minimumDuration: 0.3, maximumDistance: 0, perform: {
                 withAnimation(.easeOut(duration: 0.05)) {
@@ -86,12 +93,16 @@ struct DesignerBoardView: View {
         Image(Utils.pegColorToImageBlockFileName(color: block.color))
             .resizable()
             .frame(width: block.width, height: block.height, alignment: .center)
+            .rotationEffect(Angle(degrees: block.rotation))
             .position(x: block.center.dx, y: block.center.dy)
+            .animation(.default, value: block.rotation)
             .onTapGesture {
                 if type(of: actionsViewModel.currentAction) == DeleteAction.self {
                     withAnimation(.easeOut(duration: 0.1)) {
                         designerViewModel.deleteBlock(block: block)
                     }
+                } else {
+                    designerViewModel.setSelectedBlock(block)
                 }
             }
             .onLongPressGesture(minimumDuration: 0.3, maximumDistance: 0, perform: {
