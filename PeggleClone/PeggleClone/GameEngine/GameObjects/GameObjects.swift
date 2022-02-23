@@ -6,7 +6,7 @@
 //
 
 class GameObjects {
-    private static var ballCollidesWith = Set<GameObjectType>([.ball, .peg])
+    private static var ballCollidesWith = Set<GameObjectType>([.ball, .peg, .block])
     private static var pegCollidesWith = Set<GameObjectType>([.ball])
     private static var lineCollidesWith = Set<GameObjectType>([.ball])
     private static var blockCollidesWith = Set<GameObjectType>([.ball])

@@ -15,9 +15,6 @@ final class TriangularBlock: Identifiable {
     private(set) var width: Double
     private(set) var height: Double
     private(set) var center: CGVector
-    private(set) var topVertex: CGVector
-    private(set) var leftVertex: CGVector
-    private(set) var rightVertex: CGVector
     private(set) var rotation: Double
 
     convenience init(color: PeggleColor, center: CGVector, width: Double, height: Double, rotation: Double) {
@@ -31,46 +28,41 @@ final class TriangularBlock: Identifiable {
         self.width = width
         self.height = height
         self.rotation = rotation
-
-        topVertex = CGVector(dx: center.dx, dy: center.dy - height / 2)
-            .rotate(by: rotation, origin: center)
-        leftVertex = CGVector(dx: center.dx - width / 2, dy: center.dy + height / 2)
-            .rotate(by: rotation, origin: center)
-        rightVertex = CGVector(dx: center.dx + width / 2, dy: center.dy + height / 2)
-            .rotate(by: rotation, origin: center)
     }
 
     func setCenter(to center: CGVector) {
         self.center = center
-        resetVertices()
     }
 
     func setWidth(to width: Double) {
         self.width = width
-        resetVertices()
     }
 
     func setHeight(to height: Double) {
         self.height = height
-        resetVertices()
     }
 
     func setRotation(to rotation: Double) {
         self.rotation = rotation
-        resetVertices()
-    }
-
-    private func resetVertices() {
-        topVertex = CGVector(dx: center.dx, dy: center.dy - height / 2)
-            .rotate(by: rotation, origin: center)
-        leftVertex = CGVector(dx: center.dx - width / 2, dy: center.dy + height / 2)
-            .rotate(by: rotation, origin: center)
-        rightVertex = CGVector(dx: center.dx + width / 2, dy: center.dy + height / 2)
-            .rotate(by: rotation, origin: center)
     }
 }
 
 extension TriangularBlock: PolygonIntersector {
+    var topVertex: CGVector {
+        CGVector(dx: center.dx, dy: center.dy - height / 2)
+            .rotate(by: rotation, origin: center)
+    }
+
+    var leftVertex: CGVector {
+        CGVector(dx: center.dx - width / 2, dy: center.dy + height / 2)
+            .rotate(by: rotation, origin: center)
+    }
+
+    var rightVertex: CGVector {
+        CGVector(dx: center.dx + width / 2, dy: center.dy + height / 2)
+            .rotate(by: rotation, origin: center)
+    }
+
     var vertices: [CGVector] {
         [topVertex, rightVertex, leftVertex]
     }

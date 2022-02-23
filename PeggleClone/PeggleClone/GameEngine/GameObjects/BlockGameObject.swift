@@ -28,11 +28,12 @@ class BlockGameObject {
         height = block.height
         color = block.color
         rotation = block.rotation
-        physicsBody = PolygonalPhysicsBody(
+        physicsBody = TriangularPhysicsBody(
             gameObjectType: BlockGameObject.pegGameObjectType,
             position: block.center,
-            vertices: block.vertices,
-            edges: block.edges
+            width: width,
+            height: height,
+            rotation: rotation
         )
     }
 }
