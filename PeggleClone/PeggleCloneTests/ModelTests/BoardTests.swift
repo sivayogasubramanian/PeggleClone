@@ -69,9 +69,10 @@ class BoardTests: XCTestCase {
         let board = Board()
         let point = CGPoint(x: 50, y: 50)
         let bounds = CGSize(width: 100, height: 100)
+        board.setSize(boardSize: bounds)
 
         XCTAssertTrue(board.pegs.isEmpty)
-        _ = board.addPeg(at: point, color: nil, bounds: bounds)
+        _ = board.addPeg(at: point, color: nil)
         XCTAssertTrue(board.pegs.isEmpty)
     }
 
@@ -79,9 +80,10 @@ class BoardTests: XCTestCase {
         let board = Board()
         let point = CGPoint(x: 50, y: 50)
         let bounds = CGSize(width: 100, height: 100)
+        board.setSize(boardSize: bounds)
 
         XCTAssertTrue(board.pegs.isEmpty)
-        _ = board.addPeg(at: point, color: .blue, bounds: bounds)
+        _ = board.addPeg(at: point, color: .blue)
         XCTAssertTrue(board.pegs.count == 1)
     }
 
@@ -89,9 +91,10 @@ class BoardTests: XCTestCase {
         let board = Board()
         let point = CGPoint.zero
         let bounds = CGSize(width: 100, height: 100)
+        board.setSize(boardSize: bounds)
 
         XCTAssertTrue(board.pegs.isEmpty)
-        _ = board.addPeg(at: point, color: .blue, bounds: bounds)
+        _ = board.addPeg(at: point, color: .blue)
         XCTAssertTrue(board.pegs.isEmpty)
     }
 
@@ -99,9 +102,10 @@ class BoardTests: XCTestCase {
         let board = Board()
         let point = CGPoint(x: 100 - Constants.pegRadius + 1, y: 100 - Constants.pegRadius)
         let bounds = CGSize(width: 100, height: 100)
+        board.setSize(boardSize: bounds)
 
         XCTAssertTrue(board.pegs.isEmpty)
-        _ = board.addPeg(at: point, color: .blue, bounds: bounds)
+        _ = board.addPeg(at: point, color: .blue)
         XCTAssertTrue(board.pegs.isEmpty)
     }
 
@@ -110,9 +114,10 @@ class BoardTests: XCTestCase {
         let point1 = CGPoint(x: 40, y: 40)
         let point2 = CGPoint(x: 100, y: 100)
         let bounds = CGSize(width: 200, height: 200)
+        board.setSize(boardSize: bounds)
 
-        _ = board.addPeg(at: point1, color: .blue, bounds: bounds)
-        _ = board.addPeg(at: point2, color: .orange, bounds: bounds)
+        _ = board.addPeg(at: point1, color: .blue)
+        _ = board.addPeg(at: point2, color: .orange)
 
         XCTAssertTrue(board.pegs.count == 2)
     }
@@ -122,9 +127,10 @@ class BoardTests: XCTestCase {
         let point1 = CGPoint(x: 40, y: 40)
         let point2 = CGPoint(x: 50, y: 50)
         let bounds = CGSize(width: 100, height: 100)
+        board.setSize(boardSize: bounds)
 
-        _ = board.addPeg(at: point1, color: .blue, bounds: bounds)
-        _ = board.addPeg(at: point2, color: .orange, bounds: bounds)
+        _ = board.addPeg(at: point1, color: .blue)
+        _ = board.addPeg(at: point2, color: .orange)
 
         XCTAssertTrue(board.pegs.count == 1)
     }
@@ -134,9 +140,10 @@ class BoardTests: XCTestCase {
         let point1 = CGPoint(x: 40, y: 40)
         let point2 = CGPoint(x: 100, y: 100)
         let bounds = CGSize(width: 200, height: 200)
+        board.setSize(boardSize: bounds)
 
-        _ = board.addPeg(at: point1, color: .blue, bounds: bounds)
-        _ = board.addPeg(at: point2, color: .orange, bounds: bounds)
+        _ = board.addPeg(at: point1, color: .blue)
+        _ = board.addPeg(at: point2, color: .orange)
 
         XCTAssertTrue(board.pegs.count == 2)
         if let peg = board.pegs.first {
@@ -150,9 +157,10 @@ class BoardTests: XCTestCase {
         let point1 = CGPoint(x: 40, y: 40)
         let point2 = CGPoint(x: 100, y: 100)
         let bounds = CGSize(width: 200, height: 200)
+        board.setSize(boardSize: bounds)
 
-        _ = board.addPeg(at: point1, color: .blue, bounds: bounds)
-        _ = board.addPeg(at: point2, color: .orange, bounds: bounds)
+        _ = board.addPeg(at: point1, color: .blue)
+        _ = board.addPeg(at: point2, color: .orange)
 
         XCTAssertTrue(board.pegs.count == 2)
         board.removeAllPegs()
@@ -163,8 +171,9 @@ class BoardTests: XCTestCase {
         let peg = Peg(color: .blue, center: CGVector(dx: 40, dy: 40),
                       radius: Constants.pegRadius, rotation: .zero)
         let board = Board(uuid: UUID(), name: "board", pegs: [peg], blocks: [])
+        board.setSize(boardSize: CGSize(width: 100, height: 100))
 
-        board.movePeg(peg: peg, to: CGPoint(x: 50, y: 50), bounds: CGSize(width: 100, height: 100))
+        board.movePeg(peg: peg, to: CGPoint(x: 50, y: 50))
 
         XCTAssertTrue(peg.center.dx == 50)
         XCTAssertTrue(peg.center.dy == 50)
@@ -174,8 +183,9 @@ class BoardTests: XCTestCase {
         let peg = Peg(color: .blue, center: CGVector(dx: 40, dy: 40),
                       radius: Constants.pegRadius, rotation: .zero)
         let board = Board(uuid: UUID(), name: "board", pegs: [peg], blocks: [])
+        board.setSize(boardSize: CGSize(width: 100, height: 100))
 
-        board.movePeg(peg: peg, to: CGPoint(x: 100, y: 100), bounds: CGSize(width: 100, height: 100))
+        board.movePeg(peg: peg, to: CGPoint(x: 100, y: 100))
 
         XCTAssertTrue(peg.center.dx == 40)
         XCTAssertTrue(peg.center.dy == 40)
@@ -187,8 +197,9 @@ class BoardTests: XCTestCase {
         let peg2 = Peg(color: .blue, center: CGVector(dx: 100, dy: 100),
                        radius: Constants.pegRadius, rotation: .zero)
         let board = Board(uuid: UUID(), name: "board", pegs: [peg1, peg2], blocks: [])
+        board.setSize(boardSize: CGSize(width: 100, height: 100))
 
-        board.movePeg(peg: peg1, to: CGPoint(x: 200, y: 200), bounds: CGSize(width: 100, height: 100))
+        board.movePeg(peg: peg1, to: CGPoint(x: 200, y: 200))
 
         XCTAssertTrue(peg1.center.dx == 40)
         XCTAssertTrue(peg1.center.dy == 40)

@@ -22,24 +22,26 @@ class DesignerViewModel: ObservableObject {
     private(set) var selectedBlock: TriangularBlock?
 
     func addPeg(at point: CGPoint, color: PeggleColor?) {
-        let peg = board.addPeg(at: point, color: color, bounds: boardSize)
+        let peg = board.addPeg(at: point, color: color)
         setSelectedPeg(peg)
         updateViews()
     }
 
     func addBlock(at point: CGPoint, color: PeggleColor?) {
-        let block = board.addBlock(at: point, color: color, bounds: boardSize)
+        let block = board.addBlock(at: point, color: color)
         setSelectedBlock(block)
         updateViews()
     }
 
     func movePeg(peg: Peg, to newCenter: CGPoint) {
-        board.movePeg(peg: peg, to: newCenter, bounds: boardSize)
+        board.movePeg(peg: peg, to: newCenter)
+        setSelectedPeg(peg)
         updateViews()
     }
 
     func moveBlock(block: TriangularBlock, to newCenter: CGPoint) {
-        board.moveBlock(block: block, to: newCenter, bounds: boardSize)
+        board.moveBlock(block: block, to: newCenter)
+        setSelectedBlock(block)
         updateViews()
     }
 

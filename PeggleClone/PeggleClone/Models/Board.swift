@@ -51,13 +51,13 @@ final class Board: Identifiable {
         self.boardSize = boardSize
     }
 
-    func addPeg(at point: CGPoint, color: PeggleColor?, bounds: CGSize) -> Peg? {
+    func addPeg(at point: CGPoint, color: PeggleColor?) -> Peg? {
         guard let color = color else {
             return nil
         }
 
         let newPeg = Peg(color: color, center: point.toCGVector(), radius: Constants.pegRadius, rotation: .zero)
-        guard validateAddPeg(peg: newPeg, bounds: bounds) else {
+        guard validateAddPeg(peg: newPeg, bounds: boardSize) else {
             return nil
         }
 
@@ -65,14 +65,14 @@ final class Board: Identifiable {
         return newPeg
     }
 
-    func addBlock(at point: CGPoint, color: PeggleColor?, bounds: CGSize) -> TriangularBlock? {
+    func addBlock(at point: CGPoint, color: PeggleColor?) -> TriangularBlock? {
         guard let color = color else {
             return nil
         }
 
         let newBlock = TriangularBlock(color: color, center: point.toCGVector(), width: Constants.blockWidth,
                                        height: Constants.blockHeight, rotation: .zero)
-        guard validateAddBlock(block: newBlock, bounds: bounds) else {
+        guard validateAddBlock(block: newBlock, bounds: boardSize) else {
             return nil
         }
 
@@ -93,22 +93,22 @@ final class Board: Identifiable {
         blocks = []
     }
 
-    func movePeg(peg: Peg, to newCenter: CGPoint, bounds: CGSize) {
+    func movePeg(peg: Peg, to newCenter: CGPoint) {
         guard let index = pegs.firstIndex(where: { $0 === peg }) else {
             return
         }
 
         let currentPeg = pegs[index]
-        movePegToClosestValidLocation(peg: currentPeg, to: newCenter, bounds: bounds)
+        movePegToClosestValidLocation(peg: currentPeg, to: newCenter, bounds: boardSize)
     }
 
-    func moveBlock(block: TriangularBlock, to newCenter: CGPoint, bounds: CGSize) {
+    func moveBlock(block: TriangularBlock, to newCenter: CGPoint) {
         guard let index = blocks.firstIndex(where: { $0 === block }) else {
             return
         }
 
         let currentBlock = blocks[index]
-        moveBlockToClosestValidLocation(block: currentBlock, to: newCenter, bounds: bounds)
+        moveBlockToClosestValidLocation(block: currentBlock, to: newCenter, bounds: boardSize)
     }
 
     func setRotation(peg: Peg, to rotation: Double) -> Bool {
@@ -116,6 +116,10 @@ final class Board: Identifiable {
 
         guard !isAnyPegPresentThatOverlaps(peg: rotatedPeg, excludePeg: peg)
                 && !isAnyBlockPresentThatOverlaps(peg: rotatedPeg) else {
+            return false
+        }
+
+        guard isWithinBounds(peg: rotatedPeg, bounds: boardSize) else {
             return false
         }
 
@@ -132,6 +136,10 @@ final class Board: Identifiable {
             return false
         }
 
+        guard isWithinBounds(block: rotatedBlock, bounds: boardSize) else {
+            return false
+        }
+
         block.setRotation(to: rotation)
         return true
     }
@@ -141,6 +149,10 @@ final class Board: Identifiable {
 
         guard  !isAnyPegPresentThatOverlaps(peg: resizedPeg, excludePeg: peg)
                 && !isAnyBlockPresentThatOverlaps(peg: resizedPeg) else {
+            return false
+        }
+
+        guard isWithinBounds(peg: resizedPeg, bounds: boardSize) else {
             return false
         }
 
@@ -157,6 +169,10 @@ final class Board: Identifiable {
             return false
         }
 
+        guard isWithinBounds(block: resizedBlock, bounds: boardSize) else {
+            return false
+        }
+
         block.setWidth(to: width)
         return true
     }
@@ -167,6 +183,10 @@ final class Board: Identifiable {
 
         guard !isAnyPegPresentThatOverlaps(block: resizedBlock)
                 && !isAnyBlockPresentThatOverlaps(block: resizedBlock, excludeBlock: block) else {
+            return false
+        }
+
+        guard isWithinBounds(block: resizedBlock, bounds: boardSize) else {
             return false
         }
 
@@ -187,7 +207,7 @@ final class Board: Identifiable {
                            rotation: peg.rotation)
         }
 
-        guard validateMovePeg(peg: movedPeg, bounds: bounds) else {
+        guard isWithinBounds(peg: movedPeg, bounds: bounds) else {
             return
         }
 
@@ -207,7 +227,7 @@ final class Board: Identifiable {
                                          height: block.height, rotation: block.rotation)
         }
 
-        guard validateMoveBlock(block: movedBlock, bounds: bounds) else {
+        guard isWithinBounds(block: movedBlock, bounds: bounds) else {
             return
         }
 
@@ -254,14 +274,6 @@ extension Board {
         }
 
         return true
-    }
-
-    private func validateMovePeg(peg: Peg, bounds: CGSize) -> Bool {
-        isWithinBounds(peg: peg, bounds: bounds)
-    }
-
-    private func validateMoveBlock(block: TriangularBlock, bounds: CGSize) -> Bool {
-        isWithinBounds(block: block, bounds: bounds)
     }
 
     private func isOverlappingWithExisitingPegs(peg newPeg: Peg) -> Bool {
