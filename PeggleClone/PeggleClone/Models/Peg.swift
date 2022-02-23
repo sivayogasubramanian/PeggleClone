@@ -8,7 +8,7 @@
 import CoreGraphics
 import Foundation
 
-final class Peg: Identifiable {
+final class Peg: Identifiable, CircularIntersector {
     let uuid: UUID
     let color: PeggleColor
     private(set) var center: CGVector
@@ -41,7 +41,4 @@ final class Peg: Identifiable {
     func setRadius(to radius: Double) {
         self.radius = radius
     }
-}
-
-extension Peg: CircularIntersector {
 }

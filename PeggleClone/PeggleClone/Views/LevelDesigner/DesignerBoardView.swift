@@ -131,35 +131,28 @@ struct DesignerBoardView: View {
             .frame(width: max(block.springiness, 125), height: max(block.springiness, 125))
             .position(x: block.center.dx, y: block.center.dy)
             .animation(.default, value: block.springiness)
-            .overlay {
-                Circle().fill(.gray).opacity(0.2).frame(width: 30, height: 30)
-                    .position(
-                        x: block.center.dx, y: block.center.dy - block.springiness / 2
-                    ).gesture(DragGesture()
-                                .onChanged({ value in dragHandler(block: block, value.location) })
-                    ).animation(.default, value: block.springiness)
+            .overlay(content: { makeMiniResizingCircles(block) })
+    }
 
-                Circle().fill(.gray).opacity(0.2).frame(width: 30, height: 30)
-                    .position(
-                        x: block.center.dx, y: block.center.dy +  block.springiness / 2
-                    ).gesture(DragGesture()
-                                .onChanged({ value in dragHandler(block: block, value.location) })
-                    ).animation(.default, value: block.springiness)
+    private func makeMiniResizingCircles(_ block: TriangularBlock) -> some View {
+        // 4 corners of the big circle
+        let centers = [
+            CGVector(dx: block.center.dx, dy: block.center.dy - block.springiness / 2),
+            CGVector(dx: block.center.dx, dy: block.center.dy + block.springiness / 2),
+            CGVector(dx: block.center.dx + block.springiness / 2, dy: block.center.dy),
+            CGVector(dx: block.center.dx - block.springiness / 2, dy: block.center.dy)
+        ]
 
-                Circle().fill(.gray).opacity(0.2).frame(width: 30, height: 30)
-                    .position(
-                        x: block.center.dx - block.springiness / 2, y: block.center.dy
-                    ).gesture(DragGesture()
-                                .onChanged({ value in dragHandler(block: block, value.location) })
-                    ).animation(.default, value: block.springiness)
+        return ForEach(0..<centers.count, id: \.self) { index in
+            let center = centers[index]
 
-                Circle().fill(.gray).opacity(0.2).frame(width: 30, height: 30)
-                    .position(
-                        x: block.center.dx + block.springiness / 2, y: block.center.dy
-                    ).gesture(DragGesture()
-                                .onChanged({ value in dragHandler(block: block, value.location) })
-                    ).animation(.default, value: block.springiness)
-            }
+            Circle().fill(.gray).opacity(0.2).frame(width: 30, height: 30)
+                .position(
+                    x: center.dx, y: center.dy
+                ).gesture(DragGesture()
+                            .onChanged({ value in dragHandler(block: block, value.location) })
+                ).animation(.default, value: block.springiness)
+        }
     }
 }
 
