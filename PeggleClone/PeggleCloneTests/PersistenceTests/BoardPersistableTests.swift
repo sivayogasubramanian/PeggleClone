@@ -28,9 +28,9 @@ class BoardPersistableTests: XCTestCase {
         let pegEntities = [peg1, peg2].map({ $0.toCoreDataEntity(using: viewContext) })
 
         let block1 = TriangularBlock(color: .blue, center: .zero, width: Constants.blockWidth,
-                                     height: Constants.blockHeight, rotation: .zero)
+                                     height: Constants.blockHeight, rotation: .zero, springiness: .zero)
         let block2 = TriangularBlock(color: .orange, center: CGVector(dx: 10, dy: 10), width: Constants.blockWidth,
-                                     height: Constants.blockHeight, rotation: .zero)
+                                     height: Constants.blockHeight, rotation: .zero, springiness: .zero)
         let blockEntities = [block1, block2].map({ $0.toCoreDataEntity(using: viewContext) })
 
         let uuid = UUID(), name = "Test"
@@ -60,9 +60,9 @@ class BoardPersistableTests: XCTestCase {
         let peg1 = Peg(color: .blue, center: .zero, radius: Constants.pegRadius, rotation: .zero)
         let peg2 = Peg(color: .orange, center: CGVector(dx: 10, dy: 10), radius: Constants.pegRadius, rotation: .zero)
         let block1 = TriangularBlock(color: .blue, center: .zero, width: Constants.blockWidth,
-                                     height: Constants.blockHeight, rotation: .zero)
+                                     height: Constants.blockHeight, rotation: .zero, springiness: .zero)
         let block2 = TriangularBlock(color: .orange, center: CGVector(dx: 10, dy: 10), width: Constants.blockWidth,
-                                     height: Constants.blockHeight, rotation: .zero)
+                                     height: Constants.blockHeight, rotation: .zero, springiness: .zero)
 
         let uuid = UUID(), name = "Test"
         let snapshot = Data(base64Encoded: "Test") ?? Data()

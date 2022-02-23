@@ -71,7 +71,7 @@ final class Board: Identifiable {
         }
 
         let newBlock = TriangularBlock(color: color, center: point.toCGVector(), width: Constants.blockWidth,
-                                       height: Constants.blockHeight, rotation: .zero)
+                                       height: Constants.blockHeight, rotation: .zero, springiness: 0)
         guard validateAddBlock(block: newBlock, bounds: boardSize) else {
             return nil
         }
@@ -129,7 +129,8 @@ final class Board: Identifiable {
 
     func setRotation(block: TriangularBlock, to rotation: Double) -> Bool {
         let rotatedBlock = TriangularBlock(color: block.color, center: block.center, width: block.width,
-                                           height: block.height, rotation: rotation)
+                                           height: block.height, rotation: rotation,
+                                           springiness: block.springiness)
 
         guard !isAnyPegPresentThatOverlaps(block: rotatedBlock)
                 && !isAnyBlockPresentThatOverlaps(block: rotatedBlock, excludeBlock: block) else {
@@ -162,7 +163,8 @@ final class Board: Identifiable {
 
     func setBlockWidth(block: TriangularBlock, to width: Double) -> Bool {
         let resizedBlock = TriangularBlock(color: block.color, center: block.center, width: width,
-                                           height: block.height, rotation: block.rotation)
+                                           height: block.height, rotation: block.rotation,
+                                           springiness: block.springiness)
 
         guard !isAnyPegPresentThatOverlaps(block: resizedBlock)
                 && !isAnyBlockPresentThatOverlaps(block: resizedBlock, excludeBlock: block) else {
@@ -179,7 +181,8 @@ final class Board: Identifiable {
 
     func setBlockHeight(block: TriangularBlock, to height: Double) -> Bool {
         let resizedBlock = TriangularBlock(color: block.color, center: block.center, width: block.width,
-                                           height: height, rotation: block.rotation)
+                                           height: height, rotation: block.rotation,
+                                           springiness: block.springiness)
 
         guard !isAnyPegPresentThatOverlaps(block: resizedBlock)
                 && !isAnyBlockPresentThatOverlaps(block: resizedBlock, excludeBlock: block) else {
@@ -192,6 +195,20 @@ final class Board: Identifiable {
 
         block.setHeight(to: height)
         return true
+    }
+
+    func setBlockSpringiness(block: TriangularBlock, to springiness: Double) {
+        if springiness < PhysicsConstants.minimumSpringiness {
+            block.setSpringiness(to: PhysicsConstants.minimumSpringiness)
+            return
+        }
+
+        if springiness > PhysicsConstants.maximumSpringiness {
+            block.setSpringiness(to: PhysicsConstants.maximumSpringiness)
+            return
+        }
+
+        block.setSpringiness(to: springiness)
     }
 
     private func movePegToClosestValidLocation(peg: Peg, to newCenter: CGPoint, bounds: CGSize) {
@@ -218,13 +235,15 @@ final class Board: Identifiable {
         let direction = (block.center - newCenter.toCGVector()).normalize()
         var currentPoint = newCenter.toCGVector()
         var movedBlock = TriangularBlock(color: block.color, center: currentPoint, width: block.width,
-                                         height: block.height, rotation: block.rotation)
+                                         height: block.height, rotation: block.rotation,
+                                         springiness: block.springiness)
 
         while isAnyPegPresentThatOverlaps(block: movedBlock)
                 || isAnyBlockPresentThatOverlaps(block: movedBlock, excludeBlock: block) {
             currentPoint += direction
             movedBlock = TriangularBlock(color: block.color, center: currentPoint, width: block.width,
-                                         height: block.height, rotation: block.rotation)
+                                         height: block.height, rotation: block.rotation,
+                                         springiness: block.springiness)
         }
 
         guard isWithinBounds(block: movedBlock, bounds: bounds) else {

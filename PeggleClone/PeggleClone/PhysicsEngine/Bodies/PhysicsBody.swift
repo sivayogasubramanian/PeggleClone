@@ -11,9 +11,9 @@ import CoreGraphics
 class PhysicsBody {
     private(set) var gameObjectType: GameObjectType
     private(set) var position: CGVector
-    private(set) var mass: Double = .infinity
-    private(set) var velocity: CGVector = .zero
-    private(set) var force: CGVector  = .zero
+    private(set) var mass = Double.infinity
+    private(set) var velocity = CGVector.zero
+    private(set) var force = CGVector.zero
     private(set) var hitCount = 0
     var isMovable: Bool {
         mass != .infinity && mass != .zero

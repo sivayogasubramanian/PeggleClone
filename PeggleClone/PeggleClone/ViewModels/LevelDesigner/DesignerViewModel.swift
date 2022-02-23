@@ -18,6 +18,7 @@ class DesignerViewModel: ObservableObject {
     private(set) var radius = Constants.pegRadius
     private(set) var width = Constants.blockWidth
     private(set) var height = Constants.blockHeight
+    private(set) var showSpringinessCircle = false
     private(set) var selectedPeg: Peg?
     private(set) var selectedBlock: TriangularBlock?
 
@@ -47,13 +48,13 @@ class DesignerViewModel: ObservableObject {
 
     func deletePeg(peg: Peg) {
         board.deletePeg(peg: peg)
-        resetStatesOfSliders()
+        resetViewModelStates()
         updateViews()
     }
 
     func deleteBlock(block: TriangularBlock) {
         board.deleteBlock(block: block)
-        resetStatesOfSliders()
+        resetViewModelStates()
         updateViews()
     }
 
@@ -61,7 +62,7 @@ class DesignerViewModel: ObservableObject {
     func setBoard(to board: Board) {
         self.board = board
         isNewBoard = false
-        resetStatesOfSliders()
+        resetViewModelStates()
         updateViews()
     }
 
@@ -76,6 +77,7 @@ class DesignerViewModel: ObservableObject {
     }
 
     func setImageData(from view: DesignerBoardView) {
+        resetViewModelStates()
         board.setImage(to: view.asImage(size: boardSize).pngData())
     }
 
@@ -83,7 +85,7 @@ class DesignerViewModel: ObservableObject {
         board = Board()
         setBoardSize(to: boardSize)
         isNewBoard = true
-        resetStatesOfSliders()
+        resetViewModelStates()
         updateViews()
     }
 
@@ -106,6 +108,7 @@ class DesignerViewModel: ObservableObject {
             rotation = block.rotation
             width = block.width
             height = block.height
+            showSpringinessCircle = block.springiness > 0
             selectedBlock = block
         }
 
@@ -155,6 +158,27 @@ class DesignerViewModel: ObservableObject {
             }
         }
 
+        updateViews()
+    }
+
+    func toggleSpringinessCircle() {
+        showSpringinessCircle.toggle()
+        guard let selectedBlock = selectedBlock else {
+            return
+        }
+
+        if showSpringinessCircle {
+            board.setBlockSpringiness(block: selectedBlock, to: PhysicsConstants.minimumSpringiness)
+        } else {
+            board.setBlockSpringiness(block: selectedBlock, to: PhysicsConstants.zeroSpringiness)
+        }
+
+        updateViews()
+    }
+
+    func setSpringiness(for block: TriangularBlock, location: CGPoint) {
+        let springiness = block.center.distance(to: location.toCGVector())
+        board.setBlockSpringiness(block: block, to: springiness)
         updateViews()
     }
 
@@ -216,11 +240,14 @@ class DesignerViewModel: ObservableObject {
         board.setName(to: name)
     }
 
-    private func resetStatesOfSliders() {
+    private func resetViewModelStates() {
+        selectedPeg = nil
+        selectedBlock = nil
         rotation = .zero
         radius = Constants.pegRadius
         width = Constants.blockWidth
         height = Constants.blockHeight
+        showSpringinessCircle = false
     }
 
     private func updateViews() {

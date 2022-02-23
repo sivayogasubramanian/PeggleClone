@@ -19,7 +19,7 @@ class Intersector {
         )
     }
 
-    static func detectBetween(polygon1: PolygonIntersector, polygon2: PolygonIntersector) -> CollisionManifold {
+    static func detectBetween(polygon1: TriangularIntersector, polygon2: TriangularIntersector) -> CollisionManifold {
         let axesToConsider = polygon1.edges.map({
             CGVector(dx: -$0.direction.dy, dy: $0.direction.dx).normalize()
         }) + polygon2.edges.map({
@@ -53,7 +53,7 @@ class Intersector {
         return CollisionManifold(hasCollided: hasCollided, normal: collisionNormal, depth: circle.radius - depth)
     }
 
-    static func detectBetween(circle: CircularIntersector, polygon: PolygonIntersector) -> CollisionManifold {
+    static func detectBetween(circle: CircularIntersector, polygon: TriangularIntersector) -> CollisionManifold {
         let closestVector = findClosestPoint(on: polygon, to: circle)
         let centerToClosestVector = closestVector - circle.center
         let axesToConsider = [centerToClosestVector.normalize()] + polygon.edges.map({
@@ -87,7 +87,7 @@ extension Intersector {
         Intersector.detectBetween(circle: circle, line: line)
     }
 
-    static func detectBetween(polygon: PolygonIntersector, circle: CircularIntersector) -> CollisionManifold {
+    static func detectBetween(polygon: TriangularIntersector, circle: CircularIntersector) -> CollisionManifold {
         Intersector.detectBetween(circle: circle, polygon: polygon)
     }
 }
@@ -104,7 +104,7 @@ extension Intersector {
         return (min(dotProduct1, dotProduct2), max(dotProduct1, dotProduct2))
     }
 
-    private static func project(polygon: PolygonIntersector, onto vector: CGVector) -> (Double, Double) {
+    private static func project(polygon: TriangularIntersector, onto vector: CGVector) -> (Double, Double) {
         var minimum = Double.infinity
         var maximum = -Double.infinity
 
@@ -116,7 +116,9 @@ extension Intersector {
         return (minimum, maximum)
     }
 
-    private static func findClosestPoint(on polygon: PolygonIntersector, to circle: CircularIntersector) -> CGVector {
+    private static func findClosestPoint(
+        on polygon: TriangularIntersector, to circle: CircularIntersector
+    ) -> CGVector {
         var closestPoint = CGVector.zero
         var distance = Double.infinity
 

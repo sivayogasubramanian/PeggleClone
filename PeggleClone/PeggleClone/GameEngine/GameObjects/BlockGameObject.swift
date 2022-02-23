@@ -17,7 +17,7 @@ class BlockGameObject {
     private(set) var height: Double
     private(set) var rotation: Double
     var isHit: Bool {
-        physicsBody.hitCount != 0
+        false
     }
     var shouldBeRemoved: Bool {
         physicsBody.hitCount > PhysicsConstants.physicsBodyMaxHitCount
@@ -28,13 +28,25 @@ class BlockGameObject {
         height = block.height
         color = block.color
         rotation = block.rotation
-        physicsBody = TriangularPhysicsBody(
-            gameObjectType: BlockGameObject.pegGameObjectType,
-            position: block.center,
-            width: width,
-            height: height,
-            rotation: rotation
-        )
+
+        if block.springiness == 0 {
+            physicsBody = StaticTriangularPhysicsBody(
+                gameObjectType: BlockGameObject.pegGameObjectType,
+                position: block.center,
+                width: width,
+                height: height,
+                rotation: rotation
+            )
+        } else {
+            physicsBody = SHMTriangularPhysicsBody(
+                gameObjectType: BlockGameObject.pegGameObjectType,
+                position: block.center,
+                width: width,
+                height: height,
+                rotation: rotation,
+                springiness: block.springiness
+            )
+        }
     }
 }
 

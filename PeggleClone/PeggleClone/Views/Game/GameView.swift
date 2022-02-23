@@ -89,6 +89,7 @@ struct GameView: View {
             .frame(width: block.width, height: block.height, alignment: .center)
             .rotationEffect(Angle(degrees: block.rotation))
             .position(x: block.physicsBody.position.dx, y: block.physicsBody.position.dy)
+            .animation(.interactiveSpring(), value: block.physicsBody.position)
     }
 
     private func overlayBallView(_ ball: BallGameObject) -> some View {

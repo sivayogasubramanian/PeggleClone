@@ -16,4 +16,7 @@ struct PhysicsConstants {
     static let initialBallLaunchYCoordinate = 50.0
     static let physicsBodyMaxHitCount = 100
     static let physicsUpdateTickTime = 0.01
+    static let zeroSpringiness = 0.0
+    static let minimumSpringiness = 125.0
+    static let maximumSpringiness = 250.0
 }

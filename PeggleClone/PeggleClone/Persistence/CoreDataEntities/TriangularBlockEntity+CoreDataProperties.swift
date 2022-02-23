@@ -22,6 +22,7 @@ extension TriangularBlockEntity {
     @NSManaged private(set) var xCoord: Double
     @NSManaged private(set) var yCoord: Double
     @NSManaged private(set) var rotation: Double
+    @NSManaged private(set) var springiness: Double
     @NSManaged private(set) var boardEntity: BoardEntity
 
 }
@@ -53,5 +54,9 @@ extension TriangularBlockEntity: Identifiable {
 
     func setRotation(to rotation: Double) {
         self.rotation = rotation
+    }
+
+    func setSpringiness(to springiness: Double) {
+        self.springiness = springiness
     }
 }

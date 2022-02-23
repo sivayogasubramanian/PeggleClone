@@ -116,5 +116,55 @@ struct DesignerBoardView: View {
                     designerViewModel.moveBlock(block: block, to: value.location)
                 }
             }))
+            .overlay {
+                if designerViewModel.showSpringinessCircle && designerViewModel.selectedBlock === block {
+                    overlaySpringinessCircle(block: block)
+                }
+            }
+    }
+
+    private func overlaySpringinessCircle(block: TriangularBlock) -> some View {
+        Circle()
+            .stroke(lineWidth: 1)
+            .fill(.gray)
+            .opacity(0.3)
+            .frame(width: max(block.springiness, 125), height: max(block.springiness, 125))
+            .position(x: block.center.dx, y: block.center.dy)
+            .animation(.default, value: block.springiness)
+            .overlay {
+                Circle().fill(.gray).opacity(0.2).frame(width: 30, height: 30)
+                    .position(
+                        x: block.center.dx, y: block.center.dy - block.springiness / 2
+                    ).gesture(DragGesture()
+                                .onChanged({ value in dragHandler(block: block, value.location) })
+                    ).animation(.default, value: block.springiness)
+
+                Circle().fill(.gray).opacity(0.2).frame(width: 30, height: 30)
+                    .position(
+                        x: block.center.dx, y: block.center.dy +  block.springiness / 2
+                    ).gesture(DragGesture()
+                                .onChanged({ value in dragHandler(block: block, value.location) })
+                    ).animation(.default, value: block.springiness)
+
+                Circle().fill(.gray).opacity(0.2).frame(width: 30, height: 30)
+                    .position(
+                        x: block.center.dx - block.springiness / 2, y: block.center.dy
+                    ).gesture(DragGesture()
+                                .onChanged({ value in dragHandler(block: block, value.location) })
+                    ).animation(.default, value: block.springiness)
+
+                Circle().fill(.gray).opacity(0.2).frame(width: 30, height: 30)
+                    .position(
+                        x: block.center.dx + block.springiness / 2, y: block.center.dy
+                    ).gesture(DragGesture()
+                                .onChanged({ value in dragHandler(block: block, value.location) })
+                    ).animation(.default, value: block.springiness)
+            }
+    }
+}
+
+extension DesignerBoardView {
+    private func dragHandler(block: TriangularBlock, _ location: CGPoint) {
+        designerViewModel.setSpringiness(for: block, location: location)
     }
 }

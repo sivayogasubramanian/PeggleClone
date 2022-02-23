@@ -16,18 +16,26 @@ final class TriangularBlock: Identifiable {
     private(set) var height: Double
     private(set) var center: CGVector
     private(set) var rotation: Double
+    private(set) var springiness: Double
 
-    convenience init(color: PeggleColor, center: CGVector, width: Double, height: Double, rotation: Double) {
-        self.init(uuid: UUID(), color: color, center: center, width: width, height: height, rotation: rotation)
+    convenience init(color: PeggleColor, center: CGVector, width: Double,
+                     height: Double, rotation: Double, springiness: Double
+    ) {
+        self.init(uuid: UUID(), color: color, center: center,
+                  width: width, height: height, rotation: rotation,
+                  springiness: springiness)
     }
 
-    init(uuid: UUID, color: PeggleColor, center: CGVector, width: Double, height: Double, rotation: Double) {
+    init(uuid: UUID, color: PeggleColor, center: CGVector,
+         width: Double, height: Double, rotation: Double, springiness: Double
+    ) {
         self.uuid = uuid
         self.color = color
         self.center = center
         self.width = width
         self.height = height
         self.rotation = rotation
+        self.springiness = springiness
     }
 
     func setCenter(to center: CGVector) {
@@ -45,33 +53,14 @@ final class TriangularBlock: Identifiable {
     func setRotation(to rotation: Double) {
         self.rotation = rotation
     }
+
+    func setSpringiness(to springiness: Double) {
+        self.springiness = springiness
+    }
 }
 
-extension TriangularBlock: PolygonIntersector {
-    var topVertex: CGVector {
-        CGVector(dx: center.dx, dy: center.dy - height / 2)
-            .rotate(by: rotation, origin: center)
-    }
-
-    var leftVertex: CGVector {
-        CGVector(dx: center.dx - width / 2, dy: center.dy + height / 2)
-            .rotate(by: rotation, origin: center)
-    }
-
-    var rightVertex: CGVector {
-        CGVector(dx: center.dx + width / 2, dy: center.dy + height / 2)
-            .rotate(by: rotation, origin: center)
-    }
-
-    var vertices: [CGVector] {
-        [topVertex, rightVertex, leftVertex]
-    }
-
-    var edges: [Line] {
-        [
-            Line(start: topVertex, end: rightVertex),
-            Line(start: rightVertex, end: leftVertex),
-            Line(start: leftVertex, end: topVertex)
-        ]
+extension TriangularBlock: TriangularIntersector {
+    var position: CGVector {
+        center
     }
 }

@@ -29,7 +29,7 @@ struct ImageButtonView: View {
 
             VStack {
                 if designerViewModel.selectedPeg != nil || designerViewModel.selectedBlock != nil {
-                    rotationSelectorView
+                    rotationAndOscillateSelectorView
                 }
 
                 if designerViewModel.selectedPeg != nil {
@@ -132,7 +132,7 @@ struct ImageButtonView: View {
             )
     }
 
-    private var rotationSelectorView: some View {
+    private var rotationAndOscillateSelectorView: some View {
         HStack {
             Text("Rotation:")
             Slider(
@@ -143,6 +143,15 @@ struct ImageButtonView: View {
                     }),
                 in: 0...360, step: 1.0
             )
+
+            if designerViewModel.selectedBlock != nil {
+                Toggle("Oscillate:", isOn: Binding(get: {
+                    designerViewModel.showSpringinessCircle
+                }, set: { _, _ in
+                    designerViewModel.toggleSpringinessCircle()
+                })
+                )
+            }
         }
     }
 
