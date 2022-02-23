@@ -72,7 +72,7 @@ final class TriangularBlock: Identifiable {
 
 extension TriangularBlock: PolygonIntersector {
     var vertices: [CGVector] {
-        [topVertex, leftVertex, rightVertex]
+        [topVertex, rightVertex, leftVertex]
     }
 
     var edges: [Line] {
