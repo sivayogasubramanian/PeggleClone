@@ -323,18 +323,18 @@ extension Board {
     }
 
     private func isOverlapping(block: TriangularBlock, peg: Peg) -> Bool {
-        let (isOverlapping, _ ) = Intersector.detectBetween(polygon: block, circle: peg)
-        return isOverlapping
+        let manifold = Intersector.detectBetween(polygon: block, circle: peg)
+        return manifold.hasCollided
     }
 
     private func areOverlapping(peg1: Peg, peg2: Peg) -> Bool {
-        let (areOverlapping, _ ) = Intersector.detectBetween(circle1: peg1, circle2: peg2)
-        return areOverlapping
+        let manifold = Intersector.detectBetween(circle1: peg1, circle2: peg2)
+        return manifold.hasCollided
     }
 
     private func areOverlapping(block1: TriangularBlock, block2: TriangularBlock) -> Bool {
-        let (areOverlapping, _ ) = Intersector.detectBetween(polygon1: block1, polygon2: block2)
-        return areOverlapping
+        let manifold = Intersector.detectBetween(polygon1: block1, polygon2: block2)
+        return manifold.hasCollided
     }
 
     private func isWithinBounds(peg: Peg, bounds: CGSize) -> Bool {

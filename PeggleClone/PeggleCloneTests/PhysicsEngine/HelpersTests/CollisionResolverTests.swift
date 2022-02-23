@@ -15,7 +15,8 @@ class CollisionResolverTests: XCTestCase {
         let circle1 = CircularPhysicsBody(gameObjectType: .ball, position: circle1Position, radius: 10)
         let circle2 = CircularPhysicsBody(gameObjectType: .ball, position: circle2Position, radius: 20)
 
-        CollisionResolver.resolveCollisions(body1: circle1, body2: circle2)
+        let manifold = Intersector.detectBetween(circle1: circle1, circle2: circle2)
+        CollisionResolver.resolveCollisions(body1: circle1, body2: circle2, manifold: manifold)
         XCTAssertEqual(circle1.position, circle1Position)
         XCTAssertEqual(circle2.position, circle2Position)
     }
@@ -26,7 +27,8 @@ class CollisionResolverTests: XCTestCase {
         let circle1 = CircularPhysicsBody(gameObjectType: .ball, position: circle1Position, radius: 10, mass: 1)
         let circle2 = CircularPhysicsBody(gameObjectType: .ball, position: circle2Position, radius: 20)
 
-        CollisionResolver.resolveCollisions(body1: circle1, body2: circle2)
+        let manifold = Intersector.detectBetween(circle1: circle1, circle2: circle2)
+        CollisionResolver.resolveCollisions(body1: circle1, body2: circle2, manifold: manifold)
         XCTAssertNotEqual(circle1.position, circle1Position)
         XCTAssertEqual(circle2.position, circle2Position)
     }
@@ -37,7 +39,8 @@ class CollisionResolverTests: XCTestCase {
         let circle1 = CircularPhysicsBody(gameObjectType: .ball, position: circle1Position, radius: 10, mass: 1)
         let circle2 = CircularPhysicsBody(gameObjectType: .ball, position: circle2Position, radius: 20, mass: 2)
 
-        CollisionResolver.resolveCollisions(body1: circle1, body2: circle2)
+        let manifold = Intersector.detectBetween(circle1: circle1, circle2: circle2)
+        CollisionResolver.resolveCollisions(body1: circle1, body2: circle2, manifold: manifold)
         XCTAssertNotEqual(circle1.position, circle1Position)
         XCTAssertNotEqual(circle2.position, circle2Position)
     }
@@ -48,7 +51,8 @@ class CollisionResolverTests: XCTestCase {
         let circle1 = CircularPhysicsBody(gameObjectType: .ball, position: circle1Position, radius: 10, mass: 1)
         let circle2 = CircularPhysicsBody(gameObjectType: .ball, position: circle2Position, radius: 20, mass: 2)
 
-        CollisionResolver.resolveCollisions(body1: circle1, body2: circle2)
+        let manifold = Intersector.detectBetween(circle1: circle1, circle2: circle2)
+        CollisionResolver.resolveCollisions(body1: circle1, body2: circle2, manifold: manifold)
         XCTAssertEqual(circle1.position, circle1Position)
         XCTAssertEqual(circle2.position, circle2Position)
     }

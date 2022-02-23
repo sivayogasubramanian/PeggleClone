@@ -10,6 +10,10 @@ import CoreGraphics
 
 class CollisionResolver {
     static func resolveCollisions(body1: PhysicsBody, body2: PhysicsBody, manifold: CollisionManifold) {
+        guard manifold.hasCollided else {
+            return
+        }
+
         let impulseVector = getImpulseVector(body1: body1, body2: body2, manifold: manifold)
         body1.setVelocity(to: body1.velocity + (impulseVector / body1.mass) * manifold.normal)
         body2.setVelocity(to: body2.velocity - (impulseVector / body2.mass) * manifold.normal)
