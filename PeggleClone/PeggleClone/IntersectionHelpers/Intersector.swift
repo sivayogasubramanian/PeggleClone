@@ -9,64 +9,84 @@ import Foundation
 import CoreGraphics
 
 class Intersector {
-    static func detectBetween(circle1: CircularIntersector, circle2: CircularIntersector) -> Bool {
+    static func detectBetween(circle1: CircularIntersector, circle2: CircularIntersector) -> (Bool, CollisionManifold) {
         let vectorBetweenCenters = circle1.center - circle2.center
+        let magnitude = vectorBetweenCenters.length()
         let radiiSum = circle1.radius + circle2.radius
-        return vectorBetweenCenters.lengthSquared() < radiiSum * radiiSum
+        let hasCollided = vectorBetweenCenters.length() < radiiSum
+        let manifold = CollisionManifold(normal: vectorBetweenCenters.normalize(), depth: radiiSum - magnitude)
+        return (hasCollided, manifold)
     }
 
-    static func detectBetween(polygon1: PolygonIntersector, polygon2: PolygonIntersector) -> Bool {
+    static func detectBetween(polygon1: PolygonIntersector, polygon2: PolygonIntersector) -> (Bool, CollisionManifold) {
         let axesToConsider = polygon1.edges.map({
-            CGVector(dx: -$0.direction.dy, dy: $0.direction.dx)
+            CGVector(dx: -$0.direction.dy, dy: $0.direction.dx).normalize()
         }) + polygon2.edges.map({
-            CGVector(dx: -$0.direction.dy, dy: $0.direction.dx)
+            CGVector(dx: -$0.direction.dy, dy: $0.direction.dx).normalize()
         })
+        var depth = Double.infinity
+        var normal = CGVector.zero
 
         for axis in axesToConsider {
             let (minPolygon1, maxPolygon1) = project(polygon: polygon1, onto: axis)
             let (minPolygon2, maxPolygon2) = project(polygon: polygon2, onto: axis)
 
             if minPolygon1 >= maxPolygon2 || minPolygon2 >= maxPolygon1 {
-                return false
+                return (false, .zero)
+            }
+
+            let oldDepth = depth
+            depth = min(depth, abs(minPolygon1 - maxPolygon2), abs(minPolygon2 - maxPolygon1))
+            if depth != oldDepth {
+                normal = axis
             }
         }
 
-        return true
+        return (true, CollisionManifold(normal: normal, depth: depth))
     }
 
-    static func detectBetween(circle: CircularIntersector, line: LineIntersector) -> Bool {
-        let distanceFromCenterToLine = line.line.shortestDistance(from: circle.center)
-        return distanceFromCenterToLine < circle.radius
+    static func detectBetween(circle: CircularIntersector, line: LineIntersector) -> (Bool, CollisionManifold) {
+        let collisionNormal = (line.line.closestPointOnLine(to: circle.center) - circle.center).normalize()
+        let depth = line.line.shortestDistance(from: circle.center)
+        let hasCollided = depth <= circle.radius
+        return (hasCollided, CollisionManifold(normal: collisionNormal, depth: circle.radius - depth))
     }
 
-    static func detectBetween(circle: CircularIntersector, polygon: PolygonIntersector) -> Bool {
+    static func detectBetween(circle: CircularIntersector, polygon: PolygonIntersector) -> (Bool, CollisionManifold) {
         let closestVector = findClosestPoint(on: polygon, to: circle)
         let centerToClosestVector = closestVector - circle.center
-
-        let axesToConsider = [centerToClosestVector] + polygon.edges.map({
-            CGVector(dx: -$0.direction.dy, dy: $0.direction.dx)
+        let axesToConsider = [centerToClosestVector.normalize()] + polygon.edges.map({
+            CGVector(dx: -$0.direction.dy, dy: $0.direction.dx).normalize()
         })
+        var depth = Double.infinity
+        var normal = CGVector.zero
 
         for axis in axesToConsider {
             let (minCircle, maxCircle) = project(circle: circle, onto: axis)
             let (minPolygon, maxPolygon) = project(polygon: polygon, onto: axis)
 
             if minPolygon >= maxCircle || minCircle >= maxPolygon {
-                return false
+                return (false, .zero)
+            }
+
+            let oldDepth = depth
+            depth = min(depth, abs(minPolygon - maxCircle), abs(minCircle - maxPolygon))
+            if depth != oldDepth {
+                normal = axis
             }
         }
 
-        return true
+        return (true, CollisionManifold(normal: normal, depth: depth))
     }
 }
 
 // MARK: Overloaded Methods
 extension Intersector {
-    static func detectBetween(line: LineIntersector, circle: CircularIntersector) -> Bool {
+    static func detectBetween(line: LineIntersector, circle: CircularIntersector) -> (Bool, CollisionManifold) {
         Intersector.detectBetween(circle: circle, line: line)
     }
 
-    static func detectBetween(polygon: PolygonIntersector, circle: CircularIntersector) -> Bool {
+    static func detectBetween(polygon: PolygonIntersector, circle: CircularIntersector) -> (Bool, CollisionManifold) {
         Intersector.detectBetween(circle: circle, polygon: polygon)
     }
 }

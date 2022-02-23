@@ -41,12 +41,14 @@ class PhysicsWorld {
         guard GameObjects.areCollidable(body1.gameObjectType, body2.gameObjectType) else {
             return
         }
-        guard IntersectionDetector.detectCollisions(body1: body1, body2: body2) else {
+
+        let (hasCollided, collisionManifold) = IntersectionDetector.detectCollisions(body1: body1, body2: body2)
+        guard hasCollided else {
             return
         }
 
         body1.incrementHitCount()
         body2.incrementHitCount()
-        CollisionResolver.resolveCollisions(body1: body1, body2: body2)
+        CollisionResolver.resolveCollisions(body1: body1, body2: body2, manifold: collisionManifold)
     }
 }

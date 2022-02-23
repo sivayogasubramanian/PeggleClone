@@ -8,7 +8,7 @@
 import Foundation
 
 class IntersectionDetector {
-    static func detectCollisions(body1: PhysicsBody, body2: PhysicsBody) -> Bool {
+    static func detectCollisions(body1: PhysicsBody, body2: PhysicsBody) -> (Bool, CollisionManifold) {
         switch (body1, body2) {
         case let (circle1, circle2) as (CircularIntersector, CircularIntersector):
             return Intersector.detectBetween(circle1: circle1, circle2: circle2)
@@ -20,7 +20,7 @@ class IntersectionDetector {
             return Intersector.detectBetween(circle: circle, polygon: polygon)
         default:
             assertionFailure("Unknown physics bodies in IntersectionDetector")
-            return false
+            return (false, CollisionManifold(normal: .zero, depth: .zero))
         }
     }
 }

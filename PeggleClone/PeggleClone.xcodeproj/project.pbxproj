@@ -83,6 +83,7 @@
 		47DA512F27C3A54A00491B3A /* AddOrangeTriangularBlockAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA512E27C3A54A00491B3A /* AddOrangeTriangularBlockAction.swift */; };
 		47DA513127C3AA9200491B3A /* PolygonalPhysicsBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA513027C3AA9200491B3A /* PolygonalPhysicsBody.swift */; };
 		47DA513327C3ABA000491B3A /* BlockGameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DA513227C3ABA000491B3A /* BlockGameObject.swift */; };
+		47DDFEE227C6468D008678F4 /* CollisionManifold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DDFEE127C6468D008678F4 /* CollisionManifold.swift */; };
 		47F94AD327A329E20016EDC7 /* PegEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F94ACF27A329E20016EDC7 /* PegEntity+CoreDataClass.swift */; };
 		47F94AD427A329E20016EDC7 /* PegEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F94AD027A329E20016EDC7 /* PegEntity+CoreDataProperties.swift */; };
 		47F94AD527A329E20016EDC7 /* BoardEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F94AD127A329E20016EDC7 /* BoardEntity+CoreDataClass.swift */; };
@@ -179,6 +180,7 @@
 		47DA512E27C3A54A00491B3A /* AddOrangeTriangularBlockAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrangeTriangularBlockAction.swift; sourceTree = "<group>"; };
 		47DA513027C3AA9200491B3A /* PolygonalPhysicsBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonalPhysicsBody.swift; sourceTree = "<group>"; };
 		47DA513227C3ABA000491B3A /* BlockGameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockGameObject.swift; sourceTree = "<group>"; };
+		47DDFEE127C6468D008678F4 /* CollisionManifold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionManifold.swift; sourceTree = "<group>"; };
 		47F94ACF27A329E20016EDC7 /* PegEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PegEntity+CoreDataClass.swift"; path = "PeggleClone/Persistence/CoreDataEntities/PegEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		47F94AD027A329E20016EDC7 /* PegEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PegEntity+CoreDataProperties.swift"; path = "PeggleClone/Persistence/CoreDataEntities/PegEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		47F94AD127A329E20016EDC7 /* BoardEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BoardEntity+CoreDataClass.swift"; path = "PeggleClone/Persistence/CoreDataEntities/BoardEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
@@ -421,6 +423,7 @@
 		47A9309927B3FAAC00009C30 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				47DDFEE127C6468D008678F4 /* CollisionManifold.swift */,
 				47A930A127B3FBA400009C30 /* CollisionResolver.swift */,
 				47A9309F27B3FB8D00009C30 /* IntersectionDetector.swift */,
 			);
@@ -739,6 +742,7 @@
 				4754997A27C35DCC005FFC68 /* Intersector.swift in Sources */,
 				47A930A227B3FBA400009C30 /* CollisionResolver.swift in Sources */,
 				479AB7FA27A1C2AF00F3208E /* View.swift in Sources */,
+				47DDFEE227C6468D008678F4 /* CollisionManifold.swift in Sources */,
 				47F94AD527A329E20016EDC7 /* BoardEntity+CoreDataClass.swift in Sources */,
 				472D3FBE279882C4001B2E42 /* DesignerViewModel.swift in Sources */,
 				4717DC6C27A015D300DF7272 /* Board+Persistable.swift in Sources */,

@@ -9,102 +9,30 @@ import Foundation
 import CoreGraphics
 
 class CollisionResolver {
-    static func resolveCollisions(body1: PhysicsBody, body2: PhysicsBody) {
-        switch (body1, body2) {
-        case let (circle1, circle2) as (CircularPhysicsBody, CircularPhysicsBody):
-            circleAndCircle(circle1: circle1, circle2: circle2)
-        case let (circle, line) as (CircularPhysicsBody, LinePhysicsBody),
-            let (line, circle) as (LinePhysicsBody, CircularPhysicsBody):
-            circleAndLine(circle: circle, line: line, withCof: 1)
-        case let (circle, polygon) as (CircularPhysicsBody, PolygonalPhysicsBody),
-            let (polygon, circle) as (PolygonalPhysicsBody, CircularPhysicsBody):
-            circleAndPolygon(circle: circle, polygon: polygon)
-        default:
-            assertionFailure("Unknown physics bodies in CollisionResolver")
-        }
+    static func resolveCollisions(body1: PhysicsBody, body2: PhysicsBody, manifold: CollisionManifold) {
+        let impulseVector = getImpulseVector(body1: body1, body2: body2, manifold: manifold)
+        body1.setVelocity(to: body1.velocity + (impulseVector / body1.mass) * manifold.normal)
+        body2.setVelocity(to: body2.velocity - (impulseVector / body2.mass) * manifold.normal)
+        fixOverlaps(body1: body1, body2: body2, manifold: manifold)
     }
 
-    private static func circleAndPolygon(circle: CircularPhysicsBody, polygon: PolygonalPhysicsBody) {
-        for vertex in polygon.vertices {
-            let circularPhysicsBody = CircularPhysicsBody(gameObjectType: .block, position: vertex, radius: 1)
-
-            if Intersector.detectBetween(circle1: circle, circle2: circularPhysicsBody) {
-                circleAndCircle(circle1: circle, circle2: circularPhysicsBody)
-                return
-            }
+    private static func fixOverlaps(body1: PhysicsBody, body2: PhysicsBody, manifold: CollisionManifold) {
+        if body1.isMovable && body2.isMovable {
+            body1.setPosition(to: body1.position + (manifold.normal * (manifold.depth / 2)))
+            body2.setPosition(to: body2.position - (manifold.normal * (manifold.depth / 2)))
+        } else if body1.isMovable {
+            body1.setPosition(to: body1.position + (manifold.normal * manifold.depth))
+        } else if body2.isMovable {
+            body2.setPosition(to: body2.position - (manifold.normal * manifold.depth))
         }
-
-        for line in polygon.edges {
-            let linePhysicsBody = LinePhysicsBody(start: line.start, end: line.end)
-
-            if Intersector.detectBetween(circle: circle, line: linePhysicsBody) {
-                circleAndLine(circle: circle, line: linePhysicsBody, withCof: PhysicsConstants.coefficientOfRestitution)
-                return
-            }
-        }
-    }
-
-    private static func circleAndLine(circle: CircularPhysicsBody, line: LinePhysicsBody, withCof cof: Double) {
-        let collisionNormal = (circle.center - line.closestPointOnLine(to: circle.center)).normalize()
-        let impulseVector = getImpulseVector(collisionNormal: collisionNormal, body1: circle, body2: line, cof: cof)
-        circle.setVelocity(to: circle.velocity + impulseVector)
-        line.setVelocity(to: line.velocity - impulseVector)
-        fixOverlapForCircleAndLineCollisions(circle, line, collisionNormal)
-    }
-
-    private static func circleAndCircle(circle1: CircularPhysicsBody, circle2: CircularPhysicsBody) {
-        let collisionNormal = (circle1.position - circle2.position).normalize()
-        let impulseVector = getImpulseVector(collisionNormal: collisionNormal, body1: circle1, body2: circle2)
-        circle1.setVelocity(to: circle1.velocity + impulseVector)
-        circle2.setVelocity(to: circle2.velocity - impulseVector)
-        fixOverlapForCircleAndCircleCollisions(circle1, circle2, collisionNormal)
     }
 
     private static func getImpulseVector(
-        collisionNormal: CGVector,
-        body1: PhysicsBody,
-        body2: PhysicsBody,
-        cof: Double = PhysicsConstants.coefficientOfRestitution
-    ) -> CGVector {
+        body1: PhysicsBody, body2: PhysicsBody, manifold: CollisionManifold
+    ) -> Double {
         let relativeVelocity = body1.velocity - body2.velocity
-        let velocityAlongNormal = relativeVelocity.dot(vector: collisionNormal)
-        var impulse = -cof * velocityAlongNormal
+        var impulse = -(1 + PhysicsConstants.coefficientOfRestitution) * relativeVelocity.dot(vector: manifold.normal)
         impulse /= (1 / body1.mass) + (1 / body2.mass)
-        return collisionNormal * impulse
-    }
-
-    private static func fixOverlapForCircleAndCircleCollisions(
-        _ circle1: CircularPhysicsBody,
-        _ circle2: CircularPhysicsBody,
-        _ collisionNormal: CGVector
-    ) {
-        let centerToCenterVector = circle1.position - circle2.position
-        let radiiSum = circle1.radius + circle2.radius
-
-        if centerToCenterVector.lengthSquared() < radiiSum * radiiSum {
-            let depth = radiiSum - centerToCenterVector.length()
-
-            if circle1.isMovable && circle2.isMovable {
-                circle1.setPosition(to: circle1.position + collisionNormal * depth / 2)
-                circle2.setPosition(to: circle2.position - collisionNormal * depth / 2)
-            } else if circle1.isMovable {
-                circle1.setPosition(to: (circle1.position + collisionNormal * depth))
-            } else if circle2.isMovable {
-                circle2.setPosition(to: (circle2.position - collisionNormal * depth))
-            }
-        }
-    }
-
-    private static func fixOverlapForCircleAndLineCollisions(
-        _ circle: CircularPhysicsBody,
-        _ line: LinePhysicsBody,
-        _ collisionNormal: CGVector
-    ) {
-        let distance = line.shortestDistance(from: circle.center)
-        let depth = circle.radius - distance
-
-        if distance < circle.radius {
-            circle.setPosition(to: circle.center + (depth * collisionNormal))
-        }
+        return impulse
     }
 }
