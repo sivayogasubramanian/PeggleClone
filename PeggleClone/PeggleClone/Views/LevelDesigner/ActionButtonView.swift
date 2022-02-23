@@ -40,24 +40,24 @@ struct ActionButtonView: View {
 
     var body: some View {
         HStack {
-            HStack(spacing: 40) {
+            HStack {
                 loadButtonView
 
                 saveButtonView
 
                 resetButtonView
             }
-            .padding(.trailing, 40.0)
+            .padding(.trailing, 10)
 
             levelNameTextFieldView
 
             playButtonView
         }
-        .padding(.horizontal, 40)
+        .padding(.horizontal, 25)
     }
 
     private var loadButtonView: some View {
-        Button("LOAD", action: { showingLoadAlert = true })
+        Button("LOAD", action: { showingLoadAlert = true; textFieldIsFocused = false })
             .alert(
                 "Please remember to save your progress. Any progress made will be lost if it is not saved.",
                 isPresented: $showingLoadAlert,
@@ -76,37 +76,40 @@ struct ActionButtonView: View {
         Button("SAVE", action: {
             showingSaveAlert = true
             textFieldIsFocused = false
-        }).disabled(levelName.isEmpty)
-            .alert("Are you sure you want to save this level?", isPresented: $showingSaveAlert, actions: {
-                Button("Cancel", role: .cancel, action: {})
-                Button("Yes", action: { saveButtonHandler() })
-            })
-            .alert("Successfully saved level!", isPresented: $isSaveSuccess, actions: {})
+        })
+        .disabled(levelName.isEmpty)
+        .alert("Are you sure you want to save this level?", isPresented: $showingSaveAlert, actions: {
+            Button("Cancel", role: .cancel, action: {})
+            Button("Yes", action: { saveButtonHandler() })
+        })
+        .alert("Successfully saved level!", isPresented: $isSaveSuccess, actions: {})
     }
 
     private var resetButtonView: some View {
         Button("RESET", action: {
             showingResetAlert = true
-        }).alert("Are you sure you want to reset this level?", isPresented: $showingResetAlert) {
+        })
+        .alert("Are you sure you want to reset this level?", isPresented: $showingResetAlert) {
             Button("Cancel", role: .cancel, action: {})
             Button("Yes", role: .destructive, action: { resetButtonHandler() })
         }
     }
 
     private var playButtonView: some View {
-        Button("PLAY", action: {
+        Button("TRIAL PLAY", action: {
             UIView.setAnimationsEnabled(false)
             isGameActive = true
-        }).padding(.leading, 40.0)
-            .fullScreenCover(
-                isPresented: $isGameActive,
-                content: {
-                    GameView(gameViewModel: GameViewModel(board: designerViewModel.board))
-                        .onAppear {
-                            UIView.setAnimationsEnabled(true)
-                        }
+            textFieldIsFocused = false
+        })
+        .fullScreenCover(
+            isPresented: $isGameActive,
+            content: {
+                GameView(gameViewModel: GameViewModel(board: designerViewModel.board.prepareGameplayBoard()))
+                .onAppear {
+                    UIView.setAnimationsEnabled(true)
                 }
-            )
+            }
+        )
     }
 
     private var levelNameTextFieldView: some View {
@@ -122,10 +125,12 @@ extension ActionButtonView {
         designerViewModel.setImageData(from: boardView)
         designerViewModel.saveBoard()
         isSaveSuccess = true
+        textFieldIsFocused = false
     }
 
     private func resetButtonHandler() {
         designerViewModel.resetDesigner()
+        textFieldIsFocused = false
         levelName = ""
     }
 }

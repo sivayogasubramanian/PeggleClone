@@ -13,31 +13,20 @@ struct GameView: View {
     @State private var rotateState: Angle = .zero
 
     var body: some View {
-        NavigationView {
-            ZStack(alignment: .top) {
-                GeometryReader { _ in
-                    Image(Constants.backgroundImage)
-                        .resizable()
-                        .frame(width: gameViewModel.boardWidth, height: gameViewModel.boardHeight)
-                        .overlay {
-                            overlayPegViews()
-                        }
-                        .overlay {
-                            overlayBlockViews()
-                        }
-                        .overlay {
-                            if let ball = gameViewModel.ball {
-                                overlayBallView(ball)
-                            }
-                        }
-                        .gesture(dragGestureForShoot)
-                }
+        ZStack(alignment: .top) {
+            VStack {
+                Image(Constants.backgroundImage)
+                    .resizable()
+                    .gesture(dragGestureForShoot)
+            }
 
-                cannonView
+            if let ball = gameViewModel.ball {
+                overlayBallView(ball)
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading, content: { backButtonView })
-            }
+            overlayPegViews()
+            overlayBlockViews()
+            cannonView
+            backButtonView
         }
         .onAppear {
             gameViewModel.startSimulation()
@@ -53,19 +42,20 @@ struct GameView: View {
     }
 
     private var backButtonView: some View {
-        Button(action: {
-            presentationMode.wrappedValue.dismiss()
-        }, label: {
-            HStack {
-                Image(systemName: "chevron.left")
-                Text("Back")
+        Image(Constants.backButtonImage)
+            .resizable().opacity(0.3).scaledToFit()
+            .frame(width: 50, height: 50)
+            .position(x: 40, y: 35)
+            .onTapGesture {
+                presentationMode.wrappedValue.dismiss()
             }
-        })
     }
 
     private func overlayPegViews() -> some View {
-        ForEach(gameViewModel.pegs) { peg in
-            makePegView(peg)
+        ZStack {
+            ForEach(gameViewModel.pegs) { peg in
+                makePegView(peg).transition(.scale(scale: 1.1).combined(with: .opacity))
+            }
         }.animation(.easeOut(duration: 0.5), value: gameViewModel.pegs)
     }
 
@@ -78,8 +68,10 @@ struct GameView: View {
     }
 
     private func overlayBlockViews() -> some View {
-        ForEach(gameViewModel.blocks) { block in
-            makeBlockView(block)
+        ZStack {
+            ForEach(gameViewModel.blocks) { block in
+                makeBlockView(block).transition(.scale(scale: 1.1).combined(with: .opacity))
+            }
         }.animation(.easeOut(duration: 0.5), value: gameViewModel.blocks)
     }
 

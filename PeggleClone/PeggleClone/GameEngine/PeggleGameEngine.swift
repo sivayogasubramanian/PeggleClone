@@ -95,7 +95,8 @@ class PeggleGameEngine {
             return
         }
 
-        let shouldRemoveBall = ball.physicsBody.position.dy > boardSize.height - ball.radius
+        let shouldRemoveBall = ball.physicsBody.position.dy > boardSize.height +
+            Constants.letterBoxYOffset - ball.radius
 
         if shouldRemoveBall {
             removeBall(ball: ball)

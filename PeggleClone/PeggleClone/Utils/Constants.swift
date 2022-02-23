@@ -8,6 +8,7 @@
 struct Constants {
     static let coreDataContainerName = "PeggleCloneData"
 
+    static let backButtonImage = "back-button"
     static let backgroundImage = "background"
     static let bluePegImage = "peg-blue"
     static let blueTriangularBlockImage = "peg-blue-triangle"
@@ -25,4 +26,5 @@ struct Constants {
     static let pegRadius = 25.0
     static let blockWidth = 50.0
     static let blockHeight = 50.0
+    static let letterBoxYOffset = 155.0
 }

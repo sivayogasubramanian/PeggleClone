@@ -157,7 +157,7 @@ struct ImageButtonView: View {
 
     private var resizePegView: some View {
         HStack {
-            Text("Radius:   ")
+            Text("Radius:")
             Slider(
                 value: Binding(
                     get: { designerViewModel.radius },
@@ -172,7 +172,7 @@ struct ImageButtonView: View {
     private var resizeBlockView: some View {
         HStack {
             HStack {
-                Text("Width:    ")
+                Text("Width:")
                 Slider(
                     value: Binding(
                         get: { designerViewModel.width },
@@ -184,7 +184,7 @@ struct ImageButtonView: View {
             }
 
             HStack {
-                Text("Height:   ")
+                Text("Height:")
                 Slider(
                     value: Binding(
                         get: { designerViewModel.height },

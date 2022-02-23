@@ -25,7 +25,8 @@ struct DesignerView: View {
             )
 
             boardView
-        }.ignoresSafeArea(.keyboard)
+        }
+        .ignoresSafeArea(.keyboard)
     }
 
     private var boardView: DesignerBoardView {
