@@ -35,9 +35,9 @@ class Seeder {
 
             for yUnit in 1...Constants.yRatio - 1 {
                 let coordinate = CGPoint(x: getXCoordinate(for: Double(xUnit)), y: getYCoordinate(for: Double(yUnit)))
-                let color: PeggleColor = yUnit % 2 == 0 ? .blue : .orange
+                let color: PeggleColor = yUnit.isMultiple(of: 2) ? .blue : .orange
 
-                if xUnit % 2 == 0 {
+                if xUnit.isMultiple(of: 2) {
                     _ = board.addPeg(at: coordinate, color: color)
                 } else {
                     _ = board.addBlock(at: coordinate, color: color)
@@ -57,7 +57,7 @@ class Seeder {
         for xUnit in 1...Constants.xRatio - 1 {
             for yUnit in 1...(Constants.yRatio - 1) * 10 {
                 let coordinate = CGPoint(x: getXCoordinate(for: Double(xUnit)), y: getYCoordinate(for: Double(yUnit)))
-                let color: PeggleColor = (xUnit + yUnit) % 2 == 0 ? .blue : .orange
+                let color: PeggleColor = (xUnit + yUnit).isMultiple(of: 2) ? .blue : .orange
 
                 let block = board.addBlock(at: coordinate, color: color)
                 block?.setSpringiness(to: PhysicsConstants.maximumSpringiness)
@@ -69,7 +69,7 @@ class Seeder {
         for xUnit in 1...Constants.xRatio - 1 {
             for yUnit in 1...(Constants.yRatio - 1) * 10 {
                 let coordinate = CGPoint(x: getXCoordinate(for: Double(xUnit)), y: getYCoordinate(for: Double(yUnit)))
-                let color: PeggleColor = (xUnit + yUnit) % 2 == 0 ? .blue : .orange
+                let color: PeggleColor = (xUnit + yUnit).isMultiple(of: 2) ? .blue : .orange
 
                 _ = board.addPeg(at: coordinate, color: color)
             }
@@ -113,10 +113,10 @@ class Seeder {
     }
 
     private func getXCoordinate(for standardUnit: Double) -> Double {
-        return Double(standardUnit) * (Double(size.width) / Double(Constants.xRatio))
+        Double(standardUnit) * (Double(size.width) / Double(Constants.xRatio))
     }
 
     private func getYCoordinate(for standardUnit: Double) -> Double {
-        return Double(standardUnit) * (Double(size.height) / Double(Constants.yRatio)) + Constants.letterBoxYOffset
+        Double(standardUnit) * (Double(size.height) / Double(Constants.yRatio)) + Constants.letterBoxYOffset
     }
 }

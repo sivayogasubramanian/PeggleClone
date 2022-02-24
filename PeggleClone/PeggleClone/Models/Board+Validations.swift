@@ -9,7 +9,7 @@ import Foundation
 import CoreGraphics
 
 /// This extension contains validation methods for the main Board model.
-internal extension Board {
+extension Board {
     func isNameValid(name: String) -> Bool {
         guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             return false

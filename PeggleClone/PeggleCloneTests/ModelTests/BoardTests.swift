@@ -79,7 +79,7 @@ class BoardTests: XCTestCase {
     func testAddPeg_withValidPoint_shouldAddPeg() {
         let board = Board()
         let point = CGPoint(x: 50, y: 50 + Constants.letterBoxYOffset)
-        let bounds = CGSize(width: 100, height: 1000)
+        let bounds = CGSize(width: 100, height: 1_000)
         board.setSize(boardSize: bounds)
 
         XCTAssertTrue(board.pegs.isEmpty)
@@ -113,7 +113,7 @@ class BoardTests: XCTestCase {
         let board = Board()
         let point1 = CGPoint(x: 40, y: 40 + Constants.letterBoxYOffset)
         let point2 = CGPoint(x: 100, y: 100 + Constants.letterBoxYOffset)
-        let bounds = CGSize(width: 200, height: 1000)
+        let bounds = CGSize(width: 200, height: 1_000)
         board.setSize(boardSize: bounds)
 
         _ = board.addPeg(at: point1, color: .blue)
@@ -126,7 +126,7 @@ class BoardTests: XCTestCase {
         let board = Board()
         let point1 = CGPoint(x: 40, y: 40 + Constants.letterBoxYOffset)
         let point2 = CGPoint(x: 50, y: 50 + Constants.letterBoxYOffset)
-        let bounds = CGSize(width: 100, height: 1000)
+        let bounds = CGSize(width: 100, height: 1_000)
         board.setSize(boardSize: bounds)
 
         _ = board.addPeg(at: point1, color: .blue)
@@ -139,7 +139,7 @@ class BoardTests: XCTestCase {
         let board = Board()
         let point1 = CGPoint(x: 40, y: 40 + Constants.letterBoxYOffset)
         let point2 = CGPoint(x: 100, y: 100 + Constants.letterBoxYOffset)
-        let bounds = CGSize(width: 200, height: 1000)
+        let bounds = CGSize(width: 200, height: 1_000)
         board.setSize(boardSize: bounds)
 
         _ = board.addPeg(at: point1, color: .blue)
@@ -156,7 +156,7 @@ class BoardTests: XCTestCase {
         let board = Board()
         let point1 = CGPoint(x: 40, y: 40 + Constants.letterBoxYOffset)
         let point2 = CGPoint(x: 100, y: 100 + Constants.letterBoxYOffset)
-        let bounds = CGSize(width: 200, height: 1000)
+        let bounds = CGSize(width: 200, height: 1_000)
         board.setSize(boardSize: bounds)
 
         _ = board.addPeg(at: point1, color: .blue)
@@ -171,7 +171,7 @@ class BoardTests: XCTestCase {
         let peg = Peg(color: .blue, center: CGVector(dx: 40, dy: 40 + Constants.letterBoxYOffset),
                       radius: Constants.pegRadius, rotation: .zero)
         let board = Board(uuid: UUID(), name: "board", pegs: [peg], blocks: [])
-        board.setSize(boardSize: CGSize(width: 100, height: 1000))
+        board.setSize(boardSize: CGSize(width: 100, height: 1_000))
 
         board.movePeg(peg: peg, to: CGPoint(x: 50, y: 50 + Constants.letterBoxYOffset))
 
@@ -183,7 +183,7 @@ class BoardTests: XCTestCase {
         let peg = Peg(color: .blue, center: CGVector(dx: 40, dy: 40 + Constants.letterBoxYOffset),
                       radius: Constants.pegRadius, rotation: .zero)
         let board = Board(uuid: UUID(), name: "board", pegs: [peg], blocks: [])
-        board.setSize(boardSize: CGSize(width: 100, height: 1000))
+        board.setSize(boardSize: CGSize(width: 100, height: 1_000))
 
         board.movePeg(peg: peg, to: CGPoint(x: 100, y: 100))
 
