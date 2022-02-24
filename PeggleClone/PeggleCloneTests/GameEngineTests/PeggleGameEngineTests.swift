@@ -75,7 +75,7 @@ class PeggleGameEngineTests: XCTestCase {
         gameEngine.addBall(shootingTowards: point)
 
         // Simulate collision
-        var totalTime = 10.0
+        var totalTime = 20.0
         while totalTime > 0 {
             gameEngine.simulateFor(dt: PhysicsConstants.physicsUpdateTickTime)
             totalTime -= PhysicsConstants.physicsUpdateTickTime
