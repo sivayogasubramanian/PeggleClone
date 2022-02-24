@@ -28,61 +28,7 @@ class Seeder {
     private func makeLevelOneUsingStandardUnits() -> Board {
         let board = Board()
         board.setSize(boardSize: size)
-        board.setName(to: "Preset Level: Diamond Matrix")
-
-        for xUnit in 1...Constants.xRatio - 1 {
-            board.setBoardOffset(to: -100)
-
-            for yUnit in 1...Constants.yRatio - 1 {
-                let coordinate = CGPoint(x: getXCoordinate(for: Double(xUnit)), y: getYCoordinate(for: Double(yUnit)))
-                let color: PeggleColor = yUnit.isMultiple(of: 2) ? .blue : .orange
-
-                if xUnit.isMultiple(of: 2) {
-                    _ = board.addPeg(at: coordinate, color: color)
-                } else {
-                    _ = board.addBlock(at: coordinate, color: color)
-                }
-            }
-        }
-
-        board.setBoardOffset(to: .infinity)
-        return board
-    }
-
-    private func makeLevelTwoUsingStandardUnits() -> Board {
-        let board = Board()
-        board.setSize(boardSize: size)
-        board.setName(to: "Preset Level: Oscillating Madness")
-
-        for xUnit in 1...Constants.xRatio - 1 {
-            for yUnit in 1...(Constants.yRatio - 1) * 10 {
-                let coordinate = CGPoint(x: getXCoordinate(for: Double(xUnit)), y: getYCoordinate(for: Double(yUnit)))
-                let color: PeggleColor = (xUnit + yUnit).isMultiple(of: 2) ? .blue : .orange
-
-                let block = board.addBlock(at: coordinate, color: color)
-                block?.setSpringiness(to: PhysicsConstants.maximumSpringiness)
-            }
-        }
-
-        board.setBoardOffset(to: -(size.height))
-
-        for xUnit in 1...Constants.xRatio - 1 {
-            for yUnit in 1...(Constants.yRatio - 1) * 10 {
-                let coordinate = CGPoint(x: getXCoordinate(for: Double(xUnit)), y: getYCoordinate(for: Double(yUnit)))
-                let color: PeggleColor = (xUnit + yUnit).isMultiple(of: 2) ? .blue : .orange
-
-                _ = board.addPeg(at: coordinate, color: color)
-            }
-        }
-
-        board.setBoardOffset(to: .infinity)
-        return board
-    }
-
-    private func makeLevelThreeUsingStandardUnits() -> Board {
-        let board = Board()
-        board.setSize(boardSize: size)
-        board.setName(to: "Preset Level: A for Avengers")
+        board.setName(to: "Preset Level: A Level")
 
         var (initialX, initialY) = (3.5, 1.0)
         while initialX > 0.0 && initialY < Double(Constants.yRatio) {
@@ -109,6 +55,60 @@ class Seeder {
         }
 
         _ = board.addPeg(at: CGPoint(x: getXCoordinate(for: 3.5), y: getYCoordinate(for: 1.0)), color: .blue)
+        return board
+    }
+
+    private func makeLevelTwoUsingStandardUnits() -> Board {
+        let board = Board()
+        board.setSize(boardSize: size)
+        board.setName(to: "Preset Level: Diamond Matrix")
+
+        for xUnit in 1...Constants.xRatio - 1 {
+            board.setBoardOffset(to: -100)
+
+            for yUnit in 1...Constants.yRatio - 1 {
+                let coordinate = CGPoint(x: getXCoordinate(for: Double(xUnit)), y: getYCoordinate(for: Double(yUnit)))
+                let color: PeggleColor = yUnit.isMultiple(of: 2) ? .blue : .orange
+
+                if xUnit.isMultiple(of: 2) {
+                    _ = board.addPeg(at: coordinate, color: color)
+                } else {
+                    _ = board.addBlock(at: coordinate, color: color)
+                }
+            }
+        }
+
+        board.setBoardOffset(to: .infinity)
+        return board
+    }
+
+    private func makeLevelThreeUsingStandardUnits() -> Board {
+        let board = Board()
+        board.setSize(boardSize: size)
+        board.setName(to: "Preset Level: Oscillating Madness")
+
+        for xUnit in 1...Constants.xRatio - 1 {
+            for yUnit in 1...(Constants.yRatio - 1) * 10 {
+                let coordinate = CGPoint(x: getXCoordinate(for: Double(xUnit)), y: getYCoordinate(for: Double(yUnit)))
+                let color: PeggleColor = (xUnit + yUnit).isMultiple(of: 2) ? .blue : .orange
+
+                let block = board.addBlock(at: coordinate, color: color)
+                block?.setSpringiness(to: PhysicsConstants.maximumSpringiness)
+            }
+        }
+
+        board.setBoardOffset(to: -(size.height))
+
+        for xUnit in 1...Constants.xRatio - 1 {
+            for yUnit in 1...(Constants.yRatio - 1) * 10 {
+                let coordinate = CGPoint(x: getXCoordinate(for: Double(xUnit)), y: getYCoordinate(for: Double(yUnit)))
+                let color: PeggleColor = (xUnit + yUnit).isMultiple(of: 2) ? .blue : .orange
+
+                _ = board.addPeg(at: coordinate, color: color)
+            }
+        }
+
+        board.setBoardOffset(to: .infinity)
         return board
     }
 
