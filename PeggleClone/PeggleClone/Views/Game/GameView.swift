@@ -31,12 +31,14 @@ struct GameView: View {
         .onAppear {
             gameViewModel.startSimulation()
         }
+        .statusBar(hidden: true)
+        .edgesIgnoringSafeArea([.top, .bottom])
     }
 
     private var cannonView: some View {
         Image(Utils.cannonImageFileName(isCannonLoaded: gameViewModel.isCannonLoaded))
             .resizable()
-            .frame(width: 100, height: 100, alignment: .center)
+            .frame(width: 100, height: 100)
             .rotationEffect(rotateState)
             .offset(y: -7)
     }
@@ -45,7 +47,7 @@ struct GameView: View {
         Image(Constants.backButtonImage)
             .resizable().opacity(0.3).scaledToFit()
             .frame(width: 50, height: 50)
-            .position(x: 40, y: 35)
+            .position(x: 40, y: 50)
             .onTapGesture {
                 presentationMode.wrappedValue.dismiss()
             }
@@ -62,9 +64,11 @@ struct GameView: View {
     private func makePegView(_ peg: PegGameObject) -> some View {
         Image(Utils.pegColorToImagePegFileName(color: peg.color, isHit: peg.isHit))
             .resizable()
-            .frame(width: peg.diameter, height: peg.diameter, alignment: .center)
+            .frame(width: peg.diameter, height: peg.diameter)
             .rotationEffect(Angle(degrees: peg.rotation))
             .position(x: peg.physicsBody.position.dx, y: peg.physicsBody.position.dy)
+            .offset(x: 0, y: gameViewModel.offset)
+            .animation(.interactiveSpring(), value: gameViewModel.offset)
     }
 
     private func overlayBlockViews() -> some View {
@@ -78,16 +82,22 @@ struct GameView: View {
     private func makeBlockView(_ block: BlockGameObject) -> some View {
         Image(Utils.pegColorToImageBlockFileName(color: block.color, isHit: block.isHit))
             .resizable()
-            .frame(width: block.width, height: block.height, alignment: .center)
+            .frame(width: block.width, height: block.height)
             .rotationEffect(Angle(degrees: block.rotation))
             .position(x: block.physicsBody.position.dx, y: block.physicsBody.position.dy)
+            .offset(x: 0, y: gameViewModel.offset)
+            .animation(.interactiveSpring(), value: gameViewModel.offset)
     }
 
     private func overlayBallView(_ ball: BallGameObject) -> some View {
         Image("ball")
             .resizable()
             .frame(width: ball.diameter, height: ball.diameter)
-            .position(x: ball.physicsBody.position.dx, y: ball.physicsBody.position.dy)
+            .position(x: ball.physicsBody.position.dx, y: ball.physicsBody.position.dy + gameViewModel.offset)
+            .onChange(of: ball.physicsBody.position.dy) { newY in
+                gameViewModel.setOffset(using: newY)
+            }
+            .animation(.interactiveSpring(), value: gameViewModel.offset)
     }
 
     private var dragGestureForShoot: some Gesture {

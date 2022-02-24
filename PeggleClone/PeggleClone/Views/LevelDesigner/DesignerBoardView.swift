@@ -19,24 +19,18 @@ struct DesignerBoardView: View {
                 .resizable()
                 .scaledToFill()
                 .gesture(
+                    DragGesture().onChanged({ value in
+                        designerViewModel.setBoardOffset(to: value.translation.height / 20)
+                    })
+                )
+                .gesture(
                     DragGesture(minimumDistance: 0).onEnded({ value in
                         withAnimation(.easeIn(duration: 0.1)) {
-                            if actionsViewModel.getPeggleType() == .peg {
-                                designerViewModel.addPeg(
-                                    at: value.location,
-                                    color: actionsViewModel.getColor()
-                                )
-                            }
-
-                            if actionsViewModel.getPeggleType() == .block {
-                                designerViewModel.addBlock(
-                                    at: value.location,
-                                    color: actionsViewModel.getColor()
-                                )
-                            }
+                            boardTapHandler(value.location)
                         }
                     })
-                ).overlay {
+                )
+                .overlay {
                     overlayPegViews()
                     overlayBlockViews()
                 }
@@ -61,11 +55,13 @@ struct DesignerBoardView: View {
     private func makePegView(_ peg: Peg) -> some View {
         Image(Utils.pegColorToImagePegFileName(color: peg.color))
             .resizable()
-            .frame(width: peg.diameter, height: peg.diameter, alignment: .center)
+            .frame(width: peg.diameter, height: peg.diameter)
             .rotationEffect(Angle(degrees: peg.rotation))
             .animation(.default, value: peg.rotation)
             .animation(.default, value: peg.radius)
+            .animation(.default, value: designerViewModel.board.boardHeightOffset)
             .position(x: peg.center.dx, y: peg.center.dy)
+            .offset(x: 0, y: designerViewModel.board.boardHeightOffset)
             .onTapGesture {
                 if type(of: actionsViewModel.currentAction) == DeleteAction.self {
                     withAnimation(.easeOut(duration: 0.1)) {
@@ -91,12 +87,14 @@ struct DesignerBoardView: View {
     private func makeBlockView(_ block: TriangularBlock) -> some View {
         Image(Utils.pegColorToImageBlockFileName(color: block.color))
             .resizable()
-            .frame(width: block.width, height: block.height, alignment: .center)
+            .frame(width: block.width, height: block.height)
             .rotationEffect(Angle(degrees: block.rotation))
             .position(x: block.center.dx, y: block.center.dy)
+            .offset(x: 0, y: designerViewModel.board.boardHeightOffset)
             .animation(.default, value: block.rotation)
             .animation(.default, value: block.width)
             .animation(.default, value: block.height)
+            .animation(.default, value: designerViewModel.board.boardHeightOffset)
             .onTapGesture {
                 if type(of: actionsViewModel.currentAction) == DeleteAction.self {
                     withAnimation(.easeOut(duration: 0.1)) {
@@ -130,7 +128,9 @@ struct DesignerBoardView: View {
             .opacity(0.3)
             .frame(width: max(block.springiness, 125), height: max(block.springiness, 125))
             .position(x: block.center.dx, y: block.center.dy)
+            .offset(x: 0, y: designerViewModel.board.boardHeightOffset)
             .animation(.default, value: block.springiness)
+            .animation(.default, value: designerViewModel.board.boardHeightOffset)
             .overlay(content: { makeMiniResizingCircles(block) })
     }
 
@@ -149,15 +149,35 @@ struct DesignerBoardView: View {
             Circle().fill(.gray).opacity(0.2).frame(width: 30, height: 30)
                 .position(
                     x: center.dx, y: center.dy
-                ).gesture(DragGesture()
-                            .onChanged({ value in dragHandler(block: block, value.location) })
-                ).animation(.default, value: block.springiness)
+                )
+                .offset(x: 0, y: designerViewModel.board.boardHeightOffset)
+                .gesture(DragGesture().onChanged({ value in
+                    springinessDragHandler(block: block, value.location) })
+                )
+                .animation(.default, value: block.springiness)
+                .animation(.default, value: designerViewModel.board.boardHeightOffset)
         }
     }
 }
 
 extension DesignerBoardView {
-    private func dragHandler(block: TriangularBlock, _ location: CGPoint) {
+    private func boardTapHandler(_ location: CGPoint) {
+        if actionsViewModel.getPeggleType() == .peg {
+            designerViewModel.addPeg(
+                at: location,
+                color: actionsViewModel.getColor()
+            )
+        }
+
+        if actionsViewModel.getPeggleType() == .block {
+            designerViewModel.addBlock(
+                at: location,
+                color: actionsViewModel.getColor()
+            )
+        }
+    }
+
+    private func springinessDragHandler(block: TriangularBlock, _ location: CGPoint) {
         designerViewModel.setSpringiness(for: block, location: location)
     }
 }

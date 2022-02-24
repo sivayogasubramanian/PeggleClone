@@ -104,7 +104,7 @@ struct ActionButtonView: View {
         .fullScreenCover(
             isPresented: $isGameActive,
             content: {
-                GameView(gameViewModel: GameViewModel(board: designerViewModel.board.prepareGameplayBoard()))
+                GameView(gameViewModel: GameViewModel(board: designerViewModel.board))
                 .onAppear {
                     UIView.setAnimationsEnabled(true)
                 }

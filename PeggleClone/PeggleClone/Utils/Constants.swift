@@ -26,5 +26,5 @@ struct Constants {
     static let pegRadius = 25.0
     static let blockWidth = 50.0
     static let blockHeight = 50.0
-    static let letterBoxYOffset = 155.0
+    static let letterBoxYOffset = 145.0
 }

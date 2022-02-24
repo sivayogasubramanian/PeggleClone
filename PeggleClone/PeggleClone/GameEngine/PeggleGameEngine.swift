@@ -10,11 +10,13 @@ import QuartzCore
 
 class PeggleGameEngine {
     private let world: PhysicsWorld
+    private let board: Board
     private(set) var ball: BallGameObject?
     private var pegObjects = [ObjectIdentifier: PegGameObject]()
     private var blockObjects = [ObjectIdentifier: BlockGameObject]()
     private var boardSize: CGSize
     private(set) var isReadyToShoot = true
+    private(set) var offset = Double.zero
     var pegs: [PegGameObject] {
         Array(pegObjects.values)
     }
@@ -23,6 +25,7 @@ class PeggleGameEngine {
     }
 
     init(board: Board) {
+        self.board = board
         boardSize = board.boardSize
         world = PhysicsWorld()
 
@@ -68,6 +71,10 @@ class PeggleGameEngine {
         removeNearbyGameObjectsIfBallStationary()
     }
 
+    func setOffset(to offset: Double) {
+        self.offset = offset
+    }
+
     private func addPegToPhysicsEngine(_ peg: PegGameObject) {
         pegObjects[ObjectIdentifier(peg)] = peg
         world.addPhysicsBody(peg.physicsBody)
@@ -95,8 +102,7 @@ class PeggleGameEngine {
             return
         }
 
-        let shouldRemoveBall = ball.physicsBody.position.dy > boardSize.height +
-            Constants.letterBoxYOffset - ball.radius
+        let shouldRemoveBall = ball.physicsBody.position.dy > max(board.maxHeight, boardSize.height - ball.radius)
 
         if shouldRemoveBall {
             removeBall(ball: ball)
@@ -134,6 +140,7 @@ class PeggleGameEngine {
 
     private func removeBall(ball: BallGameObject) {
         self.ball = nil
+        offset = .zero
         world.removePhysicsBody(ball.physicsBody)
         removeLitGameObjectsIfBallExited()
         resetHitCountOfGameObjects()

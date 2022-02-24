@@ -81,6 +81,11 @@ class DesignerViewModel: ObservableObject {
         board.setImage(to: view.asImage(size: boardSize).pngData())
     }
 
+    func setBoardOffset(to offset: Double) {
+        board.setBoardOffset(to: offset)
+        updateViews()
+    }
+
     func resetDesigner() {
         board = Board()
         setBoardSize(to: boardSize)

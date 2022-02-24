@@ -15,9 +15,18 @@ final class Board: Identifiable {
     private(set) var blocks: [TriangularBlock]
     private(set) var snapshot = Data()
     private(set) var boardSize = CGSize.zero
+    private(set) var boardHeightOffset = 0.0
 
     var canSave: Bool {
         !name.isEmpty
+    }
+    var maxHeight: Double {
+        var maximum = Double.zero
+
+        maximum = pegs.reduce(maximum, { max($0, $1.center.dy) })
+        maximum = blocks.reduce(maximum, { max($0, $1.center.dy) })
+
+        return maximum + Constants.pegRadius * 4
     }
 
     convenience init() {
@@ -51,12 +60,16 @@ final class Board: Identifiable {
         self.boardSize = boardSize
     }
 
+    func setBoardOffset(to offset: Double) {
+        boardHeightOffset = min(.zero, boardHeightOffset + offset)
+    }
+
     func addPeg(at point: CGPoint, color: PeggleColor?) -> Peg? {
         guard let color = color else {
             return nil
         }
-
-        let newPeg = Peg(color: color, center: point.toCGVector(), radius: Constants.pegRadius, rotation: .zero)
+        let center = CGVector(dx: point.x, dy: point.y - boardHeightOffset)
+        let newPeg = Peg(color: color, center: center, radius: Constants.pegRadius, rotation: .zero)
         guard validateAddPeg(peg: newPeg, bounds: boardSize) else {
             return nil
         }
@@ -70,7 +83,8 @@ final class Board: Identifiable {
             return nil
         }
 
-        let newBlock = TriangularBlock(color: color, center: point.toCGVector(), width: Constants.blockWidth,
+        let center = CGVector(dx: point.x, dy: point.y - boardHeightOffset)
+        let newBlock = TriangularBlock(color: color, center: center, width: Constants.blockWidth,
                                        height: Constants.blockHeight, rotation: .zero, springiness: 0)
         guard validateAddBlock(block: newBlock, bounds: boardSize) else {
             return nil
@@ -216,31 +230,9 @@ final class Board: Identifiable {
         block.setSpringiness(to: springiness)
     }
 
-    func prepareGameplayBoard() -> Board {
-        let board = Board()
-        board.setSize(boardSize: boardSize)
-
-        for peg in pegs {
-            let gameCenter = CGVector(dx: peg.center.dx, dy: peg.center.dy + Constants.letterBoxYOffset)
-            let gamePeg = Peg(color: peg.color, center: gameCenter,
-                              radius: peg.radius, rotation: peg.rotation)
-            board.pegs.append(gamePeg)
-        }
-
-        for block in blocks {
-            let gameCenter = CGVector(dx: block.center.dx, dy: block.center.dy + Constants.letterBoxYOffset)
-            let gameBlock = TriangularBlock(color: block.color, center: gameCenter,
-                                            width: block.width, height: block.height,
-                                            rotation: block.rotation, springiness: block.springiness)
-            board.blocks.append(gameBlock)
-        }
-
-        return board
-    }
-
     private func movePegToClosestValidLocation(peg: Peg, to newCenter: CGPoint, bounds: CGSize) {
-        let direction = (peg.center - newCenter.toCGVector()).normalize()
-        var currentPoint = newCenter.toCGVector()
+        var currentPoint = CGVector(dx: newCenter.x, dy: newCenter.y - boardHeightOffset)
+        let direction = (peg.center - currentPoint).normalize()
         var movedPeg = Peg(color: peg.color, center: currentPoint, radius: peg.radius,
                            rotation: peg.rotation)
 
@@ -259,8 +251,8 @@ final class Board: Identifiable {
     }
 
     private func moveBlockToClosestValidLocation(block: TriangularBlock, to newCenter: CGPoint, bounds: CGSize) {
-        let direction = (block.center - newCenter.toCGVector()).normalize()
-        var currentPoint = newCenter.toCGVector()
+        var currentPoint = CGVector(dx: newCenter.x, dy: newCenter.y - boardHeightOffset)
+        let direction = (block.center - currentPoint).normalize()
         var movedBlock = TriangularBlock(color: block.color, center: currentPoint, width: block.width,
                                          height: block.height, rotation: block.rotation,
                                          springiness: block.springiness)

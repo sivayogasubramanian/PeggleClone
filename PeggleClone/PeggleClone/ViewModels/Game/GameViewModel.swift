@@ -14,7 +14,7 @@ import SwiftUI
 class GameViewModel: ObservableObject {
     private(set) var displaylink: CADisplayLink?
     private(set) var gameEngine: PeggleGameEngine
-    private var board: Board
+    private(set) var board: Board
     var pegs: [PegGameObject] {
         gameEngine.pegs
     }
@@ -32,6 +32,9 @@ class GameViewModel: ObservableObject {
     }
     var boardHeight: CGFloat {
         board.boardSize.height
+    }
+    var offset: Double {
+        gameEngine.offset
     }
 
     // Game loop variables
@@ -57,6 +60,17 @@ class GameViewModel: ObservableObject {
         let centerToPoint = point.toCGVector() - CGVector(dx: boardWidth / 2, dy: 0)
         let sine = centerVector.cross(vector: centerToPoint) / (centerVector.length() * centerToPoint.length())
         return Angle(radians: asin(sine))
+    }
+
+    func setOffset(using newY: Double) {
+        guard board.maxHeight > boardHeight else {
+            return
+        }
+
+        let maxOffset = board.maxHeight - boardHeight
+        if newY > board.maxHeight / 2 {
+            gameEngine.setOffset(to: max(-maxOffset, -(newY - board.maxHeight / 2)))
+        }
     }
 
     func startSimulation() {

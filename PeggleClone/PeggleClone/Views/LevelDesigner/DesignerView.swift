@@ -12,21 +12,26 @@ struct DesignerView: View {
     @StateObject private var actionsViewModel = DesignerActionsViewModel()
 
     var body: some View {
-        VStack {
-            ImageButtonView(
-                designerViewModel: designerViewModel,
-                actionsViewModel: actionsViewModel
-            )
-
-            ActionButtonView(
-                boardView: boardView,
-                designerViewModel: designerViewModel,
-                actionsViewModel: actionsViewModel
-            )
-
+        ZStack(alignment: .top) {
             boardView
+
+            VStack {
+                ImageButtonView(
+                    designerViewModel: designerViewModel,
+                    actionsViewModel: actionsViewModel
+                )
+
+                ActionButtonView(
+                    boardView: boardView,
+                    designerViewModel: designerViewModel,
+                    actionsViewModel: actionsViewModel
+                )
+            }
+            .background(Color.white)
         }
+        .statusBar(hidden: true)
         .ignoresSafeArea(.keyboard)
+        .edgesIgnoringSafeArea([.top, .bottom])
     }
 
     private var boardView: DesignerBoardView {

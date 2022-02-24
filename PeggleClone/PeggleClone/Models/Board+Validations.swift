@@ -124,13 +124,13 @@ internal extension Board {
 
     func isWithinBounds(peg: Peg, bounds: CGSize) -> Bool {
         let minX = peg.radius, maxX = bounds.width - peg.radius
-        let minY = peg.radius, maxY = bounds.height - peg.radius
+        let minY = Constants.letterBoxYOffset + peg.radius, maxY = bounds.height - peg.radius - boardHeightOffset
         return peg.center.isWithinBounds(minX: minX, maxX: maxX, minY: minY, maxY: maxY)
     }
 
     func isWithinBounds(block: TriangularBlock, bounds: CGSize) -> Bool {
         let minX = CGFloat.zero, maxX = bounds.width
-        let minY = CGFloat.zero, maxY = bounds.height
+        let minY = Constants.letterBoxYOffset, maxY = bounds.height - boardHeightOffset
 
         for vertex in block.vertices where !vertex.isWithinBounds(minX: minX, maxX: maxX, minY: minY, maxY: maxY) {
             return false
