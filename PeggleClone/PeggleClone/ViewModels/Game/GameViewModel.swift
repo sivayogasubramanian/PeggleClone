@@ -46,11 +46,6 @@ class GameViewModel: ObservableObject {
         gameEngine = PeggleGameEngine(board: board)
     }
 
-    deinit {
-        displaylink?.invalidate()
-        displaylink = nil
-    }
-
     func shootBallTowards(point: CGPoint) {
         gameEngine.addBall(shootingTowards: point)
     }
@@ -75,6 +70,11 @@ class GameViewModel: ObservableObject {
 
     func startSimulation() {
         createDisplayLink()
+    }
+
+    func stopSimulation() {
+        displaylink?.invalidate()
+        displaylink = nil
     }
 
     private func createDisplayLink() {

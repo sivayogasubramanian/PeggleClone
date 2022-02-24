@@ -1,8 +1,8 @@
 //
-//  PolygonIntersector.swift
+//  TriangularIntersector.swift
 //  PeggleClone
 //
-//  Created by Sivayogasubramanian on 21/2/22.
+//  Created by Sivayogasubramanian on 25/2/22.
 //
 
 import Foundation
@@ -13,6 +13,8 @@ protocol TriangularIntersector {
     var height: Double { get }
     var position: CGVector { get }
     var rotation: Double { get }
+    var vertices: [CGVector] { get }
+    var edges: [Line] { get }
 }
 
 extension TriangularIntersector {

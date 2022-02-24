@@ -40,7 +40,7 @@
 		4754997027C282D8005FFC68 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754996F27C282D8005FFC68 /* Line.swift */; };
 		4754997327C35D0A005FFC68 /* CircularIntersector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754997227C35D0A005FFC68 /* CircularIntersector.swift */; };
 		4754997627C35D36005FFC68 /* LineIntersector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754997527C35D36005FFC68 /* LineIntersector.swift */; };
-		4754997827C35D73005FFC68 /* TriangularIntersector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754997727C35D73005FFC68 /* TriangularIntersector.swift */; };
+		4754997827C35D73005FFC68 /* PolygonalIntersector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754997727C35D73005FFC68 /* PolygonalIntersector.swift */; };
 		4754997A27C35DCC005FFC68 /* Intersector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754997927C35DCC005FFC68 /* Intersector.swift */; };
 		4754999427C391D3005FFC68 /* TriangularBlockEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754998E27C391D3005FFC68 /* TriangularBlockEntity+CoreDataClass.swift */; };
 		4754999F27C39287005FFC68 /* TriangularBlockEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754999927C39287005FFC68 /* TriangularBlockEntity+CoreDataProperties.swift */; };
@@ -74,6 +74,7 @@
 		47A930C727B43E9100009C30 /* BallGameObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A930C627B43E9100009C30 /* BallGameObjectTests.swift */; };
 		47A930C927B43EA000009C30 /* PegGameObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A930C827B43EA000009C30 /* PegGameObjectTests.swift */; };
 		47B22AC027C7A5EF00B58CFD /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B22ABF27C7A5EF00B58CFD /* Seeder.swift */; };
+		47B22AC527C7ED0900B58CFD /* TriangularIntersector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B22AC427C7ED0900B58CFD /* TriangularIntersector.swift */; };
 		47CA667227B67E4100ADC2C5 /* GameObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CA667127B67E4100ADC2C5 /* GameObjects.swift */; };
 		47CA667527B68BC900ADC2C5 /* GameObjectsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CA667427B68BC900ADC2C5 /* GameObjectsTests.swift */; };
 		47CBF83E27C1315100B80002 /* PeggleAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBF83D27C1315100B80002 /* PeggleAction.swift */; };
@@ -138,7 +139,7 @@
 		4754996F27C282D8005FFC68 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		4754997227C35D0A005FFC68 /* CircularIntersector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularIntersector.swift; sourceTree = "<group>"; };
 		4754997527C35D36005FFC68 /* LineIntersector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineIntersector.swift; sourceTree = "<group>"; };
-		4754997727C35D73005FFC68 /* TriangularIntersector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangularIntersector.swift; sourceTree = "<group>"; };
+		4754997727C35D73005FFC68 /* PolygonalIntersector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonalIntersector.swift; sourceTree = "<group>"; };
 		4754997927C35DCC005FFC68 /* Intersector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intersector.swift; sourceTree = "<group>"; };
 		4754998E27C391D3005FFC68 /* TriangularBlockEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TriangularBlockEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4754999927C39287005FFC68 /* TriangularBlockEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TriangularBlockEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -174,6 +175,7 @@
 		47A930C627B43E9100009C30 /* BallGameObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallGameObjectTests.swift; sourceTree = "<group>"; };
 		47A930C827B43EA000009C30 /* PegGameObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegGameObjectTests.swift; sourceTree = "<group>"; };
 		47B22ABF27C7A5EF00B58CFD /* Seeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seeder.swift; sourceTree = "<group>"; };
+		47B22AC427C7ED0900B58CFD /* TriangularIntersector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangularIntersector.swift; sourceTree = "<group>"; };
 		47CA667127B67E4100ADC2C5 /* GameObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObjects.swift; sourceTree = "<group>"; };
 		47CA667427B68BC900ADC2C5 /* GameObjectsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObjectsTests.swift; sourceTree = "<group>"; };
 		47CBF83D27C1315100B80002 /* PeggleAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleAction.swift; sourceTree = "<group>"; };
@@ -341,7 +343,8 @@
 			children = (
 				4754997227C35D0A005FFC68 /* CircularIntersector.swift */,
 				4754997527C35D36005FFC68 /* LineIntersector.swift */,
-				4754997727C35D73005FFC68 /* TriangularIntersector.swift */,
+				4754997727C35D73005FFC68 /* PolygonalIntersector.swift */,
+				47B22AC427C7ED0900B58CFD /* TriangularIntersector.swift */,
 				4754997927C35DCC005FFC68 /* Intersector.swift */,
 			);
 			path = IntersectionHelpers;
@@ -387,7 +390,7 @@
 				474470FB27AEC81D0048C4BF /* PhysicsEngine */,
 				47A930A627B3FC3800009C30 /* GameEngine */,
 				4754997127C35CD6005FFC68 /* IntersectionHelpers */,
-				47DDFEED27C7A538008678F4 /* SeedData */,
+				47DDFEED27C7A538008678F4 /* Seed */,
 				4776293A279844B800A1A8C0 /* Assets.xcassets */,
 				4776293C279844B800A1A8C0 /* Preview Content */,
 			);
@@ -563,12 +566,12 @@
 			path = Actions;
 			sourceTree = "<group>";
 		};
-		47DDFEED27C7A538008678F4 /* SeedData */ = {
+		47DDFEED27C7A538008678F4 /* Seed */ = {
 			isa = PBXGroup;
 			children = (
 				47B22ABF27C7A5EF00B58CFD /* Seeder.swift */,
 			);
-			path = SeedData;
+			path = Seed;
 			sourceTree = "<group>";
 		};
 		47F94AC627A326580016EDC7 /* CoreDataEntities */ = {
@@ -770,6 +773,7 @@
 				4754997327C35D0A005FFC68 /* CircularIntersector.swift in Sources */,
 				47A930AD27B3FC8700009C30 /* PegGameObject.swift in Sources */,
 				473A9E18279C1F8300476A3A /* ActionButtonView.swift in Sources */,
+				47B22AC527C7ED0900B58CFD /* TriangularIntersector.swift in Sources */,
 				4717DC6227A0075600DF7272 /* PeggleCloneData.xcdatamodeld in Sources */,
 				4717DC6827A0132700DF7272 /* Persistable.swift in Sources */,
 				47DA513327C3ABA000491B3A /* BlockGameObject.swift in Sources */,
@@ -793,7 +797,7 @@
 				47CBF84027C132AD00B80002 /* AddBluePegAction.swift in Sources */,
 				47A930B327B3FD0C00009C30 /* GameView.swift in Sources */,
 				473A9E20279C2F7D00476A3A /* Utils.swift in Sources */,
-				4754997827C35D73005FFC68 /* TriangularIntersector.swift in Sources */,
+				4754997827C35D73005FFC68 /* PolygonalIntersector.swift in Sources */,
 				47A930AB27B3FC7300009C30 /* BallGameObject.swift in Sources */,
 				47CBF84227C132D200B80002 /* AddOrangePegAction.swift in Sources */,
 			);

@@ -8,7 +8,7 @@
 import Foundation
 import CoreGraphics
 
-class SHMTriangularPhysicsBody: PhysicsBody, TriangularIntersector {
+class SHMTriangularPhysicsBody: PhysicsBody, PolygonalIntersector, TriangularIntersector {
     private static var minimumSpringiness = 100.0
     private static var maximumSpringiness = 25.0
 
@@ -40,7 +40,7 @@ class SHMTriangularPhysicsBody: PhysicsBody, TriangularIntersector {
         let acceleration = force * (1 / mass)
         setVelocity(to: velocity + acceleration)
         setPosition(to: position + (velocity * deltaTime))
-        setVelocity(to: velocity * 0.995)
+        setVelocity(to: velocity * 0.97)
 
         if distance < 5 && velocity.length() < 100 {
             setPosition(to: originalPosition)

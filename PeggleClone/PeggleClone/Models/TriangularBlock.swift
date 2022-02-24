@@ -59,7 +59,7 @@ final class TriangularBlock: Identifiable {
     }
 }
 
-extension TriangularBlock: TriangularIntersector {
+extension TriangularBlock: PolygonalIntersector, TriangularIntersector {
     var position: CGVector {
         center
     }

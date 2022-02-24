@@ -50,6 +50,7 @@ struct GameView: View {
             .position(x: 40, y: 50)
             .onTapGesture {
                 presentationMode.wrappedValue.dismiss()
+                gameViewModel.stopSimulation()
             }
     }
 

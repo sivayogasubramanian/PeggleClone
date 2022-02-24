@@ -8,7 +8,7 @@
 import Foundation
 import CoreGraphics
 
-class StaticTriangularPhysicsBody: PhysicsBody, TriangularIntersector {
+class StaticTriangularPhysicsBody: PhysicsBody, PolygonalIntersector, TriangularIntersector {
     private(set) var width: Double
     private(set) var height: Double
     private(set) var rotation: Double

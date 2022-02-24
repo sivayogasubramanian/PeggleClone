@@ -85,27 +85,37 @@ class Seeder {
     private func makeLevelThreeUsingStandardUnits() -> Board {
         let board = Board()
         board.setSize(boardSize: size)
-        board.setName(to: "Preset Level: Oscillating Madness")
+        board.setName(to: "Preset Level: Infinite Oscillating Madness")
 
-        for xUnit in 1...Constants.xRatio - 1 {
-            for yUnit in 1...(Constants.yRatio - 1) * 10 {
-                let coordinate = CGPoint(x: getXCoordinate(for: Double(xUnit)), y: getYCoordinate(for: Double(yUnit)))
-                let color: PeggleColor = (xUnit + yUnit).isMultiple(of: 2) ? .blue : .orange
+        for _ in 0...1 {
+            for xUnit in 1...Constants.xRatio - 1 {
+                for yUnit in 1...(Constants.yRatio - 1) * 10 {
+                    let coordinate = CGPoint(
+                        x: getXCoordinate(for: Double(xUnit)),
+                        y: getYCoordinate(for: Double(yUnit))
+                    )
+                    let color: PeggleColor = (xUnit + yUnit).isMultiple(of: 2) ? .blue : .orange
 
-                let block = board.addBlock(at: coordinate, color: color)
-                block?.setSpringiness(to: PhysicsConstants.maximumSpringiness)
+                    let block = board.addBlock(at: coordinate, color: color)
+                    block?.setSpringiness(to: PhysicsConstants.maximumSpringiness)
+                }
             }
-        }
 
-        board.setBoardOffset(to: -(size.height))
+            board.setBoardOffset(to: -(size.height))
 
-        for xUnit in 1...Constants.xRatio - 1 {
-            for yUnit in 1...(Constants.yRatio - 1) * 10 {
-                let coordinate = CGPoint(x: getXCoordinate(for: Double(xUnit)), y: getYCoordinate(for: Double(yUnit)))
-                let color: PeggleColor = (xUnit + yUnit).isMultiple(of: 2) ? .blue : .orange
+            for xUnit in 1...Constants.xRatio - 1 {
+                for yUnit in 1...(Constants.yRatio - 1) * 10 {
+                    let coordinate = CGPoint(
+                        x: getXCoordinate(for: Double(xUnit)),
+                        y: getYCoordinate(for: Double(yUnit))
+                    )
+                    let color: PeggleColor = (xUnit + yUnit).isMultiple(of: 2) ? .blue : .orange
 
-                _ = board.addPeg(at: coordinate, color: color)
+                    _ = board.addPeg(at: coordinate, color: color)
+                }
             }
+
+            board.setBoardOffset(to: -(size.height))
         }
 
         board.setBoardOffset(to: .infinity)
