@@ -27,4 +27,8 @@ struct Constants {
     static let blockWidth = 50.0
     static let blockHeight = 50.0
     static let letterBoxYOffset = 145.0
+    static let yCoordinatePadding = pegRadius * 4
+
+    static let xRatio = 7
+    static let yRatio = 10
 }

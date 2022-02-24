@@ -78,6 +78,7 @@ extension SavedLevelsView {
     }
 
     private func onAppearHandler() {
-        savedBoards = designerViewModel.loadSavedLevels()
+        savedBoards.append(contentsOf: Seeder(for: designerViewModel.boardSize).makeSeedLevels())
+        savedBoards.append(contentsOf: designerViewModel.loadSavedLevels())
     }
 }

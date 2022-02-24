@@ -42,7 +42,7 @@ class SHMTriangularPhysicsBody: PhysicsBody, TriangularIntersector {
         setPosition(to: position + (velocity * deltaTime))
         setVelocity(to: velocity * 0.995)
 
-        if distance < 5 && velocity.length() < 50 {
+        if distance < 5 && velocity.length() < 100 {
             setPosition(to: originalPosition)
             setVelocity(to: .zero)
         }

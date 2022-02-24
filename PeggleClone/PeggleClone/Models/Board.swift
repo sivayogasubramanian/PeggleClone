@@ -26,7 +26,7 @@ final class Board: Identifiable {
         maximum = pegs.reduce(maximum, { max($0, $1.center.dy) })
         maximum = blocks.reduce(maximum, { max($0, $1.center.dy) })
 
-        return maximum + Constants.pegRadius * 4
+        return maximum + Constants.yCoordinatePadding
     }
 
     convenience init() {

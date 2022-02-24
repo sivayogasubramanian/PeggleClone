@@ -63,13 +63,13 @@ class GameViewModel: ObservableObject {
     }
 
     func setOffset(using newY: Double) {
-        guard board.maxHeight > boardHeight else {
+        guard board.maxHeight > boardHeight + Constants.yCoordinatePadding else {
             return
         }
 
         let maxOffset = board.maxHeight - boardHeight
-        if newY > board.maxHeight / 2 {
-            gameEngine.setOffset(to: max(-maxOffset, -(newY - board.maxHeight / 2)))
+        if newY > boardHeight / 2 {
+            gameEngine.setOffset(to: -min(maxOffset, newY - boardHeight / 2))
         }
     }
 
