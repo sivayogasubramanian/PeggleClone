@@ -198,6 +198,11 @@ final class Board: Identifiable {
     }
 
     func setBlockSpringiness(block: TriangularBlock, to springiness: Double) {
+        if springiness == PhysicsConstants.zeroSpringiness {
+            block.setSpringiness(to: PhysicsConstants.zeroSpringiness)
+            return
+        }
+
         if springiness < PhysicsConstants.minimumSpringiness {
             block.setSpringiness(to: PhysicsConstants.minimumSpringiness)
             return
