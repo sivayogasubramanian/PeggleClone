@@ -25,6 +25,7 @@ struct GameView: View {
             }
             overlayPegViews()
             overlayBlockViews()
+            overlayBucketView()
             cannonView
             backButtonView
         }
@@ -40,7 +41,6 @@ struct GameView: View {
             .resizable()
             .frame(width: 100, height: 100)
             .rotationEffect(rotateState)
-            .offset(y: -7)
     }
 
     private var backButtonView: some View {
@@ -91,14 +91,23 @@ struct GameView: View {
     }
 
     private func overlayBallView(_ ball: BallGameObject) -> some View {
-        Image("ball")
+        Image(Constants.ballImage)
             .resizable()
             .frame(width: ball.diameter, height: ball.diameter)
-            .position(x: ball.physicsBody.position.dx, y: ball.physicsBody.position.dy + gameViewModel.offset)
+            .position(x: ball.physicsBody.position.dx, y: ball.physicsBody.position.dy)
+            .offset(x: 0, y: gameViewModel.offset)
             .onChange(of: ball.physicsBody.position.dy) { newY in
                 gameViewModel.setOffset(using: newY)
             }
             .animation(.interactiveSpring(), value: gameViewModel.offset)
+    }
+
+    private func overlayBucketView() -> some View {
+        Image(Constants.bucketImage)
+            .resizable()
+            .frame(width: Constants.bucketWidth, height: Constants.bucketHeight)
+            .position(x: gameViewModel.bucket.physicsBody.position.dx, y: gameViewModel.bucket.physicsBody.position.dy)
+            .offset(x: 0, y: gameViewModel.offset)
     }
 
     private var dragGestureForShoot: some Gesture {

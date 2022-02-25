@@ -37,7 +37,7 @@ class PhysicsWorldTests: XCTestCase {
 
     func testUpdatePhysicsBodiesPositions() {
         let body = PhysicsBody(gameObjectType: .ball, position: .zero, mass: 1)
-        body.setForce(to: PhysicsConstants.gravity)
+        body.setForce(to: PhysicsConstants.gravity, isMovable: body.isMovable)
         world.addPhysicsBody(body)
         world.updatePhysicsBodiesPositions(dt: 1)
         XCTAssertNotEqual(body.position, .zero)
@@ -58,7 +58,7 @@ class PhysicsWorldTests: XCTestCase {
     func testResolveCollisions_forCollisionBetweenBoundaries() {
         world = PhysicsWorld()
         world.addPhysicsBody(LinePhysicsBody(start: CGVector(dx: 10, dy: 0), end: CGVector(dx: 10, dy: 40)))
-        let circle1Position = CGVector(dx: 10, dy: 41)
+        let circle1Position = CGVector(dx: 11, dy: 40)
         let circle1 = CircularPhysicsBody(gameObjectType: .ball, position: circle1Position, radius: 10, mass: 1)
         world.addPhysicsBody(circle1)
         world.resolveCollisions()

@@ -10,6 +10,8 @@ struct Constants {
 
     static let backButtonImage = "back-button"
     static let backgroundImage = "background"
+    static let ballImage = "ball"
+    static let bucketImage = "bucket"
     static let bluePegImage = "peg-blue"
     static let blueTriangularBlockImage = "peg-blue-triangle"
     static let cannontLoadedImage = "cannon-loaded"
@@ -26,6 +28,9 @@ struct Constants {
     static let pegRadius = 25.0
     static let blockWidth = 50.0
     static let blockHeight = 50.0
+    static let bucketWidth = 150.0
+    static let bucketHeight = 100.0
+    static let bucketYCoordinateOffset = 10.0
     static let letterBoxYOffset = 145.0
     static let yCoordinatePadding = pegRadius * 4
 

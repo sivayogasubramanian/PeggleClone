@@ -12,6 +12,7 @@ class PeggleGameEngine {
     private let world: PhysicsWorld
     private let board: Board
     private(set) var ball: BallGameObject?
+    private(set) var bucket: BucketGameObject
     private var pegObjects = [ObjectIdentifier: PegGameObject]()
     private var blockObjects = [ObjectIdentifier: BlockGameObject]()
     private var boardSize: CGSize
@@ -28,16 +29,23 @@ class PeggleGameEngine {
         self.board = board
         boardSize = board.boardSize
         world = PhysicsWorld()
+        bucket = BucketGameObject(
+            position: CGVector(
+                dx: boardSize.width / 2,
+                dy: max(board.maxHeight, boardSize.height) + Constants.bucketYCoordinateOffset
+            )
+        )
 
         // Left boundary
         world.addPhysicsBody(
-            LinePhysicsBody(start: CGVector(dx: 0, dy: 0), end: CGVector(dx: 0, dy: boardSize.height))
+            LinePhysicsBody(start: CGVector(dx: 0, dy: 0),
+                            end: CGVector(dx: 0, dy: max(board.maxHeight, boardSize.height)))
         )
         // Right boundary
         world.addPhysicsBody(
             LinePhysicsBody(
                 start: CGVector(dx: boardSize.width, dy: 0),
-                end: CGVector(dx: boardSize.width, dy: boardSize.height)
+                end: CGVector(dx: boardSize.width, dy: max(board.maxHeight, boardSize.height))
             )
         )
         // Top boundary
@@ -48,6 +56,7 @@ class PeggleGameEngine {
             )
         )
 
+        world.addPhysicsBody(bucket.physicsBody)
         board.pegs.forEach({ addPegToPhysicsEngine(PegGameObject(fromPeg: $0)) })
         board.blocks.forEach({ addBlockToPhysicsEngine(BlockGameObject(fromBlock: $0)) })
     }
@@ -103,6 +112,7 @@ class PeggleGameEngine {
         }
 
         let shouldRemoveBall = ball.physicsBody.position.dy > max(board.maxHeight, boardSize.height - ball.radius)
+        || bucket.isHit
 
         if shouldRemoveBall {
             removeBall(ball: ball)
@@ -123,6 +133,7 @@ class PeggleGameEngine {
 
     private func resetHitCountOfGameObjects() {
         ball?.physicsBody.resetHitCount()
+        bucket.physicsBody.resetHitCount()
         pegs.forEach({ $0.physicsBody.resetHitCount() })
         blocks.forEach({ $0.physicsBody.resetHitCount() })
     }
@@ -132,8 +143,11 @@ class PeggleGameEngine {
             position: CGVector(dx: boardSize.width / 2, dy: PhysicsConstants.initialBallLaunchYCoordinate)
         )
         let direction = (point.toCGVector() - ball.physicsBody.position).normalize()
-        ball.physicsBody.setForce(to: PhysicsConstants.gravity)
-        ball.physicsBody.setVelocity(to: direction * PhysicsConstants.initialBallLaunchVelocityMultiplier)
+        ball.physicsBody.setForce(to: PhysicsConstants.gravity, isMovable: true)
+        ball.physicsBody.setVelocity(
+            to: direction * PhysicsConstants.initialBallLaunchVelocityMultiplier,
+            isMovable: true
+        )
 
         return ball
     }

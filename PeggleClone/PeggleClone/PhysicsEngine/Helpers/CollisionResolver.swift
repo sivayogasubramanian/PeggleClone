@@ -15,19 +15,25 @@ class CollisionResolver {
         }
 
         let impulseVector = getImpulseVector(body1: body1, body2: body2, manifold: manifold)
-        body1.setVelocity(to: body1.velocity + (impulseVector / body1.mass) * manifold.normal)
-        body2.setVelocity(to: body2.velocity - (impulseVector / body2.mass) * manifold.normal)
+        body1.setVelocity(
+            to: body1.velocity + (impulseVector / body1.mass) * manifold.normal,
+            isMovable: body1.isMovable
+        )
+        body2.setVelocity(
+            to: body2.velocity - (impulseVector / body2.mass) * manifold.normal,
+            isMovable: body2.isMovable
+        )
         fixOverlaps(body1: body1, body2: body2, manifold: manifold)
     }
 
     private static func fixOverlaps(body1: PhysicsBody, body2: PhysicsBody, manifold: CollisionManifold) {
         if body1.isMovable && body2.isMovable {
-            body1.setPosition(to: body1.position + (manifold.normal * (manifold.depth / 2)))
-            body2.setPosition(to: body2.position - (manifold.normal * (manifold.depth / 2)))
+            body1.setPosition(to: body1.position + (manifold.normal * (manifold.depth / 2)), isMovable: true)
+            body2.setPosition(to: body2.position - (manifold.normal * (manifold.depth / 2)), isMovable: true)
         } else if body1.isMovable {
-            body1.setPosition(to: body1.position + (manifold.normal * manifold.depth))
+            body1.setPosition(to: body1.position + (manifold.normal * manifold.depth), isMovable: true)
         } else if body2.isMovable {
-            body2.setPosition(to: body2.position - (manifold.normal * manifold.depth))
+            body2.setPosition(to: body2.position - (manifold.normal * manifold.depth), isMovable: true)
         }
     }
 

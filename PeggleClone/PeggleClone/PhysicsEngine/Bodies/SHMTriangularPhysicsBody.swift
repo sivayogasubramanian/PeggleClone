@@ -29,7 +29,7 @@ class SHMTriangularPhysicsBody: PhysicsBody, PolygonalIntersector, TriangularInt
         super.init(gameObjectType: gameObjectType, position: position, mass: 2)
     }
 
-    override func updatePhysicsBody(dt deltaTime: TimeInterval) {
+    override func updatePhysicsBody(dt deltaTime: TimeInterval, isMovable: Bool) {
         guard velocity.lengthSquared() != 0 else {
             return
         }
@@ -38,13 +38,13 @@ class SHMTriangularPhysicsBody: PhysicsBody, PolygonalIntersector, TriangularInt
         let direction = (originalPosition - position).normalize()
         let force = direction * springiness
         let acceleration = force * (1 / mass)
-        setVelocity(to: velocity + acceleration)
-        setPosition(to: position + (velocity * deltaTime))
-        setVelocity(to: velocity * 0.97)
+        setVelocity(to: velocity + acceleration, isMovable: isMovable)
+        setPosition(to: position + (velocity * deltaTime), isMovable: isMovable)
+        setVelocity(to: velocity * 0.97, isMovable: isMovable)
 
         if distance < 5 && velocity.length() < 100 {
-            setPosition(to: originalPosition)
-            setVelocity(to: .zero)
+            setPosition(to: originalPosition, isMovable: isMovable)
+            setVelocity(to: .zero, isMovable: isMovable)
         }
     }
 }

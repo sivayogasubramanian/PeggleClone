@@ -9,7 +9,7 @@ import Foundation
 import CoreGraphics
 
 class PegGameObject {
-    private static let pegGameObjectType = GameObjectType.peg
+    private static let gameObjectType = GameObjectType.peg
 
     private(set) var physicsBody: PhysicsBody
     private(set) var radius: Double
@@ -30,7 +30,7 @@ class PegGameObject {
         color = peg.color
         rotation = peg.rotation
         physicsBody = CircularPhysicsBody(
-            gameObjectType: PegGameObject.pegGameObjectType,
+            gameObjectType: PegGameObject.gameObjectType,
             position: peg.center,
             radius: peg.radius
         )

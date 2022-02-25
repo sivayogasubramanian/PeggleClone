@@ -34,28 +34,28 @@ class PhysicsBody {
         hitCount += count
     }
 
-    func setVelocity(to velocity: CGVector) {
+    func setVelocity(to velocity: CGVector, isMovable: Bool) {
         guard isMovable else {
             return
         }
         self.velocity = velocity
     }
 
-    func setForce(to force: CGVector) {
+    func setForce(to force: CGVector, isMovable: Bool) {
         guard isMovable else {
             return
         }
         self.force = force
     }
 
-    func setPosition(to position: CGVector) {
+    func setPosition(to position: CGVector, isMovable: Bool) {
         guard isMovable else {
             return
         }
         self.position = position
     }
 
-    func updatePhysicsBody(dt deltaTime: TimeInterval) {
+    func updatePhysicsBody(dt deltaTime: TimeInterval, isMovable: Bool) {
         guard isMovable else {
             return
         }

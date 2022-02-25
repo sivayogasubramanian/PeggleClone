@@ -21,7 +21,7 @@ class PhysicsWorld {
     }
 
     func updatePhysicsBodiesPositions(dt deltaTime: TimeInterval) {
-        physicsBodies.forEach({ $0.updatePhysicsBody(dt: deltaTime) })
+        physicsBodies.forEach({ $0.updatePhysicsBody(dt: deltaTime, isMovable: $0.isMovable) })
     }
 
     func resolveCollisions() {

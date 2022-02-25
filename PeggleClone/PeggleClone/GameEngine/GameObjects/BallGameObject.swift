@@ -9,7 +9,7 @@ import Foundation
 import CoreGraphics
 
 class BallGameObject {
-    private static let ballGameObjectType = GameObjectType.ball
+    private static let gameObjectType = GameObjectType.ball
 
     private(set) var physicsBody: PhysicsBody
     private(set) var radius = Constants.ballRadius
@@ -19,7 +19,7 @@ class BallGameObject {
 
     init(position: CGVector) {
         physicsBody = CircularPhysicsBody(
-            gameObjectType: BallGameObject.ballGameObjectType,
+            gameObjectType: BallGameObject.gameObjectType,
             position: position,
             radius: radius,
             mass: PhysicsConstants.ballMass

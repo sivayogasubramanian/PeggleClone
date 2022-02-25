@@ -9,7 +9,7 @@ import Foundation
 import CoreGraphics
 
 class BlockGameObject {
-    private static let pegGameObjectType = GameObjectType.block
+    private static let gameObjectType = GameObjectType.block
 
     private(set) var physicsBody: PhysicsBody
     private(set) var color: PeggleColor
@@ -31,7 +31,7 @@ class BlockGameObject {
 
         if block.springiness == 0 {
             physicsBody = StaticTriangularPhysicsBody(
-                gameObjectType: BlockGameObject.pegGameObjectType,
+                gameObjectType: BlockGameObject.gameObjectType,
                 position: block.center,
                 width: width,
                 height: height,
@@ -39,7 +39,7 @@ class BlockGameObject {
             )
         } else {
             physicsBody = SHMTriangularPhysicsBody(
-                gameObjectType: BlockGameObject.pegGameObjectType,
+                gameObjectType: BlockGameObject.gameObjectType,
                 position: block.center,
                 width: width,
                 height: height,

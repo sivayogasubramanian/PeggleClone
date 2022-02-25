@@ -24,6 +24,9 @@ class GameViewModel: ObservableObject {
     var ball: BallGameObject? {
         gameEngine.ball
     }
+    var bucket: BucketGameObject {
+        gameEngine.bucket
+    }
     var isCannonLoaded: Bool {
         gameEngine.isReadyToShoot
     }
