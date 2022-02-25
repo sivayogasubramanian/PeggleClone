@@ -15,4 +15,8 @@ class AddOrangeTriangularBlockAction: PeggleAction {
     func getColor() -> PeggleColor? {
         .orange
     }
+
+    func getDescription() -> String? {
+        "A regular orange triangular obstacle."
+    }
 }

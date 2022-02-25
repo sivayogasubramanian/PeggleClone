@@ -8,6 +8,7 @@
 struct Constants {
     static let coreDataContainerName = "PeggleCloneData"
 
+    static let mainBackgroundImage = "main-background"
     static let backButtonImage = "back-button"
     static let backgroundImage = "background"
     static let ballImage = "ball"
@@ -35,9 +36,11 @@ struct Constants {
     static let bucketWidth = 150.0
     static let bucketHeight = 100.0
     static let bucketYCoordinateOffset = 10.0
-    static let letterBoxYOffset = 145.0
+    static let letterBoxYOffset = 170.0
     static let yCoordinatePadding = pegRadius * 4
 
     static let xRatio = 7
     static let yRatio = 10
+
+    static let powerups: [Powerup] = [KaBoom(), SpookyBall()]
 }

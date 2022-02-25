@@ -11,7 +11,7 @@ import SwiftUI
 struct PeggleCloneApp: App {
     var body: some Scene {
         WindowGroup {
-            DesignerView()
+            MainView()
         }
     }
 }

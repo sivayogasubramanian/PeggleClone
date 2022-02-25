@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GameView: View {
-    @Environment(\.presentationMode) private var presentationMode
+    @Environment(\.dismiss) var dismiss
     @ObservedObject var gameViewModel: GameViewModel
     @State private var rotateState: Angle = .zero
 
@@ -18,6 +18,19 @@ struct GameView: View {
                 Image(Constants.backgroundImage)
                     .resizable()
                     .gesture(dragGestureForShoot)
+                    .overlay(alignment: .topTrailing) {
+                        GameObjectCounterView(
+                            blue: gameViewModel.numberOfBluePegsLeft,
+                            orange: gameViewModel.numberOfOrangePegsLeft,
+                            purple: gameViewModel.numberOfPurplePegsLeft,
+                            balls: gameViewModel.numberOfBallsLeft
+                        )
+                        .padding(.top, 15).padding(.trailing, 20)
+                        .opacity(0.5)
+                    }
+                    .overlay(alignment: .topLeading) {
+                        backButtonView.padding(.top, 15).padding(.leading, 20)
+                    }
             }
 
             if let ball = gameViewModel.ball {
@@ -27,8 +40,15 @@ struct GameView: View {
             overlayBlockViews()
             overlayBucketView()
             cannonView
-            backButtonView
         }
+        .alert("Congratulations! You Won!", isPresented: Binding(get: { gameViewModel.isGameWon }, set: {_, _ in }),
+               actions: {
+            Button("Okay", action: { dismiss() }).onDisappear(perform: { dismiss() })
+        })
+        .alert("Sorry! You lost.", isPresented: Binding(get: { gameViewModel.isGameOver }, set: {_, _ in }),
+               actions: {
+            Button("Okay", action: { dismiss() }).onDisappear(perform: { dismiss() })
+        })
         .onAppear {
             gameViewModel.startSimulation()
         }
@@ -47,10 +67,8 @@ struct GameView: View {
         Image(Constants.backButtonImage)
             .resizable().opacity(0.3).scaledToFit()
             .frame(width: 50, height: 50)
-            .position(x: 40, y: 50)
             .onTapGesture {
-                presentationMode.wrappedValue.dismiss()
-                gameViewModel.stopSimulation()
+                dismiss()
             }
     }
 
@@ -108,6 +126,14 @@ struct GameView: View {
             .frame(width: Constants.bucketWidth, height: Constants.bucketHeight)
             .position(x: gameViewModel.bucket.physicsBody.position.dx, y: gameViewModel.bucket.physicsBody.position.dy)
             .offset(x: 0, y: gameViewModel.offset)
+    }
+
+    private var numberOfBallsLeftView: some View {
+        ImageCounterView(
+            image: Constants.ballImage,
+            count: gameViewModel.numberOfBallsLeft,
+            color: .black
+        )
     }
 
     private var dragGestureForShoot: some Gesture {

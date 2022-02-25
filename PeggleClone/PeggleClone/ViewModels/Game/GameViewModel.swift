@@ -39,6 +39,24 @@ class GameViewModel: ObservableObject {
     var offset: Double {
         gameEngine.offset
     }
+    var numberOfBallsLeft: Int {
+        gameEngine.numberOfBallsLeft
+    }
+    var numberOfOrangePegsLeft: Int {
+        gameEngine.pegs.filter({ $0.color == .orange }).count
+    }
+    var numberOfBluePegsLeft: Int {
+        gameEngine.pegs.filter({ $0.color == .blue }).count
+    }
+    var numberOfPurplePegsLeft: Int {
+        gameEngine.pegs.filter({ $0.color == .purple }).count
+    }
+    var isGameWon: Bool {
+        gameEngine.isGameWon
+    }
+    var isGameOver: Bool {
+        gameEngine.isGameOver
+    }
 
     // Game loop variables
     private(set) var previousTime = Date().timeIntervalSince1970
@@ -47,6 +65,11 @@ class GameViewModel: ObservableObject {
     init(board: Board) {
         self.board = board
         gameEngine = PeggleGameEngine(board: board)
+    }
+
+    deinit {
+        displaylink?.invalidate()
+        displaylink = nil
     }
 
     func shootBallTowards(point: CGPoint) {
@@ -73,11 +96,6 @@ class GameViewModel: ObservableObject {
 
     func startSimulation() {
         createDisplayLink()
-    }
-
-    func stopSimulation() {
-        displaylink?.invalidate()
-        displaylink = nil
     }
 
     private func createDisplayLink() {

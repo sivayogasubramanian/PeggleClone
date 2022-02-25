@@ -24,11 +24,13 @@ class PegGameObject {
     var shouldBeRemoved: Bool {
         physicsBody.hitCount > PhysicsConstants.physicsBodyMaxHitCount
     }
+    private(set) var powerup: Powerup?
 
     init(fromPeg peg: Peg) {
         radius = peg.radius
         color = peg.color
         rotation = peg.rotation
+        powerup = PowerupMapping.getPowerupFor(color: peg.color)
         physicsBody = CircularPhysicsBody(
             gameObjectType: PegGameObject.gameObjectType,
             position: peg.center,

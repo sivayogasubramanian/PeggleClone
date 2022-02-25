@@ -18,11 +18,31 @@ class PeggleGameEngine {
     private var boardSize: CGSize
     private(set) var isReadyToShoot = true
     private(set) var offset = Double.zero
+    private(set) var numberOfBallsLeft = 10
     var pegs: [PegGameObject] {
         Array(pegObjects.values)
     }
     var blocks: [BlockGameObject] {
         Array(blockObjects.values)
+    }
+    var isSpookyBallActive: Bool {
+        pegs.filter({ $0.isHit && $0.color == .purple }).count > 0
+    }
+    var isBallOutOfBounds: Bool {
+        guard let ball = ball else {
+            return false
+        }
+
+        return ball.physicsBody.position.dy > max(board.maxHeight, boardSize.height - ball.radius)
+    }
+    var shouldRemoveBall: Bool {
+        isBallOutOfBounds || (!isSpookyBallActive && bucket.isHit)
+    }
+    var isGameOver: Bool {
+        numberOfBallsLeft <= 0
+    }
+    var isGameWon: Bool {
+        pegs.filter({ $0.color == .orange }).count <= 0
     }
 
     init(board: Board) {
@@ -62,9 +82,10 @@ class PeggleGameEngine {
     }
 
     func addBall(shootingTowards point: CGPoint) {
-        guard isReadyToShoot, let ball = prepareNewBall(initialDirection: point) else {
+        guard isReadyToShoot && !isGameOver && !isGameWon, let ball = prepareNewBall(initialDirection: point) else {
             return
         }
+        numberOfBallsLeft -= 1
         self.ball = ball
         world.addPhysicsBody(ball.physicsBody)
         isReadyToShoot.toggle()
@@ -76,12 +97,25 @@ class PeggleGameEngine {
         world.resolveCollisions()
 
         // Peggle Specific Operations
+        applyPowerups()
         removeBallIfBallExited()
         removeNearbyGameObjectsIfBallStationary()
     }
 
     func setOffset(to offset: Double) {
         self.offset = offset
+    }
+
+    func removeLitGameObjects() {
+        for peg in pegs where peg.isHit {
+            world.removePhysicsBody(peg.physicsBody)
+            pegObjects.removeValue(forKey: ObjectIdentifier(peg))
+        }
+
+        for block in blocks where block.isHit {
+            world.removePhysicsBody(block.physicsBody)
+            blockObjects.removeValue(forKey: ObjectIdentifier(block))
+        }
     }
 
     private func addPegToPhysicsEngine(_ peg: PegGameObject) {
@@ -111,23 +145,11 @@ class PeggleGameEngine {
             return
         }
 
-        let shouldRemoveBall = ball.physicsBody.position.dy > max(board.maxHeight, boardSize.height - ball.radius)
-        || bucket.isHit
-
         if shouldRemoveBall {
+            if bucket.isHit {
+                numberOfBallsLeft += 1
+            }
             removeBall(ball: ball)
-        }
-    }
-
-    private func removeLitGameObjectsIfBallExited() {
-        for peg in pegs where peg.isHit {
-            world.removePhysicsBody(peg.physicsBody)
-            pegObjects.removeValue(forKey: ObjectIdentifier(peg))
-        }
-
-        for block in blocks where block.isHit {
-            world.removePhysicsBody(block.physicsBody)
-            blockObjects.removeValue(forKey: ObjectIdentifier(block))
         }
     }
 
@@ -156,8 +178,20 @@ class PeggleGameEngine {
         self.ball = nil
         offset = .zero
         world.removePhysicsBody(ball.physicsBody)
-        removeLitGameObjectsIfBallExited()
+        removeLitGameObjects()
         resetHitCountOfGameObjects()
         isReadyToShoot.toggle()
+    }
+
+    private func applyPowerups() {
+        for peg in pegs {
+            guard peg.isHit else {
+                continue
+            }
+
+            if let powerup = peg.powerup {
+                powerup.applyPowerup(hitPeg: peg, gameEngine: self)
+            }
+        }
     }
 }

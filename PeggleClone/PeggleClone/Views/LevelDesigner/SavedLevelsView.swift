@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SavedLevelsView: View {
-    @Environment(\.presentationMode) private var presentationMode
+    @Environment(\.dismiss) var dismiss
 
     @Binding var levelName: String
     @ObservedObject var designerViewModel: DesignerViewModel
@@ -32,6 +32,9 @@ struct SavedLevelsView: View {
         .onAppear(perform: {
             onAppearHandler()
         })
+        .statusBar(hidden: true)
+        .ignoresSafeArea(.keyboard)
+        .edgesIgnoringSafeArea([.top, .bottom])
     }
 
     private func makeButtonViewForBoard(_ board: Board) -> some View {
@@ -63,13 +66,13 @@ extension SavedLevelsView {
     private func selectLevelButtonHandler(board: Board) {
         designerViewModel.setBoard(to: board)
         levelName = board.name
-        presentationMode.wrappedValue.dismiss()
+        dismiss()
     }
 
     private func createLevelButtonHandler() {
         levelName = ""
         designerViewModel.resetDesigner()
-        presentationMode.wrappedValue.dismiss()
+        dismiss()
     }
 
     private func onAppearHandler() {

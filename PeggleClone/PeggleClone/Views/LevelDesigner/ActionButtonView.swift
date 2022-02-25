@@ -54,6 +54,7 @@ struct ActionButtonView: View {
             playButtonView
         }
         .padding(.horizontal, 25)
+        .padding(.top, 10)
     }
 
     private var loadButtonView: some View {
@@ -97,7 +98,6 @@ struct ActionButtonView: View {
 
     private var playButtonView: some View {
         Button("TRIAL PLAY", action: {
-            UIView.setAnimationsEnabled(false)
             isGameActive = true
             textFieldIsFocused = false
         })
@@ -105,9 +105,6 @@ struct ActionButtonView: View {
             isPresented: $isGameActive,
             content: {
                 GameView(gameViewModel: GameViewModel(board: designerViewModel.board))
-                .onDisappear {
-                    UIView.setAnimationsEnabled(true)
-                }
             }
         )
     }

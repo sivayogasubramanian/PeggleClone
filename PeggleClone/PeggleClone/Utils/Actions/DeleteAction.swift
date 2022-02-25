@@ -15,4 +15,8 @@ class DeleteAction: PeggleAction {
     func getColor() -> PeggleColor? {
         nil
     }
+
+    func getDescription() -> String? {
+        nil
+    }
 }

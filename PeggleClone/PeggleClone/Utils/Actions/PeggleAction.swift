@@ -14,4 +14,5 @@ enum PeggleType {
 protocol PeggleAction {
     func getPeggleType() -> PeggleType?
     func getColor() -> PeggleColor?
+    func getDescription() -> String?
 }

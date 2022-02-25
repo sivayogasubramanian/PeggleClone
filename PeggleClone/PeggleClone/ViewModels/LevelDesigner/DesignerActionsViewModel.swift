@@ -8,7 +8,7 @@
 import Foundation
 
 class DesignerActionsViewModel: ObservableObject {
-    @Published private(set) var currentAction: PeggleAction = AddBluePegAction()
+    @Published private(set) var currentAction: PeggleAction = AddOrangePegAction()
 
     func setAction(to action: PeggleAction) {
         currentAction = action

@@ -15,4 +15,8 @@ class AddOrangePegAction: PeggleAction {
     func getColor() -> PeggleColor? {
         .orange
     }
+
+    func getDescription() -> String? {
+        "You need to hit all of the orange pegs to win."
+    }
 }

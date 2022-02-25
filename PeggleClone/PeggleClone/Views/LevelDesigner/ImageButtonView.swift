@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ImageButtonView: View {
-    private static let imageButtonSize = 55.0
+    private static let imageButtonSize = 70.0
     private static let selectedOpacity = 1.0
     private static let notSelectedOpacity = 0.3
 
@@ -16,41 +16,43 @@ struct ImageButtonView: View {
     @ObservedObject var actionsViewModel: DesignerActionsViewModel
 
     var body: some View {
-        HStack {
-            HStack(spacing: 5) {
-                bluePegImageButtonView
+        VStack(alignment: .leading) {
+            Text(actionsViewModel.currentAction.getDescription() ?? "")
+                .foregroundColor(.gray)
 
-                orangePegImageButtonView
-
-                purplePegImageButtonView
-
-                blueTriangularBlockButtonView
-
-                orangeTriangularBlockButtonView
-
-                purpleTriangularBlockButtonView
-            }
-
-            Spacer()
-
-            VStack {
-                if designerViewModel.selectedPeg != nil || designerViewModel.selectedBlock != nil {
-                    rotationAndOscillateSelectorView
+            HStack {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        orangePegImageButtonView
+                        bluePegImageButtonView
+                        purplePegImageButtonView
+                        orangeTriangularBlockButtonView
+                        blueTriangularBlockButtonView
+                        purpleTriangularBlockButtonView
+                    }
                 }
 
-                if designerViewModel.selectedPeg != nil {
-                    resizePegView
-                } else if designerViewModel.selectedBlock != nil {
-                    resizeBlockView
+                Spacer()
+
+                VStack {
+                    if designerViewModel.selectedPeg != nil || designerViewModel.selectedBlock != nil {
+                        rotationAndOscillateSelectorView
+                    }
+
+                    if designerViewModel.selectedPeg != nil {
+                        resizePegView
+                    } else if designerViewModel.selectedBlock != nil {
+                        resizeBlockView
+                    }
                 }
+
+                Spacer()
+
+                deletePegImageButtonView
             }
-
-            Spacer()
-
-            deletePegImageButtonView
         }
         .padding(.horizontal, 20)
-        .frame(height: 100)
+        .frame(height: 125)
     }
 
     private var bluePegImageButtonView: some View {

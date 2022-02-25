@@ -15,4 +15,8 @@ class AddBluePegAction: PeggleAction {
     func getColor() -> PeggleColor? {
         .blue
     }
+
+    func getDescription() -> String? {
+        "Ka-Boom: Sets of a chain explosion of blue pegs. Nearby pegs will be lit."
+    }
 }

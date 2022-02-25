@@ -13,7 +13,6 @@ class DesignerViewModel: ObservableObject {
     private(set) var board = Board()
     private(set) var isNewBoard = true
     private(set) var boardSize: CGSize = .zero
-
     private(set) var rotation: Double = .zero
     private(set) var radius = Constants.pegRadius
     private(set) var width = Constants.blockWidth
@@ -21,6 +20,24 @@ class DesignerViewModel: ObservableObject {
     private(set) var showSpringinessCircle = false
     private(set) var selectedPeg: Peg?
     private(set) var selectedBlock: TriangularBlock?
+    var numberOfOrangePegsAdded: Int {
+        board.pegs.filter({ $0.color == .orange }).count
+    }
+    var numberOfBluePegsAdded: Int {
+        board.pegs.filter({ $0.color == .blue }).count
+    }
+    var numberOfPurplePegsAdded: Int {
+        board.pegs.filter({ $0.color == .purple }).count
+    }
+    var numberOfOrangeBlocksAdded: Int {
+        board.blocks.filter({ $0.color == .orange }).count
+    }
+    var numberOfBlueBlocksAdded: Int {
+        board.blocks.filter({ $0.color == .blue }).count
+    }
+    var numberOfPurpleBlocksAdded: Int {
+        board.blocks.filter({ $0.color == .purple }).count
+    }
 
     func addPeg(at point: CGPoint, color: PeggleColor?) {
         let peg = board.addPeg(at: point, color: color)

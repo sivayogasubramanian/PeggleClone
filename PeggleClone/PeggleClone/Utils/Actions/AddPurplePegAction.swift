@@ -15,4 +15,8 @@ class AddPurplePegAction: PeggleAction {
     func getColor() -> PeggleColor? {
         .purple
     }
+
+    func getDescription() -> String? {
+        "Spooky-Ball: When the ball exits, it mysteriously reappears at the top."
+    }
 }
