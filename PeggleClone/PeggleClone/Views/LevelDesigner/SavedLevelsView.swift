@@ -28,11 +28,6 @@ struct SavedLevelsView: View {
                     createLevelButtonView
                 })
             }
-            .overlay {
-                if savedBoards.isEmpty {
-                    Text("No saved levels present").foregroundColor(.gray).font(.title3)
-                }
-            }
         }
         .onAppear(perform: {
             onAppearHandler()
