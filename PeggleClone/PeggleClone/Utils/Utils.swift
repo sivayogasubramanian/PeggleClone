@@ -18,6 +18,8 @@ struct Utils {
             return isHit ? Constants.glowingBluePegImage : Constants.bluePegImage
         case .orange:
             return isHit ? Constants.glowingOrangePegImage : Constants.orangePegImage
+        case .purple:
+            return isHit ? Constants.glowingPurplePegImage : Constants.purplePegImage
         }
     }
 
@@ -27,6 +29,8 @@ struct Utils {
             return isHit ? Constants.glowingBlueTriangularBlockImage : Constants.blueTriangularBlockImage
         case .orange:
             return isHit ? Constants.glowingOrangeTriangularBlockImage : Constants.orangeTriangularBlockImage
+        case .purple:
+            return isHit ? Constants.glowingPurpleTriangularBlockImage : Constants.purpleTriangularBlockImage
         }
     }
 

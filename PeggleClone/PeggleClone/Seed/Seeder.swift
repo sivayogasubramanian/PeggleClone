@@ -9,6 +9,7 @@ import Foundation
 import CoreGraphics
 
 class Seeder {
+    let colors: [PeggleColor] = [.blue, .orange, .purple]
     let size: CGSize
 
     init(for size: CGSize) {
@@ -35,7 +36,7 @@ class Seeder {
             initialX -= 0.25
             initialY += 0.5
             let coordinate = CGPoint(x: getXCoordinate(for: initialX), y: getYCoordinate(for: initialY))
-            _ = board.addPeg(at: coordinate, color: .blue)
+            _ = board.addPeg(at: coordinate, color: .orange)
         }
 
         (initialX, initialY) = (3.5, 1.0)
@@ -43,7 +44,7 @@ class Seeder {
             initialX += 0.25
             initialY += 0.5
             let coordinate = CGPoint(x: getXCoordinate(for: initialX), y: getYCoordinate(for: initialY))
-            _ = board.addPeg(at: coordinate, color: .blue)
+            _ = board.addPeg(at: coordinate, color: .orange)
         }
 
         (initialX, initialY) = (1.75, 4.5)
@@ -51,7 +52,7 @@ class Seeder {
         while initialX < maximumX {
             initialX += 0.25
             let coordinate = CGPoint(x: getXCoordinate(for: initialX), y: getYCoordinate(for: initialY))
-            _ = board.addPeg(at: coordinate, color: .orange)
+            _ = board.addPeg(at: coordinate, color: .purple)
         }
 
         _ = board.addPeg(at: CGPoint(x: getXCoordinate(for: 3.5), y: getYCoordinate(for: 1.0)), color: .blue)
@@ -68,7 +69,7 @@ class Seeder {
 
             for yUnit in 1...Constants.yRatio - 1 {
                 let coordinate = CGPoint(x: getXCoordinate(for: Double(xUnit)), y: getYCoordinate(for: Double(yUnit)))
-                let color: PeggleColor = yUnit.isMultiple(of: 2) ? .blue : .orange
+                let color: PeggleColor = colors[yUnit % colors.count]
 
                 if xUnit.isMultiple(of: 2) {
                     _ = board.addPeg(at: coordinate, color: color)
@@ -94,7 +95,7 @@ class Seeder {
                         x: getXCoordinate(for: Double(xUnit)),
                         y: getYCoordinate(for: Double(yUnit))
                     )
-                    let color: PeggleColor = (xUnit + yUnit).isMultiple(of: 2) ? .blue : .orange
+                    let color: PeggleColor = colors[(xUnit + yUnit) % colors.count]
 
                     let block = board.addBlock(at: coordinate, color: color)
                     block?.setSpringiness(to: PhysicsConstants.maximumSpringiness)
@@ -109,7 +110,7 @@ class Seeder {
                         x: getXCoordinate(for: Double(xUnit)),
                         y: getYCoordinate(for: Double(yUnit))
                     )
-                    let color: PeggleColor = (xUnit + yUnit).isMultiple(of: 2) ? .blue : .orange
+                    let color: PeggleColor = colors[(xUnit + yUnit) % colors.count]
 
                     _ = board.addPeg(at: coordinate, color: color)
                 }

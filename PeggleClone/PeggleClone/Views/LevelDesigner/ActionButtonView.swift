@@ -105,7 +105,7 @@ struct ActionButtonView: View {
             isPresented: $isGameActive,
             content: {
                 GameView(gameViewModel: GameViewModel(board: designerViewModel.board))
-                .onAppear {
+                .onDisappear {
                     UIView.setAnimationsEnabled(true)
                 }
             }

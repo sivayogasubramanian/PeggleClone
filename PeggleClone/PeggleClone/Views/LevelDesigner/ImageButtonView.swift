@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ImageButtonView: View {
-    private static let imageButtonSize = 70.0
+    private static let imageButtonSize = 55.0
     private static let selectedOpacity = 1.0
     private static let notSelectedOpacity = 0.3
 
@@ -16,14 +16,20 @@ struct ImageButtonView: View {
     @ObservedObject var actionsViewModel: DesignerActionsViewModel
 
     var body: some View {
-        HStack(spacing: 5) {
-            bluePegImageButtonView
+        HStack {
+            HStack(spacing: 5) {
+                bluePegImageButtonView
 
-            orangePegImageButtonView
+                orangePegImageButtonView
 
-            blueTriangularBlockButtonView
+                purplePegImageButtonView
 
-            orangeTriangularBlockButtonView
+                blueTriangularBlockButtonView
+
+                orangeTriangularBlockButtonView
+
+                purpleTriangularBlockButtonView
+            }
 
             Spacer()
 
@@ -81,6 +87,23 @@ struct ImageButtonView: View {
             )
     }
 
+    private var purplePegImageButtonView: some View {
+        Image(Constants.purplePegImage)
+            .resizable()
+            .scaledToFit()
+            .frame(width: ImageButtonView.imageButtonSize, height: ImageButtonView.imageButtonSize)
+            .onTapGesture {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    actionsViewModel.setAction(to: AddPurplePegAction())
+                }
+            }
+            .opacity(
+                type(of: actionsViewModel.currentAction) == AddPurplePegAction.self
+                ? ImageButtonView.selectedOpacity
+                : ImageButtonView.notSelectedOpacity
+            )
+    }
+
     private var blueTriangularBlockButtonView: some View {
         Image(Constants.blueTriangularBlockImage)
             .resizable()
@@ -110,6 +133,23 @@ struct ImageButtonView: View {
             }
             .opacity(
                 type(of: actionsViewModel.currentAction) == AddOrangeTriangularBlockAction.self
+                ? ImageButtonView.selectedOpacity
+                : ImageButtonView.notSelectedOpacity
+            )
+    }
+
+    private var purpleTriangularBlockButtonView: some View {
+        Image(Constants.purpleTriangularBlockImage)
+            .resizable()
+            .scaledToFit()
+            .frame(width: ImageButtonView.imageButtonSize, height: ImageButtonView.imageButtonSize)
+            .onTapGesture {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    actionsViewModel.setAction(to: AddPurpleTriangularBlockAction())
+                }
+            }
+            .opacity(
+                type(of: actionsViewModel.currentAction) == AddPurpleTriangularBlockAction.self
                 ? ImageButtonView.selectedOpacity
                 : ImageButtonView.notSelectedOpacity
             )

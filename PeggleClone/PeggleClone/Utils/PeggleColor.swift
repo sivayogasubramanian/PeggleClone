@@ -6,5 +6,5 @@
 //
 
 @objc public enum PeggleColor: Int16 {
-    case blue = 0, orange = 1
+    case blue = 0, orange = 1, purple = 2
 }

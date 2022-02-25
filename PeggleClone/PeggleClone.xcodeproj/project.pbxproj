@@ -78,6 +78,8 @@
 		47B22AC727C86EA000B58CFD /* BucketGameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B22AC627C86EA000B58CFD /* BucketGameObject.swift */; };
 		47B22AC927C8806300B58CFD /* RectangularIntersector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B22AC827C8806300B58CFD /* RectangularIntersector.swift */; };
 		47B22ACB27C8819200B58CFD /* OscillatingRectangularPhysicsBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B22ACA27C8819200B58CFD /* OscillatingRectangularPhysicsBody.swift */; };
+		47B22ACF27C89E2500B58CFD /* AddPurplePegAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B22ACE27C89E2500B58CFD /* AddPurplePegAction.swift */; };
+		47B22AD127C89E4F00B58CFD /* AddPurpleTriangularBlockAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B22AD027C89E4F00B58CFD /* AddPurpleTriangularBlockAction.swift */; };
 		47CA667227B67E4100ADC2C5 /* GameObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CA667127B67E4100ADC2C5 /* GameObjects.swift */; };
 		47CA667527B68BC900ADC2C5 /* GameObjectsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CA667427B68BC900ADC2C5 /* GameObjectsTests.swift */; };
 		47CBF83E27C1315100B80002 /* PeggleAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBF83D27C1315100B80002 /* PeggleAction.swift */; };
@@ -182,6 +184,8 @@
 		47B22AC627C86EA000B58CFD /* BucketGameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketGameObject.swift; sourceTree = "<group>"; };
 		47B22AC827C8806300B58CFD /* RectangularIntersector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularIntersector.swift; sourceTree = "<group>"; };
 		47B22ACA27C8819200B58CFD /* OscillatingRectangularPhysicsBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OscillatingRectangularPhysicsBody.swift; sourceTree = "<group>"; };
+		47B22ACE27C89E2500B58CFD /* AddPurplePegAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPurplePegAction.swift; sourceTree = "<group>"; };
+		47B22AD027C89E4F00B58CFD /* AddPurpleTriangularBlockAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPurpleTriangularBlockAction.swift; sourceTree = "<group>"; };
 		47CA667127B67E4100ADC2C5 /* GameObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObjects.swift; sourceTree = "<group>"; };
 		47CA667427B68BC900ADC2C5 /* GameObjectsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObjectsTests.swift; sourceTree = "<group>"; };
 		47CBF83D27C1315100B80002 /* PeggleAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleAction.swift; sourceTree = "<group>"; };
@@ -567,8 +571,10 @@
 			children = (
 				47CBF83D27C1315100B80002 /* PeggleAction.swift */,
 				47CBF83F27C132AD00B80002 /* AddBluePegAction.swift */,
+				47B22ACE27C89E2500B58CFD /* AddPurplePegAction.swift */,
 				47CBF84127C132D200B80002 /* AddOrangePegAction.swift */,
 				4754996D27C26CE0005FFC68 /* AddBlueTriangularBlockAction.swift */,
+				47B22AD027C89E4F00B58CFD /* AddPurpleTriangularBlockAction.swift */,
 				47DA512E27C3A54A00491B3A /* AddOrangeTriangularBlockAction.swift */,
 				47CBF84327C132EF00B80002 /* DeleteAction.swift */,
 			);
@@ -756,6 +762,7 @@
 				4754996A27C2684D005FFC68 /* TriangularBlock.swift in Sources */,
 				47A930A027B3FB8D00009C30 /* IntersectionDetector.swift in Sources */,
 				472D3FC0279882CC001B2E42 /* Peg.swift in Sources */,
+				47B22AD127C89E4F00B58CFD /* AddPurpleTriangularBlockAction.swift in Sources */,
 				473A9E15279C13A600476A3A /* CGFloat.swift in Sources */,
 				4754999F27C39287005FFC68 /* TriangularBlockEntity+CoreDataProperties.swift in Sources */,
 				47CA667227B67E4100ADC2C5 /* GameObjects.swift in Sources */,
@@ -771,6 +778,7 @@
 				4717DC6A27A014C300DF7272 /* Peg+Persistable.swift in Sources */,
 				4754997A27C35DCC005FFC68 /* Intersector.swift in Sources */,
 				47A930A227B3FBA400009C30 /* CollisionResolver.swift in Sources */,
+				47B22ACF27C89E2500B58CFD /* AddPurplePegAction.swift in Sources */,
 				479AB7FA27A1C2AF00F3208E /* View.swift in Sources */,
 				47DDFEE227C6468D008678F4 /* CollisionManifold.swift in Sources */,
 				47DDFEEC27C6C486008678F4 /* Board+Validations.swift in Sources */,
