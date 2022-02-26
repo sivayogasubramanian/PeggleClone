@@ -15,6 +15,8 @@ class PowerupMapping {
             return SpookyBall()
         } else if color == .gray {
             return ShapeShift()
+        } else if color == .yellow {
+            return Flash()
         }
 
         return nil

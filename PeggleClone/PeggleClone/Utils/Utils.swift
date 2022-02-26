@@ -22,6 +22,8 @@ struct Utils {
             return isLit ? Constants.glowingPurplePegImage : Constants.purplePegImage
         case .gray:
             return isLit ? Constants.glowingGrayPegImage : Constants.grayPegImage
+        case .yellow:
+            return isLit ? Constants.glowingYellowPegImage : Constants.yellowPegImage
         }
     }
 
@@ -35,6 +37,8 @@ struct Utils {
             return isLit ? Constants.glowingPurpleTriangularBlockImage : Constants.purpleTriangularBlockImage
         case .gray:
             return isLit ? Constants.glowingGrayTriangularBlockImage : Constants.grayTriangularBlockImage
+        case .yellow:
+            return isLit ? Constants.glowingYellowTriangularBlockImage : Constants.yellowTriangularBlockImage
         }
     }
 
@@ -76,6 +80,8 @@ struct Utils {
             return 100
         case .purple:
             return 500
+        case .yellow:
+            return 1000
         }
     }
 }

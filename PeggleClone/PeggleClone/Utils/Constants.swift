@@ -6,8 +6,10 @@
 //
 
 struct Constants {
+    // Core-data
     static let coreDataContainerName = "PeggleCloneData"
 
+    // Images
     static let mainBackgroundImage = "main-background"
     static let backButtonImage = "back-button"
     static let backgroundImage = "background"
@@ -32,7 +34,12 @@ struct Constants {
     static let glowingGrayPegImage = "peg-grey-glow"
     static let grayTriangularBlockImage = "peg-grey-triangle"
     static let glowingGrayTriangularBlockImage = "peg-grey-glow-triangle"
+    static let yellowPegImage = "peg-yellow"
+    static let glowingYellowPegImage = "peg-yellow-glow"
+    static let yellowTriangularBlockImage = "peg-yellow-triangle"
+    static let glowingYellowTriangularBlockImage = "peg-yellow-glow-triangle"
 
+    // Numerics
     static let ballRadius = 20.0
     static let ballMinRadius = ballRadius / 2
     static let ballMaxRadius = ballRadius * 2
@@ -45,8 +52,7 @@ struct Constants {
     static let letterBoxYOffset = 170.0
     static let yCoordinatePadding = pegRadius * 4
 
+    // Letterboxing
     static let xRatio = 7
     static let yRatio = 10
-
-    static let powerups: [Powerup] = [KaBoom(), SpookyBall()]
 }

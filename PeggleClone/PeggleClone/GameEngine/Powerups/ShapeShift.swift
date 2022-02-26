@@ -9,7 +9,7 @@ import Foundation
 
 class ShapeShift: Powerup {
     func applyPowerup(hitPeg: PegGameObject, gameEngine: PeggleGameEngine) {
-        guard hitPeg.physicsBody.hitCount == 1 else {
+        guard hitPeg.physicsBody.hitCount <= 1 else {
             return
         }
 

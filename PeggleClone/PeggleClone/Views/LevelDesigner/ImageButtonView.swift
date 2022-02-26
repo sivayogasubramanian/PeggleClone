@@ -44,10 +44,12 @@ struct ImageButtonView: View {
             bluePegImageButtonView
             purplePegImageButtonView
             grayPegImageButtonView
+            yellowPegImageButtonView
             orangeTriangularBlockButtonView
             blueTriangularBlockButtonView
             purpleTriangularBlockButtonView
             grayTriangularBlockButtonView
+            yellowTriangularBlockButtonView
         }
     }
 
@@ -105,6 +107,16 @@ struct ImageButtonView: View {
         )
     }
 
+    private var yellowPegImageButtonView: some View {
+        IndividualImageButtonView(
+            designerViewModel: designerViewModel,
+            actionsViewModel: actionsViewModel,
+            image: Constants.yellowPegImage,
+            action: AddYellowPegAction(),
+            actionType: AddYellowPegAction.self
+        )
+    }
+
     private var orangeTriangularBlockButtonView: some View {
         IndividualImageButtonView(
             designerViewModel: designerViewModel,
@@ -142,6 +154,16 @@ struct ImageButtonView: View {
             image: Constants.grayTriangularBlockImage,
             action: AddGrayTriangularBlockAction(),
             actionType: AddGrayTriangularBlockAction.self
+        )
+    }
+
+    private var yellowTriangularBlockButtonView: some View {
+        IndividualImageButtonView(
+            designerViewModel: designerViewModel,
+            actionsViewModel: actionsViewModel,
+            image: Constants.yellowTriangularBlockImage,
+            action: AddYellowTriangularBlockAction(),
+            actionType: AddYellowTriangularBlockAction.self
         )
     }
 

@@ -21,6 +21,7 @@ enum Sound: String, CaseIterable {
     case explosion
     case ghost
     case shapeshift
+    case flash
 }
 
 class SoundManager {
