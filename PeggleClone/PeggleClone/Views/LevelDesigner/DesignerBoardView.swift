@@ -37,7 +37,6 @@ struct DesignerBoardView: View {
                 .onAppear(perform: {
                     designerViewModel.setBoardSize(to: geometry.size)
                 })
-                .frame(height: geometry.size.height - (Constants.bucketHeight - Constants.bucketYCoordinateOffset))
                 .clipped()
         }
     }

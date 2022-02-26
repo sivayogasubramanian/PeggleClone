@@ -25,6 +25,7 @@ struct DesignerView: View {
                     boardOffsetView
                         .padding(.bottom, 35).padding(.leading, 20)
                 }
+                .overlay(separatorLine(designerViewModel.boardSize))
 
             VStack(spacing: 0) {
                 HStack(alignment: .center, spacing: 0) {
@@ -99,5 +100,16 @@ struct DesignerView: View {
                 Button("Cancel", role: .cancel, action: {})
                 Button("Ok", role: .destructive, action: { dismiss() })
             })
+    }
+
+    private func separatorLine(_ size: CGSize) -> some View {
+        var path = Path()
+
+        path.move(to: CGPoint(x: 0, y: size.height - (Constants.bucketHeight - Constants.bucketYCoordinateOffset)))
+        path.addLine(to: CGPoint(
+            x: size.width, y: size.height - (Constants.bucketHeight - Constants.bucketYCoordinateOffset))
+        )
+
+        return path.stroke(.gray, lineWidth: 2)
     }
 }

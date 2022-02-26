@@ -10,7 +10,7 @@ import CoreGraphics
 
 class Seeder {
     static let names = ["Preset Level: A Level", "Preset Level: Diamond Matrix", "Preset Level: Oscillating Madness"]
-    let colors: [PeggleColor] = [.blue, .orange, .purple]
+    let colors: [PeggleColor] = [.blue, .orange, .purple, .yellow, .gray]
     let size: CGSize
 
     init(for size: CGSize) {
@@ -32,15 +32,15 @@ class Seeder {
         board.setSize(boardSize: size)
         board.setName(to: Seeder.names[0])
 
-        var (initialX, initialY) = (3.5, 1.0)
+        var (initialX, initialY) = (3.5, 0.5)
         while initialX > 0.0 && initialY < Double(Constants.yRatio) {
             initialX -= 0.25
             initialY += 0.5
             let coordinate = CGPoint(x: getXCoordinate(for: initialX), y: getYCoordinate(for: initialY))
-            _ = board.addPeg(at: coordinate, color: .orange)
+            _ = board.addPeg(at: coordinate, color: .yellow)
         }
 
-        (initialX, initialY) = (3.5, 1.0)
+        (initialX, initialY) = (3.5, 0.5)
         while initialX < Double(Constants.xRatio) && initialY < Double(Constants.yRatio) {
             initialX += 0.25
             initialY += 0.5
@@ -48,7 +48,7 @@ class Seeder {
             _ = board.addPeg(at: coordinate, color: .orange)
         }
 
-        (initialX, initialY) = (1.75, 4.5)
+        (initialX, initialY) = (1.75, 4.0)
         let maximumX = 5.25
         while initialX < maximumX {
             initialX += 0.25
@@ -56,7 +56,7 @@ class Seeder {
             _ = board.addPeg(at: coordinate, color: .purple)
         }
 
-        _ = board.addPeg(at: CGPoint(x: getXCoordinate(for: 3.5), y: getYCoordinate(for: 1.0)), color: .blue)
+        _ = board.addPeg(at: CGPoint(x: getXCoordinate(for: 3.5), y: getYCoordinate(for: 0.5)), color: .blue)
         return board
     }
 
