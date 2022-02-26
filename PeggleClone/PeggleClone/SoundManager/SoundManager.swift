@@ -18,13 +18,12 @@ enum Sound: String, CaseIterable {
     case hitBucket
     case win
     case lose
-
 }
 
 class SoundManager {
     static let shared = SoundManager()
 
-    var players: [Sound: AVAudioPlayer] = [:]
+    private var players: [Sound: AVAudioPlayer] = [:]
 
     private init() {
         for sound in Sound.allCases {
@@ -40,7 +39,7 @@ class SoundManager {
             guard !player.isPlaying else {
                 return
             }
-            player.volume = isReducedVolume ? 2 : 4
+            player.volume = isReducedVolume ? 1 : 2
             player.play()
         }
     }

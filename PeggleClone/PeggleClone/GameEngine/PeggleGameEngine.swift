@@ -19,6 +19,7 @@ class PeggleGameEngine {
     private(set) var isReadyToShoot = true
     private(set) var offset = Double.zero
     private(set) var numberOfBallsLeft = 10
+    private(set) var score = 0
     var pegs: [PegGameObject] {
         Array(pegObjects.values)
     }
@@ -43,6 +44,15 @@ class PeggleGameEngine {
     }
     var isGameWon: Bool {
         pegs.filter({ $0.color == .orange }).count <= 0
+    }
+    var numberOfOrangePegsLeft: Int {
+        pegs.filter({ $0.color == .orange }).count
+    }
+    var numberOfBluePegsLeft: Int {
+        pegs.filter({ $0.color == .blue }).count
+    }
+    var numberOfPurplePegsLeft: Int {
+        pegs.filter({ $0.color == .purple }).count
     }
 
     init(board: Board) {
@@ -150,6 +160,7 @@ class PeggleGameEngine {
                 SoundManager.shared.playSound(sound: .hitBucket)
                 numberOfBallsLeft += 1
             }
+            updateScore()
             removeBall(ball: ball)
         }
     }
@@ -194,5 +205,9 @@ class PeggleGameEngine {
                 powerup.applyPowerup(hitPeg: peg, gameEngine: self)
             }
         }
+    }
+
+    private func updateScore() {
+        score += Utils.getScoreWhenPegHit(pegs: pegs)
     }
 }

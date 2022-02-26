@@ -650,16 +650,16 @@
 		47BE0DD727CA1B7500F25502 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				4770F17627CA4F8400743ADA /* main.wav */,
+				4770F17527CA4F8400743ADA /* game.wav */,
 				4770F18327CA515A00743ADA /* click.wav */,
 				4770F18127CA50E200743ADA /* click2.wav */,
-				4770F17527CA4F8400743ADA /* game.wav */,
+				4770F17227CA4F8300743ADA /* shoot.wav */,
+				4770F17127CA4F8300743ADA /* hitPeg.wav */,
 				4770F17027CA4F8300743ADA /* hitBlock.wav */,
 				4770F17427CA4F8400743ADA /* hitBucket.wav */,
-				4770F17127CA4F8300743ADA /* hitPeg.wav */,
-				4770F16E27CA4F8300743ADA /* lose.wav */,
-				4770F17627CA4F8400743ADA /* main.wav */,
-				4770F17227CA4F8300743ADA /* shoot.wav */,
 				4770F16D27CA4F8300743ADA /* win.wav */,
+				4770F16E27CA4F8300743ADA /* lose.wav */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";

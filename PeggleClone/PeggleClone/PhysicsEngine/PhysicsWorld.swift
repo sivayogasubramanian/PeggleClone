@@ -42,7 +42,7 @@ class PhysicsWorld {
             return
         }
 
-        let (manifold) = IntersectionDetector.detectCollisions(body1: body1, body2: body2)
+        let manifold = IntersectionDetector.detectCollisions(body1: body1, body2: body2)
         guard manifold.hasCollided else {
             return
         }

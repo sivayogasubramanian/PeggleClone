@@ -37,4 +37,39 @@ struct Utils {
     static func cannonImageFileName(isCannonLoaded loadStatus: Bool) -> String {
         loadStatus ? Constants.cannontLoadedImage : Constants.cannontUnloadedImage
     }
+
+    static func getScoreWhenPegHit(pegs: [PegGameObject]) -> Int {
+        let orangeBalls = pegs.filter({ $0.color == .orange })
+        let orangeBallsHit = orangeBalls.filter({ $0.isLit })
+        let orangeBallsLeft = orangeBalls.count - orangeBallsHit.count
+        var multiplier = 1
+        if orangeBallsLeft == 0 {
+            multiplier = 100
+        } else if orangeBallsLeft <= 3 {
+            multiplier = 10
+        } else if orangeBallsLeft <= 7 {
+            multiplier = 5
+        } else if orangeBallsLeft <= 10 {
+            multiplier = 3
+        } else if orangeBallsLeft <= 15 {
+            multiplier = 2
+        }
+
+        var score = 0
+        for peg in pegs where peg.isLit {
+            score += getScore(pegColor: peg.color)
+        }
+        return score * multiplier
+    }
+
+    private static func getScore(pegColor: PeggleColor) -> Int {
+        switch pegColor {
+        case .blue:
+            return 10
+        case .orange:
+            return 100
+        case .purple:
+            return 500
+        }
+    }
 }

@@ -25,7 +25,6 @@ struct DesignerBoardView: View {
                 )
                 .gesture(
                     DragGesture(minimumDistance: 0).onEnded({ value in
-                        SoundManager.shared.playSound(sound: .click2)
                         withAnimation(.easeIn(duration: 0.1)) {
                             boardTapHandler(value.location)
                         }
@@ -174,17 +173,22 @@ struct DesignerBoardView: View {
 extension DesignerBoardView {
     private func boardTapHandler(_ location: CGPoint) {
         if actionsViewModel.getPeggleType() == .peg {
-            designerViewModel.addPeg(
+            if designerViewModel.addPeg(
                 at: location,
                 color: actionsViewModel.getColor()
-            )
+            ) {
+                SoundManager.shared.playSound(sound: .click2)
+            }
         }
 
         if actionsViewModel.getPeggleType() == .block {
-            designerViewModel.addBlock(
+            if designerViewModel.addBlock(
                 at: location,
                 color: actionsViewModel.getColor()
-            )
+            ) {
+                SoundManager.shared.playSound(sound: .click2)
+
+            }
         }
     }
 

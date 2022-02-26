@@ -39,16 +39,18 @@ class DesignerViewModel: ObservableObject {
         board.blocks.filter({ $0.color == .purple }).count
     }
 
-    func addPeg(at point: CGPoint, color: PeggleColor?) {
+    func addPeg(at point: CGPoint, color: PeggleColor?) -> Bool {
         let peg = board.addPeg(at: point, color: color)
         setSelectedPeg(peg)
         updateViews()
+        return peg != nil
     }
 
-    func addBlock(at point: CGPoint, color: PeggleColor?) {
+    func addBlock(at point: CGPoint, color: PeggleColor?) -> Bool {
         let block = board.addBlock(at: point, color: color)
         setSelectedBlock(block)
         updateViews()
+        return block != nil
     }
 
     func movePeg(peg: Peg, to newCenter: CGPoint) {

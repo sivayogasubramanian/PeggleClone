@@ -43,19 +43,22 @@ class GameViewModel: ObservableObject {
         gameEngine.numberOfBallsLeft
     }
     var numberOfOrangePegsLeft: Int {
-        gameEngine.pegs.filter({ $0.color == .orange }).count
+        gameEngine.numberOfOrangePegsLeft
     }
     var numberOfBluePegsLeft: Int {
-        gameEngine.pegs.filter({ $0.color == .blue }).count
+        gameEngine.numberOfBluePegsLeft
     }
     var numberOfPurplePegsLeft: Int {
-        gameEngine.pegs.filter({ $0.color == .purple }).count
+        gameEngine.numberOfPurplePegsLeft
     }
     var isGameWon: Bool {
         gameEngine.isGameWon
     }
     var isGameOver: Bool {
         gameEngine.isGameOver && ball == nil
+    }
+    var score: Int {
+        gameEngine.score
     }
 
     // Game loop variables

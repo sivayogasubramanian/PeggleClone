@@ -30,6 +30,9 @@ struct GameView: View {
                     .overlay(alignment: .topLeading) {
                         backButtonView.padding(.top, 15).padding(.leading, 20)
                     }
+                    .overlay(alignment: .topLeading) {
+                        scoreView.padding(.top, 25).padding(.leading, 100)
+                    }
             }
 
             if let ball = gameViewModel.ball {
@@ -41,13 +44,15 @@ struct GameView: View {
             cannonView
         }
         .gesture(dragGestureForShoot)
-        .alert("Congratulations! You Won!", isPresented: Binding(get: { gameViewModel.isGameWon }, set: {_, _ in }),
+        .alert("Congratulations! You Won! Your final score was \(gameViewModel.score)!",
+               isPresented: Binding(get: { gameViewModel.isGameWon }, set: {_, _ in }),
                actions: {
             Button("Okay", action: { dismiss() })
                 .onAppear(perform: { SoundManager.shared.playSound(sound: .win) })
                 .onDisappear(perform: { dismiss() })
         })
-        .alert("Sorry! You lost.", isPresented: Binding(get: { gameViewModel.isGameOver }, set: {_, _ in }),
+        .alert("Sorry! You lost. You will do better next time!",
+               isPresented: Binding(get: { gameViewModel.isGameOver }, set: {_, _ in }),
                actions: {
             Button("Okay", action: { dismiss() })
                 .onAppear(perform: { SoundManager.shared.playSound(sound: .lose) })
@@ -138,6 +143,15 @@ struct GameView: View {
             .frame(width: Constants.bucketWidth, height: Constants.bucketHeight)
             .position(x: gameViewModel.bucket.physicsBody.position.dx, y: gameViewModel.bucket.physicsBody.position.dy)
             .offset(x: 0, y: gameViewModel.offset)
+    }
+
+    private var scoreView: some View {
+        HStack {
+            Text("Score:").font(.title2).bold()
+            withAnimation(.easeInOut(duration: 1)) {
+                Text(String(gameViewModel.score)).font(.title2)
+            }
+        }
     }
 
     private var dragGestureForShoot: some Gesture {
