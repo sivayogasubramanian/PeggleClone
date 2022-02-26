@@ -43,7 +43,7 @@ class DesignerViewModelTests: XCTestCase {
     func testAddPeg() {
         XCTAssertEqual(viewModel.board.pegs.count, 0)
         _ = viewModel.addPeg(at: CGPoint(x: 50, y: 50 + Constants.letterBoxYOffset),
-                         color: .orange)
+                             color: .orange)
         XCTAssertEqual(viewModel.board.pegs.count, 1)
     }
 

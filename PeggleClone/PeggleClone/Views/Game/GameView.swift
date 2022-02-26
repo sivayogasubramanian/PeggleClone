@@ -18,14 +18,9 @@ struct GameView: View {
                 Image(Constants.backgroundImage)
                     .resizable()
                     .overlay(alignment: .topTrailing) {
-                        GameObjectCounterView(
-                            blue: gameViewModel.numberOfBluePegsLeft,
-                            orange: gameViewModel.numberOfOrangePegsLeft,
-                            purple: gameViewModel.numberOfPurplePegsLeft,
-                            balls: gameViewModel.numberOfBallsLeft
-                        )
-                        .padding(.top, 15).padding(.trailing, 20)
-                        .opacity(0.8)
+                        gameObjectCounterView
+                            .padding(.top, 15).padding(.trailing, 20)
+                            .opacity(0.8)
                     }
                     .overlay(alignment: .topLeading) {
                         backButtonView.padding(.top, 15).padding(.leading, 20)
@@ -45,14 +40,14 @@ struct GameView: View {
         }
         .gesture(dragGestureForShoot)
         .alert("Congratulations! You Won! Your final score was \(gameViewModel.score)!",
-               isPresented: Binding(get: { gameViewModel.isGameWon }, set: {_, _ in }),
+               isPresented: Binding(get: { gameViewModel.isGameWon }, set: { _, _ in }),
                actions: {
             Button("Okay", action: { dismiss() })
                 .onAppear(perform: { SoundManager.shared.playSound(sound: .win) })
                 .onDisappear(perform: { dismiss() })
         })
         .alert("Sorry! You lost. You will do better next time!",
-               isPresented: Binding(get: { gameViewModel.isGameOver }, set: {_, _ in }),
+               isPresented: Binding(get: { gameViewModel.isGameOver }, set: { _, _ in }),
                actions: {
             Button("Okay", action: { dismiss() })
                 .onAppear(perform: { SoundManager.shared.playSound(sound: .lose) })
@@ -69,6 +64,15 @@ struct GameView: View {
         })
         .statusBar(hidden: true)
         .edgesIgnoringSafeArea([.top, .bottom])
+    }
+
+    private var gameObjectCounterView: some View {
+        GameObjectCounterView(
+            blue: gameViewModel.numberOfBluePegsLeft,
+            orange: gameViewModel.numberOfOrangePegsLeft,
+            purple: gameViewModel.numberOfPurplePegsLeft,
+            balls: gameViewModel.numberOfBallsLeft
+        )
     }
 
     private var cannonView: some View {

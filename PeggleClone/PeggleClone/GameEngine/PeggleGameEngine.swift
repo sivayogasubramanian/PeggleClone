@@ -27,7 +27,7 @@ class PeggleGameEngine {
         Array(blockObjects.values)
     }
     var isSpookyBallActive: Bool {
-        pegs.filter({ $0.isLit && $0.color == .purple }).count > 0
+        pegs.contains(where: { $0.isLit && $0.color == .purple })
     }
     var isBallOutOfBounds: Bool {
         guard let ball = ball else {
@@ -43,7 +43,7 @@ class PeggleGameEngine {
         numberOfBallsLeft <= 0
     }
     var isGameWon: Bool {
-        pegs.filter({ $0.color == .orange }).count <= 0
+        pegs.contains(where: { $0.color == .orange })
     }
     var numberOfOrangePegsLeft: Int {
         pegs.filter({ $0.color == .orange }).count

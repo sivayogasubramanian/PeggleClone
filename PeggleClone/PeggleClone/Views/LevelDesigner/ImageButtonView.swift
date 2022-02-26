@@ -22,29 +22,12 @@ struct ImageButtonView: View {
 
             HStack {
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        orangePegImageButtonView
-                        bluePegImageButtonView
-                        purplePegImageButtonView
-                        orangeTriangularBlockButtonView
-                        blueTriangularBlockButtonView
-                        purpleTriangularBlockButtonView
-                    }
+                    imageButtonViewCollection
                 }
 
                 Spacer()
 
-                VStack {
-                    if designerViewModel.selectedPeg != nil || designerViewModel.selectedBlock != nil {
-                        rotationAndOscillateSelectorView
-                    }
-
-                    if designerViewModel.selectedPeg != nil {
-                        resizePegView
-                    } else if designerViewModel.selectedBlock != nil {
-                        resizeBlockView
-                    }
-                }
+                objectAttributeAdjusterViewCollection
 
                 Spacer()
 
@@ -53,6 +36,31 @@ struct ImageButtonView: View {
         }
         .padding(.horizontal, 20)
         .frame(height: 125)
+    }
+
+    private var imageButtonViewCollection: some View {
+        HStack {
+            orangePegImageButtonView
+            bluePegImageButtonView
+            purplePegImageButtonView
+            orangeTriangularBlockButtonView
+            blueTriangularBlockButtonView
+            purpleTriangularBlockButtonView
+        }
+    }
+
+    private var objectAttributeAdjusterViewCollection: some View {
+        VStack {
+            if designerViewModel.selectedPeg != nil || designerViewModel.selectedBlock != nil {
+                rotationAndOscillateSelectorView
+            }
+
+            if designerViewModel.selectedPeg != nil {
+                resizePegView
+            } else if designerViewModel.selectedBlock != nil {
+                resizeBlockView
+            }
+        }
     }
 
     private var bluePegImageButtonView: some View {

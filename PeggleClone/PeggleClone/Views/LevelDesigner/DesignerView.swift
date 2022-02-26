@@ -16,15 +16,8 @@ struct DesignerView: View {
         ZStack(alignment: .top) {
             boardView
                 .overlay(alignment: .bottomTrailing) {
-                    DesignerObjectCounterView(
-                        bluePeg: designerViewModel.numberOfBluePegsAdded,
-                        orangePeg: designerViewModel.numberOfOrangePegsAdded,
-                        purplePeg: designerViewModel.numberOfPurplePegsAdded,
-                        blueBlock: designerViewModel.numberOfBlueBlocksAdded,
-                        orangeBlock: designerViewModel.numberOfOrangeBlocksAdded,
-                        purpleBlock: designerViewModel.numberOfPurpleBlocksAdded
-                    )
-                    .padding(.bottom, 20).padding(.trailing, 20)
+                    designerObjectCounterView
+                        .padding(.bottom, 20).padding(.trailing, 20)
                 }
                 .overlay(alignment: .bottomLeading) {
                     boardOffsetView
@@ -56,6 +49,17 @@ struct DesignerView: View {
 
     private var boardView: DesignerBoardView {
         DesignerBoardView(designerViewModel: designerViewModel, actionsViewModel: actionsViewModel)
+    }
+
+    private var designerObjectCounterView: some View {
+        DesignerObjectCounterView(
+            bluePeg: designerViewModel.numberOfBluePegsAdded,
+            orangePeg: designerViewModel.numberOfOrangePegsAdded,
+            purplePeg: designerViewModel.numberOfPurplePegsAdded,
+            blueBlock: designerViewModel.numberOfBlueBlocksAdded,
+            orangeBlock: designerViewModel.numberOfOrangeBlocksAdded,
+            purpleBlock: designerViewModel.numberOfPurpleBlocksAdded
+        )
     }
 
     private var boardOffsetView: some View {
