@@ -15,10 +15,10 @@ struct GameObjectCounterView: View {
 
     var body: some View {
         HStack {
-            ImageCounterView(image: Constants.bluePegImage, count: blue, color: .black)
-            ImageCounterView(image: Constants.orangePegImage, count: orange, color: .black)
-            ImageCounterView(image: Constants.purplePegImage, count: purple, color: .black)
-            ImageCounterView(image: Constants.ballImage, count: balls, color: .black)
+            ImageCounterView(image: Constants.orangePegImage, count: orange, color: .black, isCircle: true)
+            ImageCounterView(image: Constants.bluePegImage, count: blue, color: .black, isCircle: true)
+            ImageCounterView(image: Constants.purplePegImage, count: purple, color: .black, isCircle: true)
+            ImageCounterView(image: Constants.ballImage, count: balls, color: .black, isCircle: true)
         }
     }
 }

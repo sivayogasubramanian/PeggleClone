@@ -17,12 +17,15 @@ struct DesignerObjectCounterView: View {
 
     var body: some View {
         HStack {
-            ImageCounterView(image: Constants.bluePegImage, count: bluePeg, color: .black)
-            ImageCounterView(image: Constants.orangePegImage, count: orangePeg, color: .black)
-            ImageCounterView(image: Constants.purplePegImage, count: purplePeg, color: .black)
-            ImageCounterView(image: Constants.blueTriangularBlockImage, count: blueBlock, color: .black)
-            ImageCounterView(image: Constants.orangeTriangularBlockImage, count: orangeBlock, color: .black)
-            ImageCounterView(image: Constants.purpleTriangularBlockImage, count: purpleBlock, color: .black)
+            ImageCounterView(image: Constants.orangePegImage, count: orangePeg, color: .black, isCircle: true)
+            ImageCounterView(image: Constants.bluePegImage, count: bluePeg, color: .black, isCircle: true)
+            ImageCounterView(image: Constants.purplePegImage, count: purplePeg, color: .black, isCircle: true)
+            ImageCounterView(image: Constants.orangeTriangularBlockImage, count: orangeBlock,
+                             color: .black, isCircle: false)
+            ImageCounterView(image: Constants.blueTriangularBlockImage, count: blueBlock,
+                             color: .black, isCircle: false)
+            ImageCounterView(image: Constants.purpleTriangularBlockImage, count: purpleBlock,
+                             color: .black, isCircle: false)
         }
     }
 }

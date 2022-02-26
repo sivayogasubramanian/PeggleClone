@@ -55,7 +55,10 @@ struct DesignerBoardView: View {
     }
 
     private func makePegView(_ peg: Peg) -> some View {
-        Image(Utils.pegColorToImagePegFileName(color: peg.color))
+        let image = peg === designerViewModel.selectedPeg
+            ? Utils.pegColorToImagePegFileName(color: peg.color, isHit: true)
+            : Utils.pegColorToImagePegFileName(color: peg.color)
+        return Image(image)
             .resizable()
             .frame(width: peg.diameter, height: peg.diameter)
             .rotationEffect(Angle(degrees: peg.rotation))
@@ -87,7 +90,10 @@ struct DesignerBoardView: View {
     }
 
     private func makeBlockView(_ block: TriangularBlock) -> some View {
-        Image(Utils.pegColorToImageBlockFileName(color: block.color))
+        let image = block === designerViewModel.selectedBlock
+            ? Utils.pegColorToImageBlockFileName(color: block.color, isHit: true)
+            : Utils.pegColorToImageBlockFileName(color: block.color)
+        return Image(image)
             .resizable()
             .frame(width: block.width, height: block.height)
             .rotationEffect(Angle(degrees: block.rotation))

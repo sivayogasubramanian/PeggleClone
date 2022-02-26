@@ -128,14 +128,6 @@ struct GameView: View {
             .offset(x: 0, y: gameViewModel.offset)
     }
 
-    private var numberOfBallsLeftView: some View {
-        ImageCounterView(
-            image: Constants.ballImage,
-            count: gameViewModel.numberOfBallsLeft,
-            color: .black
-        )
-    }
-
     private var dragGestureForShoot: some Gesture {
         DragGesture(minimumDistance: 0)
             .onChanged({ value in

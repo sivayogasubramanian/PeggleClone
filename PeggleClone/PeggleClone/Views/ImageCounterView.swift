@@ -11,6 +11,7 @@ struct ImageCounterView: View {
     let image: String
     let count: Int
     let color: Color
+    let isCircle: Bool
 
     var body: some View {
         Image(image)
@@ -21,6 +22,7 @@ struct ImageCounterView: View {
                     .bold()
                     .font(.title3)
                     .foregroundColor(color)
+                    .offset(y: isCircle ? 0 : 5)
             }
     }
 }
