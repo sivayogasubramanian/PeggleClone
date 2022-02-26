@@ -39,8 +39,8 @@ class SHMTriangularPhysicsBody: PhysicsBody, PolygonalIntersector, TriangularInt
         let force = direction * springiness
         let acceleration = force * (1 / mass)
         setVelocity(to: velocity + acceleration, isMovable: isMovable)
-        setPosition(to: position + (velocity * deltaTime), isMovable: isMovable)
-        setVelocity(to: velocity * 0.97, isMovable: isMovable)
+        setPosition(to: position + (velocity * deltaTime * 3), isMovable: isMovable)
+        setVelocity(to: velocity * 0.95, isMovable: isMovable)
 
         if distance < 5 && velocity.length() < 100 {
             setPosition(to: originalPosition, isMovable: isMovable)
