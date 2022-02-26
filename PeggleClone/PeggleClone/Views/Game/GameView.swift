@@ -17,7 +17,6 @@ struct GameView: View {
             VStack {
                 Image(Constants.backgroundImage)
                     .resizable()
-                    .gesture(dragGestureForShoot)
                     .overlay(alignment: .topTrailing) {
                         GameObjectCounterView(
                             blue: gameViewModel.numberOfBluePegsLeft,
@@ -41,6 +40,7 @@ struct GameView: View {
             overlayBucketView()
             cannonView
         }
+        .gesture(dragGestureForShoot)
         .alert("Congratulations! You Won!", isPresented: Binding(get: { gameViewModel.isGameWon }, set: {_, _ in }),
                actions: {
             Button("Okay", action: { dismiss() })
