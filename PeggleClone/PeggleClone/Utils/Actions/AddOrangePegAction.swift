@@ -17,6 +17,6 @@ class AddOrangePegAction: PeggleAction {
     }
 
     func getDescription() -> String? {
-        "You need to hit all of the orange pegs to win."
+        "You need to hit all of the orange pegs to win. There must be at least one orange peg in a level."
     }
 }

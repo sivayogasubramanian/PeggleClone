@@ -17,6 +17,6 @@ class AddGrayPegAction: PeggleAction {
     }
 
     func getDescription() -> String? {
-        "Shape Shift: The game ball has a chance to change size when this peg is hit."
+        "Shape-Shift: The game ball has a chance to change size when this peg is hit for the first time."
     }
 }
