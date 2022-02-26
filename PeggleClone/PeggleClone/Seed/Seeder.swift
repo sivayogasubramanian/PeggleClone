@@ -9,6 +9,7 @@ import Foundation
 import CoreGraphics
 
 class Seeder {
+    static let names = ["Preset Level: A Level", "Preset Level: Diamond Matrix", "Preset Level: Oscillating Madness"]
     let colors: [PeggleColor] = [.blue, .orange, .purple]
     let size: CGSize
 
@@ -29,7 +30,7 @@ class Seeder {
     private func makeLevelOneUsingStandardUnits() -> Board {
         let board = Board()
         board.setSize(boardSize: size)
-        board.setName(to: "Preset Level: A Level")
+        board.setName(to: Seeder.names[0])
 
         var (initialX, initialY) = (3.5, 1.0)
         while initialX > 0.0 && initialY < Double(Constants.yRatio) {
@@ -62,7 +63,7 @@ class Seeder {
     private func makeLevelTwoUsingStandardUnits() -> Board {
         let board = Board()
         board.setSize(boardSize: size)
-        board.setName(to: "Preset Level: Diamond Matrix")
+        board.setName(to: Seeder.names[1])
 
         for xUnit in 1...Constants.xRatio - 1 {
             board.setBoardOffset(to: -100)
@@ -86,7 +87,7 @@ class Seeder {
     private func makeLevelThreeUsingStandardUnits() -> Board {
         let board = Board()
         board.setSize(boardSize: size)
-        board.setName(to: "Preset Level: Oscillating Madness")
+        board.setName(to: Seeder.names[2])
 
         for xUnit in 1...Constants.xRatio - 1 {
             for yUnit in 1...(Constants.yRatio - 3) {

@@ -257,7 +257,7 @@ class DesignerViewModel: ObservableObject {
         let boards = loadSavedLevels()
         var name = board.name
 
-        while boards.contains(where: { $0.name == name }) {
+        while Seeder.names.contains(name) || boards.contains(where: { $0.name == name }) {
             name += " copy"
         }
 
