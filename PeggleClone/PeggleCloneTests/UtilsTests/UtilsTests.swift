@@ -18,8 +18,8 @@ class UtilsTests: XCTestCase {
     func testPegColorToImageFileName() {
         XCTAssertEqual(Utils.pegColorToImagePegFileName(color: .orange), "peg-orange")
         XCTAssertEqual(Utils.pegColorToImagePegFileName(color: .blue), "peg-blue")
-        XCTAssertEqual(Utils.pegColorToImagePegFileName(color: .orange, isHit: true), "peg-orange-glow")
-        XCTAssertEqual(Utils.pegColorToImagePegFileName(color: .blue, isHit: true), "peg-blue-glow")
+        XCTAssertEqual(Utils.pegColorToImagePegFileName(color: .orange, isLit: true), "peg-orange-glow")
+        XCTAssertEqual(Utils.pegColorToImagePegFileName(color: .blue, isLit: true), "peg-blue-glow")
     }
 
     func testCannonImageFileName() {

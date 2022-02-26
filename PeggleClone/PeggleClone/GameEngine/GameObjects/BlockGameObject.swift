@@ -16,8 +16,12 @@ class BlockGameObject {
     private(set) var width: Double
     private(set) var height: Double
     private(set) var rotation: Double
-    var isHit: Bool {
+    private(set) var isSpringy: Bool
+    var isLit: Bool {
         false
+    }
+    var isHit: Bool {
+        physicsBody.hitCount != 0
     }
     var shouldBeRemoved: Bool {
         physicsBody.hitCount > PhysicsConstants.physicsBodyMaxHitCount
@@ -28,8 +32,9 @@ class BlockGameObject {
         height = block.height
         color = block.color
         rotation = block.rotation
+        isSpringy = block.springiness != 0
 
-        if block.springiness == 0 {
+        if !isSpringy {
             physicsBody = StaticTriangularPhysicsBody(
                 gameObjectType: BlockGameObject.gameObjectType,
                 position: block.center,

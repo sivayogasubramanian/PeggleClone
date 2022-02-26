@@ -43,15 +43,25 @@ struct GameView: View {
         }
         .alert("Congratulations! You Won!", isPresented: Binding(get: { gameViewModel.isGameWon }, set: {_, _ in }),
                actions: {
-            Button("Okay", action: { dismiss() }).onDisappear(perform: { dismiss() })
+            Button("Okay", action: { dismiss() })
+                .onAppear(perform: { SoundManager.shared.playSound(sound: .win) })
+                .onDisappear(perform: { dismiss() })
         })
         .alert("Sorry! You lost.", isPresented: Binding(get: { gameViewModel.isGameOver }, set: {_, _ in }),
                actions: {
-            Button("Okay", action: { dismiss() }).onDisappear(perform: { dismiss() })
+            Button("Okay", action: { dismiss() })
+                .onAppear(perform: { SoundManager.shared.playSound(sound: .lose) })
+                .onDisappear(perform: { dismiss() })
         })
         .onAppear {
             gameViewModel.startSimulation()
+            SoundManager.shared.stopSound(sound: .main)
+            SoundManager.shared.playSound(sound: .game, isReducedVolume: true)
         }
+        .onDisappear(perform: {
+            SoundManager.shared.stopSound(sound: .game)
+            SoundManager.shared.playSound(sound: .main, isReducedVolume: true)
+        })
         .statusBar(hidden: true)
         .edgesIgnoringSafeArea([.top, .bottom])
     }
@@ -81,13 +91,14 @@ struct GameView: View {
     }
 
     private func makePegView(_ peg: PegGameObject) -> some View {
-        Image(Utils.pegColorToImagePegFileName(color: peg.color, isHit: peg.isHit))
+        Image(Utils.pegColorToImagePegFileName(color: peg.color, isLit: peg.isLit))
             .resizable()
             .frame(width: peg.diameter, height: peg.diameter)
             .rotationEffect(Angle(degrees: peg.rotation))
             .position(x: peg.physicsBody.position.dx, y: peg.physicsBody.position.dy)
             .offset(x: 0, y: gameViewModel.offset)
             .animation(.interactiveSpring(), value: gameViewModel.offset)
+            .onChange(of: peg.isLit, perform: { _ in SoundManager.shared.playSound(sound: .hitPeg) })
     }
 
     private func overlayBlockViews() -> some View {
@@ -99,13 +110,14 @@ struct GameView: View {
     }
 
     private func makeBlockView(_ block: BlockGameObject) -> some View {
-        Image(Utils.pegColorToImageBlockFileName(color: block.color, isHit: block.isHit))
+        Image(Utils.pegColorToImageBlockFileName(color: block.color, isLit: block.isLit))
             .resizable()
             .frame(width: block.width, height: block.height)
             .rotationEffect(Angle(degrees: block.rotation))
             .position(x: block.physicsBody.position.dx, y: block.physicsBody.position.dy)
             .offset(x: 0, y: gameViewModel.offset)
             .animation(.interactiveSpring(), value: gameViewModel.offset)
+            .onChange(of: block.isHit, perform: { _ in SoundManager.shared.playSound(sound: .hitBlock) })
     }
 
     private func overlayBallView(_ ball: BallGameObject) -> some View {
@@ -142,6 +154,9 @@ struct GameView: View {
                     x: value.location.x,
                     y: max(value.location.y, PhysicsConstants.initialBallLaunchYCoordinate)
                 )
+                if gameViewModel.isCannonLoaded {
+                    SoundManager.shared.playSound(sound: .shoot)
+                }
                 gameViewModel.shootBallTowards(point: point)
             })
     }

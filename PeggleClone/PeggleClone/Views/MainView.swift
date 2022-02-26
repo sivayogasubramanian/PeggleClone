@@ -23,21 +23,30 @@ struct MainView: View {
             .statusBar(hidden: true)
             .ignoresSafeArea(.keyboard)
             .edgesIgnoringSafeArea([.top, .bottom])
+            .onAppear {
+                SoundManager.shared.playSound(sound: .main, isReducedVolume: true)
+            }
     }
 
     private var playGameButtonView: some View {
-        Button("Play Game", action: { isShowingPlayableLevelsView = true })
-            .buttonStyle(GrowingButton())
-            .fullScreenCover(isPresented: $isShowingPlayableLevelsView) {
-                PlayableLevelsView()
-            }
+        Button("Play Game", action: {
+            isShowingPlayableLevelsView = true
+            SoundManager.shared.playSound(sound: .click)
+        })
+        .buttonStyle(GrowingButton())
+        .fullScreenCover(isPresented: $isShowingPlayableLevelsView) {
+            PlayableLevelsView()
+        }
     }
 
     private var designLevelButtonView: some View {
-        Button("Design Level", action: { isShowingLevelDesigner = true })
-            .buttonStyle(GrowingButton())
-            .fullScreenCover(isPresented: $isShowingLevelDesigner) {
-                DesignerView()
-            }
+        Button("Design Level", action: { isShowingLevelDesigner = true
+            SoundManager.shared.playSound(sound: .click)
+
+        })
+        .buttonStyle(GrowingButton())
+        .fullScreenCover(isPresented: $isShowingLevelDesigner) {
+            DesignerView()
+        }
     }
 }

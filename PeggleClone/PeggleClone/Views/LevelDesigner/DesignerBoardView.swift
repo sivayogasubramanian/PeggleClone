@@ -25,6 +25,7 @@ struct DesignerBoardView: View {
                 )
                 .gesture(
                     DragGesture(minimumDistance: 0).onEnded({ value in
+                        SoundManager.shared.playSound(sound: .click2)
                         withAnimation(.easeIn(duration: 0.1)) {
                             boardTapHandler(value.location)
                         }
@@ -56,7 +57,7 @@ struct DesignerBoardView: View {
 
     private func makePegView(_ peg: Peg) -> some View {
         let image = peg === designerViewModel.selectedPeg
-            ? Utils.pegColorToImagePegFileName(color: peg.color, isHit: true)
+            ? Utils.pegColorToImagePegFileName(color: peg.color, isLit: true)
             : Utils.pegColorToImagePegFileName(color: peg.color)
         return Image(image)
             .resizable()
@@ -68,6 +69,7 @@ struct DesignerBoardView: View {
             .position(x: peg.center.dx, y: peg.center.dy)
             .offset(x: 0, y: designerViewModel.board.boardHeightOffset)
             .onTapGesture {
+                SoundManager.shared.playSound(sound: .click2)
                 if type(of: actionsViewModel.currentAction) == DeleteAction.self {
                     withAnimation(.easeOut(duration: 0.1)) {
                         designerViewModel.deletePeg(peg: peg)
@@ -91,7 +93,7 @@ struct DesignerBoardView: View {
 
     private func makeBlockView(_ block: TriangularBlock) -> some View {
         let image = block === designerViewModel.selectedBlock
-            ? Utils.pegColorToImageBlockFileName(color: block.color, isHit: true)
+            ? Utils.pegColorToImageBlockFileName(color: block.color, isLit: true)
             : Utils.pegColorToImageBlockFileName(color: block.color)
         return Image(image)
             .resizable()
@@ -104,6 +106,7 @@ struct DesignerBoardView: View {
             .animation(.default, value: block.height)
             .animation(.spring(), value: designerViewModel.board.boardHeightOffset)
             .onTapGesture {
+                SoundManager.shared.playSound(sound: .click2)
                 if type(of: actionsViewModel.currentAction) == DeleteAction.self {
                     withAnimation(.easeOut(duration: 0.1)) {
                         designerViewModel.deleteBlock(block: block)

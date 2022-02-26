@@ -17,6 +17,6 @@ class DeleteAction: PeggleAction {
     }
 
     func getDescription() -> String? {
-        nil
+        "Deletes the tapped object from the designer."
     }
 }

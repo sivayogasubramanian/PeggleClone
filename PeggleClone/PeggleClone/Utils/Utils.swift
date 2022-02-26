@@ -12,25 +12,25 @@ struct Utils {
        number * .pi / 180
     }
 
-    static func pegColorToImagePegFileName(color: PeggleColor, isHit: Bool = false) -> String {
+    static func pegColorToImagePegFileName(color: PeggleColor, isLit: Bool = false) -> String {
         switch color {
         case .blue:
-            return isHit ? Constants.glowingBluePegImage : Constants.bluePegImage
+            return isLit ? Constants.glowingBluePegImage : Constants.bluePegImage
         case .orange:
-            return isHit ? Constants.glowingOrangePegImage : Constants.orangePegImage
+            return isLit ? Constants.glowingOrangePegImage : Constants.orangePegImage
         case .purple:
-            return isHit ? Constants.glowingPurplePegImage : Constants.purplePegImage
+            return isLit ? Constants.glowingPurplePegImage : Constants.purplePegImage
         }
     }
 
-    static func pegColorToImageBlockFileName(color: PeggleColor, isHit: Bool = false) -> String {
+    static func pegColorToImageBlockFileName(color: PeggleColor, isLit: Bool = false) -> String {
         switch color {
         case .blue:
-            return isHit ? Constants.glowingBlueTriangularBlockImage : Constants.blueTriangularBlockImage
+            return isLit ? Constants.glowingBlueTriangularBlockImage : Constants.blueTriangularBlockImage
         case .orange:
-            return isHit ? Constants.glowingOrangeTriangularBlockImage : Constants.orangeTriangularBlockImage
+            return isLit ? Constants.glowingOrangeTriangularBlockImage : Constants.orangeTriangularBlockImage
         case .purple:
-            return isHit ? Constants.glowingPurpleTriangularBlockImage : Constants.purpleTriangularBlockImage
+            return isLit ? Constants.glowingPurpleTriangularBlockImage : Constants.purpleTriangularBlockImage
         }
     }
 

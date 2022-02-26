@@ -61,6 +61,7 @@ struct ImageButtonView: View {
             .scaledToFit()
             .frame(width: ImageButtonView.imageButtonSize, height: ImageButtonView.imageButtonSize)
             .onTapGesture {
+                SoundManager.shared.playSound(sound: .click)
                 withAnimation(.easeInOut(duration: 0.2)) {
                     actionsViewModel.setAction(to: AddBluePegAction())
                 }
@@ -78,6 +79,7 @@ struct ImageButtonView: View {
             .scaledToFit()
             .frame(width: ImageButtonView.imageButtonSize, height: ImageButtonView.imageButtonSize)
             .onTapGesture {
+                SoundManager.shared.playSound(sound: .click)
                 withAnimation(.easeInOut(duration: 0.2)) {
                     actionsViewModel.setAction(to: AddOrangePegAction())
                 }
@@ -95,6 +97,7 @@ struct ImageButtonView: View {
             .scaledToFit()
             .frame(width: ImageButtonView.imageButtonSize, height: ImageButtonView.imageButtonSize)
             .onTapGesture {
+                SoundManager.shared.playSound(sound: .click)
                 withAnimation(.easeInOut(duration: 0.2)) {
                     actionsViewModel.setAction(to: AddPurplePegAction())
                 }
@@ -112,6 +115,7 @@ struct ImageButtonView: View {
             .scaledToFit()
             .frame(width: ImageButtonView.imageButtonSize, height: ImageButtonView.imageButtonSize)
             .onTapGesture {
+                SoundManager.shared.playSound(sound: .click)
                 withAnimation(.easeInOut(duration: 0.2)) {
                     actionsViewModel.setAction(to: AddBlueTriangularBlockAction())
                 }
@@ -129,6 +133,7 @@ struct ImageButtonView: View {
             .scaledToFit()
             .frame(width: ImageButtonView.imageButtonSize, height: ImageButtonView.imageButtonSize)
             .onTapGesture {
+                SoundManager.shared.playSound(sound: .click)
                 withAnimation(.easeInOut(duration: 0.2)) {
                     actionsViewModel.setAction(to: AddOrangeTriangularBlockAction())
                 }
@@ -146,6 +151,7 @@ struct ImageButtonView: View {
             .scaledToFit()
             .frame(width: ImageButtonView.imageButtonSize, height: ImageButtonView.imageButtonSize)
             .onTapGesture {
+                SoundManager.shared.playSound(sound: .click)
                 withAnimation(.easeInOut(duration: 0.2)) {
                     actionsViewModel.setAction(to: AddPurpleTriangularBlockAction())
                 }
@@ -163,6 +169,7 @@ struct ImageButtonView: View {
             .scaledToFit()
             .frame(width: ImageButtonView.imageButtonSize, height: ImageButtonView.imageButtonSize)
             .onTapGesture {
+                SoundManager.shared.playSound(sound: .click)
                 withAnimation(.easeInOut(duration: 0.2)) {
                     actionsViewModel.setAction(to: DeleteAction())
                 }

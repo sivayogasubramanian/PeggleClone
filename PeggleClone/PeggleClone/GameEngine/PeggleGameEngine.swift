@@ -26,7 +26,7 @@ class PeggleGameEngine {
         Array(blockObjects.values)
     }
     var isSpookyBallActive: Bool {
-        pegs.filter({ $0.isHit && $0.color == .purple }).count > 0
+        pegs.filter({ $0.isLit && $0.color == .purple }).count > 0
     }
     var isBallOutOfBounds: Bool {
         guard let ball = ball else {
@@ -107,12 +107,12 @@ class PeggleGameEngine {
     }
 
     func removeLitGameObjects() {
-        for peg in pegs where peg.isHit {
+        for peg in pegs where peg.isLit {
             world.removePhysicsBody(peg.physicsBody)
             pegObjects.removeValue(forKey: ObjectIdentifier(peg))
         }
 
-        for block in blocks where block.isHit {
+        for block in blocks where block.isLit {
             world.removePhysicsBody(block.physicsBody)
             blockObjects.removeValue(forKey: ObjectIdentifier(block))
         }
@@ -147,6 +147,7 @@ class PeggleGameEngine {
 
         if shouldRemoveBall {
             if bucket.isHit {
+                SoundManager.shared.playSound(sound: .hitBucket)
                 numberOfBallsLeft += 1
             }
             removeBall(ball: ball)
@@ -185,7 +186,7 @@ class PeggleGameEngine {
 
     private func applyPowerups() {
         for peg in pegs {
-            guard peg.isHit else {
+            guard peg.isLit else {
                 continue
             }
 

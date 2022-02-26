@@ -55,7 +55,7 @@ class GameViewModel: ObservableObject {
         gameEngine.isGameWon
     }
     var isGameOver: Bool {
-        gameEngine.isGameOver
+        gameEngine.isGameOver && ball == nil
     }
 
     // Game loop variables

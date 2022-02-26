@@ -25,7 +25,7 @@ class KaBoom: Powerup {
             to: ball.physicsBody.velocity + direction * KaBoom.explosionVelocityMultiplier,
             isMovable: true
         )
-        for peg in gameEngine.pegs where peg != hitPeg && !peg.isHit {
+        for peg in gameEngine.pegs where peg != hitPeg && !peg.isLit {
             if peg.physicsBody.position.distance(to: hitPeg.physicsBody.position) < KaBoom.explosionRadius {
                 peg.physicsBody.incrementHitCount()
                 if peg.color == .blue {

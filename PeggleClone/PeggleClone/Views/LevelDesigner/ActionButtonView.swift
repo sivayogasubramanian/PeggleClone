@@ -58,25 +58,31 @@ struct ActionButtonView: View {
     }
 
     private var loadButtonView: some View {
-        Button("LOAD", action: { showingLoadAlert = true; textFieldIsFocused = false })
-            .alert(
-                "Please remember to save your progress. Any progress made will be lost if it is not saved.",
-                isPresented: $showingLoadAlert,
-                actions: {
-                    Button("Cancel", role: .cancel, action: {})
-                    Button("Ok", role: .destructive, action: { showingSavedLevels = true })
-                })
-            .fullScreenCover(
-                isPresented: $showingSavedLevels,
-                onDismiss: { levelName = designerViewModel.board.name },
-                content: { SavedLevelsView(levelName: $levelName, designerViewModel: designerViewModel) }
-            )
+        Button("LOAD", action: {
+            showingLoadAlert = true
+            textFieldIsFocused = false
+            SoundManager.shared.playSound(sound: .click)
+
+        })
+        .alert(
+            "Please remember to save your progress. Any progress made will be lost if it is not saved.",
+            isPresented: $showingLoadAlert,
+            actions: {
+                Button("Cancel", role: .cancel, action: {})
+                Button("Ok", role: .destructive, action: { showingSavedLevels = true })
+            })
+        .fullScreenCover(
+            isPresented: $showingSavedLevels,
+            onDismiss: { levelName = designerViewModel.board.name },
+            content: { SavedLevelsView(levelName: $levelName, designerViewModel: designerViewModel) }
+        )
     }
 
     private var saveButtonView: some View {
         Button("SAVE", action: {
             showingSaveAlert = true
             textFieldIsFocused = false
+            SoundManager.shared.playSound(sound: .click)
         })
         .disabled(levelName.isEmpty)
         .alert("Are you sure you want to save this level?", isPresented: $showingSaveAlert, actions: {
@@ -89,6 +95,7 @@ struct ActionButtonView: View {
     private var resetButtonView: some View {
         Button("RESET", action: {
             showingResetAlert = true
+            SoundManager.shared.playSound(sound: .click)
         })
         .alert("Are you sure you want to reset this level?", isPresented: $showingResetAlert) {
             Button("Cancel", role: .cancel, action: {})
@@ -100,6 +107,7 @@ struct ActionButtonView: View {
         Button("TRIAL PLAY", action: {
             isGameActive = true
             textFieldIsFocused = false
+            SoundManager.shared.playSound(sound: .click)
         })
         .fullScreenCover(
             isPresented: $isGameActive,

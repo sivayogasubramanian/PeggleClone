@@ -18,7 +18,7 @@ class PegGameObject {
     var diameter: Double {
         radius * 2
     }
-    var isHit: Bool {
+    var isLit: Bool {
         physicsBody.hitCount != 0
     }
     var shouldBeRemoved: Bool {
