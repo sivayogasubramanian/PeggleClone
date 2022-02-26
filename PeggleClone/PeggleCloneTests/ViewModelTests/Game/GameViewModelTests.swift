@@ -15,7 +15,8 @@ class GameViewModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let board = Board()
-        board.setSize(boardSize: CGSize(width: 100, height: 100))
+        board.setSize(boardSize: CGSize(width: 1_000, height: 1_000))
+        _ = board.addPeg(at: CGPoint(x: 500, y: 500), color: .orange)
         viewModel = GameViewModel(board: board)
     }
 
@@ -36,13 +37,13 @@ class GameViewModelTests: XCTestCase {
     }
 
     func testGetAngleForCannon() {
-        let angle1 = viewModel.getAngleForCanon(using: CGPoint(x: 50, y: 50))
+        let angle1 = viewModel.getAngleForCanon(using: CGPoint(x: 500, y: 500))
         XCTAssertEqual(angle1, Angle(radians: .zero))
 
-        let angle2 = viewModel.getAngleForCanon(using: CGPoint(x: 25, y: 25))
+        let angle2 = viewModel.getAngleForCanon(using: CGPoint(x: 250, y: 250))
         XCTAssertEqual(angle2.degrees.rounded(), 45)
 
-        let angle3 = viewModel.getAngleForCanon(using: CGPoint(x: 75, y: 25))
+        let angle3 = viewModel.getAngleForCanon(using: CGPoint(x: 750, y: 250))
         XCTAssertEqual(angle3.degrees.rounded(), -45)
     }
 

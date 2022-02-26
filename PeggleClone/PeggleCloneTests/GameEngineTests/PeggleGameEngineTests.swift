@@ -16,6 +16,7 @@ class PeggleGameEngineTests: XCTestCase {
         super.setUp()
         let board = Board()
         board.setSize(boardSize: CGSize(width: 1_000, height: 1_000))
+        _ = board.addPeg(at: CGPoint(x: 500, y: 500), color: .orange)
         gameEngine = PeggleGameEngine(board: board)
     }
 

@@ -42,13 +42,13 @@ class DesignerViewModelTests: XCTestCase {
 
     func testAddPeg() {
         XCTAssertEqual(viewModel.board.pegs.count, 0)
-        viewModel.addPeg(at: CGPoint(x: 50, y: 50 + Constants.letterBoxYOffset),
+        _ = viewModel.addPeg(at: CGPoint(x: 50, y: 50 + Constants.letterBoxYOffset),
                          color: .orange)
         XCTAssertEqual(viewModel.board.pegs.count, 1)
     }
 
     func testMovePeg() {
-        viewModel.addPeg(at: CGPoint(x: 50, y: 50), color: .orange)
+        _ = viewModel.addPeg(at: CGPoint(x: 50, y: 50), color: .orange)
         guard let peg = viewModel.board.pegs.first else {
             return
         }
@@ -61,7 +61,7 @@ class DesignerViewModelTests: XCTestCase {
     }
 
     func testDeletePeg() {
-        viewModel.addPeg(at: CGPoint(x: 50, y: 50), color: .orange)
+        _ = viewModel.addPeg(at: CGPoint(x: 50, y: 50), color: .orange)
         guard let peg = viewModel.board.pegs.first else {
             return
         }
@@ -72,8 +72,8 @@ class DesignerViewModelTests: XCTestCase {
     }
 
     func testDeletePeg_withMultiplePegs() {
-        viewModel.addPeg(at: CGPoint(x: 50, y: 50), color: .orange)
-        viewModel.addPeg(at: CGPoint(x: 100, y: 100), color: .blue)
+        _ = viewModel.addPeg(at: CGPoint(x: 50, y: 50), color: .orange)
+        _ = viewModel.addPeg(at: CGPoint(x: 100, y: 100), color: .blue)
         guard let peg1 = viewModel.board.pegs.first, let peg2 = viewModel.board.pegs.last else {
             return
         }
@@ -158,8 +158,8 @@ class DesignerViewModelTests: XCTestCase {
     }
 
     func testSaveBoard_whenBoardIsNewWithEmptyName_shouldNotAddNewBoard() {
-        viewModel.addPeg(at: CGPoint(x: 50, y: 50), color: .orange)
-        viewModel.addPeg(at: CGPoint(x: 100, y: 100), color: .blue)
+        _ = viewModel.addPeg(at: CGPoint(x: 50, y: 50), color: .orange)
+        _ = viewModel.addPeg(at: CGPoint(x: 100, y: 100), color: .blue)
         viewModel.saveBoard(using: viewContext)
 
         let boards = viewModel.loadSavedLevels(using: viewContext)
@@ -169,8 +169,8 @@ class DesignerViewModelTests: XCTestCase {
 
     func testSaveBoard_whenBoardIsNewWithValidName_shouldAddNewBoard() {
         viewModel.setBoardName(to: "This is a test")
-        viewModel.addPeg(at: CGPoint(x: 50, y: 50), color: .orange)
-        viewModel.addPeg(at: CGPoint(x: 100, y: 100), color: .blue)
+        _ = viewModel.addPeg(at: CGPoint(x: 50, y: 50), color: .orange)
+        _ = viewModel.addPeg(at: CGPoint(x: 100, y: 100), color: .blue)
         viewModel.saveBoard(using: viewContext)
 
         let boards = viewModel.loadSavedLevels(using: viewContext)
@@ -182,14 +182,14 @@ class DesignerViewModelTests: XCTestCase {
         let oldBoard = Board()
         viewModel.setBoard(to: oldBoard)
         viewModel.setBoardName(to: "test")
-        viewModel.addPeg(at: CGPoint(x: 50, y: 50), color: .orange)
-        viewModel.addPeg(at: CGPoint(x: 100, y: 100), color: .blue)
+        _ = viewModel.addPeg(at: CGPoint(x: 50, y: 50), color: .orange)
+        _ = viewModel.addPeg(at: CGPoint(x: 100, y: 100), color: .blue)
         viewModel.saveBoard(using: viewContext)
 
         var boards = viewModel.loadSavedLevels(using: viewContext)
         XCTAssertTrue(boards.count == 1)
 
-        viewModel.addPeg(at: CGPoint(x: 150, y: 150), color: .blue)
+        _ = viewModel.addPeg(at: CGPoint(x: 150, y: 150), color: .blue)
         viewModel.setBoardName(to: "new name")
         viewModel.saveBoard(using: viewContext)
 
@@ -203,14 +203,14 @@ class DesignerViewModelTests: XCTestCase {
         let oldBoard = Board()
         viewModel.setBoard(to: oldBoard)
         viewModel.setBoardName(to: "test")
-        viewModel.addPeg(at: CGPoint(x: 50, y: 50), color: .orange)
-        viewModel.addPeg(at: CGPoint(x: 100, y: 100), color: .blue)
+        _ = viewModel.addPeg(at: CGPoint(x: 50, y: 50), color: .orange)
+        _ = viewModel.addPeg(at: CGPoint(x: 100, y: 100), color: .blue)
         viewModel.saveBoard(using: viewContext)
 
         var boards = viewModel.loadSavedLevels(using: viewContext)
         XCTAssertTrue(boards.count == 1)
 
-        viewModel.addPeg(at: CGPoint(x: 150, y: 150), color: .blue)
+        _ = viewModel.addPeg(at: CGPoint(x: 150, y: 150), color: .blue)
         viewModel.setBoardName(to: "")
         viewModel.saveBoard(using: viewContext)
 
