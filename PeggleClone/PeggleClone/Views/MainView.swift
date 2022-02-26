@@ -24,7 +24,7 @@ struct MainView: View {
             .ignoresSafeArea(.keyboard)
             .edgesIgnoringSafeArea([.top, .bottom])
             .onAppear {
-                SoundManager.shared.playSound(sound: .main, isReducedVolume: true)
+                SoundManager.shared.playSound(sound: .main, isReducedVolume: true, isLooped: true)
             }
     }
 

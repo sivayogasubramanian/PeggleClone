@@ -34,11 +34,12 @@ class SoundManager {
         }
     }
 
-    func playSound(sound: Sound, isReducedVolume: Bool = false) {
+    func playSound(sound: Sound, isReducedVolume: Bool = false, isLooped: Bool = false) {
         if let player = players[sound] {
             guard !player.isPlaying else {
                 return
             }
+            player.numberOfLoops = isLooped ? 10 : 0
             player.volume = isReducedVolume ? 1 : 2
             player.play()
         }

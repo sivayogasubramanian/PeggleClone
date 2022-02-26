@@ -43,7 +43,7 @@ class PeggleGameEngine {
         numberOfBallsLeft <= 0
     }
     var isGameWon: Bool {
-        pegs.contains(where: { $0.color == .orange })
+        !pegs.contains(where: { $0.color == .orange })
     }
     var numberOfOrangePegsLeft: Int {
         pegs.filter({ $0.color == .orange }).count

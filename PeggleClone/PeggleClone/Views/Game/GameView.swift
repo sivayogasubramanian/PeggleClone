@@ -26,7 +26,7 @@ struct GameView: View {
                         backButtonView.padding(.top, 15).padding(.leading, 20)
                     }
                     .overlay(alignment: .topLeading) {
-                        scoreView.padding(.top, 25).padding(.leading, 100)
+                        scoreAndTimerView.padding(.top, 15).padding(.leading, 100)
                     }
             }
 
@@ -43,24 +43,30 @@ struct GameView: View {
                isPresented: Binding(get: { gameViewModel.isGameWon }, set: { _, _ in }),
                actions: {
             Button("Okay", action: { dismiss() })
-                .onAppear(perform: { SoundManager.shared.playSound(sound: .win) })
+                .onAppear(perform: {
+                    SoundManager.shared.playSound(sound: .win)
+                    gameViewModel.stopSimulation()
+                })
                 .onDisappear(perform: { dismiss() })
         })
         .alert("Sorry! You lost. You will do better next time!",
-               isPresented: Binding(get: { gameViewModel.isGameOver }, set: { _, _ in }),
+               isPresented: Binding(get: { gameViewModel.isGameOver || gameViewModel.isTimeOver }, set: { _, _ in }),
                actions: {
             Button("Okay", action: { dismiss() })
-                .onAppear(perform: { SoundManager.shared.playSound(sound: .lose) })
+                .onAppear(perform: {
+                    SoundManager.shared.playSound(sound: .lose)
+                    gameViewModel.stopSimulation()
+                })
                 .onDisappear(perform: { dismiss() })
         })
         .onAppear {
             gameViewModel.startSimulation()
             SoundManager.shared.stopSound(sound: .main)
-            SoundManager.shared.playSound(sound: .game, isReducedVolume: true)
+            SoundManager.shared.playSound(sound: .game, isReducedVolume: true, isLooped: true)
         }
         .onDisappear(perform: {
             SoundManager.shared.stopSound(sound: .game)
-            SoundManager.shared.playSound(sound: .main, isReducedVolume: true)
+            SoundManager.shared.playSound(sound: .main, isReducedVolume: true, isLooped: true)
         })
         .statusBar(hidden: true)
         .edgesIgnoringSafeArea([.top, .bottom])
@@ -107,7 +113,7 @@ struct GameView: View {
             .position(x: peg.physicsBody.position.dx, y: peg.physicsBody.position.dy)
             .offset(x: 0, y: gameViewModel.offset)
             .animation(.interactiveSpring(), value: gameViewModel.offset)
-            .onChange(of: peg.isLit, perform: { _ in SoundManager.shared.playSound(sound: .hitPeg) })
+            .onChange(of: peg.physicsBody.hitCount, perform: { _ in SoundManager.shared.playSound(sound: .hitPeg) })
     }
 
     private func overlayBlockViews() -> some View {
@@ -126,7 +132,7 @@ struct GameView: View {
             .position(x: block.physicsBody.position.dx, y: block.physicsBody.position.dy)
             .offset(x: 0, y: gameViewModel.offset)
             .animation(.interactiveSpring(), value: gameViewModel.offset)
-            .onChange(of: block.isHit, perform: { _ in SoundManager.shared.playSound(sound: .hitBlock) })
+            .onChange(of: block.physicsBody.hitCount, perform: { _ in SoundManager.shared.playSound(sound: .hitBlock) })
     }
 
     private func overlayBallView(_ ball: BallGameObject) -> some View {
@@ -149,11 +155,16 @@ struct GameView: View {
             .offset(x: 0, y: gameViewModel.offset)
     }
 
-    private var scoreView: some View {
-        HStack {
-            Text("Score:").font(.title2).bold()
-            withAnimation(.easeInOut(duration: 1)) {
+    private var scoreAndTimerView: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Text("Score:").font(.title2).bold()
                 Text(String(gameViewModel.score)).font(.title2)
+            }
+
+            HStack {
+                Text("Time Left:").font(.title2).bold()
+                Text("\(gameViewModel.timeLeft)s").font(.title2)
             }
         }
     }

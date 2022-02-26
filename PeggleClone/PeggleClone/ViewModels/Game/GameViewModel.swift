@@ -13,8 +13,10 @@ import SwiftUI
 
 class GameViewModel: ObservableObject {
     private(set) var displaylink: CADisplayLink?
+    private(set) var timer: Timer?
     private(set) var gameEngine: PeggleGameEngine
     private(set) var board: Board
+    private(set) var timeLeft = 120
     var pegs: [PegGameObject] {
         gameEngine.pegs
     }
@@ -60,6 +62,9 @@ class GameViewModel: ObservableObject {
     var score: Int {
         gameEngine.score
     }
+    var isTimeOver: Bool {
+        timeLeft <= 0
+    }
 
     // Game loop variables
     private(set) var previousTime = Date().timeIntervalSince1970
@@ -68,11 +73,6 @@ class GameViewModel: ObservableObject {
     init(board: Board) {
         self.board = board
         gameEngine = PeggleGameEngine(board: board)
-    }
-
-    deinit {
-        displaylink?.invalidate()
-        displaylink = nil
     }
 
     func shootBallTowards(point: CGPoint) {
@@ -101,10 +101,20 @@ class GameViewModel: ObservableObject {
         createDisplayLink()
     }
 
+    func stopSimulation() {
+        timer?.invalidate()
+        displaylink?.invalidate()
+        displaylink = nil
+        timer = nil
+    }
+
     private func createDisplayLink() {
         let displaylink = CADisplayLink(target: self, selector: #selector(step))
+        let timer = Timer
+            .scheduledTimer(timeInterval: 1, target: self, selector: #selector(gameTimer), userInfo: nil, repeats: true)
         displaylink.add(to: .current, forMode: .common)
         self.displaylink = displaylink
+        self.timer = timer
         previousTime = Date().timeIntervalSince1970
 
     }
@@ -121,6 +131,11 @@ class GameViewModel: ObservableObject {
         }
 
         updateViews()
+    }
+
+    @objc private func gameTimer() {
+        timeLeft -= 1
+        timeLeft = max(timeLeft, 0)
     }
 
     private func updateViews() {
