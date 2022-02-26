@@ -177,16 +177,16 @@
 		47603E4927B6D3CF0089E394 /* PeggleGameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleGameEngineTests.swift; sourceTree = "<group>"; };
 		476119C627A2619F001E2344 /* ImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButtonView.swift; sourceTree = "<group>"; };
 		476119C827A2BA90001E2344 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		4770F16D27CA4F8300743ADA /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = win.wav; path = ../../../sounds/win.wav; sourceTree = "<group>"; };
-		4770F16E27CA4F8300743ADA /* lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = lose.wav; path = ../../../sounds/lose.wav; sourceTree = "<group>"; };
-		4770F17027CA4F8300743ADA /* hitBlock.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = hitBlock.wav; path = ../../../sounds/hitBlock.wav; sourceTree = "<group>"; };
-		4770F17127CA4F8300743ADA /* hitPeg.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = hitPeg.wav; path = ../../../sounds/hitPeg.wav; sourceTree = "<group>"; };
-		4770F17227CA4F8300743ADA /* shoot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = shoot.wav; path = ../../../sounds/shoot.wav; sourceTree = "<group>"; };
-		4770F17427CA4F8400743ADA /* hitBucket.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = hitBucket.wav; path = ../../../sounds/hitBucket.wav; sourceTree = "<group>"; };
-		4770F17527CA4F8400743ADA /* game.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = game.wav; path = ../../../sounds/game.wav; sourceTree = "<group>"; };
-		4770F17627CA4F8400743ADA /* main.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = main.wav; path = ../../../sounds/main.wav; sourceTree = "<group>"; };
-		4770F18127CA50E200743ADA /* click2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click2.wav; path = ../../../sounds/click2.wav; sourceTree = "<group>"; };
-		4770F18327CA515A00743ADA /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click.wav; path = ../../../sounds/click.wav; sourceTree = "<group>"; };
+		4770F16D27CA4F8300743ADA /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = win.wav; path = ../sounds/win.wav; sourceTree = "<group>"; };
+		4770F16E27CA4F8300743ADA /* lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = lose.wav; path = ../sounds/lose.wav; sourceTree = "<group>"; };
+		4770F17027CA4F8300743ADA /* hitBlock.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = hitBlock.wav; path = ../sounds/hitBlock.wav; sourceTree = "<group>"; };
+		4770F17127CA4F8300743ADA /* hitPeg.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = hitPeg.wav; path = ../sounds/hitPeg.wav; sourceTree = "<group>"; };
+		4770F17227CA4F8300743ADA /* shoot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = shoot.wav; path = ../sounds/shoot.wav; sourceTree = "<group>"; };
+		4770F17427CA4F8400743ADA /* hitBucket.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = hitBucket.wav; path = ../sounds/hitBucket.wav; sourceTree = "<group>"; };
+		4770F17527CA4F8400743ADA /* game.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = game.wav; path = ../sounds/game.wav; sourceTree = "<group>"; };
+		4770F17627CA4F8400743ADA /* main.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = main.wav; path = ../sounds/main.wav; sourceTree = "<group>"; };
+		4770F18127CA50E200743ADA /* click2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click2.wav; path = ../sounds/click2.wav; sourceTree = "<group>"; };
+		4770F18327CA515A00743ADA /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click.wav; path = ../sounds/click.wav; sourceTree = "<group>"; };
 		47762933279844B700A1A8C0 /* PeggleClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeggleClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47762936279844B700A1A8C0 /* PeggleCloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleCloneApp.swift; sourceTree = "<group>"; };
 		47762938279844B700A1A8C0 /* DesignerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerView.swift; sourceTree = "<group>"; };
@@ -661,7 +661,8 @@
 				4770F16D27CA4F8300743ADA /* win.wav */,
 				4770F16E27CA4F8300743ADA /* lose.wav */,
 			);
-			path = Sounds;
+			name = Sounds;
+			path = ../../sounds;
 			sourceTree = "<group>";
 		};
 		47CBF83C27C1313F00B80002 /* Actions */ = {
