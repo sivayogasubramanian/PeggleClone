@@ -44,6 +44,8 @@
 		4754997A27C35DCC005FFC68 /* Intersector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754997927C35DCC005FFC68 /* Intersector.swift */; };
 		4754999427C391D3005FFC68 /* TriangularBlockEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754998E27C391D3005FFC68 /* TriangularBlockEntity+CoreDataClass.swift */; };
 		4754999F27C39287005FFC68 /* TriangularBlockEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4754999927C39287005FFC68 /* TriangularBlockEntity+CoreDataProperties.swift */; };
+		4758A2F827CA9BFD004525F0 /* explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4758A2F727CA9BFD004525F0 /* explosion.wav */; };
+		4758A2FA27CA9C03004525F0 /* ghost.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4758A2F927CA9C03004525F0 /* ghost.wav */; };
 		475C70AF27A043C500F8C2CB /* SavedLevelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C70AE27A043C500F8C2CB /* SavedLevelsView.swift */; };
 		47603E4427B6BEE10089E394 /* IntersectionDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47603E4327B6BEE10089E394 /* IntersectionDetectorTests.swift */; };
 		47603E4627B6C0BE0089E394 /* CollisionResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47603E4527B6C0BE0089E394 /* CollisionResolverTests.swift */; };
@@ -170,6 +172,8 @@
 		4754997927C35DCC005FFC68 /* Intersector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intersector.swift; sourceTree = "<group>"; };
 		4754998E27C391D3005FFC68 /* TriangularBlockEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TriangularBlockEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4754999927C39287005FFC68 /* TriangularBlockEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TriangularBlockEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4758A2F727CA9BFD004525F0 /* explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion.wav; sourceTree = "<group>"; };
+		4758A2F927CA9C03004525F0 /* ghost.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ghost.wav; sourceTree = "<group>"; };
 		475C70AE27A043C500F8C2CB /* SavedLevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLevelsView.swift; sourceTree = "<group>"; };
 		47603E4327B6BEE10089E394 /* IntersectionDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectionDetectorTests.swift; sourceTree = "<group>"; };
 		47603E4527B6C0BE0089E394 /* CollisionResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionResolverTests.swift; sourceTree = "<group>"; };
@@ -660,6 +664,8 @@
 				4770F17427CA4F8400743ADA /* hitBucket.wav */,
 				4770F16D27CA4F8300743ADA /* win.wav */,
 				4770F16E27CA4F8300743ADA /* lose.wav */,
+				4758A2F727CA9BFD004525F0 /* explosion.wav */,
+				4758A2F927CA9C03004525F0 /* ghost.wav */,
 			);
 			name = Sounds;
 			path = ../../sounds;
@@ -800,7 +806,9 @@
 				4770F18427CA515A00743ADA /* click.wav in Resources */,
 				4770F17C27CA4F8400743ADA /* shoot.wav in Resources */,
 				4770F17B27CA4F8400743ADA /* hitPeg.wav in Resources */,
+				4758A2FA27CA9C03004525F0 /* ghost.wav in Resources */,
 				4770F18227CA50E200743ADA /* click2.wav in Resources */,
+				4758A2F827CA9BFD004525F0 /* explosion.wav in Resources */,
 				4776293B279844B800A1A8C0 /* Assets.xcassets in Resources */,
 				4770F17A27CA4F8400743ADA /* hitBlock.wav in Resources */,
 				4770F18027CA4F8400743ADA /* main.wav in Resources */,

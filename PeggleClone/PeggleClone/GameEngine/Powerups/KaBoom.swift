@@ -19,6 +19,7 @@ class KaBoom: Powerup {
             return
         }
 
+        SoundManager.shared.playSound(sound: .explosion)
         hitPeg.physicsBody.incrementHitCount()
         let direction = (ball.physicsBody.position - hitPeg.physicsBody.position).normalize()
         ball.physicsBody.setVelocity(

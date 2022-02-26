@@ -18,6 +18,8 @@ enum Sound: String, CaseIterable {
     case hitBucket
     case win
     case lose
+    case explosion
+    case ghost
 }
 
 class SoundManager {

@@ -15,6 +15,7 @@ class SpookyBall: Powerup {
         }
 
         if gameEngine.isSpookyBallActive && gameEngine.isBallOutOfBounds {
+            SoundManager.shared.playSound(sound: .ghost)
             gameEngine.removeLitGameObjects()
             ball.physicsBody.setPosition(to: CGVector(dx: ball.physicsBody.position.dx, dy: 10), isMovable: true)
             gameEngine.setOffset(to: .zero)
