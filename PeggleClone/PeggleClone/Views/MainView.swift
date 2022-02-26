@@ -13,7 +13,7 @@ struct MainView: View {
 
     var body: some View {
         Image(Constants.mainBackgroundImage)
-            .offset(x: 25)
+            .offset(x: 25, y: 10)
             .overlay {
                 VStack(spacing: 50) {
                     playGameButtonView
