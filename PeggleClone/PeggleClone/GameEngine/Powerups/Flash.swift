@@ -20,7 +20,8 @@ class Flash: Powerup {
         hitPeg.physicsBody.incrementHitCount()
         let velocity = ball.physicsBody.velocity
 
-        guard velocity.length() < 1000 else {
+        // Prevent ball from going too fast
+        guard velocity.length() < 1_000 else {
             return
         }
 

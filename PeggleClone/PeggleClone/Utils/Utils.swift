@@ -87,7 +87,7 @@ struct Utils {
         case .purple:
             return 500
         case .yellow:
-            return 1000
+            return 1_000
         }
     }
 }
