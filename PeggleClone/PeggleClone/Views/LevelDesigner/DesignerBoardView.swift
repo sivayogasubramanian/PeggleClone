@@ -19,8 +19,8 @@ struct DesignerBoardView: View {
                 .resizable()
                 .scaledToFill()
                 .gesture(
-                    DragGesture().onChanged({ value in
-                        designerViewModel.setBoardOffset(to: value.translation.height / 20)
+                    DragGesture(minimumDistance: 20).onChanged({ value in
+                        designerViewModel.setBoardOffset(to: value.translation.height / 15)
                     })
                 )
                 .gesture(
@@ -61,7 +61,7 @@ struct DesignerBoardView: View {
             .rotationEffect(Angle(degrees: peg.rotation))
             .animation(.default, value: peg.rotation)
             .animation(.default, value: peg.radius)
-            .animation(.default, value: designerViewModel.board.boardHeightOffset)
+            .animation(.spring(), value: designerViewModel.board.boardHeightOffset)
             .position(x: peg.center.dx, y: peg.center.dy)
             .offset(x: 0, y: designerViewModel.board.boardHeightOffset)
             .onTapGesture {
@@ -96,7 +96,7 @@ struct DesignerBoardView: View {
             .animation(.default, value: block.rotation)
             .animation(.default, value: block.width)
             .animation(.default, value: block.height)
-            .animation(.default, value: designerViewModel.board.boardHeightOffset)
+            .animation(.spring(), value: designerViewModel.board.boardHeightOffset)
             .onTapGesture {
                 if type(of: actionsViewModel.currentAction) == DeleteAction.self {
                     withAnimation(.easeOut(duration: 0.1)) {
@@ -132,7 +132,7 @@ struct DesignerBoardView: View {
             .position(x: block.center.dx, y: block.center.dy)
             .offset(x: 0, y: designerViewModel.board.boardHeightOffset)
             .animation(.default, value: block.springiness)
-            .animation(.default, value: designerViewModel.board.boardHeightOffset)
+            .animation(.spring(), value: designerViewModel.board.boardHeightOffset)
             .overlay(content: { makeMiniResizingCircles(block) })
     }
 

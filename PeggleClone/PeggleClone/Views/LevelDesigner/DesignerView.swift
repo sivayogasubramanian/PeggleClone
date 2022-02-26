@@ -26,6 +26,10 @@ struct DesignerView: View {
                     )
                     .padding(.bottom, 20).padding(.trailing, 20)
                 }
+                .overlay(alignment: .bottomLeading) {
+                    boardOffsetView
+                        .padding(.bottom, 35).padding(.leading, 20)
+                }
 
             VStack(spacing: 0) {
                 HStack(alignment: .center, spacing: 0) {
@@ -52,6 +56,19 @@ struct DesignerView: View {
 
     private var boardView: DesignerBoardView {
         DesignerBoardView(designerViewModel: designerViewModel, actionsViewModel: actionsViewModel)
+    }
+
+    private var boardOffsetView: some View {
+        let offset = Int(designerViewModel.board.boardHeightOffset.rounded())
+
+        return HStack {
+            Text("Height Offset:")
+                .font(.title2)
+
+            Text(String(offset == 0 ? 0 : -offset))
+                .bold()
+                .font(.title2)
+        }
     }
 
     private var backButtonView: some View {

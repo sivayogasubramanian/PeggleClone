@@ -26,7 +26,7 @@ struct GameView: View {
                             balls: gameViewModel.numberOfBallsLeft
                         )
                         .padding(.top, 15).padding(.trailing, 20)
-                        .opacity(0.5)
+                        .opacity(0.8)
                     }
                     .overlay(alignment: .topLeading) {
                         backButtonView.padding(.top, 15).padding(.leading, 20)
