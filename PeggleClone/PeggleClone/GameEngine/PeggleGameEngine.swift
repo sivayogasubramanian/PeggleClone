@@ -10,7 +10,7 @@ import QuartzCore
 
 class PeggleGameEngine {
     private let world: PhysicsWorld
-    private let board: Board
+    let board: Board
     private(set) var ball: BallGameObject?
     private(set) var bucket: BucketGameObject
     private var pegObjects = [ObjectIdentifier: PegGameObject]()
@@ -53,6 +53,9 @@ class PeggleGameEngine {
     }
     var numberOfPurplePegsLeft: Int {
         pegs.filter({ $0.color == .purple }).count
+    }
+    var numberOfGrayPegsLeft: Int {
+        pegs.filter({ $0.color == .gray }).count
     }
 
     init(board: Board) {
@@ -126,6 +129,10 @@ class PeggleGameEngine {
             world.removePhysicsBody(block.physicsBody)
             blockObjects.removeValue(forKey: ObjectIdentifier(block))
         }
+    }
+
+    func setBall(to ball: BallGameObject) {
+        self.ball = ball
     }
 
     private func addPegToPhysicsEngine(_ peg: PegGameObject) {

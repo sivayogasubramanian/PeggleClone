@@ -26,4 +26,8 @@ class CircularPhysicsBody: PhysicsBody, CircularIntersector {
         self.radius = radius
         super.init(gameObjectType: gameObjectType, position: position, mass: mass)
     }
+
+    func setRadius(to radius: Double) {
+        self.radius = radius
+    }
 }

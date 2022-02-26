@@ -13,6 +13,8 @@ class PowerupMapping {
             return KaBoom()
         } else if color == .purple {
             return SpookyBall()
+        } else if color == .gray {
+            return ShapeShift()
         }
 
         return nil

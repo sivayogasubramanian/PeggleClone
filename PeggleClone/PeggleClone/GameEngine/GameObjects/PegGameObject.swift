@@ -11,7 +11,7 @@ import CoreGraphics
 class PegGameObject {
     private static let gameObjectType = GameObjectType.peg
 
-    private(set) var physicsBody: PhysicsBody
+    private(set) var physicsBody: CircularPhysicsBody
     private(set) var radius: Double
     private(set) var color: PeggleColor
     private(set) var rotation: Double

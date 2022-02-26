@@ -58,9 +58,11 @@ struct DesignerView: View {
             bluePeg: designerViewModel.numberOfBluePegsAdded,
             orangePeg: designerViewModel.numberOfOrangePegsAdded,
             purplePeg: designerViewModel.numberOfPurplePegsAdded,
+            grayPeg: designerViewModel.numberOfGrayPegsAdded,
             blueBlock: designerViewModel.numberOfBlueBlocksAdded,
             orangeBlock: designerViewModel.numberOfOrangeBlocksAdded,
-            purpleBlock: designerViewModel.numberOfPurpleBlocksAdded
+            purpleBlock: designerViewModel.numberOfPurpleBlocksAdded,
+            grayBlock: designerViewModel.numberOfGrayBlocksAdded
         )
     }
 

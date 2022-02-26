@@ -20,6 +20,7 @@ enum Sound: String, CaseIterable {
     case lose
     case explosion
     case ghost
+    case shapeshift
 }
 
 class SoundManager {

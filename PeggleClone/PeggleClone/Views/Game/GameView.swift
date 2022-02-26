@@ -77,6 +77,7 @@ struct GameView: View {
             blue: gameViewModel.numberOfBluePegsLeft,
             orange: gameViewModel.numberOfOrangePegsLeft,
             purple: gameViewModel.numberOfPurplePegsLeft,
+            gray: gameViewModel.numberOfGrayPegsLeft,
             balls: gameViewModel.numberOfBallsLeft
         )
     }
@@ -145,6 +146,7 @@ struct GameView: View {
                 gameViewModel.setOffset(using: newY)
             }
             .animation(.interactiveSpring(), value: gameViewModel.offset)
+            .animation(.interactiveSpring(), value: ball.radius)
     }
 
     private func overlayBucketView() -> some View {

@@ -28,8 +28,14 @@ struct Constants {
     static let glowingOrangeTriangularBlockImage = "peg-orange-glow-triangle"
     static let orangePegImage = "peg-orange"
     static let orangeTriangularBlockImage = "peg-orange-triangle"
+    static let grayPegImage = "peg-grey"
+    static let glowingGrayPegImage = "peg-grey-glow"
+    static let grayTriangularBlockImage = "peg-grey-triangle"
+    static let glowingGrayTriangularBlockImage = "peg-grey-glow-triangle"
 
     static let ballRadius = 20.0
+    static let ballMinRadius = ballRadius / 2
+    static let ballMaxRadius = ballRadius * 2
     static let pegRadius = 25.0
     static let blockWidth = 50.0
     static let blockHeight = 50.0

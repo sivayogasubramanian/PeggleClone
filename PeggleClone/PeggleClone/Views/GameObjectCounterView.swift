@@ -11,6 +11,7 @@ struct GameObjectCounterView: View {
     let blue: Int
     let orange: Int
     let purple: Int
+    let gray: Int
     let balls: Int
 
     var body: some View {
@@ -18,6 +19,7 @@ struct GameObjectCounterView: View {
             ImageCounterView(image: Constants.orangePegImage, count: orange, color: .black, isCircle: true)
             ImageCounterView(image: Constants.bluePegImage, count: blue, color: .black, isCircle: true)
             ImageCounterView(image: Constants.purplePegImage, count: purple, color: .black, isCircle: true)
+            ImageCounterView(image: Constants.grayPegImage, count: gray, color: .black, isCircle: true)
             ImageCounterView(image: Constants.ballImage, count: balls, color: .black, isCircle: true)
         }
     }

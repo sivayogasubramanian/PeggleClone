@@ -20,6 +20,8 @@ struct Utils {
             return isLit ? Constants.glowingOrangePegImage : Constants.orangePegImage
         case .purple:
             return isLit ? Constants.glowingPurplePegImage : Constants.purplePegImage
+        case .gray:
+            return isLit ? Constants.glowingGrayPegImage : Constants.grayPegImage
         }
     }
 
@@ -31,6 +33,8 @@ struct Utils {
             return isLit ? Constants.glowingOrangeTriangularBlockImage : Constants.orangeTriangularBlockImage
         case .purple:
             return isLit ? Constants.glowingPurpleTriangularBlockImage : Constants.purpleTriangularBlockImage
+        case .gray:
+            return isLit ? Constants.glowingGrayTriangularBlockImage : Constants.grayTriangularBlockImage
         }
     }
 
@@ -66,6 +70,8 @@ struct Utils {
         switch pegColor {
         case .blue:
             return 10
+        case .gray:
+            return 50
         case .orange:
             return 100
         case .purple:

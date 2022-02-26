@@ -53,6 +53,9 @@ class GameViewModel: ObservableObject {
     var numberOfPurplePegsLeft: Int {
         gameEngine.numberOfPurplePegsLeft
     }
+    var numberOfGrayPegsLeft: Int {
+        gameEngine.numberOfGrayPegsLeft
+    }
     var isGameWon: Bool {
         gameEngine.isGameWon
     }
