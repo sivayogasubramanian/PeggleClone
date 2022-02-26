@@ -23,8 +23,11 @@ class GameViewModel: ObservableObject {
     var blocks: [BlockGameObject] {
         gameEngine.blocks
     }
+    var balls: [BallGameObject] {
+        gameEngine.balls
+    }
     var ball: BallGameObject? {
-        gameEngine.ball
+        gameEngine.mainBall
     }
     var bucket: BucketGameObject {
         gameEngine.bucket
@@ -55,6 +58,12 @@ class GameViewModel: ObservableObject {
     }
     var numberOfGrayPegsLeft: Int {
         gameEngine.numberOfGrayPegsLeft
+    }
+    var numberOfYellowPegsLeft: Int {
+        gameEngine.numberOfYellowPegsLeft
+    }
+    var numberOfPinkPegsLeft: Int {
+        gameEngine.numberOfPinkPegsLeft
     }
     var isGameWon: Bool {
         gameEngine.isGameWon

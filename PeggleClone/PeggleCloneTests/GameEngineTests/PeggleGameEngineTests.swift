@@ -28,20 +28,20 @@ class PeggleGameEngineTests: XCTestCase {
     func testAddBall() {
         let point = CGPoint(x: 100, y: 100)
         gameEngine.addBall(shootingTowards: point)
-        if let ball = gameEngine.ball {
+        if let ball = gameEngine.mainBall {
             let direction = (point.toCGVector() - ball.physicsBody.position).normalize()
             XCTAssertEqual(ball.physicsBody.force, PhysicsConstants.gravity)
             XCTAssertEqual(ball.physicsBody.velocity, direction * PhysicsConstants.initialBallLaunchVelocityMultiplier)
         }
-        XCTAssertNotNil(gameEngine.ball)
+        XCTAssertNotNil(gameEngine.mainBall)
     }
 
     func testSimulateFor_movesBall() {
         let point = CGPoint(x: 100, y: 100)
         gameEngine.addBall(shootingTowards: point)
-        let initialPosition = gameEngine.ball?.physicsBody.position
+        let initialPosition = gameEngine.mainBall?.physicsBody.position
         gameEngine.simulateFor(dt: 2)
-        XCTAssertNotEqual(gameEngine.ball?.physicsBody.position, initialPosition)
+        XCTAssertNotEqual(gameEngine.mainBall?.physicsBody.position, initialPosition)
     }
 
     func testSimulateFor_doesNotMovePeg() {
@@ -63,7 +63,7 @@ class PeggleGameEngineTests: XCTestCase {
         // Long time to let gravity do its work
         gameEngine.simulateFor(dt: 10_000)
 
-        XCTAssertNil(gameEngine.ball)
+        XCTAssertNil(gameEngine.mainBall)
     }
 
     func testSimulateFor_removesPegsWhenBallCollidesWithPeg() {

@@ -11,4 +11,5 @@
     case purple = 2
     case gray = 3
     case yellow = 4
+    case pink = 5
 }

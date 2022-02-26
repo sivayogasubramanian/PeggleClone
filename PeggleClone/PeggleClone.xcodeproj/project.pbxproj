@@ -55,6 +55,9 @@
 		4758A30827CAB3F8004525F0 /* AddYellowTriangularBlockAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4758A30727CAB3F8004525F0 /* AddYellowTriangularBlockAction.swift */; };
 		4758A30A27CAB4D9004525F0 /* Flash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4758A30927CAB4D9004525F0 /* Flash.swift */; };
 		4758A30C27CAB7C7004525F0 /* flash.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4758A30B27CAB7C7004525F0 /* flash.wav */; };
+		4758A30F27CAC011004525F0 /* AddPinkPegAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4758A30E27CAC011004525F0 /* AddPinkPegAction.swift */; };
+		4758A31127CAC026004525F0 /* AddPinkTriangularBlockAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4758A31027CAC026004525F0 /* AddPinkTriangularBlockAction.swift */; };
+		4758A31327CAC172004525F0 /* RainFire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4758A31227CAC172004525F0 /* RainFire.swift */; };
 		475C70AF27A043C500F8C2CB /* SavedLevelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C70AE27A043C500F8C2CB /* SavedLevelsView.swift */; };
 		47603E4427B6BEE10089E394 /* IntersectionDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47603E4327B6BEE10089E394 /* IntersectionDetectorTests.swift */; };
 		47603E4627B6C0BE0089E394 /* CollisionResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47603E4527B6C0BE0089E394 /* CollisionResolverTests.swift */; };
@@ -192,6 +195,9 @@
 		4758A30727CAB3F8004525F0 /* AddYellowTriangularBlockAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddYellowTriangularBlockAction.swift; sourceTree = "<group>"; };
 		4758A30927CAB4D9004525F0 /* Flash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flash.swift; sourceTree = "<group>"; };
 		4758A30B27CAB7C7004525F0 /* flash.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = flash.wav; sourceTree = "<group>"; };
+		4758A30E27CAC011004525F0 /* AddPinkPegAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinkPegAction.swift; sourceTree = "<group>"; };
+		4758A31027CAC026004525F0 /* AddPinkTriangularBlockAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinkTriangularBlockAction.swift; sourceTree = "<group>"; };
+		4758A31227CAC172004525F0 /* RainFire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainFire.swift; sourceTree = "<group>"; };
 		475C70AE27A043C500F8C2CB /* SavedLevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLevelsView.swift; sourceTree = "<group>"; };
 		47603E4327B6BEE10089E394 /* IntersectionDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectionDetectorTests.swift; sourceTree = "<group>"; };
 		47603E4527B6C0BE0089E394 /* CollisionResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionResolverTests.swift; sourceTree = "<group>"; };
@@ -652,6 +658,7 @@
 				47B22AD827C8A89600B58CFD /* SpookyBall.swift */,
 				4758A30127CAA34D004525F0 /* ShapeShift.swift */,
 				4758A30927CAB4D9004525F0 /* Flash.swift */,
+				4758A31227CAC172004525F0 /* RainFire.swift */,
 			);
 			path = Powerups;
 			sourceTree = "<group>";
@@ -703,11 +710,13 @@
 				47B22ACE27C89E2500B58CFD /* AddPurplePegAction.swift */,
 				4758A2FD27CAA257004525F0 /* AddGrayPegAction.swift */,
 				4758A30527CAB3AB004525F0 /* AddYellowPegAction.swift */,
+				4758A30E27CAC011004525F0 /* AddPinkPegAction.swift */,
 				47DA512E27C3A54A00491B3A /* AddOrangeTriangularBlockAction.swift */,
 				4754996D27C26CE0005FFC68 /* AddBlueTriangularBlockAction.swift */,
 				47B22AD027C89E4F00B58CFD /* AddPurpleTriangularBlockAction.swift */,
 				4758A2FF27CAA2A0004525F0 /* AddGrayTriangularBlockAction.swift */,
 				4758A30727CAB3F8004525F0 /* AddYellowTriangularBlockAction.swift */,
+				4758A31027CAC026004525F0 /* AddPinkTriangularBlockAction.swift */,
 				47CBF84327C132EF00B80002 /* DeleteAction.swift */,
 			);
 			path = Actions;
@@ -941,10 +950,13 @@
 				472D3FBE279882C4001B2E42 /* DesignerViewModel.swift in Sources */,
 				4717DC6C27A015D300DF7272 /* Board+Persistable.swift in Sources */,
 				4754997027C282D8005FFC68 /* Line.swift in Sources */,
+				4758A31127CAC026004525F0 /* AddPinkTriangularBlockAction.swift in Sources */,
 				476119C727A2619F001E2344 /* ImageButtonView.swift in Sources */,
 				47BE0DC627C90E8400F25502 /* PowerupMapping.swift in Sources */,
 				4758A30827CAB3F8004525F0 /* AddYellowTriangularBlockAction.swift in Sources */,
 				473A9E13279C134500476A3A /* CGPoint.swift in Sources */,
+				4758A30F27CAC011004525F0 /* AddPinkPegAction.swift in Sources */,
+				4758A31327CAC172004525F0 /* RainFire.swift in Sources */,
 				4754997327C35D0A005FFC68 /* CircularIntersector.swift in Sources */,
 				47A930AD27B3FC8700009C30 /* PegGameObject.swift in Sources */,
 				47BE0DD927CA1B9600F25502 /* SoundManager.swift in Sources */,

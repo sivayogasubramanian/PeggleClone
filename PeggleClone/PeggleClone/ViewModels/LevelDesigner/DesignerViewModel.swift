@@ -32,6 +32,12 @@ class DesignerViewModel: ObservableObject {
     var numberOfGrayPegsAdded: Int {
         board.pegs.filter({ $0.color == .gray }).count
     }
+    var numberOfYellowPegsAdded: Int {
+        board.pegs.filter({ $0.color == .yellow }).count
+    }
+    var numberOfPinkPegsAdded: Int {
+        board.pegs.filter({ $0.color == .pink }).count
+    }
     var numberOfOrangeBlocksAdded: Int {
         board.blocks.filter({ $0.color == .orange }).count
     }
@@ -43,6 +49,12 @@ class DesignerViewModel: ObservableObject {
     }
     var numberOfGrayBlocksAdded: Int {
         board.blocks.filter({ $0.color == .gray }).count
+    }
+    var numberOfYellowBlocksAdded: Int {
+        board.blocks.filter({ $0.color == .yellow }).count
+    }
+    var numberOfPinkBlocksAdded: Int {
+        board.blocks.filter({ $0.color == .pink }).count
     }
 
     func addPeg(at point: CGPoint, color: PeggleColor?) -> Bool {

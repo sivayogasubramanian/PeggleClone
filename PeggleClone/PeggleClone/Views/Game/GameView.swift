@@ -31,11 +31,12 @@ struct GameView: View {
             }
 
             if let ball = gameViewModel.ball {
-                overlayBallView(ball)
+                makeBallView(ball, isMainBall: true)
             }
             overlayPegViews()
             overlayBlockViews()
             overlayBucketView()
+            overlayBallViews()
             cannonView
         }
         .gesture(dragGestureForShoot)
@@ -78,6 +79,8 @@ struct GameView: View {
             orange: gameViewModel.numberOfOrangePegsLeft,
             purple: gameViewModel.numberOfPurplePegsLeft,
             gray: gameViewModel.numberOfGrayPegsLeft,
+            yellow: gameViewModel.numberOfYellowPegsLeft,
+            pink: gameViewModel.numberOfPinkPegsLeft,
             balls: gameViewModel.numberOfBallsLeft
         )
     }
@@ -125,6 +128,14 @@ struct GameView: View {
         }.animation(.easeOut(duration: 0.5), value: gameViewModel.blocks)
     }
 
+    private func overlayBallViews() -> some View {
+        ZStack {
+            ForEach(gameViewModel.balls) { ball in
+                makeBallView(ball).transition(.scale(scale: 1.1).combined(with: .opacity))
+            }
+        }.animation(.easeOut(duration: 0.5), value: gameViewModel.blocks)
+    }
+
     private func makeBlockView(_ block: BlockGameObject) -> some View {
         Image(Utils.pegColorToImageBlockFileName(color: block.color, isLit: block.isLit))
             .resizable()
@@ -136,8 +147,8 @@ struct GameView: View {
             .onChange(of: block.physicsBody.hitCount, perform: { _ in SoundManager.shared.playSound(sound: .hitBlock) })
     }
 
-    private func overlayBallView(_ ball: BallGameObject) -> some View {
-        Image(Constants.ballImage)
+    private func makeBallView(_ ball: BallGameObject, isMainBall: Bool = false) -> some View {
+        Image(isMainBall ? Constants.mainBallImage : Constants.extraBallImage)
             .resizable()
             .frame(width: ball.diameter, height: ball.diameter)
             .position(x: ball.physicsBody.position.dx, y: ball.physicsBody.position.dy)

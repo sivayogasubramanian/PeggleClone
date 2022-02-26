@@ -16,7 +16,7 @@ struct ImageCounterView: View {
     var body: some View {
         Image(image)
             .resizable()
-            .frame(width: 55, height: 55)
+            .frame(width: 40, height: 40)
             .overlay {
                 Text(String(count))
                     .bold()

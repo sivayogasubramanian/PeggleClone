@@ -13,7 +13,7 @@ class ShapeShift: Powerup {
             return
         }
 
-        guard let ball = gameEngine.ball else {
+        guard let ball = gameEngine.mainBall else {
             return
         }
 

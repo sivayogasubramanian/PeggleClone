@@ -10,11 +10,11 @@ import CoreGraphics
 
 class SpookyBall: Powerup {
     func applyPowerup(hitPeg: PegGameObject, gameEngine: PeggleGameEngine) {
-        guard let ball = gameEngine.ball else {
+        guard let ball = gameEngine.mainBall else {
             return
         }
 
-        if gameEngine.isSpookyBallActive && gameEngine.isBallOutOfBounds {
+        if gameEngine.isSpookyBallActive && gameEngine.isMainBallOutOfBounds {
             SoundManager.shared.playSound(sound: .ghost)
             gameEngine.removeLitGameObjects()
             ball.physicsBody.setPosition(to: CGVector(dx: ball.physicsBody.position.dx, dy: 10), isMovable: true)

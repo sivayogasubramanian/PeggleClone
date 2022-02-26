@@ -40,16 +40,23 @@ struct ImageButtonView: View {
 
     private var imageButtonViewCollection: some View {
         HStack {
-            orangePegImageButtonView
-            bluePegImageButtonView
-            purplePegImageButtonView
-            grayPegImageButtonView
-            yellowPegImageButtonView
-            orangeTriangularBlockButtonView
-            blueTriangularBlockButtonView
-            purpleTriangularBlockButtonView
-            grayTriangularBlockButtonView
-            yellowTriangularBlockButtonView
+            Group {
+                orangePegImageButtonView
+                bluePegImageButtonView
+                purplePegImageButtonView
+                grayPegImageButtonView
+                yellowPegImageButtonView
+                pinkPegImageButtonView
+            }
+
+            Group {
+                orangeTriangularBlockButtonView
+                blueTriangularBlockButtonView
+                purpleTriangularBlockButtonView
+                grayTriangularBlockButtonView
+                yellowTriangularBlockButtonView
+                pinkTriangularBlockButtonView
+            }
         }
     }
 
@@ -117,6 +124,16 @@ struct ImageButtonView: View {
         )
     }
 
+    private var pinkPegImageButtonView: some View {
+        IndividualImageButtonView(
+            designerViewModel: designerViewModel,
+            actionsViewModel: actionsViewModel,
+            image: Constants.pinkPegImage,
+            action: AddPinkPegAction(),
+            actionType: AddPinkPegAction.self
+        )
+    }
+
     private var orangeTriangularBlockButtonView: some View {
         IndividualImageButtonView(
             designerViewModel: designerViewModel,
@@ -164,6 +181,16 @@ struct ImageButtonView: View {
             image: Constants.yellowTriangularBlockImage,
             action: AddYellowTriangularBlockAction(),
             actionType: AddYellowTriangularBlockAction.self
+        )
+    }
+
+    private var pinkTriangularBlockButtonView: some View {
+        IndividualImageButtonView(
+            designerViewModel: designerViewModel,
+            actionsViewModel: actionsViewModel,
+            image: Constants.pinkTriangularBlockImage,
+            action: AddPinkTriangularBlockAction(),
+            actionType: AddPinkTriangularBlockAction.self
         )
     }
 

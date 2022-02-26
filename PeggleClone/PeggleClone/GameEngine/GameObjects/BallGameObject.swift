@@ -8,7 +8,7 @@
 import Foundation
 import CoreGraphics
 
-class BallGameObject: CircularIntersector {
+class BallGameObject: CircularIntersector, Identifiable {
     var center: CGVector {
         physicsBody.position
     }

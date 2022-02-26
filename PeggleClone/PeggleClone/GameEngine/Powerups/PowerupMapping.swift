@@ -17,6 +17,8 @@ class PowerupMapping {
             return ShapeShift()
         } else if color == .yellow {
             return Flash()
+        } else if color == .pink {
+            return RainFire()
         }
 
         return nil

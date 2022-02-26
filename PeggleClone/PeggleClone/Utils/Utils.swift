@@ -24,6 +24,8 @@ struct Utils {
             return isLit ? Constants.glowingGrayPegImage : Constants.grayPegImage
         case .yellow:
             return isLit ? Constants.glowingYellowPegImage : Constants.yellowPegImage
+        case .pink:
+            return isLit ? Constants.glowingPinkPegImage : Constants.pinkPegImage
         }
     }
 
@@ -39,6 +41,8 @@ struct Utils {
             return isLit ? Constants.glowingGrayTriangularBlockImage : Constants.grayTriangularBlockImage
         case .yellow:
             return isLit ? Constants.glowingYellowTriangularBlockImage : Constants.yellowTriangularBlockImage
+        case .pink:
+            return isLit ? Constants.glowingPinkTriangularBlockImage : Constants.pinkTriangularBlockImage
         }
     }
 
@@ -72,6 +76,8 @@ struct Utils {
 
     private static func getScore(pegColor: PeggleColor) -> Int {
         switch pegColor {
+        case .pink:
+            return 1
         case .blue:
             return 10
         case .gray:

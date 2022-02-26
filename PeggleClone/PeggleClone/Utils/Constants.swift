@@ -13,7 +13,8 @@ struct Constants {
     static let mainBackgroundImage = "main-background"
     static let backButtonImage = "back-button"
     static let backgroundImage = "background"
-    static let ballImage = "ball"
+    static let mainBallImage = "peg-red"
+    static let extraBallImage = "ball"
     static let bucketImage = "bucket"
     static let bluePegImage = "peg-blue"
     static let blueTriangularBlockImage = "peg-blue-triangle"
@@ -38,6 +39,10 @@ struct Constants {
     static let glowingYellowPegImage = "peg-yellow-glow"
     static let yellowTriangularBlockImage = "peg-yellow-triangle"
     static let glowingYellowTriangularBlockImage = "peg-yellow-glow-triangle"
+    static let pinkPegImage = "peg-pink"
+    static let glowingPinkPegImage = "peg-pink-glow"
+    static let pinkTriangularBlockImage = "peg-pink-triangle"
+    static let glowingPinkTriangularBlockImage = "peg-pink-glow-triangle"
 
     // Numerics
     static let ballRadius = 20.0

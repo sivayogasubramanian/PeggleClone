@@ -19,7 +19,7 @@ struct DesignerView: View {
             boardView
                 .overlay(alignment: .bottomTrailing) {
                     designerObjectCounterView
-                        .padding(.bottom, 20).padding(.trailing, 20)
+                        .padding(.bottom, 30).padding(.trailing, 20)
                 }
                 .overlay(alignment: .bottomLeading) {
                     boardOffsetView
@@ -59,10 +59,14 @@ struct DesignerView: View {
             orangePeg: designerViewModel.numberOfOrangePegsAdded,
             purplePeg: designerViewModel.numberOfPurplePegsAdded,
             grayPeg: designerViewModel.numberOfGrayPegsAdded,
+            yellowPeg: designerViewModel.numberOfYellowPegsAdded,
+            pinkPeg: designerViewModel.numberOfPinkPegsAdded,
             blueBlock: designerViewModel.numberOfBlueBlocksAdded,
             orangeBlock: designerViewModel.numberOfOrangeBlocksAdded,
             purpleBlock: designerViewModel.numberOfPurpleBlocksAdded,
-            grayBlock: designerViewModel.numberOfGrayBlocksAdded
+            grayBlock: designerViewModel.numberOfGrayBlocksAdded,
+            yellowBlock: designerViewModel.numberOfYellowBlocksAdded,
+            pinkBlock: designerViewModel.numberOfPinkBlocksAdded
         )
     }
 

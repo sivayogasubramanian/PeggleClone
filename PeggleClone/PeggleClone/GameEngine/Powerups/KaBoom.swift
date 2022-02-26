@@ -12,7 +12,7 @@ class KaBoom: Powerup {
     static let explosionRadius = 100.0
 
     func applyPowerup(hitPeg: PegGameObject, gameEngine: PeggleGameEngine) {
-        guard let ball = gameEngine.ball else {
+        guard let ball = gameEngine.mainBall else {
             return
         }
         guard hitPeg.physicsBody.hitCount <= 2 else {

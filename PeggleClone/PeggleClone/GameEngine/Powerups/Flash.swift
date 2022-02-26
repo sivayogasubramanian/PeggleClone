@@ -9,7 +9,7 @@ import Foundation
 
 class Flash: Powerup {
     func applyPowerup(hitPeg: PegGameObject, gameEngine: PeggleGameEngine) {
-        guard let ball = gameEngine.ball else {
+        guard let ball = gameEngine.mainBall else {
             return
         }
 
