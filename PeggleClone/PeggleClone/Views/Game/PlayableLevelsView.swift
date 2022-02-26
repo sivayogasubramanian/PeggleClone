@@ -42,7 +42,12 @@ struct PlayableLevelsView: View {
             if let uiImage = UIImage(data: board.snapshot) {
                 Image(uiImage: uiImage).resizable().scaledToFit()
             }
-            Text("\(board.name)").font(.title2)
+            HStack {
+                Text("\(board.name)").font(.title2).bold()
+                if board.maxHeight > board.boardSize.height {
+                    Text("(Scrolling Level)").font(.title2)
+                }
+            }
         })
         .foregroundColor(.primary)
         .padding(15)

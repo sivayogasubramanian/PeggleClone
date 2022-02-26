@@ -12,6 +12,8 @@ struct DesignerView: View {
     @StateObject private var designerViewModel = DesignerViewModel()
     @StateObject private var actionsViewModel = DesignerActionsViewModel()
 
+    @State private var isBackTapped = false
+
     var body: some View {
         ZStack(alignment: .top) {
             boardView
@@ -77,12 +79,19 @@ struct DesignerView: View {
 
     private var backButtonView: some View {
         Button(action: {
-            dismiss()
+            isBackTapped = true
         }, label: {
             HStack {
                 Image(systemName: "chevron.left")
                 Text("BACK")
             }
         })
+        .alert(
+            "Please remember to save your progress. Any progress made will be lost if it is not saved.",
+            isPresented: $isBackTapped,
+            actions: {
+                Button("Cancel", role: .cancel, action: {})
+                Button("Ok", role: .destructive, action: { dismiss() })
+            })
     }
 }
