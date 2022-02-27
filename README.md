@@ -131,10 +131,11 @@ The larger this radius, the "looser" the springiness will be.
     - 4 additional helper game balls (dark gray in color) will be spawned if the main game ball (red in color) hits a pink peg.
     - Note that there can only be 4 helper game balls at any given time. So if the game ball happens to hit multiple pink pegs, the powerup might not activate depending on the number of game ball present.
     - The helper game balls disappear when the main game ball exits the game screen.
-    - Helper game balls can activate other powerups.
+    - Helper game balls can activate some powerups like spooky ball and ka boom.
     - If the helper ball activates the spooky ball powerup, the main ball becomes spooky (i.e. the main ball will reappear at the top after it exits).
     - Helper game balls cannot activate rain fire because of point 2.
     - Helper game balls can fall into the bucket. If they do, all balls will be removed (including the main ball) and you get a free ball and you can shoot again.
+    - Helper game balls cannot get affected by shape shift and flash power ups.
 
 ## Tests
 
