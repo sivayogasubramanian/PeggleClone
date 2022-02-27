@@ -196,12 +196,12 @@ class PeggleGameEngine {
 
     private func prepareNewBall(initialDirection point: CGPoint) -> BallGameObject? {
         let ball = BallGameObject(
-            position: CGVector(dx: boardSize.width / 2, dy: PhysicsConstants.initialBallLaunchYCoordinate)
+            position: CGVector(dx: boardSize.width / 2, dy: Constants.initialBallLaunchYCoordinate)
         )
         let direction = (point.toCGVector() - ball.physicsBody.position).normalize()
-        ball.physicsBody.setForce(to: PhysicsConstants.gravity, isMovable: true)
+        ball.physicsBody.setForce(to: Constants.gravity, isMovable: true)
         ball.physicsBody.setVelocity(
-            to: direction * PhysicsConstants.initialBallLaunchVelocity,
+            to: direction * Constants.initialBallLaunchVelocity,
             isMovable: true
         )
 

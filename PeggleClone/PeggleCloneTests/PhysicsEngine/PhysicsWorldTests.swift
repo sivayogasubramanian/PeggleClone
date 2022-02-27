@@ -37,7 +37,7 @@ class PhysicsWorldTests: XCTestCase {
 
     func testUpdatePhysicsBodiesPositions() {
         let body = PhysicsBody(gameObjectType: .ball, position: .zero, mass: 1)
-        body.setForce(to: PhysicsConstants.gravity, isMovable: body.isMovable)
+        body.setForce(to: Constants.gravity, isMovable: body.isMovable)
         world.addPhysicsBody(body)
         world.updatePhysicsBodiesPositions(dt: 1)
         XCTAssertNotEqual(body.position, .zero)

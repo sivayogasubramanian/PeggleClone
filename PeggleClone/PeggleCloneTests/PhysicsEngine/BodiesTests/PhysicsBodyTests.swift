@@ -75,7 +75,7 @@ class PhysicsBodyTests: XCTestCase {
         let oldForce = immovableBody.force
         let oldPosition = immovableBody.position
 
-        immovableBody.setForce(to: PhysicsConstants.gravity, isMovable: immovableBody.isMovable)
+        immovableBody.setForce(to: Constants.gravity, isMovable: immovableBody.isMovable)
         immovableBody.updatePhysicsBody(dt: 1, isMovable: immovableBody.isMovable)
 
         XCTAssertEqual(immovableBody.velocity, oldVelocity)
@@ -85,7 +85,7 @@ class PhysicsBodyTests: XCTestCase {
 
     func testUpdatePhysicsBody_whenPhysicsBodyMassIsZero_shouldNotUpdate() {
         let physicsBody = PhysicsBody(gameObjectType: .peg, position: CGVector(dx: 1, dy: 1), mass: 0)
-        physicsBody.setForce(to: PhysicsConstants.gravity, isMovable: physicsBody.isMovable)
+        physicsBody.setForce(to: Constants.gravity, isMovable: physicsBody.isMovable)
 
         let oldVelocity = physicsBody.velocity
         let oldForce = physicsBody.force
@@ -103,7 +103,7 @@ class PhysicsBodyTests: XCTestCase {
         let oldForce = movableBody.force
         let oldPosition = movableBody.position
 
-        movableBody.setForce(to: PhysicsConstants.gravity, isMovable: movableBody.isMovable)
+        movableBody.setForce(to: Constants.gravity, isMovable: movableBody.isMovable)
         movableBody.updatePhysicsBody(dt: 1, isMovable: movableBody.isMovable)
 
         XCTAssertNotEqual(movableBody.velocity, oldVelocity)

@@ -176,9 +176,9 @@ class DesignerViewModel: ObservableObject {
         }
 
         if showSpringinessCircle {
-            board.setBlockSpringiness(block: selectedBlock, to: PhysicsConstants.minimumSpringiness)
+            board.setBlockSpringiness(block: selectedBlock, to: Constants.minimumSpringiness)
         } else {
-            board.setBlockSpringiness(block: selectedBlock, to: PhysicsConstants.zeroSpringiness)
+            board.setBlockSpringiness(block: selectedBlock, to: Constants.zeroSpringiness)
         }
 
         updateViews()

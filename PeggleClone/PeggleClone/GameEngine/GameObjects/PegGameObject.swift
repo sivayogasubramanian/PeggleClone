@@ -22,7 +22,7 @@ class PegGameObject {
         physicsBody.hitCount != 0
     }
     var shouldBeRemoved: Bool {
-        physicsBody.hitCount > PhysicsConstants.physicsBodyMaxHitCount
+        physicsBody.hitCount > Constants.physicsBodyMaxHitCount
     }
     private(set) var powerup: Powerup?
 

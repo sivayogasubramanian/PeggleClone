@@ -21,7 +21,7 @@ class BlockGameObject {
         physicsBody.hitCount != 0
     }
     var shouldBeRemoved: Bool {
-        physicsBody.hitCount > PhysicsConstants.physicsBodyMaxHitCount
+        physicsBody.hitCount > Constants.physicsBodyMaxHitCount
     }
 
     init(fromBlock block: TriangularBlock) {

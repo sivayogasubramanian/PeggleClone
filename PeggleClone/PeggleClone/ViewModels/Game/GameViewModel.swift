@@ -138,9 +138,9 @@ class GameViewModel: ObservableObject {
         previousTime = current
         lag += elasped
 
-        while lag >= PhysicsConstants.physicsUpdateTickTime {
-            gameEngine.simulateFor(dt: PhysicsConstants.physicsUpdateTickTime)
-            lag -= PhysicsConstants.physicsUpdateTickTime
+        while lag >= Constants.physicsUpdateTickTime {
+            gameEngine.simulateFor(dt: Constants.physicsUpdateTickTime)
+            lag -= Constants.physicsUpdateTickTime
         }
 
         updateViews()

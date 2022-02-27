@@ -189,14 +189,14 @@ struct GameView: View {
             .onChanged({ value in
                 let point = CGPoint(
                     x: value.location.x,
-                    y: max(value.location.y, PhysicsConstants.initialBallLaunchYCoordinate)
+                    y: max(value.location.y, Constants.initialBallLaunchYCoordinate)
                 )
                 rotateState = gameViewModel.getAngleForCanon(using: point)
             })
             .onEnded({ value in
                 let point = CGPoint(
                     x: value.location.x,
-                    y: max(value.location.y, PhysicsConstants.initialBallLaunchYCoordinate)
+                    y: max(value.location.y, Constants.initialBallLaunchYCoordinate)
                 )
                 if gameViewModel.isCannonLoaded {
                     SoundManager.shared.playSound(sound: .shoot)

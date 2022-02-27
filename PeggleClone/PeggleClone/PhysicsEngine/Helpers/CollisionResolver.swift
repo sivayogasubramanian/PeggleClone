@@ -41,7 +41,7 @@ class CollisionResolver {
         body1: PhysicsBody, body2: PhysicsBody, manifold: CollisionManifold
     ) -> Double {
         let relativeVelocity = body1.velocity - body2.velocity
-        var impulse = -(1 + PhysicsConstants.coefficientOfRestitution) * relativeVelocity.dot(vector: manifold.normal)
+        var impulse = -(1 + Constants.coefficientOfRestitution) * relativeVelocity.dot(vector: manifold.normal)
         impulse /= (1 / body1.mass) + (1 / body2.mass)
         return impulse
     }

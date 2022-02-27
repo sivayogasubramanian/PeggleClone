@@ -30,8 +30,8 @@ class PeggleGameEngineTests: XCTestCase {
         gameEngine.addBall(shootingTowards: point)
         if let ball = gameEngine.mainBall {
             let direction = (point.toCGVector() - ball.physicsBody.position).normalize()
-            XCTAssertEqual(ball.physicsBody.force, PhysicsConstants.gravity)
-            XCTAssertEqual(ball.physicsBody.velocity, direction * PhysicsConstants.initialBallLaunchVelocity)
+            XCTAssertEqual(ball.physicsBody.force, Constants.gravity)
+            XCTAssertEqual(ball.physicsBody.velocity, direction * Constants.initialBallLaunchVelocity)
         }
         XCTAssertNotNil(gameEngine.mainBall)
     }
@@ -78,8 +78,8 @@ class PeggleGameEngineTests: XCTestCase {
         // Simulate collision
         var totalTime = 20.0
         while totalTime > 0 {
-            gameEngine.simulateFor(dt: PhysicsConstants.physicsUpdateTickTime)
-            totalTime -= PhysicsConstants.physicsUpdateTickTime
+            gameEngine.simulateFor(dt: Constants.physicsUpdateTickTime)
+            totalTime -= Constants.physicsUpdateTickTime
         }
 
         XCTAssertTrue(gameEngine.pegs.isEmpty)

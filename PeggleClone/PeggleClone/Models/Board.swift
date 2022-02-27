@@ -212,18 +212,18 @@ final class Board: Identifiable {
     }
 
     func setBlockSpringiness(block: TriangularBlock, to springiness: Double) {
-        if springiness == PhysicsConstants.zeroSpringiness {
-            block.setSpringiness(to: PhysicsConstants.zeroSpringiness)
+        if springiness == Constants.zeroSpringiness {
+            block.setSpringiness(to: Constants.zeroSpringiness)
             return
         }
 
-        if springiness < PhysicsConstants.minimumSpringiness {
-            block.setSpringiness(to: PhysicsConstants.minimumSpringiness)
+        if springiness < Constants.minimumSpringiness {
+            block.setSpringiness(to: Constants.minimumSpringiness)
             return
         }
 
-        if springiness > PhysicsConstants.maximumSpringiness {
-            block.setSpringiness(to: PhysicsConstants.maximumSpringiness)
+        if springiness > Constants.maximumSpringiness {
+            block.setSpringiness(to: Constants.maximumSpringiness)
             return
         }
 

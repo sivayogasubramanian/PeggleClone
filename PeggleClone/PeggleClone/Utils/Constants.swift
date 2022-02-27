@@ -5,6 +5,8 @@
 //  Created by Sivayogasubramanian on 22/1/22.
 //
 
+import CoreGraphics
+
 struct Constants {
     // Core-data
     static let coreDataContainerName = "PeggleCloneData"
@@ -60,4 +62,16 @@ struct Constants {
     // Letterboxing
     static let xRatio = 7
     static let yRatio = 10
+
+    // Physics Constants
+    static let ballMass = 2.0
+    static let gravity = CGVector(dx: 0, dy: 9.81)
+    static let coefficientOfRestitution = 0.8
+    static let initialBallLaunchVelocity = 800.0
+    static let initialBallLaunchYCoordinate = 50.0
+    static let physicsBodyMaxHitCount = 100
+    static let physicsUpdateTickTime = 0.01
+    static let zeroSpringiness = 0.0
+    static let minimumSpringiness = 125.0
+    static let maximumSpringiness = 250.0
 }

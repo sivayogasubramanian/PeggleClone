@@ -82,7 +82,6 @@
 		4776293B279844B800A1A8C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4776293A279844B800A1A8C0 /* Assets.xcassets */; };
 		4776293E279844B800A1A8C0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4776293D279844B800A1A8C0 /* Preview Assets.xcassets */; };
 		479AB7FA27A1C2AF00F3208E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479AB7F927A1C2AF00F3208E /* View.swift */; };
-		47A9309827B3FA3200009C30 /* PhysicsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A9309727B3FA3200009C30 /* PhysicsConstants.swift */; };
 		47A9309C27B3FACA00009C30 /* PhysicsBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A9309B27B3FACA00009C30 /* PhysicsBody.swift */; };
 		47A9309E27B3FAE300009C30 /* CircularPhysicsBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A9309D27B3FAE300009C30 /* CircularPhysicsBody.swift */; };
 		47A930A027B3FB8D00009C30 /* IntersectionDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A9309F27B3FB8D00009C30 /* IntersectionDetector.swift */; };
@@ -226,7 +225,6 @@
 		4776293D279844B800A1A8C0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		47762943279844B800A1A8C0 /* PeggleCloneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeggleCloneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		479AB7F927A1C2AF00F3208E /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
-		47A9309727B3FA3200009C30 /* PhysicsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsConstants.swift; sourceTree = "<group>"; };
 		47A9309B27B3FACA00009C30 /* PhysicsBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsBody.swift; sourceTree = "<group>"; };
 		47A9309D27B3FAE300009C30 /* CircularPhysicsBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularPhysicsBody.swift; sourceTree = "<group>"; };
 		47A9309F27B3FB8D00009C30 /* IntersectionDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectionDetector.swift; sourceTree = "<group>"; };
@@ -408,7 +406,6 @@
 				47BE0DD627CA1B6300F25502 /* SoundManager */,
 				4754996B27C26C67005FFC68 /* PeggleColor.swift */,
 				473A9E1C279C2DDB00476A3A /* Constants.swift */,
-				47A9309727B3FA3200009C30 /* PhysicsConstants.swift */,
 				473A9E1F279C2F7D00476A3A /* Utils.swift */,
 				4754996F27C282D8005FFC68 /* Line.swift */,
 			);
@@ -992,7 +989,6 @@
 				47BE0DCC27C94B8500F25502 /* MainView.swift in Sources */,
 				47B22AC027C7A5EF00B58CFD /* Seeder.swift in Sources */,
 				4717DC6627A010F000DF7272 /* CoreDataManager.swift in Sources */,
-				47A9309827B3FA3200009C30 /* PhysicsConstants.swift in Sources */,
 				47A930B527B3FD4600009C30 /* GameViewModel.swift in Sources */,
 				4758A30A27CAB4D9004525F0 /* Flash.swift in Sources */,
 				4754996627C23836005FFC68 /* LinePhysicsBody.swift in Sources */,

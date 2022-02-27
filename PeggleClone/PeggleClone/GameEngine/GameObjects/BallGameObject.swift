@@ -26,7 +26,7 @@ class BallGameObject: CircularIntersector, Identifiable {
             gameObjectType: BallGameObject.gameObjectType,
             position: position,
             radius: radius,
-            mass: PhysicsConstants.ballMass
+            mass: Constants.ballMass
         )
     }
 
@@ -35,7 +35,7 @@ class BallGameObject: CircularIntersector, Identifiable {
             gameObjectType: BallGameObject.gameObjectType,
             position: position,
             radius: radius,
-            mass: PhysicsConstants.ballMass
+            mass: Constants.ballMass
         )
     }
 

@@ -25,10 +25,10 @@ class RainFire: Powerup {
         let ball3 = BallGameObject(position: CGVector(dx: 4 * xStep, dy: 0))
         let ball4 = BallGameObject(position: CGVector(dx: 5 * xStep, dy: 0))
 
-        ball1.physicsBody.setForce(to: PhysicsConstants.gravity, isMovable: true)
-        ball2.physicsBody.setForce(to: PhysicsConstants.gravity, isMovable: true)
-        ball3.physicsBody.setForce(to: PhysicsConstants.gravity, isMovable: true)
-        ball4.physicsBody.setForce(to: PhysicsConstants.gravity, isMovable: true)
+        ball1.physicsBody.setForce(to: Constants.gravity, isMovable: true)
+        ball2.physicsBody.setForce(to: Constants.gravity, isMovable: true)
+        ball3.physicsBody.setForce(to: Constants.gravity, isMovable: true)
+        ball4.physicsBody.setForce(to: Constants.gravity, isMovable: true)
 
         gameEngine.addExtraBall(ball1)
         gameEngine.addExtraBall(ball2)

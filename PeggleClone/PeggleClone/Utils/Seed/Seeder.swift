@@ -99,7 +99,7 @@ class Seeder {
                 let color: PeggleColor = colors[(xUnit + yUnit) % colors.count]
                 if xUnit.isMultiple(of: 2) {
                     let block = board.addBlock(at: coordinate, color: color)
-                    block?.setSpringiness(to: PhysicsConstants.maximumSpringiness)
+                    block?.setSpringiness(to: Constants.maximumSpringiness)
                 } else {
                     _ = board.addPeg(at: coordinate, color: color)
                 }
