@@ -135,7 +135,8 @@ The larger this radius, the "looser" the springiness will be.
     - If the helper ball activates the spooky ball powerup, the main ball becomes spooky (i.e. the main ball will reappear at the top after it exits).
     - Helper game balls cannot activate rain fire because of point 2.
     - Helper game balls can fall into the bucket. If they do, all balls will be removed (including the main ball) and you get a free ball and you can shoot again.
-    - Helper game balls cannot get affected by shape shift and flash power ups.
+    - Helper game balls themselves cannot get affected by shape shift and flash power ups.
+    - All helper game balls activated powerups will affect the main ball.
 
 ## Tests
 
