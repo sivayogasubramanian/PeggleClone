@@ -7,7 +7,6 @@
 //
 
 import CoreData
-import Foundation
 
 @objc(PegEntity)
 public class PegEntity: NSManagedObject {

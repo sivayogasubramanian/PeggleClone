@@ -7,7 +7,6 @@
 //
 
 import CoreData
-import Foundation
 
 @objc(TriangularBlockEntity)
 public class TriangularBlockEntity: NSManagedObject {

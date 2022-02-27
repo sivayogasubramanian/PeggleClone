@@ -7,7 +7,6 @@
 //
 
 import CoreData
-import Foundation
 
 extension BoardEntity {
 

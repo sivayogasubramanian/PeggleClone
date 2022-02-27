@@ -7,7 +7,6 @@
 
 import CoreData
 import CoreGraphics
-import Foundation
 
 extension Peg: Persistable {
     static func fromCoreDataEntity(_ entity: PegEntity) -> Self {

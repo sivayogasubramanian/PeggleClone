@@ -7,7 +7,6 @@
 
 import CoreData
 import CoreGraphics
-import Foundation
 
 extension Board: Persistable {
     static func fromCoreDataEntity(_ entity: BoardEntity) -> Self {

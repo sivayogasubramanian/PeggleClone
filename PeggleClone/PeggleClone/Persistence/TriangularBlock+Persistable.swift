@@ -7,7 +7,6 @@
 
 import CoreData
 import CoreGraphics
-import Foundation
 
 extension TriangularBlock: Persistable {
     static func fromCoreDataEntity(_ entity: TriangularBlockEntity) -> Self {

@@ -7,7 +7,6 @@
 //
 
 import CoreData
-import Foundation
 
 @objc(BoardEntity)
 public class BoardEntity: NSManagedObject {
