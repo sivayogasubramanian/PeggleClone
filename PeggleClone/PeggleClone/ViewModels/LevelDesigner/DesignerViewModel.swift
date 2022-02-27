@@ -20,42 +20,6 @@ class DesignerViewModel: ObservableObject {
     private(set) var showSpringinessCircle = false
     private(set) var selectedPeg: Peg?
     private(set) var selectedBlock: TriangularBlock?
-    var numberOfOrangePegsAdded: Int {
-        board.pegs.filter({ $0.color == .orange }).count
-    }
-    var numberOfBluePegsAdded: Int {
-        board.pegs.filter({ $0.color == .blue }).count
-    }
-    var numberOfPurplePegsAdded: Int {
-        board.pegs.filter({ $0.color == .purple }).count
-    }
-    var numberOfGrayPegsAdded: Int {
-        board.pegs.filter({ $0.color == .gray }).count
-    }
-    var numberOfYellowPegsAdded: Int {
-        board.pegs.filter({ $0.color == .yellow }).count
-    }
-    var numberOfPinkPegsAdded: Int {
-        board.pegs.filter({ $0.color == .pink }).count
-    }
-    var numberOfOrangeBlocksAdded: Int {
-        board.blocks.filter({ $0.color == .orange }).count
-    }
-    var numberOfBlueBlocksAdded: Int {
-        board.blocks.filter({ $0.color == .blue }).count
-    }
-    var numberOfPurpleBlocksAdded: Int {
-        board.blocks.filter({ $0.color == .purple }).count
-    }
-    var numberOfGrayBlocksAdded: Int {
-        board.blocks.filter({ $0.color == .gray }).count
-    }
-    var numberOfYellowBlocksAdded: Int {
-        board.blocks.filter({ $0.color == .yellow }).count
-    }
-    var numberOfPinkBlocksAdded: Int {
-        board.blocks.filter({ $0.color == .pink }).count
-    }
 
     func addPeg(at point: CGPoint, color: PeggleColor?) -> Bool {
         let peg = board.addPeg(at: point, color: color)

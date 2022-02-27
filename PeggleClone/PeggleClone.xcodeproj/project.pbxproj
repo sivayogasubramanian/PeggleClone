@@ -59,6 +59,7 @@
 		4758A31127CAC026004525F0 /* AddPinkTriangularBlockAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4758A31027CAC026004525F0 /* AddPinkTriangularBlockAction.swift */; };
 		4758A31327CAC172004525F0 /* RainFire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4758A31227CAC172004525F0 /* RainFire.swift */; };
 		4758A31727CB4C0F004525F0 /* fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4758A31627CB4C0F004525F0 /* fire.wav */; };
+		4758A31927CB6209004525F0 /* Board+ComputedProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4758A31827CB6209004525F0 /* Board+ComputedProperties.swift */; };
 		475C70AF27A043C500F8C2CB /* SavedLevelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C70AE27A043C500F8C2CB /* SavedLevelsView.swift */; };
 		47603E4427B6BEE10089E394 /* IntersectionDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47603E4327B6BEE10089E394 /* IntersectionDetectorTests.swift */; };
 		47603E4627B6C0BE0089E394 /* CollisionResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47603E4527B6C0BE0089E394 /* CollisionResolverTests.swift */; };
@@ -200,6 +201,7 @@
 		4758A31027CAC026004525F0 /* AddPinkTriangularBlockAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinkTriangularBlockAction.swift; sourceTree = "<group>"; };
 		4758A31227CAC172004525F0 /* RainFire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainFire.swift; sourceTree = "<group>"; };
 		4758A31627CB4C0F004525F0 /* fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fire.wav; sourceTree = "<group>"; };
+		4758A31827CB6209004525F0 /* Board+ComputedProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Board+ComputedProperties.swift"; sourceTree = "<group>"; };
 		475C70AE27A043C500F8C2CB /* SavedLevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLevelsView.swift; sourceTree = "<group>"; };
 		47603E4327B6BEE10089E394 /* IntersectionDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectionDetectorTests.swift; sourceTree = "<group>"; };
 		47603E4527B6C0BE0089E394 /* CollisionResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionResolverTests.swift; sourceTree = "<group>"; };
@@ -520,6 +522,7 @@
 				4754996927C2684D005FFC68 /* TriangularBlock.swift */,
 				473A9E0D279BEBF500476A3A /* Board.swift */,
 				47DDFEEB27C6C486008678F4 /* Board+Validations.swift */,
+				4758A31827CB6209004525F0 /* Board+ComputedProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -937,6 +940,7 @@
 				474470FD27AEC8360048C4BF /* CGVector.swift in Sources */,
 				4754997627C35D36005FFC68 /* LineIntersector.swift in Sources */,
 				473A9E1A279C212500476A3A /* DesignerBoardView.swift in Sources */,
+				4758A31927CB6209004525F0 /* Board+ComputedProperties.swift in Sources */,
 				47A930AF27B3FCBD00009C30 /* PeggleGameEngine.swift in Sources */,
 				475C70AF27A043C500F8C2CB /* SavedLevelsView.swift in Sources */,
 				4717DC6A27A014C300DF7272 /* Peg+Persistable.swift in Sources */,

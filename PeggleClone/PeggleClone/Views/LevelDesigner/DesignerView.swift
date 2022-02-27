@@ -56,18 +56,18 @@ struct DesignerView: View {
 
     private var designerObjectCounterView: some View {
         DesignerObjectCounterView(
-            bluePeg: designerViewModel.numberOfBluePegsAdded,
-            orangePeg: designerViewModel.numberOfOrangePegsAdded,
-            purplePeg: designerViewModel.numberOfPurplePegsAdded,
-            grayPeg: designerViewModel.numberOfGrayPegsAdded,
-            yellowPeg: designerViewModel.numberOfYellowPegsAdded,
-            pinkPeg: designerViewModel.numberOfPinkPegsAdded,
-            blueBlock: designerViewModel.numberOfBlueBlocksAdded,
-            orangeBlock: designerViewModel.numberOfOrangeBlocksAdded,
-            purpleBlock: designerViewModel.numberOfPurpleBlocksAdded,
-            grayBlock: designerViewModel.numberOfGrayBlocksAdded,
-            yellowBlock: designerViewModel.numberOfYellowBlocksAdded,
-            pinkBlock: designerViewModel.numberOfPinkBlocksAdded
+            bluePeg: designerViewModel.board.bluePegsCount,
+            orangePeg: designerViewModel.board.orangePegsCount,
+            purplePeg: designerViewModel.board.purplePegsCount,
+            grayPeg: designerViewModel.board.grayPegsCount,
+            yellowPeg: designerViewModel.board.yellowPegsCount,
+            pinkPeg: designerViewModel.board.pinkPegsCount,
+            blueBlock: designerViewModel.board.blueBlocksCount,
+            orangeBlock: designerViewModel.board.orangeBlocksCount,
+            purpleBlock: designerViewModel.board.purpleBlocksCount,
+            grayBlock: designerViewModel.board.grayBlocksCount,
+            yellowBlock: designerViewModel.board.yellowBlocksCount,
+            pinkBlock: designerViewModel.board.pinkBlocksCount
         )
     }
 

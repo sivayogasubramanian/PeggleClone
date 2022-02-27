@@ -46,7 +46,7 @@ class SoundManager {
                 return
             }
             player.numberOfLoops = isLooped ? 10 : 0
-            player.volume = isReducedVolume ? 0.1 : 1
+            player.volume = isReducedVolume ? 0.1 : 0.5
             player.play()
         }
     }
