@@ -5,8 +5,6 @@
 //  Created by Sivayogasubramanian on 27/2/22.
 //
 
-import Foundation
-
 class Flash: Powerup {
     func applyPowerup(hitPeg: PegGameObject, gameEngine: PeggleGameEngine) {
         guard hitPeg.physicsBody.isHitForTheFirstTime else {

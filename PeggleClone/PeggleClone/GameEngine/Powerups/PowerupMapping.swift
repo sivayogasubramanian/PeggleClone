@@ -5,8 +5,6 @@
 //  Created by Sivayogasubramanian on 25/2/22.
 //
 
-import Foundation
-
 class PowerupMapping {
     static func getPowerupFor(color: PeggleColor) -> Powerup? {
         switch color {

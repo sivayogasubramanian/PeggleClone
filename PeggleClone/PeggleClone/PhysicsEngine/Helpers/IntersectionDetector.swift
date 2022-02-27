@@ -5,8 +5,6 @@
 //  Created by Sivayogasubramanian on 4/2/22.
 //
 
-import Foundation
-
 class IntersectionDetector {
     static func detectCollisions(body1: PhysicsBody, body2: PhysicsBody) -> CollisionManifold {
         switch (body1, body2) {

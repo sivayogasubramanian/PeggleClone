@@ -5,8 +5,6 @@
 //  Created by Sivayogasubramanian on 25/2/22.
 //
 
-import Foundation
-
 class KaBoom: Powerup {
     static let explosionRadius = 100.0
 
