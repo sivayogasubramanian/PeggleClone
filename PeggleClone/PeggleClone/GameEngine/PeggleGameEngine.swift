@@ -11,64 +11,15 @@ import QuartzCore
 class PeggleGameEngine {
     let world: PhysicsWorld
     let board: Board
-    private var pegObjects = [ObjectIdentifier: PegGameObject]()
-    private var blockObjects = [ObjectIdentifier: BlockGameObject]()
-    private var ballObjects = [ObjectIdentifier: BallGameObject]()
-    private var boardSize: CGSize
+    private(set) var boardSize: CGSize
+    private(set) var pegs = [PegGameObject]()
+    private(set) var blocks = [BlockGameObject]()
+    private(set) var balls = [BallGameObject]()
     private(set) var mainBall: BallGameObject?
     private(set) var bucket: BucketGameObject
     private(set) var offset = Double.zero
     private(set) var numberOfBallsLeft = 10
     private(set) var score = 0
-    var isReadyToShoot: Bool {
-        mainBall == nil
-    }
-    var pegs: [PegGameObject] {
-        Array(pegObjects.values)
-    }
-    var blocks: [BlockGameObject] {
-        Array(blockObjects.values)
-    }
-    var balls: [BallGameObject] {
-        Array(ballObjects.values)
-    }
-    var isSpookyBallActive: Bool {
-        pegs.contains(where: { $0.isLit && $0.color == .purple })
-    }
-    var isMainBallOutOfBounds: Bool {
-        guard let ball = mainBall else {
-            return false
-        }
-
-        return isBallOutOfBounds(ball)
-    }
-    var shouldRemoveMainBall: Bool {
-        isMainBallOutOfBounds || (!isSpookyBallActive && bucket.isHit)
-    }
-    var isGameOver: Bool {
-        numberOfBallsLeft <= 0
-    }
-    var isGameWon: Bool {
-        !pegs.contains(where: { $0.color == .orange })
-    }
-    var numberOfOrangePegsLeft: Int {
-        pegs.filter({ $0.color == .orange }).count
-    }
-    var numberOfBluePegsLeft: Int {
-        pegs.filter({ $0.color == .blue }).count
-    }
-    var numberOfPurplePegsLeft: Int {
-        pegs.filter({ $0.color == .purple }).count
-    }
-    var numberOfGrayPegsLeft: Int {
-        pegs.filter({ $0.color == .gray }).count
-    }
-    var numberOfYellowPegsLeft: Int {
-        pegs.filter({ $0.color == .yellow }).count
-    }
-    var numberOfPinkPegsLeft: Int {
-        pegs.filter({ $0.color == .pink }).count
-    }
 
     init(board: Board) {
         self.board = board
@@ -133,12 +84,13 @@ class PeggleGameEngine {
     func removeLitGameObjects() {
         for peg in pegs where peg.isLit {
             world.removePhysicsBody(peg.physicsBody)
-            pegObjects.removeValue(forKey: ObjectIdentifier(peg))
         }
+
+        pegs.removeAll(where: { $0.isLit })
     }
 
     func addExtraBall(_ ball: BallGameObject) {
-        ballObjects[ObjectIdentifier(ball)] = ball
+        balls.append(ball)
         world.addPhysicsBody(ball.physicsBody)
     }
 
@@ -166,25 +118,26 @@ class PeggleGameEngine {
     }
 
     private func addPegToPhysicsEngine(_ peg: PegGameObject) {
-        pegObjects[ObjectIdentifier(peg)] = peg
+        pegs.append(peg)
         world.addPhysicsBody(peg.physicsBody)
     }
 
     private func addBlockToPhysicsEngine(_ block: BlockGameObject) {
-        blockObjects[ObjectIdentifier(block)] = block
+        blocks.append(block)
         world.addPhysicsBody(block.physicsBody)
     }
 
     private func removeNearbyGameObjectsIfBallStationary() {
         for peg in pegs where peg.shouldBeRemoved {
             world.removePhysicsBody(peg.physicsBody)
-            pegObjects.removeValue(forKey: ObjectIdentifier(peg))
         }
 
         for block in blocks where block.shouldBeRemoved {
             world.removePhysicsBody(block.physicsBody)
-            blockObjects.removeValue(forKey: ObjectIdentifier(block))
         }
+
+        pegs.removeAll(where: { $0.shouldBeRemoved })
+        blocks.removeAll(where: { $0.shouldBeRemoved })
     }
 
     private func resetHitCountOfGameObjects() {
@@ -229,14 +182,10 @@ class PeggleGameEngine {
         }
     }
 
-    private func isBallOutOfBounds(_ ball: BallGameObject) -> Bool {
-        ball.physicsBody.position.dy > max(board.maxHeight, boardSize.height - ball.radius)
-    }
-
     private func removeAllExtraBalls() {
         for ball in balls {
             world.removePhysicsBody(ball.physicsBody)
         }
-        ballObjects.removeAll()
+        balls.removeAll()
     }
 }
