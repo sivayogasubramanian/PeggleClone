@@ -5,8 +5,6 @@
 //  Created by Sivayogasubramanian on 27/2/22.
 //
 
-import Foundation
-
 class AddPinkTriangularBlockAction: PeggleAction {
     func getPeggleType() -> PeggleType? {
         .block

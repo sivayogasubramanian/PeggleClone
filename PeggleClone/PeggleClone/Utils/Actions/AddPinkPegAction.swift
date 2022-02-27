@@ -5,8 +5,6 @@
 //  Created by Sivayogasubramanian on 27/2/22.
 //
 
-import Foundation
-
 class AddPinkPegAction: PeggleAction {
     func getPeggleType() -> PeggleType? {
         .peg
