@@ -134,11 +134,6 @@ class PeggleGameEngine {
             world.removePhysicsBody(peg.physicsBody)
             pegObjects.removeValue(forKey: ObjectIdentifier(peg))
         }
-
-        for block in blocks where block.isLit {
-            world.removePhysicsBody(block.physicsBody)
-            blockObjects.removeValue(forKey: ObjectIdentifier(block))
-        }
     }
 
     func addExtraBall(_ ball: BallGameObject) {
@@ -164,11 +159,6 @@ class PeggleGameEngine {
         for peg in pegs where peg.shouldBeRemoved {
             world.removePhysicsBody(peg.physicsBody)
             pegObjects.removeValue(forKey: ObjectIdentifier(peg))
-        }
-
-        for block in blocks where block.shouldBeRemoved {
-            world.removePhysicsBody(block.physicsBody)
-            blockObjects.removeValue(forKey: ObjectIdentifier(block))
         }
     }
 

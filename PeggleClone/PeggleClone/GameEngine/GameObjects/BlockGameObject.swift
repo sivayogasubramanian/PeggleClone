@@ -18,13 +18,7 @@ class BlockGameObject {
     private(set) var rotation: Double
     private(set) var isSpringy: Bool
     var isLit: Bool {
-        false
-    }
-    var isHit: Bool {
         physicsBody.hitCount != 0
-    }
-    var shouldBeRemoved: Bool {
-        physicsBody.hitCount > PhysicsConstants.physicsBodyMaxHitCount
     }
 
     init(fromBlock block: TriangularBlock) {

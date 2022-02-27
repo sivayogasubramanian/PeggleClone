@@ -117,7 +117,7 @@ struct GameView: View {
             .position(x: peg.physicsBody.position.dx, y: peg.physicsBody.position.dy)
             .offset(x: 0, y: gameViewModel.offset)
             .animation(.interactiveSpring(), value: gameViewModel.offset)
-            .onChange(of: peg.physicsBody.hitCount, perform: { _ in SoundManager.shared.playSound(sound: .hitPeg) })
+            .onChange(of: peg.isLit, perform: { _ in SoundManager.shared.playSound(sound: .hitPeg) })
     }
 
     private func overlayBlockViews() -> some View {
@@ -144,7 +144,7 @@ struct GameView: View {
             .position(x: block.physicsBody.position.dx, y: block.physicsBody.position.dy)
             .offset(x: 0, y: gameViewModel.offset)
             .animation(.interactiveSpring(), value: gameViewModel.offset)
-            .onChange(of: block.physicsBody.hitCount, perform: { _ in SoundManager.shared.playSound(sound: .hitBlock) })
+            .onChange(of: block.isLit, perform: { _ in SoundManager.shared.playSound(sound: .hitBlock) })
     }
 
     private func makeBallView(_ ball: BallGameObject, isMainBall: Bool = false) -> some View {
