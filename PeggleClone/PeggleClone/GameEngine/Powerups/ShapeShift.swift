@@ -19,16 +19,7 @@ class ShapeShift: Powerup {
 
         hitPeg.physicsBody.incrementHitCount()
         let newRadius = Double.random(in: Constants.ballMinRadius...Constants.ballMaxRadius)
-        let direction = (ball.center - hitPeg.physicsBody.position).normalize()
-        let newCenter = hitPeg.physicsBody.position + direction * (newRadius + hitPeg.radius)
-        let newBall = BallGameObject(position: newCenter, radius: newRadius)
-
-        guard gameEngine.board.isAnyObjectPresentThatOverlaps(ball: newBall) else {
-            return
-        }
-
         ball.setRadius(to: newRadius)
-        ball.setPosition(to: newCenter)
         let manifold = Intersector.detectBetween(circle1: hitPeg.physicsBody, circle2: ball.physicsBody)
         CollisionResolver.resolveCollisions(
             body1: hitPeg.physicsBody,

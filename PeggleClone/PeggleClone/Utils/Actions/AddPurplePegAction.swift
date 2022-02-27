@@ -17,6 +17,6 @@ class AddPurplePegAction: PeggleAction {
     }
 
     func getDescription() -> String? {
-        "Spooky-Ball: When the ball exits, it mysteriously reappears at the top."
+        "Spooky-Ball: When the ball exits, it invokes its ghostly sprit to reappear at the top."
     }
 }

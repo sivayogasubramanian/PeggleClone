@@ -154,7 +154,9 @@ struct GameView: View {
             .position(x: ball.physicsBody.position.dx, y: ball.physicsBody.position.dy)
             .offset(x: 0, y: gameViewModel.offset)
             .onChange(of: ball.physicsBody.position.dy) { newY in
-                gameViewModel.setOffset(using: newY)
+                if isMainBall {
+                    gameViewModel.setOffset(using: newY)
+                }
             }
             .animation(.interactiveSpring(), value: gameViewModel.offset)
             .animation(.interactiveSpring(), value: ball.radius)

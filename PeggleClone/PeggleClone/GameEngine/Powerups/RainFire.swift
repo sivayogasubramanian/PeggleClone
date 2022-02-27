@@ -34,5 +34,7 @@ class RainFire: Powerup {
         gameEngine.addExtraBall(ball2)
         gameEngine.addExtraBall(ball3)
         gameEngine.addExtraBall(ball4)
+
+        SoundManager.shared.playSound(sound: .fire)
     }
 }

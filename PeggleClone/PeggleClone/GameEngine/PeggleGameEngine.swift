@@ -146,6 +146,10 @@ class PeggleGameEngine {
         world.addPhysicsBody(ball.physicsBody)
     }
 
+    func updateScore() {
+        score += Utils.getScoreWhenPegHit(pegs: pegs)
+    }
+
     private func addPegToPhysicsEngine(_ peg: PegGameObject) {
         pegObjects[ObjectIdentifier(peg)] = peg
         world.addPhysicsBody(peg.physicsBody)
@@ -197,7 +201,7 @@ class PeggleGameEngine {
         let direction = (point.toCGVector() - ball.physicsBody.position).normalize()
         ball.physicsBody.setForce(to: PhysicsConstants.gravity, isMovable: true)
         ball.physicsBody.setVelocity(
-            to: direction * PhysicsConstants.initialBallLaunchVelocityMultiplier,
+            to: direction * PhysicsConstants.initialBallLaunchVelocity,
             isMovable: true
         )
 
@@ -224,10 +228,6 @@ class PeggleGameEngine {
                 powerup.applyPowerup(hitPeg: peg, gameEngine: self)
             }
         }
-    }
-
-    private func updateScore() {
-        score += Utils.getScoreWhenPegHit(pegs: pegs)
     }
 
     private func isBallOutOfBounds(_ ball: BallGameObject) -> Bool {

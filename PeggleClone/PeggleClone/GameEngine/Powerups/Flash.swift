@@ -21,7 +21,7 @@ class Flash: Powerup {
         let velocity = ball.physicsBody.velocity
 
         // Prevent ball from going too fast
-        guard velocity.length() < 1_000 else {
+        guard velocity.length() < PhysicsConstants.initialBallLaunchVelocity else {
             return
         }
 

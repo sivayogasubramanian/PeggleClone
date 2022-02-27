@@ -107,28 +107,6 @@ extension Board {
         return false
     }
 
-    func isAnyObjectPresentThatOverlaps(ball: BallGameObject) -> Bool {
-        for peg in pegs where isOverlapping(peg: peg, ball: ball) {
-            return true
-        }
-
-        for block in blocks where isOverlapping(block: block, ball: ball) {
-            return true
-        }
-
-        return false
-    }
-
-    func isOverlapping(peg: Peg, ball: BallGameObject) -> Bool {
-        let manifold = Intersector.detectBetween(circle1: peg, circle2: ball)
-        return manifold.hasCollided
-    }
-
-    func isOverlapping(block: TriangularBlock, ball: BallGameObject) -> Bool {
-        let manifold = Intersector.detectBetween(polygon: block, circle: ball)
-        return manifold.hasCollided
-    }
-
     func isOverlapping(block: TriangularBlock, peg: Peg) -> Bool {
         let manifold = Intersector.detectBetween(polygon: block, circle: peg)
         return manifold.hasCollided

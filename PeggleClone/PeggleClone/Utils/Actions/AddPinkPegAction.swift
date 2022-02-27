@@ -17,6 +17,6 @@ class AddPinkPegAction: PeggleAction {
     }
 
     func getDescription() -> String? {
-        "Rain Fire: Spawns new balls at the top that help clear pegs until the main ball is active."
+        "Rain Fire: Spawns 4 new balls at the top that help clear pegs until the main ball is active."
     }
 }

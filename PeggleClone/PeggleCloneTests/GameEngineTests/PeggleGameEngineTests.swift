@@ -31,7 +31,7 @@ class PeggleGameEngineTests: XCTestCase {
         if let ball = gameEngine.mainBall {
             let direction = (point.toCGVector() - ball.physicsBody.position).normalize()
             XCTAssertEqual(ball.physicsBody.force, PhysicsConstants.gravity)
-            XCTAssertEqual(ball.physicsBody.velocity, direction * PhysicsConstants.initialBallLaunchVelocityMultiplier)
+            XCTAssertEqual(ball.physicsBody.velocity, direction * PhysicsConstants.initialBallLaunchVelocity)
         }
         XCTAssertNotNil(gameEngine.mainBall)
     }

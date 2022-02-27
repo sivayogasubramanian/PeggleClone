@@ -22,6 +22,8 @@ enum Sound: String, CaseIterable {
     case ghost
     case shapeshift
     case flash
+    case fire
+
 }
 
 class SoundManager {
@@ -44,7 +46,7 @@ class SoundManager {
                 return
             }
             player.numberOfLoops = isLooped ? 10 : 0
-            player.volume = isReducedVolume ? 1 : 2
+            player.volume = isReducedVolume ? 0.3 : 1
             player.play()
         }
     }
