@@ -8,17 +8,16 @@
 import Foundation
 import CoreGraphics
 
-class BallGameObject: CircularIntersector, Identifiable {
-    var center: CGVector {
-        physicsBody.position
-    }
-
+class BallGameObject: CircularIntersector {
     private static let gameObjectType = GameObjectType.ball
 
     private(set) var physicsBody: CircularPhysicsBody
     private(set) var radius = Constants.ballRadius
     var diameter: Double {
         radius * 2
+    }
+    var center: CGVector {
+        physicsBody.position
     }
 
     init(position: CGVector) {
@@ -46,5 +45,11 @@ class BallGameObject: CircularIntersector, Identifiable {
 
     func setPosition(to position: CGVector) {
         physicsBody.setPosition(to: position, isMovable: true)
+    }
+}
+
+extension BallGameObject: Equatable, Identifiable {
+    static func == (lhs: BallGameObject, rhs: BallGameObject) -> Bool {
+        lhs === rhs
     }
 }

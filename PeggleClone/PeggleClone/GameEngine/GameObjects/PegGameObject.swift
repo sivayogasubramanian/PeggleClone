@@ -15,6 +15,7 @@ class PegGameObject {
     private(set) var radius: Double
     private(set) var color: PeggleColor
     private(set) var rotation: Double
+    private(set) var powerup: Powerup?
     var diameter: Double {
         radius * 2
     }
@@ -24,7 +25,6 @@ class PegGameObject {
     var shouldBeRemoved: Bool {
         physicsBody.hitCount > Constants.physicsBodyMaxHitCount
     }
-    private(set) var powerup: Powerup?
 
     init(fromPeg peg: Peg) {
         radius = peg.radius

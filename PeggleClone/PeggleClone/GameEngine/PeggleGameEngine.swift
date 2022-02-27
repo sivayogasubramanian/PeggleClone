@@ -11,12 +11,12 @@ import QuartzCore
 class PeggleGameEngine {
     let world: PhysicsWorld
     let board: Board
-    private(set) var mainBall: BallGameObject?
-    private(set) var bucket: BucketGameObject
     private var pegObjects = [ObjectIdentifier: PegGameObject]()
     private var blockObjects = [ObjectIdentifier: BlockGameObject]()
     private var ballObjects = [ObjectIdentifier: BallGameObject]()
     private var boardSize: CGSize
+    private(set) var mainBall: BallGameObject?
+    private(set) var bucket: BucketGameObject
     private(set) var offset = Double.zero
     private(set) var numberOfBallsLeft = 10
     private(set) var score = 0
