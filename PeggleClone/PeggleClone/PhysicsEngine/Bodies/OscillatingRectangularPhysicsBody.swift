@@ -5,8 +5,8 @@
 //  Created by Sivayogasubramanian on 25/2/22.
 //
 
-import Foundation
 import CoreGraphics
+import Foundation
 
 class OscillatingRectangularPhysicsBody: PhysicsBody, PolygonalIntersector, RectangularIntersector {
     private(set) var width: Double

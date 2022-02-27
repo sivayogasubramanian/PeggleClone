@@ -5,9 +5,8 @@
 //  Created by Sivayogasubramanian on 4/2/22.
 //
 
-import Foundation
 import CoreGraphics
-import SwiftUI
+import Foundation
 
 class PhysicsWorld {
     private(set) var physicsBodies: [PhysicsBody] = []
