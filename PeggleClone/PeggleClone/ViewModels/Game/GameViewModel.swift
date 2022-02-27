@@ -16,7 +16,7 @@ class GameViewModel: ObservableObject {
     private(set) var gameEngine: PeggleGameEngine
     private(set) var timer: Timer?
     private(set) var displaylink: CADisplayLink?
-    private(set) var timeLeft = 120
+    private(set) var timeLeft = 60 * 5 // 5 mins
     var pegs: [PegGameObject] {
         gameEngine.pegs
     }

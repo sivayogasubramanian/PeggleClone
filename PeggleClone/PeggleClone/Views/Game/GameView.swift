@@ -133,7 +133,7 @@ struct GameView: View {
             ForEach(gameViewModel.balls) { ball in
                 makeBallView(ball).transition(.scale(scale: 1.1).combined(with: .opacity))
             }
-        }.animation(.easeOut(duration: 0.5), value: gameViewModel.blocks)
+        }.animation(.easeOut(duration: 0.5), value: gameViewModel.balls)
     }
 
     private func makeBlockView(_ block: BlockGameObject) -> some View {

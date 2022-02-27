@@ -10,12 +10,11 @@ class ShapeShift: Powerup {
         guard hitPeg.physicsBody.isHitForTheFirstTime else {
             return
         }
-
         guard let ball = gameEngine.mainBall else {
             return
         }
-
         hitPeg.physicsBody.incrementHitCount()
+
         let newRadius = Double.random(in: Constants.ballMinRadius...Constants.ballMaxRadius)
         ball.setRadius(to: newRadius)
 
