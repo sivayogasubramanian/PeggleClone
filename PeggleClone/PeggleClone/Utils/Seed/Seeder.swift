@@ -8,6 +8,7 @@
 import Foundation
 import CoreGraphics
 
+/// Contains preloaded levels for game
 class Seeder {
     static let names = ["Preset Level: A Level", "Preset Level: Diamond Matrix", "Preset Level: Oscillating Madness"]
     let colors: [PeggleColor] = [.blue, .orange, .purple, .yellow, .gray]

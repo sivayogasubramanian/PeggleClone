@@ -17,6 +17,6 @@ class AddBluePegAction: PeggleAction {
     }
 
     func getDescription() -> String? {
-        "Ka-Boom: Sets of a chain explosion of blue pegs. All nearby pegs will be lit."
+        "Ka-Boom: Sets of a chain explosion of blue pegs. All nearby pegs will be hit."
     }
 }
