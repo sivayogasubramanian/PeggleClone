@@ -61,6 +61,7 @@
 		4758A31727CB4C0F004525F0 /* fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4758A31627CB4C0F004525F0 /* fire.wav */; };
 		4758A31927CB6209004525F0 /* Board+ComputedProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4758A31827CB6209004525F0 /* Board+ComputedProperties.swift */; };
 		4758A31B27CB73F4004525F0 /* PeggleGameEngine+ComputedProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4758A31A27CB73F4004525F0 /* PeggleGameEngine+ComputedProperties.swift */; };
+		4758A31D27CB77E7004525F0 /* LineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4758A31C27CB77E6004525F0 /* LineTests.swift */; };
 		475C70AF27A043C500F8C2CB /* SavedLevelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475C70AE27A043C500F8C2CB /* SavedLevelsView.swift */; };
 		47603E4427B6BEE10089E394 /* IntersectionDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47603E4327B6BEE10089E394 /* IntersectionDetectorTests.swift */; };
 		47603E4627B6C0BE0089E394 /* CollisionResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47603E4527B6C0BE0089E394 /* CollisionResolverTests.swift */; };
@@ -203,6 +204,7 @@
 		4758A31627CB4C0F004525F0 /* fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fire.wav; sourceTree = "<group>"; };
 		4758A31827CB6209004525F0 /* Board+ComputedProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Board+ComputedProperties.swift"; sourceTree = "<group>"; };
 		4758A31A27CB73F4004525F0 /* PeggleGameEngine+ComputedProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PeggleGameEngine+ComputedProperties.swift"; sourceTree = "<group>"; };
+		4758A31C27CB77E6004525F0 /* LineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineTests.swift; sourceTree = "<group>"; };
 		475C70AE27A043C500F8C2CB /* SavedLevelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLevelsView.swift; sourceTree = "<group>"; };
 		47603E4327B6BEE10089E394 /* IntersectionDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectionDetectorTests.swift; sourceTree = "<group>"; };
 		47603E4527B6C0BE0089E394 /* CollisionResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionResolverTests.swift; sourceTree = "<group>"; };
@@ -610,6 +612,7 @@
 			isa = PBXGroup;
 			children = (
 				47A930BB27B4366C00009C30 /* UtilsTests.swift */,
+				4758A31C27CB77E6004525F0 /* LineTests.swift */,
 			);
 			path = UtilsTests;
 			sourceTree = "<group>";
@@ -1011,6 +1014,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4758A31D27CB77E7004525F0 /* LineTests.swift in Sources */,
 				47603E4427B6BEE10089E394 /* IntersectionDetectorTests.swift in Sources */,
 				47603E4A27B6D3CF0089E394 /* PeggleGameEngineTests.swift in Sources */,
 				470BC5D427A336F900E88AE9 /* BoardTests.swift in Sources */,
