@@ -5,8 +5,6 @@
 //  Created by Sivayogasubramanian on 27/2/22.
 //
 
-import Foundation
-
 extension Board {
     var orangePegsCount: Int {
         pegs.filter({ $0.color == .orange }).count
