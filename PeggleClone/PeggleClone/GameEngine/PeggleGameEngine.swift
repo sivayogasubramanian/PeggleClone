@@ -9,7 +9,7 @@ import Foundation
 import QuartzCore
 
 class PeggleGameEngine {
-    private let world: PhysicsWorld
+    let world: PhysicsWorld
     let board: Board
     private(set) var mainBall: BallGameObject?
     private(set) var bucket: BucketGameObject
@@ -17,10 +17,12 @@ class PeggleGameEngine {
     private var blockObjects = [ObjectIdentifier: BlockGameObject]()
     private var ballObjects = [ObjectIdentifier: BallGameObject]()
     private var boardSize: CGSize
-    private(set) var isReadyToShoot = true
     private(set) var offset = Double.zero
     private(set) var numberOfBallsLeft = 10
     private(set) var score = 0
+    var isReadyToShoot: Bool {
+        mainBall == nil
+    }
     var pegs: [PegGameObject] {
         Array(pegObjects.values)
     }
@@ -111,7 +113,6 @@ class PeggleGameEngine {
         numberOfBallsLeft -= 1
         self.mainBall = ball
         world.addPhysicsBody(ball.physicsBody)
-        isReadyToShoot.toggle()
     }
 
     func simulateFor(dt deltaTime: TimeInterval) {
@@ -145,6 +146,25 @@ class PeggleGameEngine {
         score += Utils.getScoreWhenPegHit(pegs: pegs)
     }
 
+    func removeBallIfBallExited() {
+        guard let ball = mainBall else {
+            return
+        }
+
+        if shouldRemoveMainBall {
+            if bucket.isHit {
+                SoundManager.shared.playSound(sound: .hitBucket)
+                numberOfBallsLeft += 1
+            }
+            updateScore()
+            removeBall(ball: ball)
+        }
+    }
+
+    func setMainBall(to ball: BallGameObject) {
+        mainBall = ball
+    }
+
     private func addPegToPhysicsEngine(_ peg: PegGameObject) {
         pegObjects[ObjectIdentifier(peg)] = peg
         world.addPhysicsBody(peg.physicsBody)
@@ -160,20 +180,10 @@ class PeggleGameEngine {
             world.removePhysicsBody(peg.physicsBody)
             pegObjects.removeValue(forKey: ObjectIdentifier(peg))
         }
-    }
 
-    private func removeBallIfBallExited() {
-        guard let ball = mainBall else {
-            return
-        }
-
-        if shouldRemoveMainBall {
-            if bucket.isHit {
-                SoundManager.shared.playSound(sound: .hitBucket)
-                numberOfBallsLeft += 1
-            }
-            updateScore()
-            removeBall(ball: ball)
+        for block in blocks where block.shouldBeRemoved {
+            world.removePhysicsBody(block.physicsBody)
+            blockObjects.removeValue(forKey: ObjectIdentifier(block))
         }
     }
 
@@ -204,7 +214,6 @@ class PeggleGameEngine {
         world.removePhysicsBody(ball.physicsBody)
         removeLitGameObjects()
         resetHitCountOfGameObjects()
-        isReadyToShoot.toggle()
         removeAllExtraBalls()
     }
 

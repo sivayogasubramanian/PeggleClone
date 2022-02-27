@@ -15,12 +15,14 @@ class SpookyBall: Powerup {
         }
 
         if gameEngine.isSpookyBallActive && gameEngine.isMainBallOutOfBounds {
+            let position = CGVector(dx: ball.physicsBody.position.dx, dy: 0)
+            let newBall = BallGameObject(position: position)
+            newBall.physicsBody.setForce(to: ball.physicsBody.force, isMovable: true)
+            newBall.physicsBody.setVelocity(to: ball.physicsBody.velocity, isMovable: true)
+            gameEngine.removeBallIfBallExited()
+            gameEngine.setMainBall(to: newBall)
+            gameEngine.world.addPhysicsBody(newBall.physicsBody)
             SoundManager.shared.playSound(sound: .ghost)
-            gameEngine.updateScore()
-            gameEngine.removeLitGameObjects()
-            ball.physicsBody.setPosition(to: CGVector(dx: ball.physicsBody.position.dx, dy: 10), isMovable: true)
-            gameEngine.setOffset(to: .zero)
-            gameEngine.bucket.physicsBody.resetHitCount()
         }
     }
 }

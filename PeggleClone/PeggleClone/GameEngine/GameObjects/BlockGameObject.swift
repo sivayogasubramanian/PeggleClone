@@ -20,6 +20,9 @@ class BlockGameObject {
     var isLit: Bool {
         physicsBody.hitCount != 0
     }
+    var shouldBeRemoved: Bool {
+        physicsBody.hitCount > PhysicsConstants.physicsBodyMaxHitCount
+    }
 
     init(fromBlock block: TriangularBlock) {
         width = block.width
