@@ -74,7 +74,7 @@ final class Board: Identifiable {
             return nil
         }
 
-        pegs.append(newPeg)
+        addPeg(newPeg)
         return newPeg
     }
 
@@ -90,8 +90,16 @@ final class Board: Identifiable {
             return nil
         }
 
-        blocks.append(newBlock)
+        addBlock(newBlock)
         return newBlock
+    }
+
+    func addPeg(_ peg: Peg) {
+        pegs.append(peg)
+    }
+
+    func addBlock(_ block: TriangularBlock) {
+        blocks.append(block)
     }
 
     func deletePeg(peg: Peg) {
