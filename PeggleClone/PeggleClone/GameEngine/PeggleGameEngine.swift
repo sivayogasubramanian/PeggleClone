@@ -62,7 +62,7 @@ class PeggleGameEngine {
             return
         }
         numberOfBallsLeft -= 1
-        self.mainBall = ball
+        mainBall = ball
         world.addPhysicsBody(ball.physicsBody)
     }
 
@@ -162,7 +162,7 @@ class PeggleGameEngine {
     }
 
     private func removeBall(ball: BallGameObject) {
-        self.mainBall = nil
+        mainBall = nil
         offset = .zero
         world.removePhysicsBody(ball.physicsBody)
         removeLitGameObjects()
