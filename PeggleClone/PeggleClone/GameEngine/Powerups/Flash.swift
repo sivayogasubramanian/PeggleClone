@@ -9,11 +9,10 @@ import Foundation
 
 class Flash: Powerup {
     func applyPowerup(hitPeg: PegGameObject, gameEngine: PeggleGameEngine) {
-        guard let ball = gameEngine.mainBall else {
+        guard hitPeg.physicsBody.isHitForTheFirstTime else {
             return
         }
-
-        guard hitPeg.physicsBody.hitCount <= 1 else {
+        guard let ball = gameEngine.mainBall else {
             return
         }
 

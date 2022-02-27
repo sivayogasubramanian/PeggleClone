@@ -18,6 +18,9 @@ class PhysicsBody {
     var isMovable: Bool {
         mass != .infinity && mass != .zero
     }
+    var isHitForTheFirstTime: Bool {
+        hitCount <= 1
+    }
 
     init(gameObjectType: GameObjectType, position: CGVector) {
         self.gameObjectType = gameObjectType

@@ -9,18 +9,19 @@ import Foundation
 
 class PowerupMapping {
     static func getPowerupFor(color: PeggleColor) -> Powerup? {
-        if color == .blue {
+        switch color {
+        case .blue:
             return KaBoom()
-        } else if color == .purple {
+        case .purple:
             return SpookyBall()
-        } else if color == .gray {
+        case .gray:
             return ShapeShift()
-        } else if color == .yellow {
+        case .yellow:
             return Flash()
-        } else if color == .pink {
+        case .pink:
             return RainFire()
+        default:
+            return nil
         }
-
-        return nil
     }
 }

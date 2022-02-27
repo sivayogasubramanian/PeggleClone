@@ -15,13 +15,19 @@ class SpookyBall: Powerup {
         }
 
         if gameEngine.isSpookyBallActive && gameEngine.isMainBallOutOfBounds {
+            // Create the spooky ball
             let position = CGVector(dx: ball.physicsBody.position.dx, dy: 0)
             let newBall = BallGameObject(position: position)
             newBall.physicsBody.setForce(to: ball.physicsBody.force, isMovable: true)
             newBall.physicsBody.setVelocity(to: ball.physicsBody.velocity, isMovable: true)
+
+            // Remove old ball
             gameEngine.removeBallIfBallExited()
+
+            // Add spooky ball to game engine
             gameEngine.setMainBall(to: newBall)
             gameEngine.world.addPhysicsBody(newBall.physicsBody)
+
             SoundManager.shared.playSound(sound: .ghost)
         }
     }
