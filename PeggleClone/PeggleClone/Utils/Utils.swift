@@ -54,6 +54,7 @@ struct Utils {
         let orangeBalls = pegs.filter({ $0.color == .orange })
         let orangeBallsHit = orangeBalls.filter({ $0.isLit })
         let orangeBallsLeft = orangeBalls.count - orangeBallsHit.count
+
         var multiplier = 1
         if orangeBallsLeft == 0 {
             multiplier = 100

@@ -47,13 +47,13 @@ class Intersector {
     }
 
     static func detectBetween(circle: CircularIntersector, line: LineIntersector) -> CollisionManifold {
-        let closestPoint = line.line.closestPointOnLine(to: circle.center)
+        let closestPoint = line.closestPointOnLine(to: circle.center)
         guard isClosestPointOnLine(line: line, point: closestPoint) else {
             return .zero
         }
 
         let collisionNormal = (closestPoint - circle.center).normalize()
-        let depth = line.line.shortestDistance(from: circle.center)
+        let depth = line.shortestDistance(from: circle.center)
         let hasCollided = depth <= circle.radius
         return CollisionManifold(hasCollided: hasCollided, normal: collisionNormal, depth: circle.radius - depth)
     }
@@ -138,10 +138,10 @@ extension Intersector {
     }
 
     private static func isClosestPointOnLine(line: LineIntersector, point: CGVector) -> Bool {
-        let distanceFromStart = line.line.start.distance(to: point)
-        let distanceFromEnd = line.line.end.distance(to: point)
+        let distanceFromStart = line.start.distance(to: point)
+        let distanceFromEnd = line.end.distance(to: point)
         let distanceSum = distanceFromStart + distanceFromEnd
-        let lineLength = (line.line.start - line.line.end).length()
+        let lineLength = (line.start - line.end).length()
         if distanceSum == lineLength {
             return true
         }

@@ -10,6 +10,12 @@ import CoreGraphics
 
 class LinePhysicsBody: PhysicsBody, LineIntersector {
     let line: Line
+    var start: CGVector {
+        line.start
+    }
+    var end: CGVector {
+        line.end
+    }
 
     init(start: CGVector, end: CGVector) {
         line = Line(start: start, end: end)
