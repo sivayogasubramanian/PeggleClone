@@ -27,7 +27,7 @@ class OscillatingRectangularPhysicsBody: PhysicsBody, PolygonalIntersector, Rect
 
     override func updatePhysicsBody(dt deltaTime: TimeInterval, isMovable: Bool) {
         setPosition(to: position + (velocity * deltaTime), isMovable: true)
-        if position.distance(to: originalPosition) > 200 {
+        if position.distance(to: originalPosition) > Constants.bucketMaxDisplacement {
             setVelocity(to: -velocity, isMovable: true)
         }
     }

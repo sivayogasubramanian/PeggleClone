@@ -55,6 +55,7 @@ struct Constants {
     static let blockHeight = 50.0
     static let bucketWidth = 150.0
     static let bucketHeight = 100.0
+    static let bucketMaxDisplacement = 200.0
     static let bucketYCoordinateOffset = 10.0
     static let letterBoxYOffset = 170.0
     static let yCoordinatePadding = pegRadius * 4
