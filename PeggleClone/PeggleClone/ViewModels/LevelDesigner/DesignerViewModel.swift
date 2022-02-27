@@ -13,10 +13,12 @@ class DesignerViewModel: ObservableObject {
     private(set) var board = Board()
     private(set) var isNewBoard = true
     private(set) var boardSize: CGSize = .zero
-    private(set) var rotation: Double = .zero
-    private(set) var radius = Constants.pegRadius
-    private(set) var width = Constants.blockWidth
-    private(set) var height = Constants.blockHeight
+
+    // For adjustment panel in designer
+    private(set) var rotationSelection: Double = .zero
+    private(set) var radiusSelection = Constants.pegRadius
+    private(set) var widthSelection = Constants.blockWidth
+    private(set) var heightSelection = Constants.blockHeight
     private(set) var showSpringinessCircle = false
     private(set) var selectedPeg: Peg?
     private(set) var selectedBlock: TriangularBlock?
@@ -99,8 +101,8 @@ class DesignerViewModel: ObservableObject {
         selectedBlock = nil
 
         if let peg = peg {
-            rotation = peg.rotation
-            radius = peg.radius
+            rotationSelection = peg.rotation
+            radiusSelection = peg.radius
             selectedPeg = peg
         }
 
@@ -111,9 +113,9 @@ class DesignerViewModel: ObservableObject {
         selectedPeg = nil
 
         if let block = block {
-            rotation = block.rotation
-            width = block.width
-            height = block.height
+            rotationSelection = block.rotation
+            widthSelection = block.width
+            heightSelection = block.height
             showSpringinessCircle = block.springiness > 0
             selectedBlock = block
         }
@@ -124,13 +126,13 @@ class DesignerViewModel: ObservableObject {
     func setRotation(to rotation: Double) {
         if let peg = selectedPeg {
             if board.setRotation(peg: peg, to: rotation) {
-                self.rotation = rotation
+                rotationSelection = rotation
             }
         }
 
         if let block = selectedBlock {
             if board.setRotation(block: block, to: rotation) {
-                self.rotation = rotation
+                rotationSelection = rotation
             }
         }
 
@@ -140,7 +142,7 @@ class DesignerViewModel: ObservableObject {
     func setPegRadius(to radius: Double) {
         if let peg = selectedPeg {
             if board.setPegRadius(peg: peg, to: radius) {
-                self.radius = radius
+                radiusSelection = radius
             }
         }
 
@@ -150,7 +152,7 @@ class DesignerViewModel: ObservableObject {
     func setBlockWidth(to width: Double) {
         if let block = selectedBlock {
             if board.setBlockWidth(block: block, to: width) {
-                self.width = width
+                widthSelection = width
             }
         }
 
@@ -160,7 +162,7 @@ class DesignerViewModel: ObservableObject {
     func setBlockHeight(to height: Double) {
         if let block = selectedBlock {
             if board.setBlockHeight(block: block, to: height) {
-                self.height = height
+                heightSelection = height
             }
         }
 
@@ -249,10 +251,10 @@ class DesignerViewModel: ObservableObject {
     private func resetViewModelStates() {
         selectedPeg = nil
         selectedBlock = nil
-        rotation = .zero
-        radius = Constants.pegRadius
-        width = Constants.blockWidth
-        height = Constants.blockHeight
+        rotationSelection = .zero
+        radiusSelection = Constants.pegRadius
+        widthSelection = Constants.blockWidth
+        heightSelection = Constants.blockHeight
         showSpringinessCircle = false
     }
 

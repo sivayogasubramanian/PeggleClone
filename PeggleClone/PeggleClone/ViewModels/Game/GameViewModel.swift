@@ -12,10 +12,10 @@ import UIKit
 import SwiftUI
 
 class GameViewModel: ObservableObject {
-    private(set) var displaylink: CADisplayLink?
-    private(set) var timer: Timer?
-    private(set) var gameEngine: PeggleGameEngine
     private(set) var board: Board
+    private(set) var gameEngine: PeggleGameEngine
+    private(set) var timer: Timer?
+    private(set) var displaylink: CADisplayLink?
     private(set) var timeLeft = 120
     var pegs: [PegGameObject] {
         gameEngine.pegs
@@ -104,8 +104,9 @@ class GameViewModel: ObservableObject {
         }
 
         let maxOffset = board.maxHeight - boardHeight
-        if newY > boardHeight / 2 {
-            gameEngine.setOffset(to: -min(maxOffset, newY - boardHeight / 2))
+        let halfHeight = boardHeight / 2
+        if newY > halfHeight {
+            gameEngine.setOffset(to: -min(maxOffset, newY - halfHeight))
         }
     }
 

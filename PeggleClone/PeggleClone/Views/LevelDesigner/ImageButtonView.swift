@@ -209,7 +209,7 @@ struct ImageButtonView: View {
             Text("Rotation:")
             Slider(
                 value: Binding(
-                    get: { designerViewModel.rotation },
+                    get: { designerViewModel.rotationSelection },
                     set: { newRotation, _ in
                         designerViewModel.setRotation(to: newRotation)
                     }),
@@ -232,7 +232,7 @@ struct ImageButtonView: View {
             Text("Radius:")
             Slider(
                 value: Binding(
-                    get: { designerViewModel.radius },
+                    get: { designerViewModel.radiusSelection },
                     set: { newRadius, _ in
                         designerViewModel.setPegRadius(to: newRadius)
                     }),
@@ -247,7 +247,7 @@ struct ImageButtonView: View {
                 Text("Width:")
                 Slider(
                     value: Binding(
-                        get: { designerViewModel.width },
+                        get: { designerViewModel.widthSelection },
                         set: { newWidth, _ in
                             designerViewModel.setBlockWidth(to: newWidth)
                         }),
@@ -259,7 +259,7 @@ struct ImageButtonView: View {
                 Text("Height:")
                 Slider(
                     value: Binding(
-                        get: { designerViewModel.height },
+                        get: { designerViewModel.heightSelection },
                         set: { newHeight, _ in
                             designerViewModel.setBlockHeight(to: newHeight)
                         }),
