@@ -6,7 +6,6 @@
 //
 
 import CoreData
-import Foundation
 @testable import PeggleClone
 
 /// This is a TestCoreDataManager that writes to "/dev/null" instead of using the default SQLite storage mechanism.
