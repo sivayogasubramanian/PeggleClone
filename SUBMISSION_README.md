@@ -1,10 +1,20 @@
-# PeggleClone
+# CS3217 Problem Set 4
+
+**Name:** Ruppa Nagarajan Sivayoga Subramanian
+
+**Matric No:** A0217379U
 
 ## Developer Guide
 
 The developer guide can be found [here](./docs/DEVELOPER_GUIDE.md).
 
 ## Rules of the Game
+
+Please write the rules of your game here. This section should include the
+following sub-sections. You can keep the heading format here, and you can add
+more headings to explain the rules of your game in a structured manner.
+Alternatively, you can rewrite this section in your own style. You may also
+write this section in a new file entirely, if you wish.
 
 ### Cannon Direction
 
@@ -132,3 +142,28 @@ The larger this radius, the "looser" the springiness will be.
 
 The test plans can be found [here](./docs/TEST_PLANS.md).
 
+## Written Answers
+
+### Reflecting on your Design
+
+> Do you think you have designed your code in the previous problem sets well enough?
+
+Firstly, I believe that the MVVM architecture that I implemented sort of captures the idea. However, I believe that I can do better. One of the mistakes that I did in these problem set is to have views with state. Ideally views should never have state. Views being stateless and having its associated view model handle all states simplifies the complexity of code greatly. This is because in the future, views can be regarded as something that is responsible for showing something on the screen while what to show is determined by the view model. For example, in a lot of views, the views are responsible for determining when to show various alerts to the user. Even though this achieves the desired purpose, it would be better if these logic reside in the view model layer for better separation of concerns.
+
+My physics engine in PS3 was not designed very well. Therefore, I had to refactor much of it in this problem set. I believe that the physics engine in this problem set is much cleaner than PS3. Firstly, the problem with the physics engine in the previous problem set is that it was not properly abstracted. To resolve some collision between 2 objects, the 2 critical information you need is the collision normal as well as the depth of collision. This can be easily determined for rigid bodies and abstracted into a `CollisionManifold` which then gets passed into the `CollisionResolver` to resolve.
+
+Lastly I believe that it might be better to have the game engine decide what to do with a collision. Currently, all object gets resolved in the physics engine depending on if they collide with each other. However, for games it might not be the case that all objects will collide with each other. Therefore, a better way is to have collision be detected in the physics engine which then notifies the game engine and the game engine decides what to do with it. It might pass it back to the physics engine to resolve collisions, do some game specific logic, etc. For example, if a game as a powerup rune that needs to be collected by a player, it might be better to have the game engine decide what to do with a player-rune collision instead of resolving it in the physics engine.
+
+> Is there any technical debt that you need to clean in this problem set?
+
+Firstly, I believe that having colors represented as an enum is not the right way of doing things. This is because it introduces a lot of if/switch statements throughout the codebase to determine which logic to perform depending on the peg color. Instead a better way is to have a Peg protocol, and have multiple colored peg object that conform to this protocol. This is to have color use polymorphism on color specific logic instead of having many if/switch statements.
+
+Secondly, my physics engine has 3 kinds of objects. Circle, Line and Polygon. The intersection and resolvers use these basic shapes to detect and resolve collisions. However, I was not able to come up with a n-polygon physics body shape that represents all kinds of polygons (triangle, square, rectangle, etc). Instead I had to break them apart even though they are similar. Ideally all polygons should only have one kind of physics body. Some refactoring can be done to achieve this in the future.
+
+Lastly, I did not have time to implement some kinds of collision detection and resolution such as line vs line collisions. This made it so that the I had to exhaustively list out the possible pairs of collision in `IntersectionDetector` instead of relying on polymorphism to achieve the same thing.
+
+> If you were to redo the entire application, is there anything you would have done differently?
+
+I think that I would start with the physics engine as my first module. This is because when I start with the physics engine first, I do not have any information about the game logic and I am forced create a abstracted physics engine. In this project, I believe that the physics engine is the most critical part of the application as everything will fall into place given a well designed physics engine.
+
+I would not have used SwiftUI. From discussing with my friends, I believe that SwiftUI is not really a good choice for non-CRUD based apps like a game. In a game, having as much control over the views is critical to have the best user experience. However, I am currently limited with what I can do because of the lack of control exposure in SwiftUI. Furthermore, some errors are very cryptic and very hard to debug for SwiftUI. I think using storyboards for this application is a better choice as it gives more control over the views.
